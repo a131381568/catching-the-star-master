@@ -1,28 +1,54 @@
 <template>
-  <button @click="modal = true">Open Modal</button>
-  <div class="ml-2 relative inline-block">
-    <button @click="dropdown = true">Open Dropdown</button>
-    <div v-if="dropdown" ref="dropdownRef" class="dropdown-inner">
-      Click outside of the dropdown to close it.
+  <!-- Container -->
+  <div class="flex flex-col items-center justify-center mt-32">
+    <div class="flex flex-col">
+      <!-- Navbar -->
+      <nav
+        class="fixed flex justify-between py-4 w-full top-0 left-0 right-0 z-50"
+      >
+        <!-- Logo Container -->
+        <div class="flex items-center">
+          <!-- Logo -->
+          <a class="cursor-pointer">
+            <svg
+              class="logo"
+              viewBox="0 0 128 128"
+              width="24"
+              height="24"
+              data-v-5f26462c=""
+            >
+              <path
+                fill="#42b883"
+                d="M78.8,10L64,35.4L49.2,10H0l64,110l64-110C128,10,78.8,10,78.8,10z"
+                data-v-5f26462c=""
+              ></path>
+              <path
+                fill="#35495e"
+                d="M78.8,10L64,35.4L49.2,10H25.6L64,76l38.4-66H78.8z"
+                data-v-5f26462c=""
+              ></path>
+            </svg>
+          </a>
+        </div>
+        <!-- Icon Menu Section -->
+        <div class="flex items-end space-x-5">
+          <div
+            class="bars cursor-pointer"
+            :class="{ active: modal === true }"
+            @click.prevent="toggleModal"
+          >
+            <div class="top-bar"></div>
+            <div class="middle-bar"></div>
+            <div class="bottom-bar"></div>
+          </div>
+        </div>
+      </nav>
     </div>
   </div>
 
-  <!-- 88888 -->
-  <!-- <div v-if="modal" ref="modalRef" class="modal fixed m-0 p-0 !w-full !h-full">
-    <div class="inner relative">
-      <button class="button small" title="Close" @click="modal = false">
-        𝖷
-      </button>
-      <p class="heading">Demo Modal</p>
-      <p>Click outside of the modal to close it.</p>
-    </div>
-  </div> -->
-  <!-- 88888 -->
-
   <div
     id="modal"
-    v-if="modal"
-    ref="modalRef"
+    v-show="modal"
     class="
       modal-bg
       transition-opacity
@@ -38,28 +64,12 @@
     :class="[
       { 'opacity-0': modal === false },
       { 'opacity-100': modal === true },
-      { 'z-50': modal === true },
+      { 'z-40': modal === true },
     ]"
   >
     <div
       class="w-full h-full modal-content relative m-auto bg-gray-100 shadow-lg"
     >
-      <div class="p-4 bg-gray-700 text-white">
-        <span
-          @click="modal = false"
-          class="
-            closeBtn
-            float-right
-            text-lg
-            font-bold
-            hover:text-gray-500
-            no-underline
-            cursor-pointer
-          "
-          >&times;</span
-        >
-        <h2>Modal Header</h2>
-      </div>
       <div class="p-4">
         <p>Some text in the Modal Body</p>
         <p>Some other text...</p>
@@ -80,17 +90,9 @@ const modal = ref(false);
 const modalRef = ref(null);
 
 // 綁 methods
-onClickOutside(modalRef, (event) => {
-  console.log(event);
-  modal.value = false;
-});
-
-const dropdown = ref(false);
-const dropdownRef = ref(null);
-onClickOutside(dropdownRef, (event) => {
-  console.log(event);
-  dropdown.value = false;
-});
+function toggleModal() {
+  modal.value = !modal.value;
+}
 
 // =========================================
 
@@ -126,8 +128,28 @@ onActivated(() => {
 </script>
 
 <style scoped>
-/* .modal-bg {
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: -9999;
-} */
+.bars {
+  font-size: 1em;
+  display: inline-block;
+}
+.bars > div {
+  width: 1.25em;
+  height: 0.125em;
+  margin-bottom: 0.25em;
+  transition: all 300ms ease-in-out;
+}
+.bars.active .top-bar {
+  transform: translateY(0.35em) rotate(225deg);
+}
+.bars.active .middle-bar {
+  opacity: 0;
+  transform: scale(0);
+}
+.bars.active .bottom-bar {
+  transform: translateY(-0.4em) rotate(-225deg);
+}
+
+.bars > div {
+  background: #6cf7cb;
+}
 </style>
