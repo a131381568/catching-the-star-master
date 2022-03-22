@@ -1,6 +1,6 @@
 <template>
   <!-- Container -->
-  <div class="fixed flex flex-col items-center justify-center mt-32 z-0">
+  <div class="fixed flex flex-col items-center justify-center mt-32 z-50">
     <div class="flex flex-col">
       <!-- Navbar -->
       <nav

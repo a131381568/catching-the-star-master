@@ -11,7 +11,7 @@
     "
   >
     <div class="flex items-stretch h-full">
-      <div class="flex-none w-1/6 h-16">
+      <div class="flex-none w-1/12 h-16">
         <!-- This item will not grow -->
       </div>
       <div class="flex-grow w-auto h-auto text-white self-center">
@@ -24,14 +24,11 @@
         <h4 class="text-main-color-light mt-10">
           誰能數得清天上的星星？誰能說出它們對世界的影響？——詹・湯姆遜
         </h4>
-        <button class="btnfos btnfos-1 mt-12">
-          <svg>
-            <rect x="0" y="0" fill="none" width="100%" height="100%" />
-          </svg>
-          Read More
+        <button class="draw meet mt-12">
+          <span> Read More </span>
         </button>
       </div>
-      <div class="flex-none w-1/6 h-16">
+      <div class="flex-none w-1/12 h-16">
         <!-- This item will not grow -->
       </div>
     </div>

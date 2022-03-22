@@ -23,10 +23,15 @@ module.exports = {
       },
       borderColor: theme => ({
         'primary': '#c5c5ca',
+        'secondary': '#bbb494',
+        'danger': '#80b884',
       }),
       backgroundColor: theme => ({
         'secondary': '#c5c5ca',
-      })
+      }),
+      boxShadow: {
+        'btn-default': 'inset 0 0 0 1px #c5c5ca'
+      }
     },
   },
   plugins: [

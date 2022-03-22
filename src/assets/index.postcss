@@ -1,10 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&family=Playfair+Display&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 @layer base {
+  /* global variable */
   h1 {
     @apply text-7xl;
     letter-spacing: 0.15rem;
@@ -33,71 +32,72 @@
     @apply text-tiny;
     letter-spacing: 0.15rem;
   }
-
+  div, p, input, textarea, select, option, li, a, blockquote, th, td, i, b, strong, captiom, figcaption, figure, pre{
+    @apply text-lg;
+    letter-spacing: 0.15rem;
+  }
+  /* read btn + load btn */
   button{
+    background: none;
+    border: 0;
+    box-sizing: border-box;
+    position: relative;
+    vertical-align: middle;
+    position: relative;
+    padding: 0.6rem 3.1rem 0.8rem;
     @apply text-lg;
     @apply text-main-color-light;
     @apply transition-all;
-    @apply duration-1000;
-    @apply rounded-md;
-/*
-    @apply border-primary;
-    @apply border;
-    @apply border-solid;
-*/
-    padding: 0.6rem 3.1rem 0.8rem;
+    @apply duration-500;
+    @apply shadow-btn-default
   }
-
-
-.btnfos {
-  position: relative;
-}
-.btnfos-1 svg {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-
-}
-.btnfos-1 rect {
-  fill: none;
-  stroke: #c5c5ca;
-  stroke-width: 1;
-  stroke-dasharray: 422, 0;
-}
-
-.btnfos-1:hover {
-  @apply text-sp-color-light;
-  /*
-  @apply bg-secondary;
-  @apply text-main-color-dark;
-  border-color:rgb(255 255 255 / 0%);
-  */
-}
-
-
-.btnfos-1:hover > svg {
-  @apply rounded-md;
-  border: 1px solid #80b884;
-}
-
-
-.btnfos-1:hover rect {
-  stroke: #80b884;
-  stroke-width: 5;
-  stroke-dasharray: 25, 335;
-  stroke-dashoffset: 45;
-  -webkit-transition: all 1.35s cubic-bezier(0.19, 1, 0.22, 1);
-  transition: all 1.35s cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-
-
-
-
-  div, p, input, textarea, select, option, li, a, span, blockquote, th, td, i, b, strong, captiom, figcaption, figure, pre{
-    @apply text-lg;
-    letter-spacing: 0.15rem;
+  button::before, button::after {
+    content: '';
+    box-sizing: inherit;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+  .draw {
+    transition: color 0.25s
+  }
+  .draw::before, .draw::after {
+    border: 1px solid transparent;
+    width: 0;
+    height: 0;
+  }
+  .draw::before {
+    top: 0;
+    left: 0;
+  }
+  .draw::after {
+    bottom: 0;
+    right: 0;
+  }
+  .draw:hover {
+    @apply text-sp-color-light;
+  }
+  .draw:hover::before, .draw:hover::after {
+    width: 100%;
+    height: 100%;
+  }
+  .draw:hover::before {
+    transition: width 0.25s ease-out, height 0.25s ease-out 0.25s;
+  }
+  .draw:hover::after {
+    transition: border-color 0s ease-out 0.5s, width 0.25s ease-out 0.5s, height 0.25s ease-out;
+  }
+  .meet::after {
+    top: 0;
+    left: 0;
+  }
+  .meet:hover::before {
+    border-width: 1px 1px 0 0;
+    @apply border-danger;
+  }
+  .meet:hover::after {
+    border-width:  0 0 1px 1px;
+    transition: width 0.25s ease-out 0.25s;
+    @apply border-danger;
   }
 }
