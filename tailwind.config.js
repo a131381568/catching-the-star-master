@@ -5,10 +5,11 @@ module.exports = {
   content: ['./index.html', './src/**/*.{vue,ts}'],
   theme: {
     extend: {
-      // here's how to extend fonts if needed
-      // fontFamily: {
-      //   sans: [...defaultTheme.fontFamily.sans],
-      // },
+      fontFamily: {
+        // sans: [...defaultTheme.fontFamily.sans],
+        'sans': ['Noto Sans TC', "微軟正黑體", "Microsoft JhengHei", "黑體", 'sans-serif', 'serif'],
+        'serif': ['Playfair\\ Display', 'Georgia', 'Times', ' serif']
+      },
       colors: {
         'lightxxx': '#1fb6ff'
       },
