@@ -11,7 +11,8 @@ module.exports = {
         'serif': ['Playfair\\ Display', 'Georgia', 'Times', ' serif']
       },
       fontSize: {
-        'tiny': '.938rem'
+        'tiny': '.938rem',
+        'menu-title': '5.5rem'
       },
       colors: {
         'sp-color-light': '#80b884',
@@ -28,9 +29,16 @@ module.exports = {
       }),
       backgroundColor: theme => ({
         'secondary': '#c5c5ca',
+        'danger': '#80b884',
       }),
+      lineHeight: {
+        'menu-title': '5.5rem'
+      },
       boxShadow: {
         'btn-default': 'inset 0 0 0 1px #c5c5ca'
+      },
+      letterSpacing: {
+        'wide-0275': '0.5rem'
       }
     },
   },
