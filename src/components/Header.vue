@@ -3,24 +3,11 @@
   <div class="fixed flex flex-col items-center justify-center mt-32 z-50">
     <div class="flex flex-col">
       <!-- Navbar -->
-      <nav
-        class="
-          fixed
-          flex
-          justify-between
-          py-5
-          px-9
-          w-full
-          top-0
-          left-0
-          right-0
-          z-50
-        "
-      >
+      <nav class="fixed flex justify-between py-5 px-9 w-full top-0 left-0 right-0 z-50">
         <!-- Logo Container -->
         <div class="flex items-center">
           <!-- Logo -->
-          <a class="cursor-pointer">
+          <router-link to="/" class="cursor-pointer">
             <svg
               class="svg-obj"
               xmlns="http://www.w3.org/2000/svg"
@@ -47,14 +34,8 @@
                   overflow="visible"
                 >
                   <g>
-                    <polygon
-                      fill="none"
-                      points="71.1,-1.9 2.1,-1.9 2.1,-70.9 71.1,-70.9    "
-                    />
-                    <polygon
-                      fill="#F6BB60"
-                      points="71.1,-1.9 2.1,-1.9 2.1,-70.9 71.1,-70.9    "
-                    />
+                    <polygon fill="none" points="71.1,-1.9 2.1,-1.9 2.1,-70.9 71.1,-70.9    " />
+                    <polygon fill="#F6BB60" points="71.1,-1.9 2.1,-1.9 2.1,-70.9 71.1,-70.9    " />
                     <g>
                       <path
                         fill="#FFFFFF"
@@ -495,7 +476,7 @@
                 d="M43.8,0L0,75.9h87.6L43.8,0z M33.1,29.3l2.5,4.3l-12,20.8L21.1,50L33.1,29.3z M25.4,57.4l12-20.8l19.7,34.2  h-24L25.4,57.4z"
               />
             </svg>
-          </a>
+          </router-link>
         </div>
         <!-- Icon Menu Section -->
         <div class="flex items-end space-x-5 self-center">
@@ -516,19 +497,7 @@
   <div
     id="modal"
     v-show="modal"
-    class="
-      modal-bg
-      transition-opacity
-      duration-500
-      fixed
-      w-full
-      h-full
-      left-0
-      top-0
-      z-10
-      overflow-auto
-      bg-secondary
-    "
+    class="modal-bg transition-opacity duration-500 fixed w-full h-full left-0 top-0 z-10 overflow-auto bg-secondary"
     :class="[
       { 'opacity-0': modal === false },
       { 'opacity-100': modal === true },
@@ -540,99 +509,53 @@
         <div>
           <ul>
             <li class="ml-12 mb-16 leading-menu-title">
-              <a
-                href="#"
+              <router-link
+                to="/about"
                 title="關於我們"
-                class="
-                  font-serif
-                  text-menu-title
-                  tracking-wide-menu
-                  text-main-color-dark
-                "
-                >About</a
-              >
+                class="font-serif text-menu-title tracking-wide-menu text-main-color-dark"
+              >About</router-link>
             </li>
             <li class="ml-12 mb-16 leading-menu-title">
-              <a
-                href="#"
+              <router-link
+                to="/science"
                 title="天文科普"
-                class="
-                  font-serif
-                  text-menu-title
-                  tracking-wide-menu
-                  text-main-color-dark
-                "
-                >Science</a
-              >
+                class="font-serif text-menu-title tracking-wide-menu text-main-color-dark"
+              >Science</router-link>
             </li>
             <li class="ml-12 mb-16 leading-menu-title">
-              <a
-                href="#"
+              <router-link
+                to="/"
                 title="星星故事"
-                class="
-                  font-serif
-                  text-menu-title
-                  tracking-wide-menu
-                  text-main-color-dark
-                "
-                >Story</a
-              >
+                class="font-serif text-menu-title tracking-wide-menu text-main-color-dark"
+              >Story</router-link>
             </li>
             <li class="ml-12 mb-16 leading-menu-title">
-              <a
-                href="#"
+              <router-link
+                to="/"
                 title="天文設施"
-                class="
-                  font-serif
-                  text-menu-title
-                  tracking-wide-menu
-                  text-main-color-dark
-                "
-                >Facilities</a
-              >
+                class="font-serif text-menu-title tracking-wide-menu text-main-color-dark"
+              >Facilities</router-link>
             </li>
             <li class="ml-12 mb-16 leading-menu-title">
-              <a
-                href="#"
+              <router-link
+                to="/"
                 title="觀星地點"
-                class="
-                  font-serif
-                  text-menu-title
-                  tracking-wide-menu
-                  text-main-color-dark
-                "
-                >Stargazing</a
-              >
+                class="font-serif text-menu-title tracking-wide-menu text-main-color-dark"
+              >Stargazing</router-link>
             </li>
             <li class="ml-12 mb-16 leading-menu-title">
-              <a
-                href="#"
+              <router-link
+                to="/"
                 title="搜尋頁面"
-                class="
-                  font-serif
-                  text-menu-title
-                  tracking-wide-menu
-                  text-main-color-dark
-                "
-                >Search</a
-              >
+                class="font-serif text-menu-title tracking-wide-menu text-main-color-dark"
+              >Search</router-link>
             </li>
           </ul>
         </div>
         <div
-          class="
-            bg-[url(/img/menu-bg-facilities.jpg)]
-            bg-center
-            bg-no-repeat
-            bg-cover
-            relative
-            mb-16
-            -top-4
-          "
+          class="bg-[url(/img/menu-bg-facilities.jpg)] bg-center bg-no-repeat bg-cover relative mb-16 -top-4"
         >
-          <a href="#" class="text-white absolute right-12 bottom-12 text-3xl"
-            >天文設施</a
-          >
+          <a href="#" class="text-white absolute right-12 bottom-12 text-3xl">天文設施</a>
         </div>
       </div>
     </div>

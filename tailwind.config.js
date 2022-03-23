@@ -26,7 +26,13 @@ module.exports = {
       backgroundColor: theme => ({
         'secondary': '#c5c5ca',
         'danger': '#80b884',
-        'main-color-black': '#181824'
+        'sp-color-light': '#80b884',
+        'main-color-light': '#c5c5ca',
+        'main-color-middle': '#747475',
+        'main-color-dark': '#1f1f39',
+        'main-color-black': '#181824',
+        'sub-color-dark': '#968c5e',
+        'sub-color-light': '#bbb494',
       }),
       borderColor: theme => ({
         'primary': '#c5c5ca',
@@ -46,6 +52,11 @@ module.exports = {
       },
       borderWidth: {
         'callout-box-boder': '10px'
+      },
+      opacity: {
+        '6': '0.06',
+        '12': '0.12',
+        '18': '0.18',
       }
     },
   },

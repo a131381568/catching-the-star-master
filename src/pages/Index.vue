@@ -1,14 +1,7 @@
 <template>
   <Header />
   <div
-    class="
-      mx-auto
-      h-screen
-      w-full
-      z-10
-      bg-[url(/img/home.png)] bg-right-bottom bg-no-repeat bg-cover
-      lg:bg-contain
-    "
+    class="mx-auto h-screen w-full z-10 bg-[url(/img/home.png)] bg-right-bottom bg-no-repeat bg-cover lg:bg-contain"
   >
     <div class="flex items-stretch h-full">
       <div class="flex-none w-1/12 h-16">
@@ -16,16 +9,12 @@
       </div>
       <div class="flex-grow w-auto h-auto text-white self-center">
         <h1 class="font-serif text-9xl tracking-normal">
-          <span class="font-normal text-9xl text-sp-color-light tracking-normal"
-            >Catch</span
-          >
+          <span class="font-normal text-9xl text-sp-color-light tracking-normal">Catch</span>
           the stars
         </h1>
-        <h4 class="text-main-color-light mt-10">
-          誰能數得清天上的星星？誰能說出它們對世界的影響？——詹・湯姆遜
-        </h4>
-        <button class="draw meet mt-12">
-          <span> Read More </span>
+        <h4 class="text-main-color-light mt-10">誰能數得清天上的星星？誰能說出它們對世界的影響？——詹・湯姆遜</h4>
+        <button class="btn draw meet mt-12">
+          <span>Read More</span>
         </button>
       </div>
       <div class="flex-none w-1/12 h-16">
@@ -36,7 +25,7 @@
 </template>
 <script setup lang="ts">
 // useRoute, useHead, and HelloWorld are automatically imported. See vite.config.ts for details.
-const route = useRoute();
+const route = useRoute()
 
 useHead({
   bodyAttrs: {

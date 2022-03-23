@@ -8,8 +8,7 @@
     "sourceMap": false,
     "lib": [
       "esnext",
-      "dom",
-      "es6"
+      "dom"
     ],
     "types": [
       "vite/client",

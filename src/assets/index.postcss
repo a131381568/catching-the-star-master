@@ -5,41 +5,42 @@
 @layer base {
   /* global variable */
   h1 {
-    @apply text-7xl;
-    @apply tracking-wide-content;
+    @apply text-7xl tracking-wide-content;
   }
   h2 {
-    @apply text-4xl;
-    @apply tracking-wide-content;
+    @apply text-4xl tracking-wide-content;
   }
   h3 {
-    @apply text-3xl;
-    @apply tracking-wide-content;
-
+    @apply text-3xl tracking-wide-content;
   }
   h4 {
     @apply text-2xl;
     @apply tracking-wide-content;
   }
   h5 {
-    @apply text-lg;
-    @apply tracking-wide-content;
+    @apply text-lg tracking-wide-content;
   }
   h6 {
-    @apply text-tiny;
-    @apply tracking-wide-content;
+    @apply text-tiny tracking-wide-content;
   }
   code{
-    @apply text-tiny;
-    @apply tracking-wide-content;
+    @apply text-tiny tracking-wide-content;
   }
   div, p, input, textarea, select, option, li, a, blockquote, th, td, i, b, strong, captiom, figcaption, figure, pre{
-    @apply text-lg;
-    @apply tracking-wide-content;
-    @apply font-light;
+    @apply text-lg tracking-wide-content font-light;
   }
+
+  /* post grid */
+  .grid-des-box{
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
   /* read btn + load btn */
-  button{
+  .btn{
     background: none;
     border: 0;
     box-sizing: border-box;
@@ -47,23 +48,15 @@
     vertical-align: middle;
     position: relative;
     padding: 0.6rem 3.1rem 0.8rem;
-    @apply text-lg;
-    @apply text-main-color-light;
-    @apply transition-all;
-    @apply duration-500;
-    @apply shadow-btn-default
-  }
-  button::before, button::after {
-    content: '';
-    box-sizing: inherit;
-    position: absolute;
-    width: 100%;
-    height: 100%;
+    @apply text-lg text-main-color-light transition-all duration-500 shadow-btn-default;
   }
   .draw {
     transition: color 0.25s
   }
   .draw::before, .draw::after {
+    content: '';
+    box-sizing: inherit;
+    position: absolute;
     border: 1px solid transparent;
     width: 0;
     height: 0;
@@ -102,4 +95,8 @@
     transition: width 0.25s ease-out 0.25s;
     @apply border-danger;
   }
+
+
+
+
 }

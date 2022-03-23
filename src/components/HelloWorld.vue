@@ -4,19 +4,23 @@
     id="btn1"
     class="px-3 py-2 bg-white border border-gray-300 rounded-md shadow"
     @click="increment"
-  >
-    count is: {{ count }}
-  </button>
-  <p>儲存<code>count</code>至<em>pinia</em></p>
+  >count is: {{ count }}</button>
+  <p>
+    儲存
+    <code>count</code>至
+    <em>pinia</em>
+  </p>
   <hr />
   <button
     id="btn2"
     class="px-3 py-2 bg-white border border-gray-300 rounded-md shadow"
     @click="addIncrement"
-  >
-    countA is: {{ countA }}
-  </button>
-  <p>儲存<code>countA</code>至<em>pinia</em></p>
+  >countA is: {{ countA }}</button>
+  <p>
+    儲存
+    <code>countA</code>至
+    <em>pinia</em>
+  </p>
   <hr />
   <ul>
     <li>
@@ -29,7 +33,6 @@
 </template>
 
 <script setup lang="ts">
-// useStore, and computed are automatically imported. See vite.config.ts for details.
 const store = useStore();
 const count = computed(() => store.count);
 const countA = computed(() => store.countA);

@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Index from '@/pages/Index.vue'
 import About from '@/pages/About.vue'
+import Science from '@/pages/Science.vue'
 import Story from '@/pages/Story.vue'
 
 const routes = [
@@ -16,6 +17,13 @@ const routes = [
     component: About,
     meta: {
       title: '關於我們',
+    },
+  },
+  {
+    path: '/science',
+    component: Science,
+    meta: {
+      title: '天文科普',
     },
   },
   {
