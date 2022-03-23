@@ -23,15 +23,16 @@ module.exports = {
         'sub-color-dark': '#968c5e',
         'sub-color-light': '#bbb494',
       },
-      borderColor: theme => ({
-        'primary': '#c5c5ca',
-        'secondary': '#bbb494',
-        'danger': '#80b884',
-      }),
       backgroundColor: theme => ({
         'secondary': '#c5c5ca',
         'danger': '#80b884',
         'main-color-black': '#181824'
+      }),
+      borderColor: theme => ({
+        'primary': '#c5c5ca',
+        'secondary': '#bbb494',
+        'danger': '#80b884',
+        'sub-color-dark': '#968c5e'
       }),
       lineHeight: {
         'menu-title': '5.5rem'
@@ -40,8 +41,11 @@ module.exports = {
         'btn-default': 'inset 0 0 0 1px #c5c5ca'
       },
       letterSpacing: {
-        'wide-0275': '0.5rem',
-        'wide-content': '0.2rem',
+        'wide-menu': '0.5rem',
+        'wide-content': '0.15rem',
+      },
+      borderWidth: {
+        'callout-box-boder': '10px'
       }
     },
   },

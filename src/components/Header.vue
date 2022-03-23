@@ -546,7 +546,7 @@
                 class="
                   font-serif
                   text-menu-title
-                  tracking-wide-0275
+                  tracking-wide-menu
                   text-main-color-dark
                 "
                 >About</a
@@ -559,7 +559,7 @@
                 class="
                   font-serif
                   text-menu-title
-                  tracking-wide-0275
+                  tracking-wide-menu
                   text-main-color-dark
                 "
                 >Science</a
@@ -572,7 +572,7 @@
                 class="
                   font-serif
                   text-menu-title
-                  tracking-wide-0275
+                  tracking-wide-menu
                   text-main-color-dark
                 "
                 >Story</a
@@ -585,7 +585,7 @@
                 class="
                   font-serif
                   text-menu-title
-                  tracking-wide-0275
+                  tracking-wide-menu
                   text-main-color-dark
                 "
                 >Facilities</a
@@ -598,7 +598,7 @@
                 class="
                   font-serif
                   text-menu-title
-                  tracking-wide-0275
+                  tracking-wide-menu
                   text-main-color-dark
                 "
                 >Stargazing</a
@@ -611,7 +611,7 @@
                 class="
                   font-serif
                   text-menu-title
-                  tracking-wide-0275
+                  tracking-wide-menu
                   text-main-color-dark
                 "
                 >Search</a
