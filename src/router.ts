@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-
 import Index from '@/pages/Index.vue'
 import About from '@/pages/About.vue'
+import Story from '@/pages/Story.vue'
 
 const routes = [
   {
@@ -16,6 +16,13 @@ const routes = [
     component: About,
     meta: {
       title: '關於我們',
+    },
+  },
+  {
+    path: '/story',
+    component: Story,
+    meta: {
+      title: '星星物語',
     },
   }
 ]

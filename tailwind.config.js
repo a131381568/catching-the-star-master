@@ -19,6 +19,7 @@ module.exports = {
         'main-color-light': '#c5c5ca',
         'main-color-middle': '#747475',
         'main-color-dark': '#1f1f39',
+        'main-color-black': '#181824',
         'sub-color-dark': '#968c5e',
         'sub-color-light': '#bbb494',
       },
@@ -30,6 +31,7 @@ module.exports = {
       backgroundColor: theme => ({
         'secondary': '#c5c5ca',
         'danger': '#80b884',
+        'main-color-black': '#181824'
       }),
       lineHeight: {
         'menu-title': '5.5rem'
@@ -38,7 +40,8 @@ module.exports = {
         'btn-default': 'inset 0 0 0 1px #c5c5ca'
       },
       letterSpacing: {
-        'wide-0275': '0.5rem'
+        'wide-0275': '0.5rem',
+        'wide-content': '0.2rem',
       }
     },
   },
