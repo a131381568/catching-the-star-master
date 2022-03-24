@@ -14,6 +14,7 @@
     "test:ci-components": "cypress run-ct"
   },
   "dependencies": {
+    "@kangc/v-md-editor": "^2.3.14",
     "@vueuse/core": "^8.1.2",
     "@vueuse/head": "~0.7",
     "pinia": "~2.0",
@@ -50,6 +51,7 @@
     "unplugin-auto-import": "~0.6",
     "unplugin-vue-components": "~0.18",
     "vite": "~2.8",
+    "vite-plugin-md": "^0.12.3",
     "vitest": "~0.6",
     "wait-on": "~6.0"
   }

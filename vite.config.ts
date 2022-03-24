@@ -6,6 +6,10 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import pkg from './package.json'
 
+
+import Markdown from 'vite-plugin-md'
+
+
 process.env.VITE_APP_VERSION = pkg.version
 if (process.env.NODE_ENV === 'production') {
   process.env.VITE_APP_BUILD_EPOCH = new Date().getTime().toString()
@@ -23,6 +27,7 @@ export default defineConfig({
       script: {
         refSugar: true,
       },
+      include: [/\.vue$/, /\.md$/],
     }),
     AutoImport({
       imports: [
@@ -42,6 +47,13 @@ export default defineConfig({
     Components({
       dirs: ['src/components'],
       extensions: ['vue'],
+    }),
+    Markdown({
+      markdownItOptions: {
+        html: true,
+        linkify: true,
+        typographer: true,
+      }
     }),
   ],
   resolve: {
