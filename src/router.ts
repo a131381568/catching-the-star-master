@@ -4,6 +4,7 @@ import About from '@/pages/About.vue'
 import Science from '@/pages/Science.vue'
 import SingleScience from '@/pages/SingleScience.vue'
 import Story from '@/pages/Story.vue'
+import Archive from '@/pages/Archive.vue'
 
 const routes = [
   {
@@ -44,6 +45,14 @@ const routes = [
     component: Story,
     meta: {
       title: '星星物語',
+    },
+  },
+  {
+    path: '/archive/:tagid',
+    name: 'Archive',
+    component: Archive,
+    meta: {
+      title: '彙整',
     },
   }
 ]

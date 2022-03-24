@@ -97,12 +97,67 @@
   }
 
   /* markdown */
-  .markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4, .markdown-body h5, .markdown-body h6{
-    @apply font-normal
+  .md-container > div >*{
+    @apply mb-8
   }
-  .markdown-body blockquote *{
-    @apply text-white font-bold
+  .md-container h1, .md-container h2, .md-container h3, .md-container h4, .md-container h5, .md-container h6{
+    @apply font-normal;
   }
-
-
+  .md-container h2{
+    @apply mb-12
+  }
+  .md-container h3{
+    @apply mb-8
+  }
+  .md-container h4{
+    @apply mb-5
+  }
+  .md-container h5{
+    @apply mb-4
+  }
+  .md-container h6{
+    @apply mb-3
+  }
+  .md-container blockquote *{
+    @apply text-white font-semibold
+  }
+  .md-container blockquote{
+    @apply pl-4 border-l-4 border-white my-6
+  }
+  .md-container ul{
+    @apply list-disc ml-12
+  }
+  .md-container pre{
+    @apply bg-sub-color-light p-6 rounded my-10
+  }
+  .md-container code{
+    @apply text-main-color-black font-normal font-sans
+  }
+  .md-container p > code{
+    @apply bg-sp-color-light text-lg 
+  }
+  .md-container a{
+    @apply text-sp-color-light
+  }
+  .md-container img{
+    max-width:50%;
+  }
+  .md-container hr{
+    @apply my-20
+  }
+  .md-container table{
+    @apply text-left w-full
+  }
+  .md-container thead{
+    @apply border-b-2  border-main-color-light
+  }
+  .md-container tr{
+    @apply border-b  border-main-color-light
+  }
+  .md-container th{
+    @apply font-semibold
+  }
+  .md-container td, .md-container th{
+    @apply py-3
+  }
 }

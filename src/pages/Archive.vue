@@ -51,17 +51,14 @@
           <!-- date & cat -->
           <p class="text-tiny mt-1 text-main-color-light">
             {{ val.date }},
-            <router-link
-              :to="'/Archive/' + val.catId"
-              class="text-sub-color-light"
-            >{{ val.catName }}</router-link>
+            <router-link to="/" class="text-sub-color-light">{{ val.catName }}</router-link>
           </p>
           <!-- des -->
           <p class="text-main-color-light font-light mt-5 text-lg grid-des-box">{{ val.des }}</p>
           <!-- link -->
-          <router-link class="mt-10 btn draw meet inline-block" :to="'/science/' + val.postId">
+          <button class="mt-10 btn draw meet">
             <span>Read More</span>
-          </router-link>
+          </button>
         </div>
       </div>
     </div>

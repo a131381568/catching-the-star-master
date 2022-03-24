@@ -34,48 +34,53 @@ export const useStore = defineStore('main', {
           {
             title: "Catch the stars",
             subTitle: "誰能數得清天上的星星？誰能說出它們對世界的影響？——詹・湯姆遜",
-            path: "/"
+            pageName: "Home"
           },
           {
             title: "關於我們",
             subTitle: "about",
-            path: "/about"
+            pageName: "About"
           },
           {
             title: "天文科普",
             subTitle: "science",
-            path: "/science"
+            pageName: "Science"
+          },
+          {
+            title: "約翰尼斯‧克卜勒 Johannes ",
+            subTitle: "science",
+            pageName: "SingleScience"
           },
           {
             title: "星星物語",
-            subTitle: "story",
-            path: "/story"
+            subTitle: "科學家",
+            pageName: "Story"
           },
           {
             title: "天文設施",
             subTitle: "facilities",
-            path: "/facilities"
+            pageName: "Facilities"
           },
           {
             title: "觀星地點",
             subTitle: "stargazing",
-            path: "/stargazing"
+            pageName: "Stargazing"
           },
           {
             title: "彙整",
             subTitle: "tag",
-            path: "/stargazing"
+            pageName: "Archive"
           },
           {
             title: "搜尋",
             subTitle: "search",
-            path: "/search"
+            pageName: "Search"
           },
         ]
       const route = useRoute()
-      const path = computed(() => route.path)
-      let thisPath = path.value
-      let thisPathInfo = pageDataArry.filter(item => thisPath === item.path)
+      const routeName = computed(() => route.name)
+      let thisPath = routeName.value
+      let thisPathInfo = pageDataArry.filter(item => thisPath === item.pageName)
       if (thisPathInfo.length === 0) {
         this.pageTitle = "找不到網頁"
         this.pageSubTitle = "PAGE NOT FOUND"
