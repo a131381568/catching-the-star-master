@@ -67,7 +67,7 @@ export const useStore = defineStore('main', {
             pageName: "Stargazing"
           },
           {
-            title: "彙整",
+            title: "標籤：天文觀測",
             subTitle: "tag",
             pageName: "Archive"
           },

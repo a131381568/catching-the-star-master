@@ -5,6 +5,7 @@ import Science from '@/pages/Science.vue'
 import SingleScience from '@/pages/SingleScience.vue'
 import Story from '@/pages/Story.vue'
 import Archive from '@/pages/Archive.vue'
+import Search from '@/pages/Search.vue'
 
 const routes = [
   {
@@ -53,6 +54,14 @@ const routes = [
     component: Archive,
     meta: {
       title: '彙整',
+    },
+  },
+  {
+    path: '/search',
+    name: 'Search',
+    component: Search,
+    meta: {
+      title: '搜尋',
     },
   }
 ]

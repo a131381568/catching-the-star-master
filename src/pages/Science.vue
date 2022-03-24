@@ -52,7 +52,7 @@
           <p class="text-tiny mt-1 text-main-color-light">
             {{ val.date }},
             <router-link
-              :to="'/Archive/' + val.catId"
+              :to="'/archive/' + val.catId"
               class="text-sub-color-light"
             >{{ val.catName }}</router-link>
           </p>
