@@ -72,7 +72,7 @@ export const useStore = defineStore('main', {
             pageName: "Archive"
           },
           {
-            title: "搜尋",
+            title: "搜尋頁面",
             subTitle: "search",
             pageName: "Search"
           },

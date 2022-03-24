@@ -5,17 +5,19 @@
     <TitleBox />
 
     <!-- 搜尋框 -->
-    <div class="xl:w-4/12 lg:w-2/5 h-full mt-20">
+    <div class="w-10/12 mt-20">
       <div class="relative text-lg bg-transparent text-gray-800">
-        <div class="flex items-center border-b border-teal-500 py-2">
+        <div
+          class="flex items-center duration-500 border-b border-white border-opacity-25 py-2 focus-within:border-opacity-60"
+        >
           <input
-            class="bg-transparent border-none mr-3 px-2 leading-tight focus:outline-none"
+            class="w-full bg-transparent border-transparent focus:border-transparent border-none mr-3 px-2 text-3xl text-main-color-middle focus:outline-0 focus:ring-0 focus:text-main-color-light"
             type="text"
             placeholder="Search"
           />
           <button type="submit" class="absolute right-0 top-0 mt-3 mr-4">
             <svg
-              class="h-4 w-4 fill-current"
+              class="h-10 w-10 fill-white opacity-25 hover:opacity-60 duration-500"
               xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink"
               version="1.1"

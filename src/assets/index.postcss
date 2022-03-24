@@ -30,6 +30,14 @@
     @apply text-lg tracking-wide-content font-light;
   }
 
+  /* placeholder & selection */
+  input::placeholder {
+    @apply  text-main-color-middle
+  }
+  ::selection{
+    @apply bg-sp-color-light text-main-color-black
+  }
+
   /* post grid */
   .grid-des-box{
     -webkit-line-clamp: 3;

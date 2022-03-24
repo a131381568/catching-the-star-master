@@ -545,7 +545,7 @@
             </li>
             <li class="ml-12 mb-16 leading-menu-title">
               <router-link
-                to="/"
+                to="/search"
                 title="搜尋頁面"
                 class="font-serif text-menu-title tracking-wide-menu text-main-color-dark"
               >Search</router-link>
