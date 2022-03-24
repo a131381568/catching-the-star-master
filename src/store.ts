@@ -77,8 +77,8 @@ export const useStore = defineStore('main', {
       let thisPath = path.value
       let thisPathInfo = pageDataArry.filter(item => thisPath === item.path)
       if (thisPathInfo.length === 0) {
-        this.pageTitle = "aaaaa"
-        this.pageSubTitle = "xxx"
+        this.pageTitle = "找不到網頁"
+        this.pageSubTitle = "PAGE NOT FOUND"
       } else {
         this.pageTitle = thisPathInfo[0].title
         this.pageSubTitle = thisPathInfo[0].subTitle
