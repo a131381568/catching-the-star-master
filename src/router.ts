@@ -6,6 +6,7 @@ import SingleScience from '@/pages/SingleScience.vue'
 import Story from '@/pages/Story.vue'
 import Archive from '@/pages/Archive.vue'
 import Search from '@/pages/Search.vue'
+import NotFound from '@/pages/NotFound.vue'
 
 const routes = [
   {
@@ -15,6 +16,10 @@ const routes = [
     meta: {
       title: '首頁',
     },
+  },
+  {
+    path: "/home",
+    redirect: "/"
   },
   {
     path: '/about',
@@ -53,7 +58,7 @@ const routes = [
     name: 'Archive',
     component: Archive,
     meta: {
-      title: '彙整',
+      title: '標籤',
     },
   },
   {
@@ -61,14 +66,35 @@ const routes = [
     name: 'Search',
     component: Search,
     meta: {
-      title: '搜尋',
+      title: '搜尋頁面',
     },
+  },
+  {
+    path: '/notfound',
+    name: 'NotFound',
+    component: NotFound,
+    meta: {
+      title: '找不到網頁',
+    }
+  },
+  {
+    path: "/:catchAll(.*)",
+    redirect: "/notfound"
   }
 ]
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return {
+        top: 0
+      }
+    }
+  }
 })
 
 export default router

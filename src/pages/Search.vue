@@ -3,7 +3,6 @@
   <div class="md:flex flex-wrap items-start justify-center pt-72 pb-32 2xl:px-20 md:px-6 px-4">
     <!-- 標題區塊 -->
     <TitleBox />
-
     <!-- 搜尋框 -->
     <div class="w-10/12 mt-20">
       <div class="relative text-lg bg-transparent text-gray-800">
@@ -38,15 +37,14 @@
         </div>
       </div>
     </div>
-
     <!-- 主視覺 -->
     <div class="xl:w-4/12 lg:w-2/5 h-full mt-20">
-      <img class="w-auto" src="/img/bg-achive.png" />
+      <img class="w-auto" src="/img/bg-search.png" />
     </div>
     <!-- post grid -->
     <div class="grid grid-cols-1 w-6/12 overflow-hidden mt-36">
       <div v-for="(val, key) in postList" :key="key">
-        <router-link :to="'/science/' + val.postId">
+        <router-link :to="val.path">
           <!-- card -->
           <div
             class="py-8 px-16 bg-white hover:bg-opacity-0 delay-75 duration-1000 border border-white border-opacity-0 hover:border-opacity-60 bg-opacity-6 mb-1"
@@ -69,12 +67,12 @@
 </template>
 <script setup lang="ts">
 const postList = [
-  { title: "大氣視窗", des: "我們的大氣層並不允許所有電磁波都能夠穿透，因此只有某些特定波段的電磁波能進到地......", postId: "sc1326" },
-  { title: "可見光天文學", des: "由於可見光可穿透大氣層，可見光天文學是最古老的天文學，起初人們只能用肉眼觀測......", postId: "sc1327" },
-  { title: "電波天文學", des: "電波天文學（Radio Astronomy）指的是使用無線電波的波段記錄記錄到來自天體的......", postId: "sc1328" },
-  { title: "紅外線天文學", des: "紅外線波段的波長是介於可見光及次毫米波段之間，由於大部份紅外線都無法穿透大氣層......", postId: "sc1329" },
-  { title: "紫外線天文學", des: "紫外線天文學觀測電磁波波長大約在100到3200埃之間 。因為這個範圍波長的輻射無法......", postId: "sc1330" },
-  { title: "X射線天文學", des: "X射線天文學中常以電子伏特（eV）表示光子的能量，觀測對象為0.1keV到100keV的X......", postId: "sc1331" },
-  { title: "伽瑪射線天文學", des: "伽瑪射線是可穿透整個宇宙的電磁波中最高能量的波段，也是電磁波譜中波長最短的部分......", postId: "sc1332" },
+  { title: "最璀璨明星——天狼星", des: "明亮的星星在寒冷的夜晚閃著孤寂的寒光，冬天是亮星最多的季節，有別於夏季星空的繁......", path: "/science/sc1326" },
+  { title: "木星", des: "木星的軌道半長軸為5.2AU，繞行太陽需花11.86年，因其週期接近12年，在中國古代將......", path: "/science/sc1327" },
+  { title: "類木行星", des: "也稱氣體巨行星，早期是指太陽系中的木星、土星、天王星、海王星，具有行星環的結購......", path: "/science/sc1328" },
+  { title: "類地行星", des: "也稱岩石行星，主要由金屬及矽酸鹽岩石所組成，在太陽系中類地行星共有4顆，分別為......", path: "/science/sc1329" },
+  { title: "北極星之秘", des: "韓劇冬季戀歌中，男主角曾說過這麼一段話﹕「在山上迷路的時候，只要找到北極星就可......", path: "/science/sc1330" },
+  { title: "Ia 型超新星爆炸", des: "Ia型超新星爆炸的原型是一對雙星，其中質量高的一顆恆星（白色）演化速度較快，先演......", path: "/science/sc1331" },
+  { title: "恆星月及朔望月", des: "月球是地球的衛星，繞著地球公轉，本身也會自轉，方向為由西向東，從北極上方往下看......", path: "/science/sc1332" },
 ]
 </script>
