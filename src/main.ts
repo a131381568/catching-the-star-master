@@ -12,12 +12,20 @@ import githubTheme from '@kangc/v-md-editor/lib/theme/github';
 import '@kangc/v-md-editor/lib/theme/style/github.css';
 VMdPreview.use(githubTheme)
 
+
+import MasonryWall from '@yeger/vue-masonry-wall'
+
+
+
 const head = createHead()
 const app = createApp(App)
 
 app.use(createPinia())
 app.use(router)
 app.use(head)
+
 app.use(VMdPreview);
+app.use(MasonryWall)
+
 
 app.mount('#app')

@@ -4,6 +4,7 @@ import About from '@/pages/About.vue'
 import Science from '@/pages/Science.vue'
 import SingleScience from '@/pages/SingleScience.vue'
 import Story from '@/pages/Story.vue'
+import SingleStory from '@/pages/SingleStory.vue'
 import Archive from '@/pages/Archive.vue'
 import Search from '@/pages/Search.vue'
 import NotFound from '@/pages/NotFound.vue'
@@ -49,6 +50,14 @@ const routes = [
     path: '/story',
     name: 'Story',
     component: Story,
+    meta: {
+      title: '星星物語',
+    },
+  },
+  {
+    path: '/story/:nid',
+    name: 'SingleStory',
+    component: SingleStory,
     meta: {
       title: '星星物語',
     },

@@ -38,6 +38,18 @@
     @apply bg-sp-color-light text-main-color-black
   }
 
+  /* timeline */
+  .timeline-grid:before{
+    content: "";
+    height: calc(100% + 28rem);
+    @apply -mt-56 relative border border-l-0 w-0 border-main-color-middle left-1/2
+  }
+  .timeline-grid:after{
+    content:"";
+    left: calc(50% - 7px);
+    @apply -mt-56 bg-sub-color-dark rounded-full h-15px w-15px absolute
+  }
+ 
   /* post grid */
   .grid-des-box{
     -webkit-line-clamp: 3;

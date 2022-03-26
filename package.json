@@ -17,6 +17,7 @@
     "@kangc/v-md-editor": "^2.3.14",
     "@vueuse/core": "^8.1.2",
     "@vueuse/head": "~0.7",
+    "@yeger/vue-masonry-wall": "^3.0.24",
     "pinia": "~2.0",
     "vue": "~3.2",
     "vue-router": "~4.0"

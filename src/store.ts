@@ -53,8 +53,13 @@ export const useStore = defineStore('main', {
           },
           {
             title: "星星物語",
-            subTitle: "科學家",
+            subTitle: "story",
             pageName: "Story"
+          },
+          {
+            title: "為淒美的愛情故事搭起橋樑——天鵝座 ",
+            subTitle: "星星物語",
+            pageName: "SingleStory"
           },
           {
             title: "天文設施",

@@ -524,7 +524,7 @@
             </li>
             <li class="ml-12 mb-16 leading-menu-title">
               <router-link
-                to="/"
+                to="/story"
                 title="星星故事"
                 class="font-serif text-menu-title tracking-wide-menu text-main-color-dark"
               >Story</router-link>

@@ -38,7 +38,13 @@ module.exports = {
         'primary': '#c5c5ca',
         'secondary': '#bbb494',
         'danger': '#80b884',
-        'sub-color-dark': '#968c5e'
+        'sp-color-light': '#80b884',
+        'main-color-light': '#c5c5ca',
+        'main-color-middle': '#747475',
+        'main-color-dark': '#1f1f39',
+        'main-color-black': '#181824',
+        'sub-color-dark': '#968c5e',
+        'sub-color-light': '#bbb494',
       }),
       lineHeight: {
         'menu-title': '5.5rem'
@@ -57,6 +63,21 @@ module.exports = {
         '6': '0.06',
         '12': '0.12',
         '18': '0.18',
+      },
+      width: {
+        '37/100': '37%',
+        '13/100': '13%',
+        '9px': '9px',
+        '15px': '15px'
+      },
+      height: {
+        '9px': '9px',
+        '15px': '15px'
+      },
+      inset: {
+        '7px': '7px',
+        '5px': '5px',
+        '4px': '4px'
       }
     },
   },

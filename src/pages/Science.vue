@@ -7,7 +7,7 @@
     <div class="w-10/12 mt-16 mb-20 inline-flex">
       <ul class="flex flex-wrap">
         <li v-for="(val, key) in filterCategories" :key="key">
-          <div class="flex items-center mr-10">
+          <div class="flex items-center mr-10 group">
             <input
               :id="val.catId"
               type="radio"
@@ -19,13 +19,14 @@
             <label
               :for="val.catId"
               :class="[
-                'flex', 'items-center', 'cursor-pointer', 'text-2xl',
+                'delay-75', 'duration-1000',
+                'flex', 'items-center', 'cursor-pointer', 'text-2xl', 'group-hover:text-sp-color-light',
                 { 'text-sub-color-light': val.catId === selectCat },
                 { 'text-main-color-light': val.catId !== selectCat }
               ]"
             >
               <span
-                class="w-3 h-3 inline-block mr-2 rounded-full border border-grey flex-no-shrink"
+                class="w-3 h-3 inline-block mr-2 rounded-full border border-grey flex-no-shrink group-hover:bg-sp-color-light delay-75 duration-1000"
                 :class="{ 'bg-sub-color-light': val.catId === selectCat }"
               ></span>
               {{ val.name }}
@@ -53,7 +54,7 @@
             {{ val.date }},
             <router-link
               :to="'/archive/' + val.catId"
-              class="text-sub-color-light"
+              class="text-sub-color-light hover:text-sp-color-light"
             >{{ val.catName }}</router-link>
           </p>
           <!-- des -->
