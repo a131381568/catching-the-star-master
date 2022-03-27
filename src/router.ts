@@ -6,6 +6,7 @@ import SingleScience from '@/pages/SingleScience.vue'
 import Story from '@/pages/Story.vue'
 import SingleStory from '@/pages/SingleStory.vue'
 import Facilities from '@/pages/Facilities.vue'
+import Stargazing from '@/pages/Stargazing.vue'
 import Archive from '@/pages/Archive.vue'
 import Search from '@/pages/Search.vue'
 import NotFound from '@/pages/NotFound.vue'
@@ -69,6 +70,14 @@ const routes = [
     component: Facilities,
     meta: {
       title: '天文設施',
+    },
+  },
+  {
+    path: '/stargazing',
+    name: 'Stargazing',
+    component: Stargazing,
+    meta: {
+      title: '觀星地點',
     },
   },
   {
