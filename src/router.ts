@@ -5,6 +5,7 @@ import Science from '@/pages/Science.vue'
 import SingleScience from '@/pages/SingleScience.vue'
 import Story from '@/pages/Story.vue'
 import SingleStory from '@/pages/SingleStory.vue'
+import Facilities from '@/pages/Facilities.vue'
 import Archive from '@/pages/Archive.vue'
 import Search from '@/pages/Search.vue'
 import NotFound from '@/pages/NotFound.vue'
@@ -60,6 +61,14 @@ const routes = [
     component: SingleStory,
     meta: {
       title: '星星物語',
+    },
+  },
+  {
+    path: '/facilities',
+    name: 'Facilities',
+    component: Facilities,
+    meta: {
+      title: '天文設施',
     },
   },
   {

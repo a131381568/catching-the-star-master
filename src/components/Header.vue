@@ -531,7 +531,7 @@
             </li>
             <li class="ml-12 mb-16 leading-menu-title">
               <router-link
-                to="/"
+                to="/facilities"
                 title="天文設施"
                 class="font-serif text-menu-title tracking-wide-menu text-main-color-dark"
               >Facilities</router-link>
