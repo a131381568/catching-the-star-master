@@ -1,9 +1,9 @@
 <template>
   <!-- Container -->
-  <div class="fixed flex flex-col items-center justify-center mt-32 z-50">
+  <div class="fixed flex flex-col items-center justify-center mt-32 z-10000">
     <div class="flex flex-col">
       <!-- Navbar -->
-      <nav class="fixed flex justify-between py-5 px-9 w-full top-0 left-0 right-0 z-50">
+      <nav class="fixed flex justify-between py-5 px-9 w-full top-0 left-0 right-0">
         <!-- Logo Container -->
         <div class="flex items-center">
           <!-- Logo -->
@@ -497,14 +497,14 @@
   <div
     id="modal"
     v-show="modal"
-    class="modal-bg transition-opacity duration-500 fixed w-full h-full left-0 top-0 z-10 overflow-auto bg-secondary"
+    class="modal-bg transition-opacity duration-500 fixed w-full h-full left-0 top-0 overflow-auto bg-secondary"
     :class="[
       { 'opacity-0': modal === false },
       { 'opacity-100': modal === true },
-      { 'z-40': modal === true },
+      { 'z-9999': modal === true },
     ]"
   >
-    <div class="w-full h-full modal-content relative m-auto">
+    <div class="w-full h-full modal-content relative m-auto overflow-hidden">
       <div class="grid grid-cols-2 h-full py-32 px-40">
         <div>
           <ul>
