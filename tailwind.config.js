@@ -68,6 +68,7 @@ module.exports = {
         '480px': '480px',
         '37/100': '37%',
         '13/100': '13%',
+        '2px': '2px',
         '9px': '9px',
         '15px': '15px'
       },
@@ -79,9 +80,13 @@ module.exports = {
         '80vh': '80vh'
       },
       inset: {
+        '15px': '15px',
         '7px': '7px',
         '5px': '5px',
         '4px': '4px'
+      },
+      minHeight: {
+        '100px': '100px'
       },
       zIndex: {
         '10000': '10000',
