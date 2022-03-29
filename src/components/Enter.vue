@@ -472,7 +472,7 @@
         />
       </svg>
       <div
-        class="stop-star-subtitle mt-4 font-serif text-3xl tracking-wider text-main-color-light"
+        class="stop-star-subtitle mt-4 font-serif text-3xl tracking-wider text-main-color-light animate__animated animate__bounce animate__delay-2s"
       >Catch the stars</div>
     </div>
   </div>
