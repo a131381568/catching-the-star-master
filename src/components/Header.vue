@@ -685,7 +685,7 @@ const menuList = ref([
 // 抓取選單跟 header 狀態
 const store = useStore();
 const getHeaderState = computed(() => store.isHeaderTop);
-const getLoading = computed(() => store.get_loading);
+// const getLoading = computed(() => store.get_loading);
 
 // 宣告 data 欄位
 const modal = ref(false);
@@ -702,7 +702,6 @@ const hoveredStargazing = useElementHover(stargazingRef)
 const searchRef = ref()
 const hoveredSearch = useElementHover(searchRef)
 
-
 // 綁 methods
 function toggleModal() {
   if (modal.value === false) {
@@ -715,7 +714,6 @@ function toggleModal() {
 }
 
 // ===========================================
-
 
 // 生命週期
 // onBeforeMount(() => {

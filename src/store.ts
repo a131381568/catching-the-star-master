@@ -9,28 +9,13 @@ export const useStore = defineStore('main', {
   state: () => ({
     debug: import.meta.env.MODE === 'development',
     version: versionString,
-    isInitialized: false,
-    count: 0,
-    countA: 20,
-    // 頁面共用資訊
     pageTitle: "",
     pageSubTitle: "",
-    // header
     isHeaderTop: true,
-    loading: false
+    loading: false,
+    firstEnter: true
   }),
   actions: {
-    initApp() {
-      this.isInitialized = true
-      console.log('app initialized!')
-    },
-    increment(value = 1) {
-      this.count += value
-    },
-    addIncrement(value = 1) {
-      this.countA += value
-    },
-    //
     setTitleInfo() {
       const pageDataArry =
         [
@@ -102,13 +87,12 @@ export const useStore = defineStore('main', {
     },
     setLoading(value: boolean) {
       this.loading = value
-    }
+    },
+    setEnterState(value: boolean) {
+      this.firstEnter = value
+    },
   },
   getters: {
-    isReady: (state) => {
-      return !state.isInitialized
-    },
-    //
     get_pageTitle: (state) => {
       return state.pageTitle
     },
@@ -120,6 +104,9 @@ export const useStore = defineStore('main', {
     },
     get_loading: (state) => {
       return state.loading
-    }
+    },
+    get_firstEnter: (state) => {
+      return state.firstEnter
+    },
   }
 })
