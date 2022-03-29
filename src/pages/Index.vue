@@ -1,7 +1,7 @@
 <template>
   <Header />
   <div
-    class="absolute right-0 top-0 mx-auto h-screen w-full z-0 bg-[url(/img/home.png)] bg-right-bottom bg-no-repeat bg-cover lg:bg-contain animate__animated animate__fadeInRightBig"
+    class="absolute right-0 top-0 mx-auto h-screen w-full z-0 bg-[url(/img/home.png)] bg-right-bottom bg-no-repeat bg-contain lg:bg-contain animate__animated animate__fadeInRightBig"
     :class="[{ 'animate__delay-5s': getFirstEnter === true }, { 'animate__delay-3s': getFirstEnter === false }]"
   ></div>
   <div class="mx-auto h-screen w-full z-10">
@@ -11,18 +11,20 @@
       </div>
       <div class="flex-grow w-auto h-auto text-white self-center">
         <h1
-          class="font-serif text-9xl tracking-normal animate__animated animate__fadeInLeft"
+          class="font-serif large-pc:text-9xl middle-pc:text-8xl tracking-normal animate__animated animate__fadeInLeft"
           :class="[{ 'animate__delay-3s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]"
         >
-          <span class="font-normal text-9xl text-sp-color-light tracking-normal">Catch</span>
+          <span
+            class="font-normal large-pc:text-9xl middle-pc:text-8xl text-sp-color-light tracking-normal"
+          >Catch</span>
           the stars
         </h1>
         <h4
-          class="text-main-color-light mt-10 animate__animated animate__fadeIn"
+          class="text-main-color-light animate__animated animate__fadeIn large-pc:mt-10 h-table:mt-6 large-pc:text-2xl h-table:text-lg middle-pc:w-auto h-table:w-380px"
           :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-2s': getFirstEnter === false }]"
         >誰能數得清天上的星星？誰能說出它們對世界的影響？——詹・湯姆遜</h4>
         <router-link
-          class="btn draw meet mt-12 inline-block animate__animated animate__flipInX"
+          class="btn draw meet inline-block animate__animated animate__flipInX large-pc:mt-12 h-table:mt-8"
           :class="[{ 'animate__delay-5s': getFirstEnter === true }, { 'animate__delay-3s': getFirstEnter === false }]"
           to="/science"
         >
