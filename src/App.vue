@@ -646,7 +646,7 @@
     </div>
   </div>
   <Loading v-show="getLoading === true"></Loading>
-  <Enter></Enter>
+  <!-- <Enter></Enter> -->
 </template>
 <script setup lang="ts">
 import { useScroll } from '@vueuse/core'

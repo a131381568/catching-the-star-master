@@ -514,52 +514,100 @@
           <ul>
             <li class="ml-12 mb-16 leading-menu-title">
               <router-link
+                ref="aboutRef"
                 to="/about"
                 title="關於我們"
-                class="font-serif text-menu-title tracking-wide-menu text-main-color-dark"
+                class="font-serif text-menu-title tracking-wide-menu text-main-color-dark hover:text-sp-color-light duration-1000"
               >About</router-link>
             </li>
             <li class="ml-12 mb-16 leading-menu-title">
               <router-link
+                ref="scienceRef"
                 to="/science"
                 title="天文科普"
-                class="font-serif text-menu-title tracking-wide-menu text-main-color-dark"
+                class="font-serif text-menu-title tracking-wide-menu text-main-color-dark hover:text-sp-color-light duration-1000"
               >Science</router-link>
             </li>
             <li class="ml-12 mb-16 leading-menu-title">
               <router-link
+                ref="storyRef"
                 to="/story"
-                title="星星故事"
-                class="font-serif text-menu-title tracking-wide-menu text-main-color-dark"
+                title="星星物語"
+                class="font-serif text-menu-title tracking-wide-menu text-main-color-dark hover:text-sp-color-light duration-1000"
               >Story</router-link>
             </li>
             <li class="ml-12 mb-16 leading-menu-title">
               <router-link
+                ref="facilitiesRef"
                 to="/facilities"
                 title="天文設施"
-                class="font-serif text-menu-title tracking-wide-menu text-main-color-dark"
+                class="font-serif text-menu-title tracking-wide-menu text-main-color-dark hover:text-sp-color-light duration-1000"
               >Facilities</router-link>
             </li>
             <li class="ml-12 mb-16 leading-menu-title">
               <router-link
+                ref="stargazingRef"
                 to="/stargazing"
                 title="觀星地點"
-                class="font-serif text-menu-title tracking-wide-menu text-main-color-dark"
+                class="font-serif text-menu-title tracking-wide-menu text-main-color-dark hover:text-sp-color-light duration-1000"
               >Stargazing</router-link>
             </li>
             <li class="ml-12 mb-16 leading-menu-title">
               <router-link
+                ref="searchRef"
                 to="/search"
                 title="搜尋頁面"
-                class="font-serif text-menu-title tracking-wide-menu text-main-color-dark"
+                class="font-serif text-menu-title tracking-wide-menu text-main-color-dark hover:text-sp-color-light duration-1000"
               >Search</router-link>
             </li>
           </ul>
         </div>
         <div
-          class="bg-[url(/img/menu-bg-facilities.jpg)] bg-center bg-no-repeat bg-cover relative mb-16 -top-4"
+          class="bg-[url(/img/menu-bg-04.jpg)] bg-center bg-no-repeat bg-cover relative mb-16 -top-4 transition-all duration-400"
+          :class="[
+            { 'bg-[url(/img/menu-bg-01.jpg)]': hoveredAbout },
+            { 'bg-[url(/img/menu-bg-02.jpg)]': hoveredScience },
+            { 'bg-[url(/img/menu-bg-03.jpg)]': hoveredStory },
+            { 'bg-[url(/img/menu-bg-04.jpg)]': hoveredFacilities },
+            { 'bg-[url(/img/menu-bg-05.jpg)]': hoveredStargazing },
+            { 'bg-[url(/img/menu-bg-06.jpg)]': hoveredSearch }
+          ]"
         >
-          <a href="#" class="text-white absolute right-12 bottom-12 text-3xl">天文設施</a>
+          <router-link
+            v-if="hoveredAbout"
+            to="/about"
+            class="text-white absolute right-12 bottom-12 text-3xl hover:text-sub-color-light duration-1000"
+          >關於我們</router-link>
+          <router-link
+            v-else-if="hoveredScience"
+            to="/science"
+            class="text-white absolute right-12 bottom-12 text-3xl hover:text-sub-color-light duration-1000"
+          >天文科普</router-link>
+          <router-link
+            v-else-if="hoveredStory"
+            to="/story"
+            class="text-white absolute right-12 bottom-12 text-3xl hover:text-sub-color-light duration-1000"
+          >星星物語</router-link>
+          <router-link
+            v-else-if="hoveredFacilities"
+            to="/facilities"
+            class="text-white absolute right-12 bottom-12 text-3xl hover:text-sub-color-light duration-1000"
+          >天文設施</router-link>
+          <router-link
+            v-else-if="hoveredStargazing"
+            to="/stargazing"
+            class="text-white absolute right-12 bottom-12 text-3xl hover:text-sub-color-light duration-1000"
+          >觀星地點</router-link>
+          <router-link
+            v-else-if="hoveredSearch"
+            to="/search"
+            class="text-white absolute right-12 bottom-12 text-3xl hover:text-sub-color-light duration-1000"
+          >搜尋頁面</router-link>
+          <router-link
+            v-else="hoveredFacilities"
+            to="/facilities"
+            class="text-white absolute right-12 bottom-12 text-3xl hover:text-sub-color-light duration-1000"
+          >天文設施</router-link>
         </div>
       </div>
     </div>
@@ -570,12 +618,66 @@
   ></div>-->
 </template>
 <script setup lang="ts">
+import { useElementHover } from '@vueuse/core'
+const menuList = ref([
+  {
+    title: "關於我們",
+    enTitle: "About",
+    path: "/about",
+    img: "/img/menu-bg-01.jpg"
+  },
+  {
+    title: "天文科普",
+    enTitle: "Science",
+    path: "/science",
+    img: "/img/menu-bg-02.jpg"
+  },
+  {
+    title: "星星物語",
+    enTitle: "Story",
+    path: "/story",
+    img: "/img/menu-bg-03.jpg"
+  },
+  {
+    title: "天文設施",
+    enTitle: "Facilities",
+    path: "/facilities",
+    img: "/img/menu-bg-04.jpg"
+  },
+  {
+    title: "觀星地點",
+    enTitle: "Stargazing",
+    path: "/stargazing",
+    img: "/img/menu-bg-05.jpg"
+  },
+  {
+    title: "搜尋頁面",
+    enTitle: "Search",
+    path: "/search",
+    img: "/img/menu-bg-06.jpg"
+  }
+]);
+
+// 抓取選單跟 header 狀態
 const store = useStore();
 const getHeaderState = computed(() => store.isHeaderTop);
 const getLoading = computed(() => store.get_loading);
 
 // 宣告 data 欄位
 const modal = ref(false);
+const aboutRef = ref()
+const hoveredAbout = useElementHover(aboutRef)
+const scienceRef = ref()
+const hoveredScience = useElementHover(scienceRef)
+const storyRef = ref()
+const hoveredStory = useElementHover(storyRef)
+const facilitiesRef = ref()
+const hoveredFacilities = useElementHover(facilitiesRef)
+const stargazingRef = ref()
+const hoveredStargazing = useElementHover(stargazingRef)
+const searchRef = ref()
+const hoveredSearch = useElementHover(searchRef)
+
 
 // 綁 methods
 function toggleModal() {
@@ -588,7 +690,8 @@ function toggleModal() {
   }
 }
 
-// =========================================
+// ===========================================
+
 
 // 生命週期
 // onBeforeMount(() => {
