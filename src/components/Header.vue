@@ -5,11 +5,11 @@
     <div class="flex flex-col">
       <!-- Navbar -->
       <nav
-        class="fixed flex justify-between py-5 px-9 w-full top-0 left-0 right-0 delay-75 duration-1000"
+        class="fixed flex justify-between py-5 px-9 w-full top-0 left-0 right-0 delay-75 duration-1000 hover:opacity-100"
         :class="[{ 'opacity-30': getHeaderState === true && modal === false }]"
       >
         <!-- Logo Container -->
-        <div class="flex items-center hover:animate-pulse">
+        <div class="flex items-center hover:animate-pulse header-logo">
           <!-- Logo -->
           <router-link to="/" class="cursor-pointer">
             <svg
@@ -486,13 +486,37 @@
         <!-- Icon Menu Section -->
         <div class="flex items-end space-x-5 self-center hover:animate-pulse">
           <div
-            class="bars cursor-pointer"
+            class="bars cursor-pointer text-base inline-block group"
             :class="{ active: modal === true }"
             @click.prevent="toggleModal"
           >
-            <div class="top-bar bg-white" :class="{ 'bg-main-color-dark': modal === true }"></div>
-            <div class="middle-bar bg-white" :class="{ 'bg-main-color-dark': modal === true }"></div>
-            <div class="bottom-bar bg-white" :class="{ 'bg-main-color-dark': modal === true }"></div>
+            <div
+              class="top-bar bg-white transition-all duration-300 ease-in-out w-1-8em h-0-2em mb-0-4em rounded-2em group-hover:bg-sp-color-light"
+              :class="[
+                { 'bg-main-color-dark': modal === true },
+                { 'transform-gpu': modal === true },
+                { 'rotate-225': modal === true },
+                { 'translate-y-0-8em ': modal === true }
+              ]"
+            ></div>
+            <div
+              class="middle-bar bg-white transition-all duration-300 ease-in-out w-1-8em h-0-2em mb-0-4em rounded-2em group-hover:bg-sp-color-light"
+              :class="[
+                { 'bg-main-color-dark': modal === true },
+                { 'transform-gpu': modal === true },
+                { 'opacity-0': modal === true },
+                { 'scale-0': modal === true }
+              ]"
+            ></div>
+            <div
+              class="bottom-bar bg-white transition-all duration-300 ease-in-out w-1-8em h-0-2em mb-0-4em rounded-2em group-hover:bg-sp-color-light"
+              :class="[
+                { 'bg-main-color-dark': modal === true },
+                { 'transform-gpu': modal === true },
+                { '-rotate-225': modal === true },
+                { '-translate-y-0-35em ': modal === true }
+              ]"
+            ></div>
           </div>
         </div>
       </nav>
@@ -720,26 +744,3 @@ function toggleModal() {
 //   console.log("onActivated");
 // });
 </script>
-<style scoped>
-.bars {
-  font-size: 1em;
-  display: inline-block;
-}
-.bars > div {
-  width: 1.8em;
-  height: 0.2em;
-  margin-bottom: 0.4em;
-  border-radius: 2em;
-  transition: all 300ms ease-in-out;
-}
-.bars.active .top-bar {
-  transform: translateY(0.8em) rotate(225deg);
-}
-.bars.active .middle-bar {
-  opacity: 0;
-  transform: scale(0);
-}
-.bars.active .bottom-bar {
-  transform: translateY(-0.35em) rotate(-225deg);
-}
-</style>

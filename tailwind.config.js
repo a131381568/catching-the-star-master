@@ -52,6 +52,10 @@ module.exports = {
       boxShadow: {
         'btn-default': 'inset 0 0 0 1px #c5c5ca'
       },
+      spacing: {
+        '0-8em': '0.8em',
+        '0-35em': '0.35em'
+      },
       letterSpacing: {
         'wide-menu': '0.5rem',
         'wide-content': '0.15rem',
@@ -64,22 +68,29 @@ module.exports = {
         '12': '0.12',
         '18': '0.18',
       },
+      maxWidth: {
+        '1/2': '50%',
+      },
       width: {
         '480px': '480px',
         '37/100': '37%',
+        '30/100': '30%',
+        '15/100': '15%',
         '13/100': '13%',
         '2px': '2px',
         '9px': '9px',
         '15px': '15px',
         '64px': '64px',
-        '130px': '130px'
+        '130px': '130px',
+        '1-8em': '1.8em'
       },
       height: {
         '480px': '480px',
         '130px': '130px',
         '15px': '15px',
         '9px': '9px',
-        '80vh': '80vh'
+        '80vh': '80vh',
+        '0-2em': '0.2em'
       },
       inset: {
         '15px': '15px',
@@ -95,7 +106,17 @@ module.exports = {
         '10000': '10000',
         '9999': '9999',
         '999': '999',
-        '401': '401'
+        '401': '401',
+        '1': '1'
+      },
+      margin: {
+        '0-4em': '0.4em'
+      },
+      borderRadius: {
+        '2em': '2em'
+      },
+      rotate: {
+        '225': '225deg'
       }
     },
   },

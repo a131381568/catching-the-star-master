@@ -57,25 +57,3 @@ const BUILD_DATE = import.meta.env.VITE_APP_BUILD_EPOCH
   : undefined;
 const thisYear = new Date().getFullYear();
 </script>
-<style>
-.compass_circle {
-  position: fixed;
-  right: -61vh;
-  height: 130vh;
-  top: -15vh;
-  z-index: 0;
-}
-
-.compass {
-  position: fixed;
-  z-index: 1;
-  right: -462px;
-  height: 930px;
-  top: 23px;
-  transform: rotate(166deg);
-}
-
-polygon {
-  fill: #ccc;
-}
-</style>
