@@ -114,14 +114,23 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
   scrollBehavior(to, from, savedPosition) {
-    if (savedPosition) {
-      return savedPosition
-    } else {
-      return {
-        top: 0
-      }
-    }
+    return { top: 0 }
   }
+})
+
+router.beforeEach((to, from, next) => {
+  const store = useStore();
+  store.setLoading(true)
+  setTimeout(() => {
+    next()
+  }, 500);
+
+
+})
+
+router.afterEach((to, from) => {
+  const store = useStore();
+  store.setLoading(false)
 })
 
 export default router

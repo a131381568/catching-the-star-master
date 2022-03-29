@@ -12,9 +12,12 @@ export const useStore = defineStore('main', {
     isInitialized: false,
     count: 0,
     countA: 20,
-    //
+    // 頁面共用資訊
     pageTitle: "",
-    pageSubTitle: ""
+    pageSubTitle: "",
+    // header
+    isHeaderTop: true,
+    loading: false
   }),
   actions: {
     initApp() {
@@ -93,6 +96,12 @@ export const useStore = defineStore('main', {
         this.pageTitle = thisPathInfo[0].title
         this.pageSubTitle = thisPathInfo[0].subTitle
       }
+    },
+    updateHeaderState(value: boolean) {
+      this.isHeaderTop = value
+    },
+    setLoading(value: boolean) {
+      this.loading = value
     }
   },
   getters: {
@@ -105,6 +114,12 @@ export const useStore = defineStore('main', {
     },
     get_pageSubTitle: (state) => {
       return state.pageSubTitle
+    },
+    get_isHeaderTop: (state) => {
+      return state.isHeaderTop
+    },
+    get_loading: (state) => {
+      return state.loading
     }
-  },
+  }
 })

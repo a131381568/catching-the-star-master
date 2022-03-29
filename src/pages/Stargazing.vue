@@ -49,7 +49,6 @@
 </template>
 <script setup lang="ts">
 import L from "leaflet";
-
 // 型別宣告
 type tArr = {
   name: string,

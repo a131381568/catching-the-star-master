@@ -4,7 +4,7 @@ import App from './App.vue'
 import router from './router'
 import { createHead } from '@vueuse/head'
 import './assets/index.postcss'
-
+import 'animate.css';
 import 'leaflet/dist/leaflet.css';
 import leaflet from 'leaflet'
 

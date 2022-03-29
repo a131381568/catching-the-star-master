@@ -4,9 +4,11 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    Enter: typeof import('./src/components/Enter.vue')['default']
     Footer: typeof import('./src/components/Footer.vue')['default']
     Header: typeof import('./src/components/Header.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
+    Loading: typeof import('./src/components/Loading.vue')['default']
     Timeline: typeof import('./src/components/Timeline.vue')['default']
     TitleBox: typeof import('./src/components/TitleBox.vue')['default']
   }

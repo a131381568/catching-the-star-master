@@ -1,15 +1,20 @@
 <template>
   <!-- Container -->
+  <!-- header-is-top -->
   <div class="fixed flex flex-col items-center justify-center mt-32 z-10000">
     <div class="flex flex-col">
       <!-- Navbar -->
-      <nav class="fixed flex justify-between py-5 px-9 w-full top-0 left-0 right-0">
+      <nav
+        class="fixed flex justify-between py-5 px-9 w-full top-0 left-0 right-0 delay-75 duration-1000"
+        :class="[{ 'opacity-30': getHeaderState === true && modal === false }]"
+      >
         <!-- Logo Container -->
-        <div class="flex items-center">
+        <div class="flex items-center hover:animate-pulse">
           <!-- Logo -->
           <router-link to="/" class="cursor-pointer">
             <svg
-              class="svg-obj"
+              class="header-svg-obj h-auto w-64px"
+              :class="{ active: modal === true }"
               xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink"
               xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
@@ -479,29 +484,28 @@
           </router-link>
         </div>
         <!-- Icon Menu Section -->
-        <div class="flex items-end space-x-5 self-center">
+        <div class="flex items-end space-x-5 self-center hover:animate-pulse">
           <div
             class="bars cursor-pointer"
             :class="{ active: modal === true }"
             @click.prevent="toggleModal"
           >
-            <div class="top-bar bg-white"></div>
-            <div class="middle-bar bg-white"></div>
-            <div class="bottom-bar bg-white"></div>
+            <div class="top-bar bg-white" :class="{ 'bg-main-color-dark': modal === true }"></div>
+            <div class="middle-bar bg-white" :class="{ 'bg-main-color-dark': modal === true }"></div>
+            <div class="bottom-bar bg-white" :class="{ 'bg-main-color-dark': modal === true }"></div>
           </div>
         </div>
       </nav>
     </div>
   </div>
-
   <div
     id="modal"
     v-show="modal"
-    class="modal-bg transition-opacity duration-500 fixed w-full h-full left-0 top-0 overflow-auto bg-secondary"
+    class="modal-bg fixed w-full h-full left-0 top-0 overflow-auto bg-secondary animate__animated animate__fadeInDown animate__faster"
     :class="[
       { 'opacity-0': modal === false },
       { 'opacity-100': modal === true },
-      { 'z-9999': modal === true },
+      { 'z-9999': modal === true }
     ]"
   >
     <div class="w-full h-full modal-content relative m-auto overflow-hidden">
@@ -560,54 +564,59 @@
       </div>
     </div>
   </div>
+  <!-- <div
+    v-show="!modal && !getLoading"
+    class="bg-secondary w-screen h-screen z-10000 animate__animated animate__fadeOutUp animate__faster fixed"
+  ></div>-->
 </template>
-
 <script setup lang="ts">
-import { ref } from "vue";
-import { onClickOutside } from "@vueuse/core";
+const store = useStore();
+const getHeaderState = computed(() => store.isHeaderTop);
+const getLoading = computed(() => store.get_loading);
 
 // 宣告 data 欄位
 const modal = ref(false);
-const modalRef = ref(null);
 
 // 綁 methods
 function toggleModal() {
-  modal.value = !modal.value;
+  if (modal.value === false) {
+    modal.value = true
+  } else {
+    setTimeout(() => {
+      modal.value = false
+    }, 500);
+  }
 }
 
 // =========================================
 
 // 生命週期
+// onBeforeMount(() => {
+//   console.log("onBeforeMount");
+// });
+// onMounted(() => {
+//   console.log("onMounted");
+// });
+// onBeforeUpdate(() => {
+//   console.log("onBeforeUpdate");
+// });
+// onUpdated(() => {
+//   console.log("onUpdated");
+// });
+// onBeforeUnmount(() => {
+//   console.log("onBeforeUnmount");
+// });
+// onUnmounted(() => {
+//   console.log("onUnmounted");
+// });
+// onErrorCaptured(() => {
+//   console.log("onErrorCaptured");
+// });
 
-console.log("setup");
-
-onBeforeMount(() => {
-  console.log("onBeforeMount");
-});
-onMounted(() => {
-  console.log("onMounted");
-});
-onBeforeUpdate(() => {
-  console.log("onBeforeUpdate");
-});
-onUpdated(() => {
-  console.log("onUpdated");
-});
-onBeforeUnmount(() => {
-  console.log("onBeforeUnmount");
-});
-onUnmounted(() => {
-  console.log("onUnmounted");
-});
-onErrorCaptured(() => {
-  console.log("onErrorCaptured");
-});
-
-onActivated(() => {
-  console.log("onActivated");
-});
+// onActivated(() => {
+//   console.log("onActivated");
+// });
 </script>
-
 <style scoped>
 .bars {
   font-size: 1em;
@@ -629,40 +638,5 @@ onActivated(() => {
 }
 .bars.active .bottom-bar {
   transform: translateY(-0.35em) rotate(-225deg);
-}
-
-/* ================================= */
-
-.svg-obj {
-  width: 64px;
-  height: auto;
-}
-
-.svg-obj path {
-  fill: rgb(255 255 255 / 30%);
-  stroke: rgb(255 255 255 / 30%);
-  stroke-linecap: round;
-  fill-opacity: 0;
-  stroke-dasharray: 860;
-  stroke-dashoffset: 860;
-  animation: draw 3s linear forwards;
-}
-
-@keyframes draw {
-  30% {
-    stroke-dashoffset: 430;
-  }
-  60% {
-    stroke-dashoffset: 0;
-  }
-  80% {
-    stroke-dashoffset: 200;
-    fill-opacity: 0;
-  }
-  100% {
-    fill-opacity: 1;
-    fill: #fff;
-    stroke: #fff;
-  }
 }
 </style>
