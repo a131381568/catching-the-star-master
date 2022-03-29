@@ -6,7 +6,12 @@
   >
     <router-view></router-view>
     <div class="stars-wrapper -z-1 fixed w-screen h-screen overflow-hidden left-0 top-0">
-      <svg class="stars" width="100%" height="100%" preserveAspectRatio="none">
+      <svg
+        class="stars top-0 left-0 right-0 bottom-0 absolute fill-white"
+        width="100%"
+        height="100%"
+        preserveAspectRatio="none"
+      >
         <circle class="star" cx="96.55%" cy="29.88%" r="1.1" />
         <circle class="star" cx="14.86%" cy="46.5%" r="1.2" />
         <circle class="star" cx="10.24%" cy="86.22%" r="0.6" />
@@ -208,7 +213,12 @@
         <circle class="star" cx="86.62%" cy="33.93%" r="1" />
         <circle class="star" cx="99.19%" cy="15.45%" r="0.9" />
       </svg>
-      <svg class="stars" width="100%" height="100%" preserveAspectRatio="none">
+      <svg
+        class="stars top-0 left-0 right-0 bottom-0 absolute fill-white"
+        width="100%"
+        height="100%"
+        preserveAspectRatio="none"
+      >
         <circle class="star" cx="22.33%" cy="53.11%" r="1.2" />
         <circle class="star" cx="27.26%" cy="6.19%" r="1.5" />
         <circle class="star" cx="73.95%" cy="84.53%" r="1.3" />
