@@ -121,7 +121,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const store = useStore();
   store.setEnterState(false)
-  // // 如果是第一次進這個網站
+  // 如果是第一次進這個網站
   // if (from.matched.length === 0) {
   //   store.setEnterState(true)
   // } else {

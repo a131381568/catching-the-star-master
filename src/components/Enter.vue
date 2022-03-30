@@ -1,6 +1,6 @@
 <template>
   <div
-    class="stop-star-wrapper w-full h-full flex items-stretch justify-center fixed top-0 left-0 z-10001"
+    class="pointer-events-none stop-star-wrapper w-full h-full flex items-stretch justify-center fixed top-0 left-0 z-10001"
   >
     <div class="self-center inline-block animate__animated animate__fadeOut animate__delay-4s">
       <svg

@@ -1,12 +1,15 @@
 <template>
   <Header />
   <div
-    class="h-table:flex flex-wrap items-start justify-center middle-pc:pt-72 h-table:pt-32 pb-32 middle-pc:px-20 h-table:px-6 px-4"
+    class="h-table:flex flex-wrap items-start justify-center middle-pc:pt-72 h-table:pt-32 pb-32 middle-pc:px-20 h-table:px-6 px-8 mobile:pt-32"
   >
     <!-- 標題區塊 -->
     <TitleBox />
     <!-- 主視覺 -->
-    <div class="laptop:w-5/12 h-table:w-10/12 h-full overflow-hidden relative">
+    <div
+      class="animate__animated animate__fadeInLeftBig laptop:w-5/12 h-table:w-10/12 h-full overflow-hidden relative"
+      :class="[{ 'animate__delay-3s': getFirstEnter === true }]"
+    >
       <img
         class="transition-all ease-out z-30 absolute w-auto object-center"
         src="/img/kenny-logo.png"
@@ -29,14 +32,18 @@
     <!-- 內文 -->
     <div class="laptop:w-5/12 h-table:w-10/12 middle-pc:pl-24 laptop:pl-10 laptop:mt-0 mt-10">
       <div
-        class="callout-box bg-main-color-light py-10 pl-10 pr-14 text-main-color-black font-bold mb-8 border-l-callout-box-boder border-sub-color-dark relative"
+        class="animate__animated animate__flipInX animate__delay-1s callout-box bg-main-color-light py-10 pl-10 pr-14 text-main-color-black font-bold mb-8 border-l-callout-box-boder border-sub-color-dark relative mobile:py-4 mobile:pl-4"
+        :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]"
       >
         我們是「雲上的小貓」，致力於寫下故事、留下故事。
         <span
-          class="text-sub-color-dark text-9xl font-serif font-light absolute -top-2 right-1"
+          class="text-sub-color-dark text-9xl font-serif font-light absolute -top-2 right-1 mobile:text-8xl"
         >”</span>
       </div>
-      <div class="text-main-color-light">
+      <div
+        class="text-main-color-light animate__animated animate__fadeIn"
+        :class="[{ 'animate__delay-5s': getFirstEnter === true }, { 'animate__delay-2s': getFirstEnter === false }]"
+      >
         <p>
           人是被賦予豐富情感的動物，會笑、會哭、會憤怒、會感動，所以有溫度的故事是能夠觸動人心的，甚至能夠在心中種下一顆希望的種子，在未來成長為茁壯的大樹。
           <br />&nbsp;
@@ -54,9 +61,13 @@
   </div>
   <!-- 引言 -->
   <div
-    class="h-table:flex flex-wrap items-start justify-center py-24 px-4 bg-main-color-black text-main-color-light"
+    class="h-table:flex flex-wrap items-start justify-center py-24 px-4 bg-main-color-black text-main-color-light mobile:px-8"
   >
-    <div class="w-10/12 text-center grid laptop:grid-cols-none h-table:grid-cols-3">
+    <div
+      ref="block_black_target"
+      class="h-table:w-10/12 text-center grid laptop:grid-cols-none h-table:grid-cols-3 animate__animated animate__delay-1s opacity-0"
+      :class="{ 'animate__fadeIn': block_black_isVisible }"
+    >
       <img class="mx-auto mb-10" src="/svg/hand.svg" />
       <p class="text-left laptop:text-center laptop:col-auto h-table:col-span-2">
         「我和他就好像天上的星星，遠看好像距離很近，但實際上卻是相當遙遠的。」
@@ -70,10 +81,11 @@
   </div>
   <!-- 結語區塊 -->
   <div
-    class="h-table:flex flex-wrap items-start justify-center pt-32 pb-52 middle-pc:px-20 h-table:px-6 px-4 bg-white bg-[url(/img/bg-about-white.jpg)] bg-right-bottom bg-no-repeat middle-pc:bg-contain h-table:bg-auto-500"
+    class="h-table:flex flex-wrap items-start justify-center pt-32 pb-52 middle-pc:px-20 h-table:px-6 px-4 bg-white bg-[url(/img/bg-about-white.jpg)] bg-right-bottom bg-no-repeat middle-pc:bg-contain h-table:bg-auto-500 mobile:px-8 mobile:bg-contain"
   >
     <div
-      class="middle-pc:w-7/12 laptop:w-5/12 h-table:w-10/12 text-left laptop:pb-0 pb-320px text-main-color-black"
+      class="middle-pc:w-7/12 laptop:w-5/12 h-table:w-10/12 text-left laptop:pb-0 pb-320px text-main-color-black animate__animated animate__delay-2s"
+      :class="{ 'animate__fadeIn': block_black_isVisible }"
     >
       <p>
         『打從地球誕生的那一刻起，天空就已經用這樣的姿態為我們在夜晚蓋上滿天星斗的布幕了。』
@@ -92,8 +104,20 @@
   <Footer />
 </template>
 <script setup lang="ts">
-import { useParallax } from '@vueuse/core'
-
+import { useParallax, useIntersectionObserver } from '@vueuse/core'
+const store = useStore();
+const getFirstEnter = computed(() => store.get_firstEnter);
 const photo = ref(null)
 const { tilt, roll, source } = useParallax(photo)
+const block_black_target = ref(null)
+const block_black_isVisible = ref(false)
+const { stop } = useIntersectionObserver(
+  block_black_target,
+  ([{ isIntersecting }]) => {
+    block_black_isVisible.value = isIntersecting
+    if (isIntersecting) {
+      stop()
+    }
+  }
+)
 </script>
