@@ -49,6 +49,9 @@ module.exports = {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
       },
+      backgroundSize: {
+        'auto-500': 'auto 500px'
+      },
       lineHeight: {
         'menu-title': '5.5rem'
       },
@@ -112,6 +115,9 @@ module.exports = {
         '999': '999',
         '401': '401',
         '1': '1'
+      },
+      padding: {
+        '320px': '320px'
       },
       margin: {
         '0-4em': '0.4em'

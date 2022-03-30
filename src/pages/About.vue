@@ -1,10 +1,12 @@
 <template>
   <Header />
-  <div class="md:flex flex-wrap items-start justify-center pt-72 pb-32 2xl:px-20 md:px-6 px-4">
+  <div
+    class="h-table:flex flex-wrap items-start justify-center middle-pc:pt-72 h-table:pt-32 pb-32 middle-pc:px-20 h-table:px-6 px-4"
+  >
     <!-- 標題區塊 -->
     <TitleBox />
     <!-- 主視覺 -->
-    <div class="xl:w-5/12 lg:w-2/5 h-full overflow-hidden relative">
+    <div class="laptop:w-5/12 h-table:w-10/12 h-full overflow-hidden relative">
       <img
         class="transition-all ease-out z-30 absolute w-auto object-center"
         src="/img/kenny-logo.png"
@@ -25,9 +27,9 @@
       />
     </div>
     <!-- 內文 -->
-    <div class="xl:w-5/12 md:w-1/2 md:pl-24 md:mt-0 mt-6">
+    <div class="laptop:w-5/12 h-table:w-10/12 middle-pc:pl-24 laptop:pl-10 laptop:mt-0 mt-10">
       <div
-        class="callout-box bg-main-color-light p-10 text-main-color-black font-bold mb-8 border-l-callout-box-boder border-sub-color-dark relative"
+        class="callout-box bg-main-color-light py-10 pl-10 pr-14 text-main-color-black font-bold mb-8 border-l-callout-box-boder border-sub-color-dark relative"
       >
         我們是「雲上的小貓」，致力於寫下故事、留下故事。
         <span
@@ -52,11 +54,11 @@
   </div>
   <!-- 引言 -->
   <div
-    class="md:flex flex-wrap items-start justify-center py-24 px-4 bg-main-color-black text-main-color-light"
+    class="h-table:flex flex-wrap items-start justify-center py-24 px-4 bg-main-color-black text-main-color-light"
   >
-    <div class="w-10/12 text-center">
+    <div class="w-10/12 text-center grid laptop:grid-cols-none h-table:grid-cols-3">
       <img class="mx-auto mb-10" src="/svg/hand.svg" />
-      <p>
+      <p class="text-left laptop:text-center laptop:col-auto h-table:col-span-2">
         「我和他就好像天上的星星，遠看好像距離很近，但實際上卻是相當遙遠的。」
         <br />&nbsp;
         <br />「這片夜空中，只有一顆星星在微弱的閃鑠著，好像很孤單一樣？但是我們每個人只要一抬頭就能看見它，
@@ -68,9 +70,11 @@
   </div>
   <!-- 結語區塊 -->
   <div
-    class="md:flex flex-wrap items-start justify-center pt-32 pb-52 2xl:px-20 md:px-6 px-4 bg-white bg-[url(/img/bg-about-white.jpg)] bg-right-bottom bg-no-repeat bg-contain"
+    class="h-table:flex flex-wrap items-start justify-center pt-32 pb-52 middle-pc:px-20 h-table:px-6 px-4 bg-white bg-[url(/img/bg-about-white.jpg)] bg-right-bottom bg-no-repeat middle-pc:bg-contain h-table:bg-auto-500"
   >
-    <div class="w-7/12 text-left text-main-color-black">
+    <div
+      class="middle-pc:w-7/12 laptop:w-5/12 h-table:w-10/12 text-left laptop:pb-0 pb-320px text-main-color-black"
+    >
       <p>
         『打從地球誕生的那一刻起，天空就已經用這樣的姿態為我們在夜晚蓋上滿天星斗的布幕了。』
         <br />&nbsp;
@@ -83,7 +87,7 @@
         <strong class="text-sp-color-light">這次讓我們來好好記下它們的存在的軌跡。</strong>
       </p>
     </div>
-    <div class="w-3/12"></div>
+    <div class="middle-pc:w-3/12 h-table:w-5/12"></div>
   </div>
   <Footer />
 </template>
