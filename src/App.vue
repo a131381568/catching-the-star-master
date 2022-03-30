@@ -7,7 +7,7 @@
     <router-view></router-view>
     <div class="stars-wrapper -z-1 fixed w-screen h-screen overflow-hidden left-0 top-0">
       <svg
-        class="stars top-0 left-0 right-0 bottom-0 absolute fill-white"
+        class="stars top-0 left-0 right-0 bottom-0 absolute fill-white mobile:filter-bg-opacity-50"
         width="100%"
         height="100%"
         preserveAspectRatio="none"
@@ -214,7 +214,7 @@
         <circle class="star" cx="99.19%" cy="15.45%" r="0.9" />
       </svg>
       <svg
-        class="stars top-0 left-0 right-0 bottom-0 absolute fill-white"
+        class="stars top-0 left-0 right-0 bottom-0 absolute fill-white mobile:filter-bg-opacity-50"
         width="100%"
         height="100%"
         preserveAspectRatio="none"

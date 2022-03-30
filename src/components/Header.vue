@@ -13,7 +13,7 @@
           <!-- Logo -->
           <router-link to="/" class="cursor-pointer">
             <svg
-              class="header-svg-obj h-auto w-64px"
+              class="header-svg-obj h-auto w-64px mobile:w-9"
               :class="{ active: modal === true }"
               xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -532,62 +532,67 @@
       { 'z-9999': modal === true }
     ]"
   >
-    <div class="w-full h-full modal-content relative m-auto overflow-hidden">
-      <div class="grid grid-cols-2 h-full py-32 px-40">
-        <div>
-          <ul>
-            <li class="ml-12 mb-16 leading-menu-title">
-              <router-link
-                ref="aboutRef"
-                to="/about"
-                title="關於我們"
-                class="font-serif text-menu-title tracking-wide-menu text-main-color-dark hover:text-sp-color-light duration-1000"
-              >About</router-link>
-            </li>
-            <li class="ml-12 mb-16 leading-menu-title">
-              <router-link
-                ref="scienceRef"
-                to="/science"
-                title="天文科普"
-                class="font-serif text-menu-title tracking-wide-menu text-main-color-dark hover:text-sp-color-light duration-1000"
-              >Science</router-link>
-            </li>
-            <li class="ml-12 mb-16 leading-menu-title">
-              <router-link
-                ref="storyRef"
-                to="/story"
-                title="星星物語"
-                class="font-serif text-menu-title tracking-wide-menu text-main-color-dark hover:text-sp-color-light duration-1000"
-              >Story</router-link>
-            </li>
-            <li class="ml-12 mb-16 leading-menu-title">
-              <router-link
-                ref="facilitiesRef"
-                to="/facilities"
-                title="天文設施"
-                class="font-serif text-menu-title tracking-wide-menu text-main-color-dark hover:text-sp-color-light duration-1000"
-              >Facilities</router-link>
-            </li>
-            <li class="ml-12 mb-16 leading-menu-title">
-              <router-link
-                ref="stargazingRef"
-                to="/stargazing"
-                title="觀星地點"
-                class="font-serif text-menu-title tracking-wide-menu text-main-color-dark hover:text-sp-color-light duration-1000"
-              >Stargazing</router-link>
-            </li>
-            <li class="ml-12 mb-16 leading-menu-title">
-              <router-link
-                ref="searchRef"
-                to="/search"
-                title="搜尋頁面"
-                class="font-serif text-menu-title tracking-wide-menu text-main-color-dark hover:text-sp-color-light duration-1000"
-              >Search</router-link>
-            </li>
-          </ul>
-        </div>
+    <div
+      class="w-full h-full modal-content relative m-auto overflow-hidden screens-h-900:overflow-y-auto"
+    >
+      <div
+        class="grid w-table:grid-cols-2 h-table:grid-cols-none mobile:grid-cols-none h-screen py-20 laptop:px-40 h-table:px-20 h-table:pt-36 h-table:pb-10 mobile:px-9"
+      >
+        <ul
+          class="grid grid-flow-row gap-7 w-table:gap-9 large-pc:gap-12 screens-h-900:auto-rows-max large-pc:auto-rows-auto auto-rows-max"
+        >
+          <li>
+            <router-link
+              ref="aboutRef"
+              to="/about"
+              title="關於我們"
+              class="font-serif tracking-wide-menu text-main-color-dark hover:text-sp-color-light duration-1000 h-table:text-8xl w-table:text-7xl large-pc:text-menu-title mobile:text-5xl screens-h-900:text-5xl"
+            >About</router-link>
+          </li>
+          <li>
+            <router-link
+              ref="scienceRef"
+              to="/science"
+              title="天文科普"
+              class="font-serif tracking-wide-menu text-main-color-dark hover:text-sp-color-light duration-1000 h-table:text-8xl w-table:text-7xl large-pc:text-menu-title mobile:text-5xl screens-h-900:text-5xl"
+            >Science</router-link>
+          </li>
+          <li>
+            <router-link
+              ref="storyRef"
+              to="/story"
+              title="星星物語"
+              class="font-serif tracking-wide-menu text-main-color-dark hover:text-sp-color-light duration-1000 h-table:text-8xl w-table:text-7xl large-pc:text-menu-title mobile:text-5xl screens-h-900:text-5xl"
+            >Story</router-link>
+          </li>
+          <li>
+            <router-link
+              ref="facilitiesRef"
+              to="/facilities"
+              title="天文設施"
+              class="font-serif tracking-wide-menu text-main-color-dark hover:text-sp-color-light duration-1000 h-table:text-8xl w-table:text-7xl large-pc:text-menu-title mobile:text-5xl screens-h-900:text-5xl"
+            >Facilities</router-link>
+          </li>
+          <li>
+            <router-link
+              ref="stargazingRef"
+              to="/stargazing"
+              title="觀星地點"
+              class="font-serif tracking-wide-menu text-main-color-dark hover:text-sp-color-light duration-1000 h-table:text-8xl w-table:text-7xl large-pc:text-menu-title mobile:text-5xl screens-h-900:text-5xl"
+            >Stargazing</router-link>
+          </li>
+          <li>
+            <router-link
+              ref="searchRef"
+              to="/search"
+              title="搜尋頁面"
+              class="font-serif tracking-wide-menu text-main-color-dark hover:text-sp-color-light duration-1000 h-table:text-8xl w-table:text-7xl large-pc:text-menu-title mobile:text-5xl screens-h-900:text-5xl"
+            >Search</router-link>
+          </li>
+        </ul>
+
         <div
-          class="bg-[url(/img/menu-bg-04.jpg)] bg-center bg-no-repeat bg-cover relative mb-16 -top-4 transition-all duration-400"
+          class="w-table:block h-table:hidden mobile:hidden bg-[url(/img/menu-bg-04.jpg)] bg-center bg-no-repeat bg-cover relative large-pc:mb-16 -top-4 transition-all duration-400 mobile:text-5xl"
           :class="[
             { 'bg-[url(/img/menu-bg-01.jpg)]': hoveredAbout },
             { 'bg-[url(/img/menu-bg-02.jpg)]': hoveredScience },

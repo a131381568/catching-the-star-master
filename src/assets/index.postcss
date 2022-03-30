@@ -2,6 +2,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+    .filter-bg-opacity-20{
+      filter: opacity(0.2);
+    }
+    @variants responsive {
+      /* home bg */
+      .filter-bg-opacity-50{
+        filter: opacity(0.5);
+      }
+      .filter-bg-opacity-none{
+        filter: none;
+      }
+    }
+}
+
 @layer base {
   /* global variable */
   h1 {
@@ -38,6 +54,7 @@
     overflow: hidden;
   }
 
+  /* star bg */
   :root {
     --twinkle-duration: 4s;
   }
@@ -153,7 +170,7 @@
   /* read btn + load btn */
   .btn{
     padding: 0.6rem 3.1rem 0.8rem;
-    @apply align-middle border-0 bg-none box-border relative large-pc:text-lg laptop:text-sm text-main-color-light transition-all duration-500 shadow-btn-default;
+    @apply align-middle border-0 bg-none box-border relative large-pc:text-lg text-sm text-main-color-light transition-all duration-500 shadow-btn-default;
   }
   .draw {
     transition: color 0.25s
