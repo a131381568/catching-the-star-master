@@ -5,7 +5,14 @@
     <TitleBox />
     <!-- 主視覺 -->
     <div class="xl:w-5/12 lg:w-2/5 h-full">
-      <img class="w-auto" src="/img/about-bg.jpg" />
+      <img
+        class="w-auto transition-all ease-out"
+        src="/img/about-bg.jpg"
+        ref="photo"
+        :style="{
+          'transform': `rotateX(${roll * 30}deg) rotateY(${tilt * 30}deg)`
+        }"
+      />
     </div>
     <!-- 內文 -->
     <div class="xl:w-5/12 md:w-1/2 md:pl-24 md:mt-0 mt-6">
@@ -70,3 +77,9 @@
   </div>
   <Footer />
 </template>
+<script setup lang="ts">
+import { useParallax } from '@vueuse/core'
+
+const photo = ref(null)
+const { tilt, roll, source } = useParallax(photo)
+</script>
