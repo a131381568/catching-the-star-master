@@ -8,7 +8,8 @@
     <TitleBox />
     <!-- 篩選列 -->
     <div
-      class="animate__animated animate__fadeIn animate__delay-1s w-10/12 middle-pc:mt-16 middle-pc:mb-20 mt-6 mb-16 hidden laptop:inline-flex"
+      class="animate__animated animate__fadeIn w-10/12 middle-pc:mt-16 middle-pc:mb-20 mt-6 mb-16 hidden laptop:inline-flex"
+      :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]"
     >
       <ul class="flex">
         <li
@@ -47,7 +48,8 @@
     </div>
     <!-- 選單樣式 -->
     <div
-      class="dropdown-menu z-40 h-table:w-10/12 mb-8 relative laptop:hidden animate__animated animate__fadeIn animate__delay-1s"
+      class="dropdown-menu z-40 h-table:w-10/12 mb-8 relative laptop:hidden animate__animated animate__fadeIn"
+      :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]"
     >
       <button
         id="dropdownDefault"
@@ -84,7 +86,8 @@
     </div>
     <!-- post grid -->
     <div
-      class="grid laptop:grid-cols-3 grid-cols-2 mobile:grid-cols-1 pro-pc:gap-24 h-table:gap-12 mobile:gap-5 h-table:w-10/12 overflow-hidden"
+      class="grid laptop:grid-cols-3 grid-cols-2 mobile:grid-cols-1 pro-pc:gap-24 h-table:gap-12 mobile:gap-5 h-table:w-10/12 overflow-hidden animate__animated animate__fadeInUp"
+      :class="{ 'animate__delay-4s': getFirstEnter === true }"
     >
       <div v-for="(val, key) in postList" :key="key">
         <!-- card -->
@@ -125,6 +128,8 @@
 </template>
 <script setup lang="ts">
 import { useToggle } from '@vueuse/core'
+const store = useStore();
+const getFirstEnter = computed(() => store.get_firstEnter);
 const selectCat = ref("all")
 const filterCategories = [
   { name: "全部分類", catId: "all" },

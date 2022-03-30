@@ -447,7 +447,7 @@
     </div>
   </div>
   <Loading v-show="getLoading === true"></Loading>
-  <!-- <Enter></Enter> -->
+  <Enter></Enter>
 </template>
 <script setup lang="ts">
 import { useScroll } from '@vueuse/core'
@@ -459,8 +459,5 @@ const arrivedStateVal = computed(() => {
   store.updateHeaderState(arrivedState.top);
   return arrivedState.top
 })
-
 const getLoading = computed(() => store.get_loading);
-
-//---------------------------------------------
 </script>
