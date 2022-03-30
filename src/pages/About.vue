@@ -4,13 +4,23 @@
     <!-- 標題區塊 -->
     <TitleBox />
     <!-- 主視覺 -->
-    <div class="xl:w-5/12 lg:w-2/5 h-full">
+    <div class="xl:w-5/12 lg:w-2/5 h-full overflow-hidden relative">
       <img
-        class="w-auto transition-all ease-out"
-        src="/img/about-bg.jpg"
+        class="transition-all ease-out z-30 absolute w-auto object-center"
+        src="/img/kenny-logo.png"
+        :style="{
+          'transform': `rotateX(${roll * 30}deg) rotateY(${tilt * 30}deg)`,
+          'left': 'calc(50% - 130px)',
+          'top': 'calc(50% - 115px)'
+        }"
+      />
+      <div class="absolute left-0 top-0 w-full h-full bg-gradient-radial from-white z-20"></div>
+      <img
+        class="w-auto transition-all ease-out bg-white z-10 object-center"
+        src="/img/about-bg-sp.jpg"
         ref="photo"
         :style="{
-          'transform': `rotateX(${roll * 30}deg) rotateY(${tilt * 30}deg)`
+          'transform': `rotateX(${roll * 15}deg) rotateY(${tilt * 15}deg) scale(1.05)`
         }"
       />
     </div>

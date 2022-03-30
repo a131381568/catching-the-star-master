@@ -46,6 +46,9 @@ module.exports = {
         'sub-color-dark': '#968c5e',
         'sub-color-light': '#bbb494',
       }),
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+      },
       lineHeight: {
         'menu-title': '5.5rem'
       },
