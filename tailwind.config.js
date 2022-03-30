@@ -73,6 +73,7 @@ module.exports = {
       },
       width: {
         '480px': '480px',
+        '380px': '380px',
         '37/100': '37%',
         '30/100': '30%',
         '15/100': '15%',
@@ -119,6 +120,25 @@ module.exports = {
         '225': '225deg'
       }
     },
+    // 自定義 RWD 斷點
+    /**
+     * @param { sm } - min-width: 640px
+     * @param { md } - min-width: 768px
+     * @param { lg } - min-width: 1024px
+     * @param { xl } - min-width: 1280px
+     * @param { 2xl } - min-width: 1536px
+     */
+    screens: {
+      'mini-mobile': { 'max': '375px' },
+      'mobile': { 'max': '767px' },
+      'h-table': '768px',
+      'w-table': '992px',
+      'laptop': '1280px',
+      'middle-pc': '1441px',
+      'large-pc': '1600px',
+      'pro-pc': '1800px',
+      'screens-h-900': { 'raw': '(max-height: 900px)' },
+    }
   },
   plugins: [
     require('@tailwindcss/aspect-ratio'),
