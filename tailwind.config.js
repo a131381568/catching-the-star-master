@@ -129,6 +129,13 @@ module.exports = {
      * @param { 2xl } - min-width: 1536px
      */
     screens: {
+      // default
+      'sm': '640px',
+      'md': '768px',
+      'lg': '1024px',
+      'xl': '1280px',
+      '2xl': '1536px',
+      // add
       'mini-mobile': { 'max': '375px' },
       'mobile': { 'max': '767px' },
       'h-table': '768px',
