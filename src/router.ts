@@ -112,10 +112,7 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(),
-  routes,
-  scrollBehavior(to, from, savedPosition) {
-    return { top: 0 }
-  }
+  routes
 })
 
 router.beforeEach((to, from, next) => {
@@ -126,8 +123,12 @@ router.beforeEach((to, from, next) => {
     store.setEnterState(true)
   } else {
     store.setEnterState(false)
+    // gotop
+    let origin = document.querySelector(".app-inner")
+    if (origin) {
+      origin.scrollTop = 0
+    }
   }
-
   // 設置開始 loading 狀態 
   store.setLoading(true)
   setTimeout(() => {
