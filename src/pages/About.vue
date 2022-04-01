@@ -32,7 +32,7 @@
     <!-- 內文 -->
     <div class="laptop:w-5/12 h-table:w-10/12 middle-pc:pl-24 laptop:pl-10 laptop:mt-0 mt-10">
       <div
-        class="animate__animated animate__flipInX animate__delay-1s callout-box bg-main-color-light py-10 pl-10 pr-14 text-main-color-black font-bold mb-8 border-l-callout-box-boder border-sub-color-dark relative mobile:py-4 mobile:pl-4"
+        class="animate__animated animate__flipInX callout-box bg-main-color-light py-10 pl-10 pr-14 text-main-color-black font-bold mb-8 border-l-callout-box-boder border-sub-color-dark relative mobile:py-4 mobile:pl-4"
         :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]"
       >
         我們是「雲上的小貓」，致力於寫下故事、留下故事。

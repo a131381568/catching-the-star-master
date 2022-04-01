@@ -133,8 +133,8 @@ router.beforeEach((to, from, next) => {
   //   store.setEnterState(true)
   // } else {
   //   store.setEnterState(false)
-
   // }
+
   // 設置開始 loading 狀態 
   store.setLoading(true)
   setTimeout(() => {

@@ -7,7 +7,8 @@
     <TitleBox />
     <!-- 瀏覽 md 區塊 -->
     <div
-      class="h-table:w-10/12 bg-opacity-6 bg-white text-main-color-light laptop:p-20 p-10 mobile:p-8 middle-pc:mt-16 mt-8 md-container"
+      class="animate__animated animate__fadeIn h-table:w-10/12 bg-opacity-6 bg-white text-main-color-light laptop:p-20 p-10 mobile:p-8 middle-pc:mt-16 mt-8 md-container"
+      :class="[{ 'animate__delay-5s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]"
     >
       <singlePost />
     </div>
@@ -25,7 +26,8 @@
 import singlePost from '@/assets/md/single_post.md'
 const date = ref("2022-03-15")
 const tag = ref({ name: "科學家", catId: "scientist" })
-
+const store = useStore();
+const getFirstEnter = computed(() => store.get_firstEnter);
 // let text = `
 // # 55555
 // - 11111111111

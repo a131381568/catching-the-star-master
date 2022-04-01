@@ -8,7 +8,8 @@
     <!-- 時間軸 -->
     <div
       ref="masonryRef"
-      class="container mx-auto h-table:w-10/12 h-full grid grid-col-2 grid-flow-col justify-items-center relative"
+      class="container mx-auto h-table:w-10/12 h-full grid grid-col-2 grid-flow-col justify-items-center relative animate__animated animate__fadeIn"
+      :class="[{ 'animate__delay-5s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]"
     >
       <masonry-wall
         :items="postList"
@@ -25,9 +26,10 @@
               { 'text-left float-right': (index + 1) % 2 === 0 && width >= 992 },
               { 'mt-20': index !== 0 },
               { 'mt-0 ': index === 0 },
-              { 'float-left': width < 992 }
+              { 'float-left': width < 992 },
+              { 'animate__animated animate__fadeInUp': postList.length === 1 + index }
             ]"
-            class="flex group justify-end"
+            class="flex group"
             :style="{ 'width': gridWidth + 'px' }"
           >
             <div
@@ -66,8 +68,8 @@
         </template>
       </masonry-wall>
     </div>
-    <div class="h-table:w-10/12 w-table:text-center text-left">
-      <button class="mt-20 btn draw meet">
+    <div class="h-table:w-10/12 w-table:text-center text-left" v-show="postList.length > 0">
+      <button class="mt-20 btn draw meet" @click.prevent="loadMoreTimeLine()">
         <span>Load More</span>
       </button>
     </div>
@@ -77,6 +79,8 @@
 <script setup lang="ts">
 import { useWindowSize } from '@vueuse/core'
 import { useElementSize } from '@vueuse/core'
+const store = useStore();
+const getFirstEnter = computed(() => store.get_firstEnter);
 const masonryRef = ref(null)
 const { width } = useWindowSize()
 const size = reactive(useElementSize(masonryRef))
@@ -95,12 +99,9 @@ const gridWidth = computed(() => {
   }
 })
 
-
-
-
+/////////////////////////////////
 
 const route = useRoute();
-
 useHead({
   bodyAttrs: {
     title: route.meta.title,
@@ -125,7 +126,7 @@ const thisYear = new Date().getFullYear();
 
 /////////////////////////////////
 
-const postList = [
+const postList = ref([
   {
     title: "獵戶座的傳說",
     date: "2022-03-26",
@@ -170,11 +171,26 @@ const postList = [
     des: "每個人的一生不全然都具有主角光環，大多數的一般人都是戲份不重的配角，我們今天介紹的巨蟹座，是黃道星座中最不顯眼的一個，雖毫不起眼卻是最講義氣的好夥伴......",
     postId: "fs8615",
     img: "/img/story-bg-05.jpg"
-  },
+  }
+])
 
+function loadMoreTimeLine() {
+  let array2 = [
+    {
+      title: "獵戶座的傳說",
+      date: "2022-03-26",
+      catName: "",
+      catId: "",
+      des: "今天想跟大家談談冬天中的星空——獵戶座。在冬天的夜空裡，我們抬頭仰望南方，可以看到三顆整齊排列的二級星，以這三顆星為中心向外延伸可以找到參宿四星、參宿七星",
+      postId: "fs8611",
+      img: "/img/story-bg-01.jpg",
+      animate: true
+    }
+  ]
+  const array3 = postList.value.concat(array2);
+  postList.value = array3
+}
 
-
-]
 
 
 </script>
