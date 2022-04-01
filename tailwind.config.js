@@ -104,7 +104,8 @@ module.exports = {
         '15px': '15px',
         '7px': '7px',
         '5px': '5px',
-        '4px': '4px'
+        '4px': '4px',
+        '1/2-7px': 'calc(50% - 7px)'
       },
       minHeight: {
         '100px': '100px'

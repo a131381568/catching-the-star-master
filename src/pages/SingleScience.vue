@@ -1,15 +1,22 @@
 <template>
   <Header />
-  <div class="md:flex flex-wrap items-start justify-center pt-72 pb-32 2xl:px-20 md:px-6 px-4">
+  <div
+    class="h-table:flex flex-wrap items-start justify-center middle-pc:pt-72 h-table:pt-32 pb-32 middle-pc:px-20 h-table:px-6 px-8 mobile:pt-32"
+  >
     <!-- 標題區塊 -->
     <TitleBox />
     <!-- 瀏覽 md 區塊 -->
-    <div class="w-10/12 bg-opacity-6 bg-white text-main-color-light p-20 mt-16 md-container">
+    <div
+      class="h-table:w-10/12 bg-opacity-6 bg-white text-main-color-light laptop:p-20 p-10 mobile:p-8 middle-pc:mt-16 mt-8 md-container"
+    >
       <singlePost />
     </div>
-    <div class="w-10/12 mt-8">
+    <div class="h-table:w-10/12 h-table:mt-8 mt-5">
       <span class="text-main-color-light text-tiny">{{ date }},</span>
-      <router-link class="text-sub-color-light text-tiny" :to="'/archive/' + tag.catId">{{ tag.name }}</router-link>
+      <router-link
+        class="text-sub-color-light text-tiny"
+        :to="'/archive/' + tag.catId"
+      >{{ tag.name }}</router-link>
     </div>
   </div>
   <Footer />

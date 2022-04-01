@@ -42,6 +42,9 @@
   code{
     @apply text-tiny tracking-wide-content;
   }
+  pre{
+    @apply overflow-x-auto;
+  }
   div, p, input, textarea, select, option, li, a, blockquote, th, td, i, b, strong, captiom, figcaption, figure, pre{
     @apply text-lg tracking-wide-content font-light;
   }
@@ -145,12 +148,12 @@
   .timeline-grid:before{
     content: "";
     height: calc(100% + 28rem);
-    @apply -mt-56 relative border border-l-0 w-0 border-main-color-middle left-1/2
+    @apply -mt-56 relative border border-l-0 w-0 border-main-color-middle w-table:left-1/2 left-0
   }
   .timeline-grid:after{
     content:"";
-    left: calc(50% - 7px);
-    @apply -mt-56 bg-sub-color-dark rounded-full h-15px w-15px absolute
+
+    @apply -mt-56 bg-sub-color-dark rounded-full h-15px w-15px absolute w-table:left-1/2-7px -left-7px
   }
  
   /* leaflet pop */
@@ -250,10 +253,10 @@
     @apply text-sp-color-light
   }
   .md-container img{
-    @apply  max-w-1/2
+    @apply  h-table:max-w-1/2 w-auto
   }
   .md-container hr{
-    @apply my-20
+    @apply h-table:my-20 my-11
   }
   .md-container table{
     @apply text-left w-full
