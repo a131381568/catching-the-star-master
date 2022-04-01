@@ -81,7 +81,7 @@
   </div>
   <!-- 結語區塊 -->
   <div
-    class="h-table:flex flex-wrap items-start justify-center pt-32 pb-52 middle-pc:px-20 h-table:px-6 px-4 bg-white bg-[url(/img/bg-about-white.jpg)] bg-right-bottom bg-no-repeat middle-pc:bg-contain h-table:bg-auto-500 mobile:px-8 mobile:bg-contain"
+    class="h-table:flex flex-wrap items-start justify-center pt-32 pb-52 middle-pc:px-20 h-table:px-6 px-4 bg-white bg-[url(../img/bg-about-white.jpg)] bg-right-bottom bg-no-repeat middle-pc:bg-contain h-table:bg-auto-500 mobile:px-8 mobile:bg-contain"
   >
     <div
       class="middle-pc:w-7/12 laptop:w-5/12 h-table:w-10/12 text-left laptop:pb-0 pb-320px text-main-color-black animate__animated animate__delay-2s"
