@@ -94,10 +94,14 @@ module.exports = {
       },
       height: {
         '480px': '480px',
+        '380px': '380px',
+        '200px': '200px',
         '130px': '130px',
         '15px': '15px',
         '9px': '9px',
         '80vh': '80vh',
+        '50vh': '50vh',
+        '40vh': '40vh',
         '0-2em': '0.2em'
       },
       inset: {

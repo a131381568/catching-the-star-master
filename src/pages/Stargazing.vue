@@ -1,11 +1,55 @@
 <template>
   <Header />
-  <div class="md:flex flex-wrap items-start justify-center pt-72 pb-7 2xl:px-20 md:px-6 px-4">
+  <div
+    class="h-table:flex flex-wrap items-start justify-center middle-pc:pt-72 h-table:pt-32 pb-7 middle-pc:px-20 h-table:px-6 px-8 mobile:pt-32"
+  >
     <!-- 標題區塊 -->
     <TitleBox />
   </div>
-  <!-- 地點列表 -->
-  <div class="w-1/5 h-80vh bg-white z-401 absolute px-7 py-8 shadow-2xl">
+  <!---------- 地點列表 ---------->
+  <!-- 手機板選單樣式 -->
+  <div
+    class="dropdown-menu z-401 absolute hidden mobile:block mt-2 ml-2 shadow-2xl animate__animated animate__flipInX"
+    :class="[{ 'animate__delay-5s': getFirstEnter === true }, { 'animate__delay-2s': getFirstEnter === false }]"
+  >
+    <button
+      id=" dropdownDefault"
+      class="duration-1000 text-main-color-black border border-white border-opacity-60 bg-opacity-100 bg-white font-medium text-lg pl-4 py-3 pr-12 relative text-center inline-flex items-center tracking-normal w-full"
+      type="button"
+      @click.prevent="togglePlace()"
+    >
+      {{ actMarkName }}
+      <svg
+        class="ml-2 w-4 h-4 absolute right-4"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg>
+    </button>
+    <!-- Dropdown menu -->
+    <div
+      id="dropdown"
+      class="z-10 bg-main-color-light divide-y divide-gray-100 absolute w-full"
+      v-show="togglePlaceVal"
+    >
+      <ul class="py-1 text-sm text-main-color-black cursor-pointer h-200px overflow-y-auto">
+        <li
+          v-for="(val, key) in stargazingList"
+          :key="key"
+          @click.stop="clickSingleInfo(val.latitude, val.longitude), hideInfoBox()"
+          class="tracking-normal block py-2 px-4 hover:text-sub-color-dark"
+        >{{ val.name }}</li>
+      </ul>
+    </div>
+  </div>
+  <!-- 桌機左側列表樣式 -->
+  <div
+    class="middle-pc:w-1/5 w-table:w-1/3 h-table:w-5/12 w-full h-80vh bg-white z-401 absolute px-7 py-8 shadow-2xl overflow-x-hidden hidden h-table:block animate__animated animate__slideInLeft"
+    :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]"
+  >
     <h2 class="font-normal mb-9">地點列表</h2>
     <ul>
       <li
@@ -15,40 +59,54 @@
         @click.stop="clickSingleInfo(val.latitude, val.longitude)"
       >
         <img class="w-15px mr-2" src="/svg/mark.svg" />
-        <span class="group-hover:text-sp-color-light delay-75 duration-1000">{{ val.name }}</span>
+        <span
+          class="group-hover:text-sp-color-light delay-75 duration-1000 whitespace-nowrap"
+        >{{ val.name }}</span>
       </li>
     </ul>
   </div>
   <!-- 單一地點介紹 -->
   <div
-    class="w-1/3 h-80vh bg-white z-401 absolute shadow-2xl grid grid-flow-rows"
-    v-show="infoBoxState"
+    class="middle-pc:w-1/3 w-table:w-5/12 h-table:w-1/2 w-full h-80vh bg-white z-401 absolute shadow-2xl grid grid-flow-rows animate__animated animate__slideInLeft animate__faster"
+    :class="[{ 'animate__slideOutLeft': !infoBoxState }, { '-z-9999': isReady }]"
   >
     <div class="w-full flex items-center justify-between p-4 row-span-1">
-      <h2 class="tracking-normal font-normal truncate">{{ actMarkName }}</h2>
+      <h2
+        class="tracking-normal font-normal truncate middle-pc:text-4xl h-table:text-xl mobile:text-xl"
+      >{{ actMarkName }}</h2>
       <button
         @click.stop="hideInfoBox"
-        class="p-6 -m-6 relative right-7 bottom-7px w-15px h-15px before:absolute before:left-15px before:h-15px before:w-2px before:bg-black before:rotate-45 after:absolute after:left-15px after:h-15px after:w-2px after:bg-black after:-rotate-45"
+        class="p-6 -m-6 relative mobile:right-2 right-7 bottom-7px w-15px h-15px before:absolute before:left-15px before:h-15px before:w-2px before:bg-black before:rotate-45 after:absolute after:left-15px after:h-15px after:w-2px after:bg-black after:-rotate-45"
       ></button>
     </div>
     <div
-      class="w-full min-h-100px bg-bottom bg-no-repeat bg-cover row-span-6"
+      class="w-full min-h-100px bg-bottom bg-no-repeat bg-cover row-span-6 animate__animated animate__faster"
       :style="'background-image: url(' + actMarkImg + ')'"
+      :class="{ 'animate__flipOutX': !actMarkImg }"
     ></div>
     <div class="p-4 text-main-color-middle row-span-4">
       <div>{{ actMarkDescription }}</div>
     </div>
-    <div class="px-4 text-sub-color-light flex items-center row-span-1">
+    <div class="px-4 text-sub-color-light flex items-center row-span-1 mobile:pb-2">
       <img class="w-15px mr-2" src="/svg/mark.svg" />
       <a :href="actMarkLink" target="_blank">{{ actMarkAddress }}</a>
     </div>
   </div>
   <!-- 地圖容器 -->
-  <div id="map-container" class="w-full h-80vh mb-60"></div>
+  <div
+    id="map-container"
+    class="w-full h-80vh middle-pc:mb-60 h-table:mb-24 z-0 animate__animated animate__fadeInRight"
+    :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]"
+  ></div>
   <Footer />
 </template>
 <script setup lang="ts">
+import { useToggle } from '@vueuse/core'
 import L from "leaflet";
+const store = useStore();
+const getFirstEnter = computed(() => store.get_firstEnter);
+const isReady = ref(true)
+
 // 型別宣告
 type tArr = {
   name: string,
@@ -287,10 +345,15 @@ onBeforeUnmount(() => {
   destroyMap()
 });
 
+// 手機版的選單 --------------------------------------------------------------
+const [togglePlaceVal, togglePlace] = useToggle()
+
 // methods ------------------------------------------------------------------
 function clickSingleInfo(lat: number, lon: number) {
   infoBoxState.value = true
   let actInfo = stargazingList.filter(info => info.latitude === lat && info.longitude === lon)
+  // 關閉手機版選單
+  togglePlaceVal.value = false
 
   // 將 active 欄位儲存
   if (actInfo.length > 0) {
@@ -325,9 +388,8 @@ function showInfoBox() {
 }
 function hideInfoBox() {
   infoBoxState.value = false
-  map.value.closePopup()
+  // map.value.closePopup()
   actLayer.value.setIcon(customIcon)
-
 }
 function mapInit() {
   // 建立 map 實例
@@ -362,17 +424,21 @@ function mapInit() {
     stargazingList.forEach(item => {
       if (item.latitude === e.latlng.lat && item.longitude === e.latlng.lng) {
 
-        // 將 active 欄位儲存
-        actMarkName.value = item.name
-        actMarkLatitude.value = item.latitude
-        actMarkLongitude.value = item.longitude
-        actMarkImg.value = item.img
-        actMarkDescription.value = item.description
-        actMarkAddress.value = item.address
-        actMarkLink.value = item.link
+        // 先關閉單一資訊欄
+        hideInfoBox()
 
-        // 開啟單一資訊欄
-        showInfoBox()
+        setTimeout(() => {
+          // 將 active 欄位儲存
+          actMarkName.value = item.name
+          actMarkLatitude.value = item.latitude
+          actMarkLongitude.value = item.longitude
+          actMarkImg.value = item.img
+          actMarkDescription.value = item.description
+          actMarkAddress.value = item.address
+          actMarkLink.value = item.link
+          // 開啟單一資訊欄
+          showInfoBox()
+        }, 1000);
 
         // 先將所有座標換成普通樣式, 再設置 active 樣式
         registerMarkersLayer.value.forEach(markItem => {
@@ -395,6 +461,12 @@ function mapInit() {
 
 
   });
+
+  setTimeout(() => {
+    // 地圖已設置
+    isReady.value = false
+  }, 3000);
+
 }
 function setMark(markInfo: tObj, layer: object) {
   const marker = L.marker(
@@ -407,4 +479,5 @@ function setMark(markInfo: tObj, layer: object) {
 function destroyMap() {
   map.value.remove()
 }
+
 </script>

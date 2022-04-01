@@ -165,7 +165,7 @@ function selectDropCat(catId: string) {
 }
 
 function closeDefaultMenu() {
-  console.log("closeDefaultMenu????")
+  // console.log("closeDefaultMenu????")
   if (toggleFilterVal.value === true) {
     toggleFilterVal.value = false
   }
