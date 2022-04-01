@@ -1,5 +1,6 @@
 const plugin = require('tailwindcss/plugin')
 // const defaultTheme = require('tailwindcss/defaultTheme')
+const bgPath = process.env.NODE_ENV === 'production' ? 'bg' : '/assets/bg'
 
 module.exports = {
   content: ['./index.html', './src/**/*.{vue,ts}'],
@@ -48,6 +49,15 @@ module.exports = {
       }),
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'astrolabe': 'url("' + bgPath + '/home.png")',
+        'menu-about': 'url("' + bgPath + '/menu-bg-01.jpg")',
+        'menu-science': 'url("' + bgPath + '/menu-bg-02.jpg")',
+        'menu-story': 'url("' + bgPath + '/menu-bg-03.jpg")',
+        'menu-facilities': 'url("' + bgPath + '/menu-bg-04.jpg")',
+        'menu-stargazing': 'url("' + bgPath + '/menu-bg-05.jpg")',
+        'menu-search': 'url("' + bgPath + '/menu-bg-06.jpg")',
+        'about-writing': 'url("' + bgPath + '/bg-about-white.jpg")',
+        'story-featured': 'url("' + bgPath + '/story-bg-02.jpg")'
       },
       backgroundSize: {
         'auto-500': 'auto 500px'

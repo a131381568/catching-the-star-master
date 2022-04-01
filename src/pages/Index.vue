@@ -1,7 +1,7 @@
 <template>
   <Header />
   <div
-    class="absolute right-0 top-0 mx-auto h-screen w-full z-0 bg-[url(/img/home.png)] bg-right-bottom bg-no-repeat bg-cover filter-bg-opacity-20 w-table:bg-contain animate__animated animate__fadeInRightBig w-table:filter-bg-opacity-50 laptop:filter-bg-opacity-none"
+    class="absolute right-0 top-0 mx-auto h-screen w-full z-0 bg-astrolabe bg-right-bottom bg-no-repeat bg-cover filter-bg-opacity-20 w-table:bg-contain animate__animated animate__fadeInRightBig w-table:filter-bg-opacity-50 laptop:filter-bg-opacity-none"
     :class="[{ 'animate__delay-5s': getFirstEnter === true }, { 'animate__delay-3s': getFirstEnter === false }]"
   ></div>
   <div class="mx-auto h-screen w-full z-10">

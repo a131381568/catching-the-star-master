@@ -13,7 +13,7 @@
     >
       <div
         :style="[{ 'width': imgSizeWidth + 'px' }, { 'height': imgSizeWidth + 'px' }]"
-        class="bg-[url(/img/story-bg-02.jpg)] rounded-full bg-cover laptop:ml-0 ml-auto mr-auto"
+        class="bg-story-featured rounded-full bg-cover laptop:ml-0 ml-auto mr-auto"
       ></div>
     </div>
     <!-- 瀏覽 md 區塊 -->

@@ -401,7 +401,8 @@ function mapInit() {
     scrollWheelZoom: false,
     zoomAnimation: true,
     fadeAnimation: true,
-    markerZoomAnimation: true
+    markerZoomAnimation: true,
+    attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
   })
   L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png').addTo(map.value);
   map.value.zoomControl.setPosition('topright');
@@ -411,7 +412,7 @@ function mapInit() {
 
   // 設置 popup
   popupLayer.value = L.popup({ offset: [0, -13], className: 'stargazing-map-pop' });
-  console.log(popupLayer.value)
+  // console.log(popupLayer.value)
 
   // 地圖插點
   stargazingList.forEach(item => {

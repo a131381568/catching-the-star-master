@@ -592,14 +592,14 @@
         </ul>
 
         <div
-          class="w-table:block h-table:hidden mobile:hidden bg-[url(/img/menu-bg-04.jpg)] bg-center bg-no-repeat bg-cover relative large-pc:mb-16 -top-4 transition-all duration-400 mobile:text-5xl"
+          class="w-table:block h-table:hidden mobile:hidden bg-center bg-no-repeat bg-cover relative large-pc:mb-16 -top-4 transition-all duration-400 mobile:text-5xl"
           :class="[
-            { 'bg-[url(/img/menu-bg-01.jpg)]': hoveredAbout },
-            { 'bg-[url(/img/menu-bg-02.jpg)]': hoveredScience },
-            { 'bg-[url(/img/menu-bg-03.jpg)]': hoveredStory },
-            { 'bg-[url(/img/menu-bg-04.jpg)]': hoveredFacilities },
-            { 'bg-[url(/img/menu-bg-05.jpg)]': hoveredStargazing },
-            { 'bg-[url(/img/menu-bg-06.jpg)]': hoveredSearch }
+            { 'bg-menu-about': hoveredAbout },
+            { 'bg-menu-science': hoveredScience },
+            { 'bg-menu-story': hoveredStory },
+            { 'bg-menu-facilities': hoveredFacilities || !hoveredAbout && !hoveredScience && !hoveredStory && !hoveredFacilities && !hoveredStargazing && !hoveredSearch },
+            { 'bg-menu-stargazing': hoveredStargazing },
+            { 'bg-menu-search': hoveredSearch }
           ]"
         >
           <router-link

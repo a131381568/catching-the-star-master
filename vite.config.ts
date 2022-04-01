@@ -6,9 +6,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import pkg from './package.json'
 
-
 import Markdown from 'vite-plugin-md'
-
 
 process.env.VITE_APP_VERSION = pkg.version
 if (process.env.NODE_ENV === 'production') {
@@ -65,7 +63,7 @@ export default defineConfig({
       '@comps': _resolve('src/components'),
       '@utils': _resolve('src/utils'),
       '@router': _resolve('src/router'),
-      '@store': _resolve('src/store'),
+      '@store': _resolve('src/store')
     },
   },
   test: {
