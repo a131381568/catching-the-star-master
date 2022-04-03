@@ -13,7 +13,8 @@ module.exports = {
       },
       fontSize: {
         'tiny': '.938rem',
-        'menu-title': '5.5rem'
+        'menu-title': '5.5rem',
+        '20vw': '20vw'
       },
       colors: {
         'sp-color-light': '#80b884',
@@ -170,6 +171,7 @@ module.exports = {
       'large-pc': '1600px',
       'pro-pc': '1800px',
       'screens-h-900': { 'raw': '(max-height: 900px)' },
+      'screens-h-500': { 'raw': '(max-height: 500px)' },
     }
   },
   plugins: [

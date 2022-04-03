@@ -60,7 +60,17 @@
     <div
       class="grid grid-cols-1 middle-pc:w-6/12 w-table:w-5/12 w-10/12 mobile:w-full overflow-hidden w-table:mt-36 mt-14 animate__animated animate__fadeInUp"
       :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]"
+      v-if="postList.length > 0"
     >
+      <!-- 搜尋無結果 -->
+      <div
+        v-show="postList.length === 0"
+        class="animate__animated animate__fadeIn animate__delay-1s"
+      >
+        <p class="h-table:text-3xl text-xl font-normal text-white">查無結果</p>
+        <p class="text-main-color-light font-light h-table:mt-5 mt-1 text-lg truncate">請使用其它關鍵字搜尋</p>
+      </div>
+      <!-- 搜尋有結果 -->
       <div v-for="(val, key) in postList" :key="key" class="animate__animated animate__fadeInUp">
         <router-link :to="val.path">
           <!-- card -->
@@ -89,6 +99,14 @@
   <Footer />
 </template>
 <script setup lang="ts">
+import { questions } from '@/api/user'
+
+type searchGridT = {
+  title: string,
+  des: string,
+  path: string
+}[];
+
 const store = useStore();
 const getFirstEnter = computed(() => store.get_firstEnter);
 const searchWord = ref("")
@@ -102,7 +120,7 @@ const originalList = [
   { title: "恆星月及朔望月", des: "月球是地球的衛星，繞著地球公轉，本身也會自轉，方向為由西向東，從北極上方往下看......", path: "/science/sc1332" },
 ]
 
-const postList = ref(originalList)
+const postList = ref<searchGridT>([])
 
 function loadMoreData() {
   let array2 = [{ title: "最璀璨明星——天狼星", des: "明亮的星星在寒冷的夜晚閃著孤寂的寒光，冬天是亮星最多的季節，有別於夏季星空的繁......", path: "/science/sc1326" }]
@@ -114,8 +132,19 @@ function searchData(word: string) {
   console.log(word)
   postList.value = []
   setTimeout(() => {
-    postList.value = originalList
+    // postList.value = originalList
+    postList.value = []
   }, 300);
 }
+
+
+async function testPost() {
+  let res = await questions()
+  console.log(res)
+  postList.value = res.data.data
+}
+testPost()
+
+
 
 </script>
