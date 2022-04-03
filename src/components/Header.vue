@@ -605,37 +605,37 @@
           <router-link
             v-if="hoveredAbout"
             to="/about"
-            class="text-white absolute right-12 bottom-12 text-3xl hover:text-sub-color-light duration-1000"
+            class="text-white absolute right-12 bottom-12 text-3xl hover:text-sub-color-light duration-1000 text-shadow"
           >關於我們</router-link>
           <router-link
             v-else-if="hoveredScience"
             to="/science"
-            class="text-white absolute right-12 bottom-12 text-3xl hover:text-sub-color-light duration-1000"
+            class="text-white absolute right-12 bottom-12 text-3xl hover:text-sub-color-light duration-1000 text-shadow"
           >天文科普</router-link>
           <router-link
             v-else-if="hoveredStory"
             to="/story"
-            class="text-white absolute right-12 bottom-12 text-3xl hover:text-sub-color-light duration-1000"
+            class="text-white absolute right-12 bottom-12 text-3xl hover:text-sub-color-light duration-1000 text-shadow"
           >星星物語</router-link>
           <router-link
             v-else-if="hoveredFacilities"
             to="/facilities"
-            class="text-white absolute right-12 bottom-12 text-3xl hover:text-sub-color-light duration-1000"
+            class="text-white absolute right-12 bottom-12 text-3xl hover:text-sub-color-light duration-1000 text-shadow"
           >天文設施</router-link>
           <router-link
             v-else-if="hoveredStargazing"
             to="/stargazing"
-            class="text-white absolute right-12 bottom-12 text-3xl hover:text-sub-color-light duration-1000"
+            class="text-white absolute right-12 bottom-12 text-3xl hover:text-sub-color-light duration-1000 text-shadow"
           >觀星地點</router-link>
           <router-link
             v-else-if="hoveredSearch"
             to="/search"
-            class="text-white absolute right-12 bottom-12 text-3xl hover:text-sub-color-light duration-1000"
+            class="text-white absolute right-12 bottom-12 text-3xl hover:text-sub-color-light duration-1000 text-shadow"
           >搜尋頁面</router-link>
           <router-link
             v-else="hoveredFacilities"
             to="/facilities"
-            class="text-white absolute right-12 bottom-12 text-3xl hover:text-sub-color-light duration-1000"
+            class="text-white absolute right-12 bottom-12 text-3xl hover:text-sub-color-light duration-1000 text-shadow"
           >天文設施</router-link>
         </div>
       </div>
