@@ -110,15 +110,15 @@
             >{{ val.categoryid }}</router-link>
           </p>
           <!-- des -->
-          <p
+          <!-- <p
             class="text-main-color-light font-light mt-5 text-lg grid-des-box"
-          >{{ val.description }}</p>
+          >{{ val.description }}</p>-->
 
-          <!-- <v-md-preview
-            class="text-main-color-light font-light mt-5 !text-lg grid-des-box"
+          <v-md-preview
+            class="text-main-color-light font-light mt-5 grid-des-box"
             :text="val.description"
             height="400px"
-          ></v-md-preview>-->
+          ></v-md-preview>
 
           <!-- link -->
           <router-link class="mt-10 btn draw meet inline-block" :to="'/science/' + val.postid">
