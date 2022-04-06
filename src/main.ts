@@ -12,7 +12,7 @@ import leaflet from 'leaflet'
 import VMdPreview from '@kangc/v-md-editor/lib/preview';
 import '@kangc/v-md-editor/lib/style/preview.css';
 import githubTheme from '@kangc/v-md-editor/lib/theme/github';
-import '@kangc/v-md-editor/lib/theme/style/github.css';
+// import '@kangc/v-md-editor/lib/theme/style/github.css';
 VMdPreview.use(githubTheme)
 
 import MasonryWall from '@yeger/vue-masonry-wall'

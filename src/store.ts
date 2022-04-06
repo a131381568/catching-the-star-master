@@ -35,7 +35,7 @@ export const useStore = defineStore('main', {
             pageName: "Science"
           },
           {
-            title: "約翰尼斯‧克卜勒 Johannes ",
+            title: "約翰尼斯‧克卜勒 Johannes",
             subTitle: "science",
             pageName: "SingleScience"
           },

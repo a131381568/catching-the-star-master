@@ -19,10 +19,44 @@ export const questions = (): AxiosPromise<ResponseData> => {
   })
 }
 
-export const reqbin = (): AxiosPromise<ResponseData> => {
+export const markContent = (): AxiosPromise<ResponseData> => {
   return axios.request({
-    url: 'https://reqbin.com/echo/get/json',
-    method: 'GET'
+    url: 'http://localhost:4000/graphql',
+    method: 'POST',
+    data: {
+      query: `query {
+        getSinglePost(postid: 4816) {
+          content
+        }
+      }`
+    }
   })
 }
+
+export const artistsPagi = (): AxiosPromise<ResponseData> => {
+  return axios.request({
+    url: 'http://localhost:4000/graphql',
+    method: 'POST',
+    data: {
+      query: `query {
+              artists(first: 9) {
+                edges {
+                  postid
+                  title
+                  categoryid
+                  updatetime
+                  description
+                }
+                pageInfo {
+                  hasNextPage
+                  hasPreviousPage
+                  start
+                  end
+                }
+              }
+            }`
+    }
+  })
+}
+
 

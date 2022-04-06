@@ -10,7 +10,8 @@
       class="animate__animated animate__fadeIn h-table:w-10/12 bg-opacity-6 bg-white text-main-color-light laptop:p-20 p-10 mobile:p-8 middle-pc:mt-16 mt-8 md-container"
       :class="[{ 'animate__delay-5s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]"
     >
-      <singlePost />
+      <v-md-preview class="markdown-body" :text="testTitle" height="400px"></v-md-preview>
+      <!-- <singlePost /> -->
     </div>
     <div class="h-table:w-10/12 h-table:mt-8 mt-5">
       <span class="text-main-color-light text-tiny">{{ date }},</span>
@@ -23,20 +24,30 @@
   <Footer />
 </template>
 <script setup lang="ts">
+import { markContent } from '@/api/user'
 import singlePost from '@/assets/md/single_post.md'
+console.log(singlePost)
 const date = ref("2022-03-15")
 const tag = ref({ name: "科學家", catId: "scientist" })
 const store = useStore();
 const getFirstEnter = computed(() => store.get_firstEnter);
-// let text = `
-// # 55555
-// - 11111111111
-// - 2222222222222
-// - 33333333333333333333
-// _888888888888_
-// `
-// const markdown = ref(text)
 
-// const router = useRouter()
-// console.log(router.options.routes)
+
+
+let testTitle = ref(`***`)
+
+// async function testPost() {
+//   let res = await markContent()
+//   let str = res.data.data.getSinglePost.content
+//   let newstr = str.replace(/\\\n|\\n|\n/g, "\n");
+//   newstr = newstr.replace(/<br \/>/, "")
+//   testTitle.value = newstr
+// }
+// testPost()
+
+onMounted(() => {
+  console.log(JSON.stringify(testTitle.value))
+});
+
+
 </script>
