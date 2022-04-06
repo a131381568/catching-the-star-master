@@ -198,13 +198,12 @@ function reSearchData(catId: string) {
 }
 
 
-onMounted(async () => {
+async function testPost() {
   let res = await artistsPagi()
   let str = res.data.data.artists.edges
-  console.log(str)
   postList.value = str
-  // console.log(JSON.stringify(postList.value))
-});
+}
+testPost()
 
 
 </script>

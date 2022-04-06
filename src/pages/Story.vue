@@ -10,6 +10,7 @@
       ref="masonryRef"
       class="container mx-auto h-table:w-10/12 h-full grid grid-col-2 grid-flow-col justify-items-center relative animate__animated animate__fadeIn"
       :class="[{ 'animate__delay-5s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]"
+      v-if="postList.length > 0 && postList"
     >
       <masonry-wall
         :items="postList"
@@ -85,13 +86,15 @@ const masonryRef = ref(null)
 const { width } = useWindowSize()
 const size = reactive(useElementSize(masonryRef))
 const masonryRefWidth = computed(() => {
-  if (size) {
+  // console.log(size.width)
+  if (size.width) {
     return size.width
   } else {
-    return 0
+    return 600
   }
 })
 const gridWidth = computed(() => {
+  // console.log(masonryRefWidth.value)
   if (width.value >= 992) {
     return Math.floor(masonryRefWidth.value / 2)
   } else {
@@ -118,11 +121,6 @@ useHead({
   ],
 });
 
-const VERSION = import.meta.env.VITE_APP_VERSION;
-const BUILD_DATE = import.meta.env.VITE_APP_BUILD_EPOCH
-  ? new Date(Number(import.meta.env.VITE_APP_BUILD_EPOCH))
-  : undefined;
-const thisYear = new Date().getFullYear();
 
 /////////////////////////////////
 
