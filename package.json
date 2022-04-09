@@ -1,8 +1,9 @@
 {
-  "name": "vite-ts-tailwind-starter",
+  "name": "catching-the-star-master",
   "version": "2.1.0",
   "scripts": {
     "dev": "vite",
+    "generate": "graphql-codegen --config ./src/codegen.yml",
     "build": "vite build",
     "preview": "vite build && vite preview",
     "start": "yarn dev & wait-on tcp:3000 -v",
@@ -14,12 +15,17 @@
     "test:ci-components": "cypress run-ct"
   },
   "dependencies": {
+    "@apollo/client": "^3.5.10",
     "@kangc/v-md-editor": "^2.3.14",
+    "@vue/apollo-composable": "^4.0.0-alpha.16",
     "@vueuse/core": "^8.1.2",
     "@vueuse/head": "~0.7",
     "@yeger/vue-masonry-wall": "^3.0.24",
     "animate.css": "^4.1.1",
     "axios": "^0.26.1",
+    "graphql": "^16.3.0",
+    "graphql-codegen": "^0.4.0",
+    "graphql-tag": "^2.12.6",
     "leaflet": "^1.7.1",
     "pinia": "~2.0",
     "vue": "~3.2",
