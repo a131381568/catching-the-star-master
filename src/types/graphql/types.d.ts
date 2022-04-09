@@ -5,12 +5,53 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 /** All built-in and custom scalars, mapped to their actual values */
 
 export type Post = {
-  // __typename?: 'Post';
-  content: string;
   postid: number;
-  // title: string
+  content: string;
+  title: string;
+  categoryid: string;
+  updatetime: string;
+  description: string;
+  image: string;
 };
 
+export type PostArr = {
+  postid: number;
+  content: string;
+  title: string;
+  categoryid: string;
+  updatetime: string;
+  description: string;
+  image: string;
+}[];
+
+export type PostList = {
+  edges: [Post]
+  pageInfo: PageInfo
+};
+
+export type PageInfo = {
+  hasNextPage: boolean;
+  hasPreviousPage: boolean;
+  start: number;
+  end: number;
+};
+
+
+export type QueryPostListArgs = {
+  first: number | null;
+  last: number | null;
+  after: number | null;
+  before: number | null;
+  categoryid: string | "";
+}
+
+
+export type QueryPostArgs = {
+  postid: number;
+}
+
+
+/////////////////////////////
 
 export type Scalars = {
   ID: string;
