@@ -11,36 +11,28 @@
       class="animate__animated animate__fadeIn w-10/12 middle-pc:mt-16 middle-pc:mb-20 mt-6 mb-16 hidden laptop:inline-flex"
       :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]"
     >
-      <ul class="flex">
+      <ul class="flex" v-if="filterCategories.length > 0 && filterCategories">
         <li
           v-for="(val, key) in filterCategories"
           :key="key"
           class="min-w-min w-auto"
-          @click="reSearchData(val.catId)"
+          @click="reSearchData(String(val.post_category_id))"
         >
           <div class="flex items-center group large-pc:mr-10 laptop:mr-6">
-            <input
-              :id="val.catId"
-              type="radio"
-              name="radio"
-              class="hidden"
-              v-model="selectCat"
-              :value="val.catId"
-            />
+            <input :id="String(val.post_category_id)" class="hidden" :value="val.post_category_id" />
             <label
-              :for="val.catId"
               :class="[
                 'flex-none', 'delay-75', 'duration-1000',
                 'flex', 'items-center', 'cursor-pointer', 'text-2xl', 'group-hover:text-sp-color-light',
-                { 'text-sub-color-light': val.catId === selectCat },
-                { 'text-main-color-light': val.catId !== selectCat }
+                { 'text-sub-color-light': val.post_category_id === selectCat },
+                { 'text-main-color-light': val.post_category_id !== selectCat }
               ]"
             >
               <span
                 class="flex-none w-3 h-3 inline-block mr-2 rounded-full border border-grey flex-no-shrink group-hover:bg-sp-color-light delay-75 duration-1000 whitespace-nowrap"
-                :class="{ 'bg-sub-color-light': val.catId === selectCat }"
+                :class="{ 'bg-sub-color-light': val.post_category_id === selectCat }"
               ></span>
-              {{ val.name }}
+              {{ val.post_category_name }}
             </label>
           </div>
         </li>
@@ -78,9 +70,9 @@
           <li
             v-for="(val, key) in filterCategories"
             :key="key"
-            @click.stop="selectDropCat(val.catId)"
+            @click.stop="selectDropCat(String(val.post_category_id))"
             class="tracking-wide-content block py-2 px-4 hover:text-sub-color-dark"
-          >{{ val.name }}</li>
+          >{{ val.post_category_name }}</li>
         </ul>
       </div>
     </div>
@@ -128,7 +120,11 @@
         </div>
       </div>
     </div>
-    <div class="h-table:w-10/12 text-center" v-show="postList.length > 0">
+    <div :class="['h-table:w-10/12', 'h-screen']" v-show="postList.length === 0"></div>
+    <div
+      class="h-table:w-10/12 text-center"
+      v-show="sciencePageInfo.hasNextPage && postList.length > 0"
+    >
       <button class="h-table:mt-24 mt-6 mobile:mt-11 btn draw meet" @click.prevent="loadMoreData()">
         <span>Load More</span>
       </button>
@@ -137,27 +133,52 @@
   <Footer />
 </template>
 <script setup lang="ts">
-import { artistsPagi } from '@/api/user'
 import { useToggle } from '@vueuse/core'
-import { getPostList } from '@/api/single'
-import { Post, PostList, PostArr, PageInfo } from '../types/graphql/types'
+import { getPostList, artistsCategories } from '@/api/science'
+import { PostArr, PageInfo, ArtistsCategories } from '../types/graphql/types'
 const store = useStore();
 const getFirstEnter = computed(() => store.get_firstEnter);
-const selectCat = ref("all")
-const filterCategories = [
-  { name: "全部分類", catId: "all" },
-  { name: "太陽系和恆星", catId: "solar" },
-  { name: "宇宙", catId: "universe" },
-  { name: "特殊天象", catId: "phenomena" },
-  { name: "天文觀測", catId: "observation" },
-  { name: "科學家", catId: "scientist" },
-  { name: "曆法", catId: "calendar" },
-  { name: "其他", catId: "other" }
-]
+
+// =============== 點選篩選列 ===============
+
+const selectCat = ref("")
+const filterCategories = ref<ArtistsCategories>([])
+// { name: "全部分類", catId: "" }
 const selectName = computed(() => {
-  let active = filterCategories.filter(item => item.catId === selectCat.value)
-  return active[0].name
+  let active = filterCategories.value.filter(item => item.post_category_id === selectCat.value)
+  if (active.length > 0) {
+    return active[0].post_category_name
+  } else {
+    return ""
+  }
 })
+
+// =============== 切換選單 ===============
+
+const [toggleFilterVal, toggleFilter] = useToggle()
+function selectDropCat(catId: string) {
+  // console.log("selectDropCat")
+  toggleFilterVal.value = false
+  reSearchData(catId)
+}
+function closeDefaultMenu() {
+  if (toggleFilterVal.value === true) {
+    toggleFilterVal.value = false
+  }
+}
+
+// =============== 取得篩選列 ===============
+
+getArtistsCategories()
+
+async function getArtistsCategories() {
+  const res = await artistsCategories()
+  const filterBar = res.data.artistsCategories.filter(item => item.post_category_id !== 'story')
+  filterCategories.value = filterBar
+}
+
+// =============== 載入文章資料 ===============
+
 const postList = ref<PostArr>([])
 const sciencePageInfo = ref<PageInfo>({
   end: 0,
@@ -165,35 +186,18 @@ const sciencePageInfo = ref<PageInfo>({
   hasPreviousPage: false,
   start: 0
 })
-const [toggleFilterVal, toggleFilter] = useToggle()
 
-function selectDropCat(catId: string) {
-  selectCat.value = catId
-  toggleFilterVal.value = false
-  reSearchData(catId)
-}
-
-function closeDefaultMenu() {
-  // console.log("closeDefaultMenu????")
-  if (toggleFilterVal.value === true) {
-    toggleFilterVal.value = false
-  }
-}
+defaultData(9, null, null, null, "")
 
 function loadMoreData() {
-  // let array2 = [
-  //   { title: "恆星月及朔望月", updatetime: "2022-03-15", categoryid: "solar", description: "月球是地球的衛星，繞著地球公轉，本身也會自轉，方向為由西向東，從北極上方往下看，自轉及公轉均為逆時針轉動，只是月球......", postid: "sc1326" },
-  //   { title: "月球兩大地形", updatetime: "2022-03-13", categoryid: "solar", description: "從地表觀看月球，會發現月球上很明顯地分成明亮及暗黑的區域，剛好分別對應到月球上的隕石坑和月海。", postid: "sc1355" }
-  // ]
-  // const array3 = postList.value.concat(array2);
-  // postList.value = array3
-  defaultData(3, null, sciencePageInfo.value.end, null, "")
+  defaultData(3, null, sciencePageInfo.value.end, null, selectCat.value || "")
 }
-
 function reSearchData(catId: string) {
+  // console.log("reSearchData")
+  selectCat.value = catId
   postList.value = []
   setTimeout(() => {
-    loadMoreData()
+    defaultData(9, null, null, null, catId)
   }, 300);
 }
 
@@ -210,10 +214,4 @@ async function defaultData(
   postList.value = pushList
   sciencePageInfo.value = res.data.artists.pageInfo
 }
-
-defaultData(9, null, null, null, "")
-
-
-
-
 </script>

@@ -4,6 +4,16 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: 
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 /** All built-in and custom scalars, mapped to their actual values */
 
+export type ArtistsCategory = {
+  post_category_name: String
+  post_category_id: String
+}
+
+export type ArtistsCategories = {
+  post_category_name: String
+  post_category_id: String
+}[]
+
 export type Post = {
   postid: number;
   content: string;

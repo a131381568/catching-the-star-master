@@ -24,7 +24,7 @@
   <Footer />
 </template>
 <script setup lang="ts">
-import { getSinglePostById } from '@/api/single'
+import { getSinglePostById } from '@/api/science'
 // import { markContent } from '@/api/user'
 import singlePost from '@/assets/md/single_post.md'
 console.log(singlePost)
