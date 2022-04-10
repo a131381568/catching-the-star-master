@@ -23,19 +23,15 @@
         <template #default="{ item, index }">
           <div
             :class="[
-              { 'text-right float-left': (index + 1) % 2 !== 0 && width >= 992 },
-              { 'text-left float-right': (index + 1) % 2 === 0 && width >= 992 },
               { 'mt-20': index !== 0 },
               { 'mt-0 ': index === 0 },
-              { 'float-left': width < 992 },
               { 'animate__animated animate__fadeInUp': postList.length === 1 + index }
             ]"
-            class="flex group"
+            class="flex group single-timeline-grid"
             :style="{ 'width': gridWidth + 'px' }"
           >
             <div
-              v-show="(index + 1) % 2 === 0 || width < 992"
-              class="w-3/12 flex items-stretch justify-start border border-b border-t-0 border-l-0 border-r-0 h-0 border-main-color-middle mt-5 mr-2"
+              class="left-line w-3/12 flex items-stretch justify-start border border-b border-t-0 border-l-0 border-r-0 h-0 border-main-color-middle mt-5 mr-2"
             >
               <span
                 class="self-center bg-sub-color-dark rounded-full h-9px w-9px block relative -left-4px"
@@ -58,8 +54,7 @@
               <span class="text-main-color-light grid-des-box">{{ item.description }}</span>
             </div>
             <div
-              v-show="(index + 1) % 2 !== 0 && width >= 992"
-              class="w-3/12 flex items-stretch justify-end border border-b border-t-0 border-l-0 border-r-0 h-0 border-main-color-middle mt-5 ml-2"
+              class="right-line w-3/12 flex items-stretch justify-end border border-b border-t-0 border-l-0 border-r-0 h-0 border-main-color-middle mt-5 ml-2"
             >
               <span
                 class="self-center bg-sub-color-dark rounded-full h-9px w-9px relative -right-5px"
@@ -80,8 +75,7 @@
 <script setup lang="ts">
 import { getArtistsList } from '@/api/science'
 import { ArtistsArr, PageInfo, ArtistsCategories } from '@/types/graphql/types'
-import { useWindowSize } from '@vueuse/core'
-import { useElementSize } from '@vueuse/core'
+import { useWindowSize, useElementSize, useElementBounding } from '@vueuse/core'
 const store = useStore();
 const getFirstEnter = computed(() => store.get_firstEnter);
 const masonryRef = ref(null)
@@ -152,13 +146,14 @@ async function defaultData(
 }
 
 function loadMoreTimeLine() {
-  let boxLeft = document.querySelector(".masonry-wall > .masonry-column:nth-child(1)").clientHeight
-  let boxRight = document.querySelector(".masonry-wall > .masonry-column:nth-child(2)").clientHeight
-  if (boxLeft > boxRight) {
-    setLR.value = "left"
-  } else {
-    setLR.value = "right"
-  }
+  // let boxLeft = document.querySelector(".masonry-wall > .masonry-column:nth-child(1)").clientHeight
+  // let boxRight = document.querySelector(".masonry-wall > .masonry-column:nth-child(2)").clientHeight
+  // if (boxLeft > boxRight) {
+  //   setLR.value = "left"
+  // } else {
+  //   setLR.value = "right"
+  // }
+  console.log(masonryRef.value)
   defaultData(1, null, storyPageInfo.value.end, null, "story")
 }
 </script>

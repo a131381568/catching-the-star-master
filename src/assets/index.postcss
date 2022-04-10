@@ -171,7 +171,26 @@
 
     @apply -mt-56 bg-sub-color-dark rounded-full h-15px w-15px absolute w-table:left-1/2-7px -left-7px
   }
- 
+  .masonry-wall [data-index="0"] .single-timeline-grid {
+    @apply w-table:text-right w-table:float-left text-left float-right
+  }
+  .masonry-wall [data-index="1"] .single-timeline-grid {
+    @apply text-left float-right
+  }
+  .masonry-wall [data-index="0"] .left-line{
+    @apply w-table:hidden inline-flex
+  }
+  .masonry-wall [data-index="1"] .right-line {
+    @apply hidden
+  }
+  .masonry-wall [data-index="1"] .left-line {
+    @apply inline-flex
+  }
+  .masonry-wall [data-index="0"] .right-line {
+    @apply w-table:inline-flex hidden
+  }
+
+
   /* leaflet pop */
   .stargazing-map-pop .leaflet-popup-content{
     @apply tracking-normal font-normal 
