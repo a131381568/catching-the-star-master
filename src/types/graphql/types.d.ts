@@ -4,6 +4,12 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: 
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 /** All built-in and custom scalars, mapped to their actual values */
 
+export type SinglePageInfo = {
+  page_title: String
+  sub_page_title: String
+  page_route: String
+}
+
 export type ArtistsCategory = {
   post_category_name: String
   post_category_id: String
@@ -14,7 +20,7 @@ export type ArtistsCategories = {
   post_category_id: String
 }[]
 
-export type Post = {
+export type Artists = {
   postid: number;
   content: string;
   title: string;
@@ -24,7 +30,7 @@ export type Post = {
   image: string;
 };
 
-export type PostArr = {
+export type ArtistsArr = {
   postid: number;
   content: string;
   title: string;
@@ -34,8 +40,8 @@ export type PostArr = {
   image: string;
 }[];
 
-export type PostList = {
-  edges: [Post]
+export type ArtistsList = {
+  edges: [Artists]
   pageInfo: PageInfo
 };
 
@@ -44,57 +50,4 @@ export type PageInfo = {
   hasPreviousPage: boolean;
   start: number;
   end: number;
-};
-
-
-export type QueryPostListArgs = {
-  first: number | null;
-  last: number | null;
-  after: number | null;
-  before: number | null;
-  categoryid: string | "";
-}
-
-
-export type QueryPostArgs = {
-  postid: number;
-}
-
-
-/////////////////////////////
-
-export type Scalars = {
-  ID: string;
-  String: string;
-  Boolean: boolean;
-  Int: number
-};
-
-export type Comment = {
-  __typename?: 'Comment';
-  content: Scalars['String'];
-  postid: Scalars['Int'];
-};
-
-export type Feed = {
-  __typename?: 'Feed';
-  content: Scalars['String'];
-  postid: Scalars['Int'];
-  title: Scalars['String'];
-};
-
-export type Query = {
-  __typename?: 'Query';
-  comment: Comment;
-  feed: Feed;
-};
-
-
-export type QueryCommentArgs = {
-  postid: Scalars['Int'];
-};
-
-
-export type QueryFeedArgs = {
-  postid: Scalars['Int'];
 };

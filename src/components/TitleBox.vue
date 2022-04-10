@@ -12,5 +12,4 @@ const store = useStore();
 const getFirstEnter = computed(() => store.get_firstEnter);
 const pageTitle = computed(() => store.pageTitle);
 const pageSubTitle = computed(() => store.pageSubTitle);
-store.setTitleInfo();
 </script>

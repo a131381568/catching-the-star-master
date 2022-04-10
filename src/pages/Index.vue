@@ -16,13 +16,13 @@
         >
           <span
             class="font-normal large-pc:text-9xl middle-pc:text-8xl text-sp-color-light tracking-normal"
-          >Catch</span>
-          the stars
+          >{{ pageTitle[0] }}</span>
+          {{ pageTitle[1] }} {{ pageTitle[2] }}
         </h1>
         <h4
           class="text-main-color-light animate__animated animate__fadeIn large-pc:mt-10 mt-6 large-pc:text-2xl h-table:text-lg mobile:text-lg middle-pc:w-auto h-table:w-380px"
           :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-2s': getFirstEnter === false }]"
-        >誰能數得清天上的星星？誰能說出它們對世界的影響？——詹・湯姆遜</h4>
+        >{{ pageSubTitle }}</h4>
         <router-link
           class="btn draw meet inline-block animate__animated animate__flipInX large-pc:mt-12 mt-8"
           :class="[{ 'animate__delay-5s': getFirstEnter === true }, { 'animate__delay-3s': getFirstEnter === false }]"
@@ -41,6 +41,8 @@
 const store = useStore();
 const route = useRoute()
 const getFirstEnter = computed(() => store.get_firstEnter);
+const pageTitle = computed(() => store.pageTitle.split(" "));
+const pageSubTitle = computed(() => store.pageSubTitle);
 useHead({
   bodyAttrs: {
     title: route.meta.title,

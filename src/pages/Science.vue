@@ -96,17 +96,16 @@
           <p class="text-3xl font-normal text-white truncate">{{ val.title }}</p>
           <!-- date & cat -->
           <p class="text-tiny mt-1 text-main-color-light">
-            {{ val.updatetime }},
+            {{ store.changeDate(Number(val.updatetime)) }},
             <router-link
               :to="'/archive/' + val.categoryid"
               class="text-sub-color-light hover:text-sp-color-light"
-            >{{ val.categoryid }}</router-link>
+            >{{ store.changeCatName(filterCategories, val.categoryid) }}</router-link>
           </p>
           <!-- des -->
           <!-- <p
             class="text-main-color-light font-light mt-5 text-lg grid-des-box"
           >{{ val.description }}</p>-->
-
           <v-md-preview
             class="text-main-color-light font-light mt-5 grid-des-box"
             :text="val.description"
@@ -134,8 +133,8 @@
 </template>
 <script setup lang="ts">
 import { useToggle } from '@vueuse/core'
-import { getPostList, artistsCategories } from '@/api/science'
-import { PostArr, PageInfo, ArtistsCategories } from '../types/graphql/types'
+import { getArtistsList, artistsCategories } from '@/api/science'
+import { ArtistsArr, PageInfo, ArtistsCategories } from '@/types/graphql/types'
 const store = useStore();
 const getFirstEnter = computed(() => store.get_firstEnter);
 
@@ -143,11 +142,10 @@ const getFirstEnter = computed(() => store.get_firstEnter);
 
 const selectCat = ref("")
 const filterCategories = ref<ArtistsCategories>([])
-// { name: "全部分類", catId: "" }
 const selectName = computed(() => {
-  let active = filterCategories.value.filter(item => item.post_category_id === selectCat.value)
-  if (active.length > 0) {
-    return active[0].post_category_name
+  let active = store.changeCatName(filterCategories.value, selectCat.value)
+  if (active) {
+    return active
   } else {
     return ""
   }
@@ -170,7 +168,6 @@ function closeDefaultMenu() {
 // =============== 取得篩選列 ===============
 
 getArtistsCategories()
-
 async function getArtistsCategories() {
   const res = await artistsCategories()
   const filterBar = res.data.artistsCategories.filter(item => item.post_category_id !== 'story')
@@ -179,7 +176,7 @@ async function getArtistsCategories() {
 
 // =============== 載入文章資料 ===============
 
-const postList = ref<PostArr>([])
+const postList = ref<ArtistsArr>([])
 const sciencePageInfo = ref<PageInfo>({
   end: 0,
   hasNextPage: false,
@@ -198,7 +195,7 @@ function reSearchData(catId: string) {
   postList.value = []
   setTimeout(() => {
     defaultData(9, null, null, null, catId)
-  }, 300);
+  }, 100);
 }
 
 async function defaultData(
@@ -208,9 +205,10 @@ async function defaultData(
   before: number | null,
   categoryid: string | ""
 ) {
-  const res = await getPostList(first, last, after, before, categoryid)
+  const res = await getArtistsList(first, last, after, before, categoryid)
   let originalList = postList.value
   let pushList = originalList.concat(res.data.artists.edges);
+  // 設置文章區塊
   postList.value = pushList
   sciencePageInfo.value = res.data.artists.pageInfo
 }

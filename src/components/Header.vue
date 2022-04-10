@@ -648,6 +648,30 @@
 </template>
 <script setup lang="ts">
 import { useElementHover } from '@vueuse/core'
+import { pageInfo } from '@/api/utils'
+
+// 取得路由對應標題資訊
+const route = useRoute()
+const routeName = route.name
+
+setTitleInfo(String(routeName));
+async function setTitleInfo(thisPath: string) {
+  const res = await pageInfo()
+  const pageDataArry = await res.data.pageInfo
+  let thisPathInfo = pageDataArry.filter(item => thisPath === item.page_route)
+  if (thisPathInfo.length === 0) {
+    store.setPageTitle("找不到網頁")
+    store.setPageSubTitlee("PAGE NOT FOUND")
+  } else if (thisPathInfo[0].page_route === 'SingleStory' || thisPathInfo[0].page_route === 'SingleScience') {
+    // store.setPageTitle("單一頁面")
+    // store.setPageSubTitlee("Single Page")
+  } else {
+    store.setPageTitle(String(thisPathInfo[0].page_title))
+    store.setPageSubTitlee(String(thisPathInfo[0].sub_page_title))
+  }
+}
+
+// 選單狀態
 const menuList = ref([
   {
     title: "關於我們",
@@ -686,7 +710,6 @@ const menuList = ref([
     img: "/img/menu-bg-06.jpg"
   }
 ]);
-
 // 抓取選單跟 header 狀態
 const store = useStore();
 const getHeaderState = computed(() => store.isHeaderTop);

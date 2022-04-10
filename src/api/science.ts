@@ -1,48 +1,49 @@
 import client from '../apollo'
 import gql from 'graphql-tag';
-import { Post, PostList, ArtistsCategory } from '../types/graphql/types'
+import { Artists, ArtistsList, ArtistsCategory } from '../types/graphql/types'
 
 
 // 文章列表
-type resPostList = {
+type resArtistsList = {
   data: {
-    artists: PostList;
+    artists: ArtistsList;
   };
 };
-export function getPostList(
+export function getArtistsList(
   first: Number | null,
   last: Number | null,
   after: Number | null,
   before: Number | null,
   categoryid: String | ""
-): Promise<resPostList> {
+): Promise<resArtistsList> {
   return client.query({
     query: gql`
-    query Query(
-      $first: Int,
-      $last: Int,
-      $after: Int,
-      $before: Int,
-      $categoryid: String
-    ) {
-      artists(first:$first, last: $last, after: $after, before: $before, categoryid: $categoryid) {
-        edges {
-          postid
-          title
-          categoryid
-          updatetime
-          content
-          description
-          image
-        }
-        pageInfo {
-          hasNextPage
-          hasPreviousPage
-          start
-          end
+      query Query(
+        $first: Int,
+        $last: Int,
+        $after: Int,
+        $before: Int,
+        $categoryid: String
+      ) {
+        artists(first:$first, last: $last, after: $after, before: $before, categoryid: $categoryid) {
+          edges {
+            postid
+            title
+            categoryid
+            updatetime
+            content
+            description
+            image
+          }
+          pageInfo {
+            hasNextPage
+            hasPreviousPage
+            start
+            end
+          }
         }
       }
-    }`,
+    `,
     variables: {
       first,
       last,
@@ -57,7 +58,7 @@ export function getPostList(
 // 單一文章
 type resSinglePost = {
   data: {
-    getSinglePost: Post;
+    getSinglePost: Artists;
   };
 };
 export function getSinglePostById(postid: Number): Promise<resSinglePost> {
@@ -67,6 +68,10 @@ export function getSinglePostById(postid: Number): Promise<resSinglePost> {
         getSinglePost(postid: $postid) {
           postid
           content
+          title
+          categoryid
+          updatetime
+          image
         }
       }`,
     variables: {
@@ -74,6 +79,7 @@ export function getSinglePostById(postid: Number): Promise<resSinglePost> {
     },
   })
 }
+
 
 // 文章分類
 type resPostCategories = {
