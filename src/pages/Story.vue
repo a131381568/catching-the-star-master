@@ -38,13 +38,13 @@
               ></span>
             </div>
             <div class="middle-pc:w-9/12">
-              <router-link :to="'/story/' + item.postId">
+              <router-link :to="'/story/' + item.postid">
                 <h2
                   class="text-3xl text-white font-semibold group-hover:text-sp-color-light delay-75 duration-1000"
                 >{{ item.title }}</h2>
               </router-link>
               <div class="w-full">
-                <router-link :to="'/story/' + item.postId">
+                <router-link :to="'/story/' + item.postid">
                   <img
                     class="w-auto mx-0 mt-6 mb-4 inline-block delay-75 duration-1000 group-hover:brightness-75"
                     :src="item.image"
@@ -64,7 +64,10 @@
         </template>
       </masonry-wall>
     </div>
-    <div class="h-table:w-10/12 w-table:text-center text-left" v-show="postList.length > 0">
+    <div
+      class="h-table:w-10/12 w-table:text-center text-left"
+      v-show="storyPageInfo.hasNextPage && postList.length > 0"
+    >
       <button class="mt-20 btn draw meet" @click.prevent="loadMoreTimeLine()">
         <span>Load More</span>
       </button>

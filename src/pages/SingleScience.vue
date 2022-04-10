@@ -33,15 +33,7 @@ const route = useRoute();
 const getSid = computed(() => Number(route.params.sid));
 const date = ref("")
 const tag = ref({ name: "", catId: "" })
-let mdContent = ref("")
-// async function testPost() {
-//   let res = await markContent()
-//   let str = res.data.data.getSinglePost.content
-//   let newstr = str.replace(/\\\n|\\n|\n/g, "\n");
-//   newstr = newstr.replace(/<br \/>/, "")
-//   mdContent.value = newstr
-// }
-// testPost()
+const mdContent = ref("")
 
 onMounted(async () => {
   // 取得分類  
