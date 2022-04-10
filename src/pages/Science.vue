@@ -79,7 +79,7 @@
     <!-- post grid -->
     <div
       class="grid laptop:grid-cols-3 grid-cols-2 mobile:grid-cols-1 pro-pc:gap-24 h-table:gap-12 mobile:gap-5 h-table:w-10/12 overflow-hidden animate__animated animate__fadeInUp"
-      :class="{ 'animate__delay-4s': getFirstEnter === true }"
+      :class="{ 'animate__delay-4s': getFirstEnter === true }, { animate__fadeOut: changeGridState }"
       v-if="postList.length > 0 && postList"
     >
       <div v-for="(val, key) in postList" :key="key">
@@ -138,6 +138,9 @@ import { ArtistsArr, PageInfo, ArtistsCategories } from '@/types/graphql/types'
 const store = useStore();
 const getFirstEnter = computed(() => store.get_firstEnter);
 
+const changeGridState = ref(false)
+
+
 // =============== 點選篩選列 ===============
 
 const selectCat = ref("")
@@ -190,12 +193,13 @@ function loadMoreData() {
   defaultData(3, null, sciencePageInfo.value.end, null, selectCat.value || "")
 }
 function reSearchData(catId: string) {
-  // console.log("reSearchData")
   selectCat.value = catId
-  postList.value = []
+  changeGridState.value = true
   setTimeout(() => {
+    postList.value = []
     defaultData(9, null, null, null, catId)
-  }, 100);
+    changeGridState.value = false
+  }, 500);
 }
 
 async function defaultData(
