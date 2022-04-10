@@ -522,14 +522,16 @@
       </nav>
     </div>
   </div>
+  <!-- v-show="modal" -->
+  <!-- { 'opacity-0': modal === false }, -->
   <div
     id="modal"
-    v-show="modal"
     class="modal-bg fixed w-full h-full left-0 top-0 overflow-auto bg-secondary animate__animated animate__fadeInDown animate__faster"
     :class="[
-      { 'opacity-0': modal === false },
       { 'opacity-100': modal === true },
-      { 'z-9999': modal === true }
+      { 'z-9999': modal === true },
+      { 'animate__slideOutUp': modal === false },
+      { 'opacity-0': fastHide === true }
     ]"
   >
     <div
@@ -713,7 +715,7 @@ const menuList = ref([
 // 抓取選單跟 header 狀態
 const store = useStore();
 const getHeaderState = computed(() => store.isHeaderTop);
-// const getLoading = computed(() => store.get_loading);
+const getLoading = computed(() => store.get_loading);
 
 // 宣告 data 欄位
 const modal = ref(false);
@@ -729,11 +731,16 @@ const stargazingRef = ref()
 const hoveredStargazing = useElementHover(stargazingRef)
 const searchRef = ref()
 const hoveredSearch = useElementHover(searchRef)
+const fastHide = ref(true)
 
 // 綁 methods
 function toggleModal() {
   if (modal.value === false) {
     modal.value = true
+    fastHide.value = false
+    setTimeout(() => {
+      fastHide.value = true
+    }, 2000);
   } else {
     setTimeout(() => {
       modal.value = false
