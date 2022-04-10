@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 import { Artists, ArtistsList, ArtistsCategory } from '../types/graphql/types'
 
 
-// 文章列表
+// 文章列表 ( 分類 )
 type resArtistsList = {
   data: {
     artists: ArtistsList;
@@ -97,5 +97,57 @@ export function artistsCategories(): Promise<resPostCategories> {
         }
       }
     `
+  })
+}
+
+
+// 文章列表 ( 分類 )
+type resSearchArtists = {
+  data: {
+    searchArtists: ArtistsList;
+  };
+};
+export function getSearchArtists(
+  first: Number | null,
+  last: Number | null,
+  after: Number | null,
+  before: Number | null,
+  keyword: String | ""
+): Promise<resSearchArtists> {
+  return client.query({
+    query: gql`
+      query Query(
+        $first: Int,
+        $last: Int,
+        $after: Int,
+        $before: Int,
+        $keyword: String
+      ) {
+        searchArtists(first:$first, last: $last, after: $after, before: $before, keyword: $keyword) {
+          edges {
+            postid
+            title
+            categoryid
+            updatetime
+            content
+            description
+            image
+          }
+          pageInfo {
+            hasNextPage
+            hasPreviousPage
+            start
+            end
+          }
+        }
+      }
+    `,
+    variables: {
+      first,
+      last,
+      after,
+      before,
+      keyword
+    }
   })
 }

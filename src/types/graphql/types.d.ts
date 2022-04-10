@@ -56,6 +56,6 @@ export type ArtistsList = {
 export type PageInfo = {
   hasNextPage: boolean;
   hasPreviousPage: boolean;
-  start: number;
-  end: number;
+  start: number | null;
+  end: number | null;
 };

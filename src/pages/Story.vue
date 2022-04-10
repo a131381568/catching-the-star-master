@@ -79,6 +79,7 @@
 import { getArtistsList } from '@/api/science'
 import { ArtistsArr, PageInfo, ArtistsCategories } from '@/types/graphql/types'
 import { useWindowSize, useElementSize, useElementBounding } from '@vueuse/core'
+const route = useRoute();
 const store = useStore();
 const getFirstEnter = computed(() => store.get_firstEnter);
 const masonryRef = ref(null)
@@ -101,9 +102,6 @@ const gridWidth = computed(() => {
   }
 })
 
-/////////////////////////////////
-
-const route = useRoute();
 useHead({
   bodyAttrs: {
     title: route.meta.title,
@@ -120,9 +118,8 @@ useHead({
   ],
 });
 
+// =============== 載入文章資料 ===============
 
-/////////////////////////////////
-const setLR = ref("")
 const postList = ref<ArtistsArr>([])
 const storyPageInfo = ref<PageInfo>({
   end: 0,
@@ -149,14 +146,6 @@ async function defaultData(
 }
 
 function loadMoreTimeLine() {
-  // let boxLeft = document.querySelector(".masonry-wall > .masonry-column:nth-child(1)").clientHeight
-  // let boxRight = document.querySelector(".masonry-wall > .masonry-column:nth-child(2)").clientHeight
-  // if (boxLeft > boxRight) {
-  //   setLR.value = "left"
-  // } else {
-  //   setLR.value = "right"
-  // }
-  console.log(masonryRef.value)
   defaultData(1, null, storyPageInfo.value.end, null, "story")
 }
 </script>

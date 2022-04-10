@@ -17,7 +17,7 @@
           { 'height': imgSizeWidth + 'px' },
           { 'background-image': 'url(' + circleBg + ')' }
         ]"
-        class="bg-story-featured rounded-full bg-cover laptop:ml-0 ml-auto mr-auto"
+        class="rounded-full bg-cover laptop:ml-0 ml-auto mr-auto"
       ></div>
     </div>
     <!-- 瀏覽 md 區塊 -->

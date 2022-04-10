@@ -18,7 +18,7 @@
       :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]"
     >
       <div v-for="(val, key) in postList" :key="key" class="animate__animated animate__fadeInUp">
-        <router-link :to="'/science/' + val.postId">
+        <router-link :to="'/science/' + val.postid">
           <!-- card -->
           <div
             class="laptop:py-8 laptop:px-16 p-6 bg-white hover:bg-opacity-0 delay-75 duration-1000 border border-white border-opacity-0 hover:border-opacity-60 bg-opacity-6 mb-1"
@@ -28,11 +28,11 @@
             <!-- des -->
             <p
               class="text-main-color-light font-light h-table:mt-5 mt-1 text-lg truncate"
-            >{{ val.des }}</p>
+            >{{ val.description }}</p>
           </div>
         </router-link>
       </div>
-      <div class="w-full text-center">
+      <div class="w-full text-center" v-show="archivePageInfo.hasNextPage && postList.length > 0">
         <button
           class="middle-pc:mt-16 h-table:mt-12 mobile:mt-10 btn draw meet"
           @click.prevent="loadMoreData()"
@@ -45,21 +45,40 @@
   <Footer />
 </template>
 <script setup lang="ts">
+import { getArtistsList } from '@/api/science'
+import { ArtistsArr, PageInfo } from '@/types/graphql/types'
 const store = useStore();
 const getFirstEnter = computed(() => store.get_firstEnter);
-const postList = ref([
-  { title: "大氣視窗", des: "我們的大氣層並不允許所有電磁波都能夠穿透，因此只有某些特定波段的電磁波能進到地......", postId: "sc1326" },
-  { title: "可見光天文學", des: "由於可見光可穿透大氣層，可見光天文學是最古老的天文學，起初人們只能用肉眼觀測......", postId: "sc1327" },
-  { title: "電波天文學", des: "電波天文學（Radio Astronomy）指的是使用無線電波的波段記錄記錄到來自天體的......", postId: "sc1328" },
-  { title: "紅外線天文學", des: "紅外線波段的波長是介於可見光及次毫米波段之間，由於大部份紅外線都無法穿透大氣層......", postId: "sc1329" },
-  { title: "紫外線天文學", des: "紫外線天文學觀測電磁波波長大約在100到3200埃之間 。因為這個範圍波長的輻射無法......", postId: "sc1330" },
-  { title: "X射線天文學", des: "X射線天文學中常以電子伏特（eV）表示光子的能量，觀測對象為0.1keV到100keV的X......", postId: "sc1331" },
-  { title: "伽瑪射線天文學", des: "伽瑪射線是可穿透整個宇宙的電磁波中最高能量的波段，也是電磁波譜中波長最短的部分......", postId: "sc1332" },
-])
+const route = useRoute();
+const getTagid = computed(() => route.params.tagid);
+
+// =============== 載入文章資料 ===============
+
+const postList = ref<ArtistsArr>([])
+const archivePageInfo = ref<PageInfo>({
+  end: 0,
+  hasNextPage: false,
+  hasPreviousPage: false,
+  start: 0
+})
+
+defaultData(7, null, null, null)
 
 function loadMoreData() {
-  let array2 = [{ title: "大氣視窗", des: "我們的大氣層並不允許所有電磁波都能夠穿透，因此只有某些特定波段的電磁波能進到地......", postId: "sc1326" }]
-  const array3 = postList.value.concat(array2);
-  postList.value = array3
+  defaultData(1, null, archivePageInfo.value.end, null)
+}
+
+async function defaultData(
+  first: number | null,
+  last: number | null,
+  after: number | null,
+  before: number | null
+) {
+  const res = await getArtistsList(first, last, after, before, String(getTagid.value))
+  let originalList = postList.value
+  let pushList = originalList.concat(res.data.artists.edges);
+  // 設置文章區塊
+  postList.value = pushList
+  archivePageInfo.value = res.data.artists.pageInfo
 }
 </script>
