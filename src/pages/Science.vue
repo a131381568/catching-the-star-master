@@ -138,9 +138,6 @@ import { ArtistsArr, PageInfo, ArtistsCategories } from '@/types/graphql/types'
 const store = useStore();
 const getFirstEnter = computed(() => store.get_firstEnter);
 
-const changeGridState = ref(false)
-
-
 // =============== 點選篩選列 ===============
 
 const selectCat = ref("")
@@ -179,6 +176,7 @@ async function getArtistsCategories() {
 
 // =============== 載入文章資料 ===============
 
+const changeGridState = ref(false)
 const postList = ref<ArtistsArr>([])
 const sciencePageInfo = ref<PageInfo>({
   end: 0,

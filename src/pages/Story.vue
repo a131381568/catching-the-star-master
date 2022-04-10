@@ -51,11 +51,11 @@
                 <router-link :to="'/story/' + item.postId">
                   <img
                     class="w-auto mx-0 mt-6 mb-4 inline-block delay-75 duration-1000 group-hover:brightness-75"
-                    :src="item.img"
+                    :src="item.image"
                   />
                 </router-link>
               </div>
-              <span class="text-main-color-light grid-des-box">{{ item.des }}</span>
+              <span class="text-main-color-light grid-des-box">{{ item.description }}</span>
             </div>
             <div
               v-show="(index + 1) % 2 !== 0 && width >= 992"
@@ -78,6 +78,8 @@
   <Footer />
 </template>
 <script setup lang="ts">
+import { getArtistsList } from '@/api/science'
+import { ArtistsArr, PageInfo, ArtistsCategories } from '@/types/graphql/types'
 import { useWindowSize } from '@vueuse/core'
 import { useElementSize } from '@vueuse/core'
 const store = useStore();
@@ -123,72 +125,40 @@ useHead({
 
 
 /////////////////////////////////
+const setLR = ref("")
+const postList = ref<ArtistsArr>([])
+const storyPageInfo = ref<PageInfo>({
+  end: 0,
+  hasNextPage: false,
+  hasPreviousPage: false,
+  start: 0
+})
 
-const postList = ref([
-  {
-    title: "獵戶座的傳說",
-    date: "2022-03-26",
-    catName: "",
-    catId: "",
-    des: "今天想跟大家談談冬天中的星空——獵戶座。在冬天的夜空裡，我們抬頭仰望南方，可以看到三顆整齊排列的二級星，以這三顆星為中心向外延伸可以找到參宿四星、參宿七星",
-    postId: "fs8611",
-    img: "/img/story-bg-01.jpg"
-  },
-  {
-    title: "為淒美的愛情故事搭起橋樑——天鵝座",
-    date: "2022-03-26",
-    catName: "",
-    catId: "",
-    des: "天鵝座在天空中是一個大十字，主星天津四就沉浸在銀河中(夏季大三角之一)，結合了東方淒美七夕的愛情故事，古代相傳牛郎織女因耽於遊樂，不認真耕作織布，而被迫分隔於......",
-    postId: "fs8612",
-    img: "/img/story-bg-02.jpg"
-  },
-  {
-    title: "醫者的代言人——巨蛇座",
-    date: "2022-03-26",
-    catName: "",
-    catId: "",
-    des: "我們夜晚仰望星斗訴說著人神之間交流的故事，而全天空之中卻有一個星座超級大，大到著名的天文學家托勒密不得不把它拆開來變成兩個星座，它就是我們今天要聊的蛇夫座與巨蛇座......",
-    postId: "fs8613",
-    img: "/img/story-bg-03.jpg"
-  },
-  {
-    title: "橫跨天際的銀河",
-    date: "2022-03-26",
-    catName: "",
-    catId: "",
-    des: "隨著夏季的步伐到來，想必大家時不時就在網路上看到各種銀河炫耀照，如夢似幻就像假的一樣，不過只要掌握好幾個原則，想看到並拍到銀河其實......",
-    postId: "fs8614",
-    img: "/img/story-bg-04.jpg"
-  },
-  {
-    title: "講義氣且『異氣』的好夥伴——巨蟹座",
-    date: "2022-03-26",
-    catName: "",
-    catId: "",
-    des: "每個人的一生不全然都具有主角光環，大多數的一般人都是戲份不重的配角，我們今天介紹的巨蟹座，是黃道星座中最不顯眼的一個，雖毫不起眼卻是最講義氣的好夥伴......",
-    postId: "fs8615",
-    img: "/img/story-bg-05.jpg"
-  }
-])
+defaultData(4, null, null, null, "story")
 
-function loadMoreTimeLine() {
-  let array2 = [
-    {
-      title: "獵戶座的傳說",
-      date: "2022-03-26",
-      catName: "",
-      catId: "",
-      des: "今天想跟大家談談冬天中的星空——獵戶座。在冬天的夜空裡，我們抬頭仰望南方，可以看到三顆整齊排列的二級星，以這三顆星為中心向外延伸可以找到參宿四星、參宿七星",
-      postId: "fs8611",
-      img: "/img/story-bg-01.jpg",
-      animate: true
-    }
-  ]
-  const array3 = postList.value.concat(array2);
-  postList.value = array3
+async function defaultData(
+  first: number | null,
+  last: number | null,
+  after: number | null,
+  before: number | null,
+  categoryid: string | ""
+) {
+  const res = await getArtistsList(first, last, after, before, categoryid)
+  let originalList = postList.value
+  let pushList = originalList.concat(res.data.artists.edges);
+  // 設置文章區塊
+  postList.value = pushList
+  storyPageInfo.value = res.data.artists.pageInfo
 }
 
-
-
+function loadMoreTimeLine() {
+  let boxLeft = document.querySelector(".masonry-wall > .masonry-column:nth-child(1)").clientHeight
+  let boxRight = document.querySelector(".masonry-wall > .masonry-column:nth-child(2)").clientHeight
+  if (boxLeft > boxRight) {
+    setLR.value = "left"
+  } else {
+    setLR.value = "right"
+  }
+  defaultData(1, null, storyPageInfo.value.end, null, "story")
+}
 </script>
