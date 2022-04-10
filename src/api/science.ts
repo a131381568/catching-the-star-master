@@ -76,7 +76,7 @@ export function getSinglePostById(postid: Number): Promise<resSinglePost> {
       }`,
     variables: {
       postid
-    },
+    }
   })
 }
 
