@@ -97,7 +97,7 @@ const { stop } = useIntersectionObserver(
 
 // =============== 載入設施+天文台資訊 ===============
 
-const selectCat = ref("research")
+const selectCat = ref<string>("")
 const observatoryCategories = ref<ObservatoriesArr>([])
 const eduCategories = ref<FacilitiesArr>([])
 
@@ -105,7 +105,10 @@ getFacilitiesListData()
 
 async function getFacilitiesListData() {
   const res = await facilitiesData()
-  eduCategories.value = res.data.facilitiesList
-  observatoryCategories.value = res.data.observatoriesList
+  if (res && res.data.facilitiesList && res.data.observatoriesList) {
+    eduCategories.value = res.data.facilitiesList
+    observatoryCategories.value = res.data.observatoriesList
+    selectCat.value = String(observatoryCategories.value[0].observatory_category_id)
+  }
 }
 </script>
