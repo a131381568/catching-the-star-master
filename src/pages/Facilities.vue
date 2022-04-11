@@ -78,7 +78,7 @@
 </template>
 <script setup lang="ts">
 import { useIntersectionObserver } from '@vueuse/core'
-import { facilitiesList, observatoriesList } from '@/api/facilities'
+import { facilitiesData } from '@/api/facilities'
 import { FacilitiesArr, ObservatoriesArr } from '@/types/graphql/types'
 const store = useStore();
 const getFirstEnter = computed(() => store.get_firstEnter);
@@ -95,21 +95,17 @@ const { stop } = useIntersectionObserver(
   }
 )
 
-// =============== 載入設施資訊 ===============
+// =============== 載入設施+天文台資訊 ===============
 
 const selectCat = ref("research")
 const observatoryCategories = ref<ObservatoriesArr>([])
 const eduCategories = ref<FacilitiesArr>([])
 
 getFacilitiesListData()
-getObservatoriesList()
 
 async function getFacilitiesListData() {
-  const res = await facilitiesList()
+  const res = await facilitiesData()
   eduCategories.value = res.data.facilitiesList
-}
-async function getObservatoriesList() {
-  const res = await observatoriesList()
   observatoryCategories.value = res.data.observatoriesList
 }
 </script>

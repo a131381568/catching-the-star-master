@@ -2,13 +2,14 @@ import client from '../apollo'
 import gql from 'graphql-tag';
 import { FacilitiesArr, ObservatoriesArr } from '../types/graphql/types'
 
-// 設施列表
+// 設施+天文台列表
 type resFacilities = {
   data: {
-    facilitiesList: FacilitiesArr;
+    facilitiesList: FacilitiesArr,
+    observatoriesList: ObservatoriesArr
   };
 };
-export function facilitiesList(): Promise<resFacilities> {
+export function facilitiesData(): Promise<resFacilities> {
   return client.query({
     query: gql`
       query Query {
@@ -18,21 +19,6 @@ export function facilitiesList(): Promise<resFacilities> {
           facilities_image
           facilities_link
         }
-      }
-    `
-  })
-}
-
-// 天文台列表
-type resObservatories = {
-  data: {
-    observatoriesList: ObservatoriesArr;
-  };
-};
-export function observatoriesList(): Promise<resObservatories> {
-  return client.query({
-    query: gql`
-      query Query {
         observatoriesList {
           observatory_category_name
           observatory_category_id
