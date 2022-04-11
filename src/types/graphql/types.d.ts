@@ -59,3 +59,16 @@ export type PageInfo = {
   start: number | null;
   end: number | null;
 };
+
+export type FacilitiesArr = {
+  facilities_title: String
+  facilities_description: String
+  facilities_image: String
+  facilities_link: String
+}[]
+
+export type ObservatoriesArr = {
+  observatory_category_name: String
+  observatory_category_id: String
+  observatory_post_content: String
+}[]
