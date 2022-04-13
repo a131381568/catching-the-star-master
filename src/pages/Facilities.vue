@@ -4,6 +4,9 @@
     class="h-table:flex flex-wrap items-start justify-center middle-pc:pt-72 h-table:pt-32 pb-32 middle-pc:px-20 h-table:px-6 px-8 mobile:pt-32">
     <!-- 標題區塊 -->
     <TitleBox />
+    <!-- <div class="w-10/12 mt-8 mb-14 bg-white">
+      <input type="file" @change="updateFileAct($event)" multiple>
+    </div> -->
     <!-- 小標題 -->
     <div class="w-10/12 mt-8 mb-14">
       <h2 class="text-main-color-light text-left animate__animated animate__fadeIn"
@@ -79,6 +82,7 @@
 <script setup lang="ts">
 import { useIntersectionObserver } from '@vueuse/core'
 import { facilitiesData } from '@/api/facilities'
+import { updateFile } from '@/api/utils'
 import { FacilitiesArr, ObservatoriesArr } from '@/types/graphql/types'
 const store = useStore();
 const getFirstEnter = computed(() => store.get_firstEnter);
@@ -110,5 +114,18 @@ async function getFacilitiesListData() {
     observatoryCategories.value = res.data.observatoriesList
     selectCat.value = String(observatoryCategories.value[0].observatory_category_id)
   }
+}
+
+// 測試上傳檔案
+const localFile = ref(null)
+async function updateFileAct(event: Event) {
+  // event: HTMLInputElement & { target: HTMLInputElement }
+  const target = (<HTMLInputElement>event.target)
+  let fileList = target.files
+  if (fileList !== null) {
+    const res = await updateFile(fileList[0])
+    localFile.value = res.data.singleUpload
+  }
+  console.log(localFile.value)
 }
 </script>
