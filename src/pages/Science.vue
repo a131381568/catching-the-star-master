@@ -1,37 +1,27 @@
 <template>
   <Header />
-  <div
-    @click.self="closeDefaultMenu()"
-    class="h-table:flex flex-wrap items-start justify-center middle-pc:pt-72 h-table:pt-32 pb-32 middle-pc:px-20 h-table:px-6 px-8 mobile:pt-32"
-  >
+  <div @click.self="closeDefaultMenu()"
+    class="h-table:flex flex-wrap items-start justify-center middle-pc:pt-72 h-table:pt-32 pb-32 middle-pc:px-20 h-table:px-6 px-8 mobile:pt-32">
     <!-- 標題區塊 -->
     <TitleBox />
     <!-- 篩選列 -->
     <div
       class="animate__animated animate__fadeIn w-10/12 middle-pc:mt-16 middle-pc:mb-20 mt-6 mb-16 hidden laptop:inline-flex"
-      :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]"
-    >
+      :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]">
       <ul class="flex" v-if="filterCategories.length > 0 && filterCategories">
-        <li
-          v-for="(val, key) in filterCategories"
-          :key="key"
-          class="min-w-min w-auto"
-          @click="reSearchData(String(val.post_category_id))"
-        >
+        <li v-for="(val, key) in filterCategories" :key="key" class="min-w-min w-auto"
+          @click="reSearchData(String(val.post_category_id))">
           <div class="flex items-center group large-pc:mr-10 laptop:mr-6">
             <input :id="String(val.post_category_id)" class="hidden" :value="val.post_category_id" />
-            <label
-              :class="[
-                'flex-none', 'delay-75', 'duration-1000',
-                'flex', 'items-center', 'cursor-pointer', 'text-2xl', 'group-hover:text-sp-color-light',
-                { 'text-sub-color-light': val.post_category_id === selectCat },
-                { 'text-main-color-light': val.post_category_id !== selectCat }
-              ]"
-            >
+            <label :class="[
+              'flex-none', 'delay-75', 'duration-1000',
+              'flex', 'items-center', 'cursor-pointer', 'text-2xl', 'group-hover:text-sp-color-light',
+              { 'text-sub-color-light': val.post_category_id === selectCat },
+              { 'text-main-color-light': val.post_category_id !== selectCat }
+            ]">
               <span
                 class="flex-none w-3 h-3 inline-block mr-2 rounded-full border border-grey flex-no-shrink group-hover:bg-sp-color-light delay-75 duration-1000 whitespace-nowrap"
-                :class="{ 'bg-sub-color-light': val.post_category_id === selectCat }"
-              ></span>
+                :class="{ 'bg-sub-color-light': val.post_category_id === selectCat }"></span>
               {{ val.post_category_name }}
             </label>
           </div>
@@ -39,40 +29,24 @@
       </ul>
     </div>
     <!-- 選單樣式 -->
-    <div
-      class="dropdown-menu z-40 h-table:w-10/12 mb-8 relative laptop:hidden animate__animated animate__fadeIn"
-      :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]"
-    >
-      <button
-        id="dropdownDefault"
+    <div class="dropdown-menu z-40 h-table:w-10/12 mb-8 relative laptop:hidden animate__animated animate__fadeIn"
+      :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]">
+      <button id="dropdownDefault"
         class="duration-1000 text-main-color-light border border-white border-opacity-60 hover:border-opacity-0 bg-opacity-0 bg-white hover:bg-opacity-18 hover:text-sub-color-light focus:bg-opacity-18 focus:outline-none focus:border-opacity-0 focus:text-sub-color-light font-medium text-xl pl-4 p-3 relative text-center inline-flex items-center tracking-wide-content w-200px"
-        type="button"
-        @click.prevent="toggleFilter()"
-      >
+        type="button" @click.prevent="toggleFilter()">
         {{ selectName }}
-        <svg
-          class="ml-2 w-4 h-4 absolute right-4"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+        <svg class="ml-2 w-4 h-4 absolute right-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
         </svg>
       </button>
       <!-- Dropdown menu -->
-      <div
-        id="dropdown"
-        class="z-10 bg-main-color-light divide-y divide-gray-100 absolute w-200px"
-        v-show="toggleFilterVal"
-      >
+      <div id="dropdown" class="z-10 bg-main-color-light divide-y divide-gray-100 absolute w-200px"
+        v-show="toggleFilterVal">
         <ul class="py-1 text-sm text-main-color-black cursor-pointer">
-          <li
-            v-for="(val, key) in filterCategories"
-            :key="key"
+          <li v-for="(val, key) in filterCategories" :key="key"
             @click.stop="selectDropCat(String(val.post_category_id))"
-            class="tracking-wide-content block py-2 px-4 hover:text-sub-color-dark"
-          >{{ val.post_category_name }}</li>
+            class="tracking-wide-content block py-2 px-4 hover:text-sub-color-dark">{{ val.post_category_name }}</li>
         </ul>
       </div>
     </div>
@@ -80,8 +54,7 @@
     <div
       class="grid laptop:grid-cols-3 grid-cols-2 mobile:grid-cols-1 pro-pc:gap-24 h-table:gap-12 mobile:gap-5 h-table:w-10/12 overflow-hidden animate__animated animate__fadeInUp"
       :class="{ 'animate__delay-4s': getFirstEnter === true }, { animate__fadeOut: changeGridState }"
-      v-if="postList.length > 0 && postList"
-    >
+      v-if="postList.length > 0 && postList">
       <div v-for="(val, key) in postList" :key="key">
         <!-- card -->
         <div
@@ -90,27 +63,22 @@
             { 'bg-opacity-18': (key + 1) % 3 === 0 },
             { 'bg-opacity-12': (key + 3) % 3 === 1 },
             { 'bg-opacity-6': (key + 4) % 3 === 1 }
-          ]"
-        >
+          ]">
           <!-- title -->
           <p class="text-3xl font-normal text-white truncate">{{ val.title }}</p>
           <!-- date & cat -->
           <p class="text-tiny mt-1 text-main-color-light">
             {{ store.changeDate(Number(val.updatetime)) }},
-            <router-link
-              :to="'/archive/' + val.categoryid"
-              class="text-sub-color-light hover:text-sp-color-light"
-            >{{ store.changeCatName(filterCategories, val.categoryid) }}</router-link>
+            <router-link :to="'/archive/' + val.categoryid" class="text-sub-color-light hover:text-sp-color-light">{{
+              store.changeCatName(filterCategories, val.categoryid)
+            }}</router-link>
           </p>
           <!-- des -->
           <!-- <p
             class="text-main-color-light font-light mt-5 text-lg grid-des-box"
           >{{ val.description }}</p>-->
-          <v-md-preview
-            class="text-main-color-light font-light mt-5 grid-des-box"
-            :text="val.description"
-            height="400px"
-          ></v-md-preview>
+          <v-md-preview class="text-main-color-light font-light mt-5 grid-des-box" :text="val.description"
+            height="400px"></v-md-preview>
 
           <!-- link -->
           <router-link class="mt-10 btn draw meet inline-block" :to="'/science/' + val.postid">
@@ -120,14 +88,61 @@
       </div>
     </div>
     <div :class="['h-table:w-10/12', 'h-screen']" v-show="postList.length === 0"></div>
-    <div
-      class="h-table:w-10/12 text-center"
-      v-show="sciencePageInfo.hasNextPage && postList.length > 0"
-    >
+    <div class="h-table:w-10/12 text-center" v-show="sciencePageInfo.hasNextPage && postList.length > 0">
       <button class="h-table:mt-24 mt-6 mobile:mt-11 btn draw meet" @click.prevent="loadMoreData()">
         <span>Load More</span>
       </button>
     </div>
+    <!-- /////////////////////////////////////////////////////////////// -->
+    <!-- <div class="h-table:w-10/12 text-center">
+      <nav aria-label="Page navigation example">
+        <ul class="inline-flex items-center -space-x-px">
+          <li>
+            <a href="#"
+              class="block py-2 px-3 ml-0 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+              <span class="sr-only">Previous</span>
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                  d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a href="#"
+              class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
+          </li>
+          <li>
+            <a href="#"
+              class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
+          </li>
+          <li>
+            <a href="#" aria-current="page"
+              class="z-10 py-2 px-3 leading-tight text-blue-600 bg-blue-50 border border-blue-300 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
+          </li>
+          <li>
+            <a href="#"
+              class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">4</a>
+          </li>
+          <li>
+            <a href="#"
+              class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">5</a>
+          </li>
+          <li>
+            <a href="#"
+              class="block py-2 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+              <span class="sr-only">Next</span>
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div> -->
+    <!-- /////////////////////////////////////////////////////////// -->
   </div>
   <Footer />
 </template>
@@ -171,6 +186,7 @@ getArtistsCategories()
 async function getArtistsCategories() {
   const res = await artistsCategories()
   const filterBar = res.data.artistsCategories.filter(item => item.post_category_id !== 'story')
+  // const filterBar = res.data.artistsCategories
   filterCategories.value = filterBar
 }
 

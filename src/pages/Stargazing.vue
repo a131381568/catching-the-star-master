@@ -198,7 +198,7 @@ function mapInit() {
   map.value = L.map('map-container', {
     center: coordinate.value,
     zoom: 10, // 0-18
-    attributionControl: true, // leaflet
+    attributionControl: false, // leaflet
     zoomControl: true, // - + 按鈕
     scrollWheelZoom: false,
     zoomAnimation: true,
