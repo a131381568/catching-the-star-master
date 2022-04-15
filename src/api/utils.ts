@@ -43,3 +43,24 @@ export function updateFile(file: any) {
     }
   })
 }
+
+
+
+// type resFileInfo = {
+//   data: {
+//     singleUpload: File;
+//   };
+// };
+export function getSelfInfo() {
+  return client.query({
+    query: gql`
+      query Query {
+        me {
+          id
+          email
+          name
+        }
+      }
+    `
+  })
+}

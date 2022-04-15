@@ -1,12 +1,22 @@
+import { from } from '@apollo/client/core'
 import { ApolloClient, HttpLink } from '@apollo/client/core'
 import { InMemoryCache } from '@apollo/client/cache'
 import { onError } from "@apollo/client/link/error";
-
+import { setContext } from 'apollo-link-context'
 import { createUploadLink } from 'apollo-upload-client'
 const link = createUploadLink({
   uri: <string>import.meta.env.VITE_API_URL
 })
 
+const authLink = setContext(async (_, { headers }) => {
+  const token = await localStorage.getItem('token');
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+    }
+  }
+});
 // const httpLink = new HttpLink({
 //   uri: <string>import.meta.env.VITE_API_URL
 // })
@@ -31,7 +41,8 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 const cache = new InMemoryCache()
 const apolloClient = new ApolloClient({
   // link: errorLink.concat(httpLink),
-  link: errorLink.concat(link),
+  // link: errorLink.concat(link),
+  link: from([authLink, errorLink, link]),
   cache
 })
 
