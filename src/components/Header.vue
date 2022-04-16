@@ -510,7 +510,7 @@ function toggleModal() {
 
 onMounted(async () => {
   // 測試 header 不帶 token 取得資訊
-  const mySelfData = await getSelfInfo()
-  console.log(mySelfData.data.me)
+  // const mySelfData = await getSelfInfo()
+  // console.log(mySelfData.data.me)
 });
 </script>
