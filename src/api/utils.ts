@@ -59,6 +59,8 @@ export function getSelfInfo() {
           id
           email
           name
+          iat
+          exp
         }
       }
     `

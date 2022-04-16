@@ -4,10 +4,6 @@ import { InMemoryCache } from '@apollo/client/cache'
 import { onError } from "@apollo/client/link/error";
 import { setContext } from 'apollo-link-context'
 import { createUploadLink } from 'apollo-upload-client'
-import { getSelfInfo } from '@/api/utils'
-
-/////////////////////////////////
-
 import { TokenRefreshLink } from "apollo-link-token-refresh";
 
 const refreshLink = new TokenRefreshLink({
@@ -15,13 +11,13 @@ const refreshLink = new TokenRefreshLink({
   // 判斷是否過期
   // ↓ !isTokenExpired() || typeof getAccessToken() !== 'string'
   isTokenValidOrUndefined: () => {
-    console.log("第一個?")
+    console.log("第一個")
     return false
   },
   fetchAccessToken: async (n) => {
 
     console.log("第二個")
-    // 最後再將新的 token 塞到 header
+    // 請求 token
 
     const token = await localStorage.getItem('token') || "";
     const reFreshToken = await localStorage.getItem('refresh-token') || "";
@@ -67,7 +63,7 @@ const refreshLink = new TokenRefreshLink({
 
     return accessToken
   },
-  handleResponse: (operation, accessTokenField) => (response) => {
+  handleResponse: (operation, accessTokenField) => (response: any) => {
     console.log("第三個", response.data.login.token)
     console.log("response: ", operation, accessTokenField)
     // here you can parse response, handle errors, prepare returned token to
@@ -90,9 +86,7 @@ const refreshLink = new TokenRefreshLink({
   }
 });
 
-/////////////////////////
-
-const link = createUploadLink({
+const uploadLink = createUploadLink({
   uri: <string>import.meta.env.VITE_API_URL
 })
 
@@ -130,7 +124,7 @@ const cache = new InMemoryCache()
 const apolloClient = new ApolloClient({
   // link: errorLink.concat(httpLink),
   // link: errorLink.concat(link),
-  link: from([authLink, refreshLink, errorLink, link]),
+  link: from([authLink, refreshLink, errorLink, uploadLink]),
   cache
 })
 
