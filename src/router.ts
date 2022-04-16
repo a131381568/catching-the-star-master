@@ -10,6 +10,7 @@ import Stargazing from '@/pages/Stargazing.vue'
 import Archive from '@/pages/Archive.vue'
 import Search from '@/pages/Search.vue'
 import NotFound from '@/pages/NotFound.vue'
+import Login from '@/pages/admin/Login.vue'
 
 const routes = [
   {
@@ -107,6 +108,14 @@ const routes = [
   {
     path: "/:catchAll(.*)",
     redirect: "/notfound"
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login,
+    meta: {
+      title: '登入',
+    }
   }
 ]
 

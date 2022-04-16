@@ -6,15 +6,32 @@ import { setContext } from 'apollo-link-context'
 import { createUploadLink } from 'apollo-upload-client'
 import { TokenRefreshLink } from "apollo-link-token-refresh";
 
+
+async function isTokenExpired() {
+  const token = await localStorage.getItem('token') || "";
+  const reFreshToken = await localStorage.getItem('refresh-token') || "";
+  return
+}
+
 const refreshLink = new TokenRefreshLink({
   accessTokenField: 'accessToken',
   // 判斷是否過期
   // ↓ !isTokenExpired() || typeof getAccessToken() !== 'string'
   isTokenValidOrUndefined: () => {
     console.log("第一個")
-    return false
+    const nowTimeStamp = Math.floor(new Date().getTime() / 1000)
+    const expiredTimeStamp = Number(localStorage.getItem('expired'))
+    console.log(nowTimeStamp, expiredTimeStamp)
+    // if (nowTimeStamp > expiredTimeStamp) {
+    //   console.log("nowTimeStamp > expiredTimeStamp")
+    //   return false
+    // } else {
+    //   console.log("nowTimeStamp < expiredTimeStamp")
+    //   return true
+    // }
+    return true
   },
-  fetchAccessToken: async (n) => {
+  fetchAccessToken: async () => {
 
     console.log("第二個")
     // 請求 token
@@ -51,15 +68,17 @@ const refreshLink = new TokenRefreshLink({
 
     return response.json()
   },
-  handleFetch: accessToken => {
+  handleFetch: async (accessToken, accessExp) => {
     // const accessTokenDecrypted = jwtDecode(accessToken);
     console.log("handleFetch----第四個")
     console.log(accessToken)
     // 設置 token
     // setAccessToken(accessToken);
+    await localStorage.setItem("token", accessToken)
 
     // 設置過期時間
     // setExpiresIn(parseExp(accessTokenDecrypted.exp).toString());
+    await localStorage.setItem("expired", accessExp)
 
     return accessToken
   },
@@ -72,7 +91,8 @@ const refreshLink = new TokenRefreshLink({
     // returned object should be like this:
 
     return {
-      accessToken: response.data.login.token
+      accessToken: response.data.login.token,
+      accessExp: response.data.login.exp
     }
   },
   handleError: err => {
