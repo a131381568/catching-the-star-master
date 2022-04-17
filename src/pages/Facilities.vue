@@ -84,6 +84,9 @@ import { useIntersectionObserver } from '@vueuse/core'
 import { facilitiesData } from '@/api/facilities'
 import { updateFile } from '@/api/utils'
 import { FacilitiesArr, ObservatoriesArr } from '@/types/graphql/types'
+// 取得路由
+const route = useRoute()
+const routeName = String(route.name)
 const store = useStore();
 const getFirstEnter = computed(() => store.get_firstEnter);
 
@@ -108,7 +111,7 @@ const eduCategories = ref<FacilitiesArr>([])
 getFacilitiesListData()
 
 async function getFacilitiesListData() {
-  const res = await facilitiesData()
+  const res = await facilitiesData(routeName)
   if (res && res.data.facilitiesList && res.data.observatoriesList) {
     eduCategories.value = res.data.facilitiesList
     observatoryCategories.value = res.data.observatoriesList
@@ -123,7 +126,7 @@ async function updateFileAct(event: Event) {
   const target = (<HTMLInputElement>event.target)
   let fileList = target.files
   if (fileList !== null) {
-    const res = await updateFile(fileList[0])
+    const res = await updateFile(fileList[0], routeName)
     localFile.value = res.data.singleUpload
   }
   console.log(localFile.value)

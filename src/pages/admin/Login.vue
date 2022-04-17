@@ -21,8 +21,6 @@
           <span>登入</span>
         </button>
       </form>
-      <hr />
-      <button class="btn" @click.prevent="getSelfInfo">取得個人資訊</button>
     </div>
   </div>
 
@@ -35,10 +33,12 @@ const store = useStore();
 const getFirstEnter = computed(() => store.get_firstEnter);
 const loginAccount = ref("")
 const loginPassword = ref("")
+// 取得路由
+const route = useRoute()
+const routeName = String(route.name)
 
 async function actionLoginAuth() {
-  const res = await loginAuthentication(loginAccount.value, loginPassword.value)
-  console.log(res)
+  const res = await loginAuthentication(loginAccount.value, loginPassword.value, routeName)
   if (res) {
     const personalInfo = res.data.login
     await localStorage.setItem("token", personalInfo.token)
@@ -49,5 +49,4 @@ async function actionLoginAuth() {
     await localStorage.setItem("email", personalInfo.email)
   }
 }
-
 </script>

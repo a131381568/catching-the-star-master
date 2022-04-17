@@ -41,6 +41,7 @@ const store = useStore();
 const getFirstEnter = computed(() => store.get_firstEnter);
 const route = useRoute();
 const router = useRouter();
+const routeName = String(route.name)
 const getTagid = computed(() => route.params.tagid);
 
 // =============== 載入文章資料 ===============
@@ -65,7 +66,7 @@ async function defaultData(
   after: number | null,
   before: number | null
 ) {
-  const res = await getArtistsList(first, last, after, before, String(getTagid.value))
+  const res = await getArtistsList(first, last, after, before, String(getTagid.value), routeName)
   if (res.data.artists.edges.length > 0) {
     let originalList = postList.value
     let pushList = originalList.concat(res.data.artists.edges);

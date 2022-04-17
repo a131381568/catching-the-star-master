@@ -9,10 +9,10 @@ type resFacilities = {
     observatoriesList: ObservatoriesArr
   };
 };
-export function facilitiesData(): Promise<resFacilities> {
+export function facilitiesData(pageRouteName: string): Promise<resFacilities> {
   return client.query({
     query: gql`
-      query Query {
+      query FacilitiesList {
         facilitiesList {
           facilities_title
           facilities_description
@@ -25,6 +25,9 @@ export function facilitiesData(): Promise<resFacilities> {
           observatory_post_content
         }
       }
-    `
+    `,
+    variables: {
+      pageRouteName
+    }
   })
 }

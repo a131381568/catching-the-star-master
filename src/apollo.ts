@@ -11,7 +11,6 @@ const refreshLink = new TokenRefreshLink({
   // 判斷是否過期
   // ↓ !isTokenExpired() || typeof getAccessToken() !== 'string'
   isTokenValidOrUndefined: operation => {
-    // console.log("query:", operation.operationName)
     // console.log("第一個")
 
     const nowTimeStamp = Math.floor(new Date().getTime() / 1000)
@@ -21,25 +20,29 @@ const refreshLink = new TokenRefreshLink({
     let refreshState = false
 
     if (nowTimeStamp > expiredTimeStamp) {
-      // console.log("token 已過期")
+      console.log("token 已過期")
       tokenState = false
     } else {
-      // console.log("token 正常")
+      console.log("token 正常")
       tokenState = true
     }
     if (nowTimeStamp > reFreshTokenTimeStamp) {
-      // console.log("reFresh 已過期")
+      console.log("reFresh 已過期")
       refreshState = false
     } else {
-      // console.log("reFresh 正常")
+      console.log("reFresh 正常")
       refreshState = true
     }
 
     if (!tokenState && refreshState) {
       return false
     } else if (!tokenState && !tokenState) {
-      // 彈回登入頁
-      window.location.pathname = '/login';
+      if (operation.variables.pageRouteName === "Login") {
+        // 已經在登入頁
+      } else {
+        // 彈回登入頁
+        window.location.pathname = '/login';
+      }
       return true
     } else {
       return true

@@ -8,7 +8,7 @@ type resAboutInfo = {
     aboutInfo: AboutInfo;
   };
 };
-export function aboutInfo(): Promise<resAboutInfo> {
+export function aboutInfo(pageRouteName: string): Promise<resAboutInfo> {
   return client.query({
     query: gql`
       query AboutInfo {
@@ -20,6 +20,9 @@ export function aboutInfo(): Promise<resAboutInfo> {
           epilogue
         }
       }
-    `
+    `,
+    variables: {
+      pageRouteName
+    }
   })
 }

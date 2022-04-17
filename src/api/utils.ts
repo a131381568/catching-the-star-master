@@ -8,7 +8,7 @@ type resPageInfo = {
     pageInfo: [SinglePageInfo];
   };
 };
-export function pageInfo(): Promise<resPageInfo> {
+export function pageInfo(pageRouteName: string): Promise<resPageInfo> {
   return client.query({
     query: gql`
       query PageInfo {
@@ -18,7 +18,10 @@ export function pageInfo(): Promise<resPageInfo> {
           page_route
         }
       }
-    `
+    `,
+    variables: {
+      pageRouteName
+    }
   })
 }
 
@@ -27,10 +30,10 @@ type resFileInfo = {
     singleUpload: File;
   };
 };
-export function updateFile(file: any) {
+export function updateFile(file: any, pageRouteName: string) {
   return client.mutate({
     mutation: gql`
-      mutation Mutation($file: Upload!) {
+      mutation SingleUpload($file: Upload!) {
         singleUpload(file: $file) {
           filename
           mimetype
@@ -39,7 +42,8 @@ export function updateFile(file: any) {
       }
     `,
     variables: {
-      file
+      file,
+      pageRouteName
     }
   })
 }
@@ -51,10 +55,10 @@ export function updateFile(file: any) {
 //     singleUpload: File;
 //   };
 // };
-export function getSelfInfo() {
+export function getSelfInfo(pageRouteName: string) {
   return client.query({
     query: gql`
-      query Query {
+      query Me {
         me {
           id
           email
@@ -63,12 +67,15 @@ export function getSelfInfo() {
           exp
         }
       }
-    `
+    `,
+    variables: {
+      pageRouteName
+    }
   })
 }
 
 
-export function loginAuthentication(email: string, password: string) {
+export function loginAuthentication(email: string, password: string, pageRouteName: string) {
   return client.mutate({
     mutation: gql`
       mutation Login($email: String!, $password: String!) {
@@ -85,7 +92,8 @@ export function loginAuthentication(email: string, password: string) {
     `,
     variables: {
       email,
-      password
+      password,
+      pageRouteName
     }
   })
 }

@@ -14,11 +14,12 @@ export function getArtistsList(
   last: Number | null,
   after: Number | null,
   before: Number | null,
-  categoryid: String | ""
+  categoryid: String | "",
+  pageRouteName: string
 ): Promise<resArtistsList> {
   return client.query({
     query: gql`
-      query Query(
+      query Artists(
         $first: Int,
         $last: Int,
         $after: Int,
@@ -49,7 +50,8 @@ export function getArtistsList(
       last,
       after,
       before,
-      categoryid
+      categoryid,
+      pageRouteName
     }
   })
 }
@@ -61,10 +63,10 @@ type resSinglePost = {
     getSinglePost: Artists;
   };
 };
-export function getSinglePostById(postid: Number): Promise<resSinglePost> {
+export function getSinglePostById(postid: Number, pageRouteName: string): Promise<resSinglePost> {
   return client.query({
     query: gql`
-      query Query($postid: Int!) {
+      query GetSinglePost($postid: Int!) {
         getSinglePost(postid: $postid) {
           postid
           content
@@ -75,33 +77,37 @@ export function getSinglePostById(postid: Number): Promise<resSinglePost> {
         }
       }`,
     variables: {
-      postid
+      postid,
+      pageRouteName
     }
   })
 }
 
 
-// 文章分類
+// 文章分類對照表
 type resPostCategories = {
   data: {
     artistsCategories: [ArtistsCategory];
   };
 };
-export function artistsCategories(): Promise<resPostCategories> {
+export function artistsCategories(pageRouteName: string): Promise<resPostCategories> {
   return client.query({
     query: gql`
-      query Query {
+      query ArtistsCategories {
         artistsCategories {
           post_category_name
           post_category_id
         }
       }
-    `
+    `,
+    variables: {
+      pageRouteName
+    }
   })
 }
 
 
-// 文章列表 ( 分類 )
+// 文章列表 ( 搜尋 )
 type resSearchArtists = {
   data: {
     searchArtists: ArtistsList;
@@ -112,11 +118,12 @@ export function getSearchArtists(
   last: Number | null,
   after: Number | null,
   before: Number | null,
-  keyword: String | ""
+  keyword: String | "",
+  pageRouteName: string
 ): Promise<resSearchArtists> {
   return client.query({
     query: gql`
-      query Query(
+      query SearchArtists(
         $first: Int,
         $last: Int,
         $after: Int,
@@ -147,7 +154,8 @@ export function getSearchArtists(
       last,
       after,
       before,
-      keyword
+      keyword,
+      pageRouteName
     }
   })
 }

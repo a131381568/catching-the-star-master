@@ -379,7 +379,7 @@
 </template>
 <script setup lang="ts">
 import { useElementHover } from '@vueuse/core'
-import { pageInfo, getSelfInfo } from '@/api/utils'
+import { pageInfo } from '@/api/utils'
 
 // 取得路由對應標題資訊
 const route = useRoute()
@@ -387,7 +387,7 @@ const routeName = route.name
 
 setTitleInfo(String(routeName));
 async function setTitleInfo(thisPath: string) {
-  const res = await pageInfo()
+  const res = await pageInfo(thisPath)
   const pageDataArry = await res.data.pageInfo
   let thisPathInfo = pageDataArry.filter(item => thisPath === item.page_route)
   if (thisPathInfo.length === 0) {

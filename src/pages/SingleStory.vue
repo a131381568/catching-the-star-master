@@ -42,17 +42,18 @@ const store = useStore();
 const getFirstEnter = computed(() => store.get_firstEnter);
 const route = useRoute();
 const router = useRouter();
+const routeName = String(route.name)
 const getnNid = computed(() => Number(route.params.nid));
 const mdContent = ref("")
 const circleBg = ref("")
 
 onMounted(async () => {
   // 取得分類  
-  const artistsCatRes = await artistsCategories()
+  const artistsCatRes = await artistsCategories(routeName)
   // 判斷參數是否正常
   if (getnNid.value) {
     // 取得單一資料
-    const artistsData = await getSinglePostById(getnNid.value)
+    const artistsData = await getSinglePostById(getnNid.value, routeName)
     if (artistsData.data.getSinglePost) {
       // 查詢分類物件
       const artistCatActName = store.changeCatName(

@@ -150,6 +150,9 @@
 import { useToggle } from '@vueuse/core'
 import { getArtistsList, artistsCategories } from '@/api/science'
 import { ArtistsArr, PageInfo, ArtistsCategories } from '@/types/graphql/types'
+// 取得路由
+const route = useRoute()
+const routeName = String(route.name)
 const store = useStore();
 const getFirstEnter = computed(() => store.get_firstEnter);
 
@@ -184,7 +187,7 @@ function closeDefaultMenu() {
 
 getArtistsCategories()
 async function getArtistsCategories() {
-  const res = await artistsCategories()
+  const res = await artistsCategories(routeName)
   const filterBar = res.data.artistsCategories.filter(item => item.post_category_id !== 'story')
   // const filterBar = res.data.artistsCategories
   filterCategories.value = filterBar
@@ -223,7 +226,7 @@ async function defaultData(
   before: number | null,
   categoryid: string | ""
 ) {
-  const res = await getArtistsList(first, last, after, before, categoryid)
+  const res = await getArtistsList(first, last, after, before, categoryid, routeName)
   let originalList = postList.value
   let pushList = originalList.concat(res.data.artists.edges);
   // 設置文章區塊

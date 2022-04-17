@@ -24,8 +24,10 @@ import { getSinglePostById, artistsCategories } from '@/api/science'
 // import singlePost from '@/assets/md/single_post.md'
 const store = useStore();
 const getFirstEnter = computed(() => store.get_firstEnter);
+// 取得路由
 const route = useRoute();
 const router = useRouter();
+const routeName = String(route.name)
 const getSid = computed(() => Number(route.params.sid));
 const date = ref("")
 const tag = ref({ name: "", catId: "" })
@@ -33,11 +35,11 @@ const mdContent = ref("")
 
 onMounted(async () => {
   // 取得分類  
-  const artistsCatRes = await artistsCategories()
+  const artistsCatRes = await artistsCategories(routeName)
   // 判斷參數是否正常
   if (getSid.value) {
     // 取得單一資料
-    const artistsData = await getSinglePostById(getSid.value)
+    const artistsData = await getSinglePostById(getSid.value, routeName)
     if (artistsData.data.getSinglePost) {
       // 查詢分類物件
       const artistCatActName = store.changeCatName(

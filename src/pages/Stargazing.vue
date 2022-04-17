@@ -77,6 +77,9 @@ import { stargazingMapInfo } from '@/api/stargazing'
 import { markType, stargazingListArr, layerArr, layerClickEvent } from '@/types/graphql/types'
 import { useToggle } from '@vueuse/core'
 import L from "leaflet";
+// 取得路由
+const route = useRoute()
+const routeName = String(route.name)
 const store = useStore();
 const getFirstEnter = computed(() => store.get_firstEnter);
 const isReady = ref(true)
@@ -144,7 +147,7 @@ const [togglePlaceVal, togglePlace] = useToggle()
 // ======================= 函式 ==============================
 
 async function getStargazingMapInfo() {
-  const res = await stargazingMapInfo()
+  const res = await stargazingMapInfo(routeName)
   stargazingList.value = res.data.stargazingList
 }
 
