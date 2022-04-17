@@ -11,6 +11,10 @@ import Archive from '@/pages/Archive.vue'
 import Search from '@/pages/Search.vue'
 import NotFound from '@/pages/NotFound.vue'
 import Login from '@/pages/admin/Login.vue'
+import Board from '@/pages/admin//Board.vue'
+import Stargazer from '@/pages/admin/stargazer/Stargazer.vue'
+import EditSingleStargazer from '@/pages/admin/stargazer/EditSingleStargazer.vue'
+import AddSingleStargazer from '@/pages/admin/stargazer/AddSingleStargazer.vue'
 
 const routes = [
   {
@@ -19,6 +23,7 @@ const routes = [
     component: Index,
     meta: {
       title: '首頁',
+      manage: false
     },
   },
   {
@@ -31,6 +36,7 @@ const routes = [
     component: About,
     meta: {
       title: '關於我們',
+      manage: false
     },
   },
   {
@@ -39,6 +45,7 @@ const routes = [
     component: Science,
     meta: {
       title: '天文科普',
+      manage: false
     },
   },
   {
@@ -47,6 +54,7 @@ const routes = [
     component: SingleScience,
     meta: {
       title: '天文科普',
+      manage: false
     },
   },
   {
@@ -55,6 +63,7 @@ const routes = [
     component: Story,
     meta: {
       title: '星星物語',
+      manage: false
     },
   },
   {
@@ -63,6 +72,7 @@ const routes = [
     component: SingleStory,
     meta: {
       title: '星星物語',
+      manage: false
     },
   },
   {
@@ -71,6 +81,7 @@ const routes = [
     component: Facilities,
     meta: {
       title: '天文設施',
+      manage: false
     },
   },
   {
@@ -79,6 +90,7 @@ const routes = [
     component: Stargazing,
     meta: {
       title: '觀星地點',
+      manage: false
     },
   },
   {
@@ -87,6 +99,7 @@ const routes = [
     component: Archive,
     meta: {
       title: '標籤',
+      manage: false
     },
   },
   {
@@ -95,6 +108,7 @@ const routes = [
     component: Search,
     meta: {
       title: '搜尋頁面',
+      manage: false
     },
   },
   {
@@ -103,6 +117,7 @@ const routes = [
     component: NotFound,
     meta: {
       title: '找不到網頁',
+      manage: false
     }
   },
   {
@@ -114,7 +129,44 @@ const routes = [
     name: 'Login',
     component: Login,
     meta: {
-      title: '登入',
+      title: '後台系統登入',
+      manage: true
+    }
+  },
+  {
+    path: '/board',
+    name: 'Board',
+    component: Board,
+    meta: {
+      title: '後台系統管理',
+      manage: true
+    }
+  },
+  {
+    path: '/stargazer',
+    name: 'Stargazer',
+    component: Stargazer,
+    meta: {
+      title: '觀星地點列表',
+      manage: true
+    }
+  },
+  {
+    path: '/board/stargazer/edit/:lid',
+    name: 'EditSingleStargazer',
+    component: EditSingleStargazer,
+    meta: {
+      title: '編輯觀星地點',
+      manage: true
+    }
+  },
+  {
+    path: '/board/stargazer/add/:lid',
+    name: 'AddSingleStargazer',
+    component: AddSingleStargazer,
+    meta: {
+      title: '新增觀星地點',
+      manage: true
     }
   }
 ]

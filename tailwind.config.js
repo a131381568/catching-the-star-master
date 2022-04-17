@@ -14,7 +14,8 @@ module.exports = {
       fontSize: {
         'tiny': '.938rem',
         'menu-title': '5.5rem',
-        '20vw': '20vw'
+        '20vw': '20vw',
+        'middle': '0.9375rem'
       },
       colors: {
         'sp-color-light': '#80b884',
@@ -58,7 +59,8 @@ module.exports = {
         'menu-stargazing': 'url("' + bgPath + '/menu-bg-05.jpg")',
         'menu-search': 'url("' + bgPath + '/menu-bg-06.jpg")',
         'about-writing': 'url("' + bgPath + '/bg-about-white.jpg")',
-        'story-featured': 'url("' + bgPath + '/story-bg-02.jpg")'
+        'story-featured': 'url("' + bgPath + '/story-bg-02.jpg")',
+        'admin-featured': 'url("' + bgPath + '/admin-bg.jpg")'
       },
       backgroundSize: {
         'auto-500': 'auto 500px'
@@ -67,7 +69,8 @@ module.exports = {
         'menu-title': '5.5rem'
       },
       boxShadow: {
-        'btn-default': 'inset 0 0 0 1px #c5c5ca'
+        'btn-default': 'inset 0 0 0 1px #c5c5ca',
+        '30-box': '0px 5px 30px 0px rgb(0 0 0 / 30%)'
       },
       spacing: {
         '0-8em': '0.8em',
@@ -100,6 +103,7 @@ module.exports = {
         '9px': '9px',
         '15px': '15px',
         '64px': '64px',
+        '77px': '77px',
         '130px': '130px',
         '1-8em': '1.8em'
       },
