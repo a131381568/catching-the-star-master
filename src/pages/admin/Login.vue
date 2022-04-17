@@ -10,16 +10,17 @@
     <!-- 返回按鈕 -->
     <div class="w-10/12">
       <!-- 登入 -->
-      <input type="text" class="w-48 h-8 block" placeholder="帳號" v-model="loginAccount" />
-      <input type="password" class="w-48 h-8 block" placeholder="密碼" v-model="loginPassword" />
+      <form>
+        <input type="text" class="w-48 h-8 block" placeholder="帳號" v-model="loginAccount" />
+        <input type="password" class="w-48 h-8 block" placeholder="密碼" v-model="loginPassword" />
 
-      <!-- link -->
-      <button @click.prevent="actionLoginAuth"
-        class="w-48 btn draw meet inline-block animate__animated animate__flipInX"
-        :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]">
-        <span>登入</span>
-      </button>
-
+        <!-- link -->
+        <button @click.prevent="actionLoginAuth"
+          class="w-48 btn draw meet inline-block animate__animated animate__flipInX"
+          :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]">
+          <span>登入</span>
+        </button>
+      </form>
       <hr />
       <button class="btn" @click.prevent="getSelfInfo">取得個人資訊</button>
     </div>
@@ -29,7 +30,6 @@
     :class="[{ 'animate__delay-5s': getFirstEnter === true }, { 'animate__delay-2s': getFirstEnter === false }]" />
 </template>
 <script setup lang="ts">
-import { useStorage } from '@vueuse/core'
 import { loginAuthentication, getSelfInfo } from '@/api/utils'
 const store = useStore();
 const getFirstEnter = computed(() => store.get_firstEnter);
@@ -42,12 +42,11 @@ async function actionLoginAuth() {
   if (res) {
     const personalInfo = res.data.login
     await localStorage.setItem("token", personalInfo.token)
-    // await useStorage("token", jwtToken)
-    // const personalInfo = await getSelfInfo()
     await localStorage.setItem("expired", personalInfo.exp)
+    await localStorage.setItem("refresh-token", personalInfo.refreshToken)
+    await localStorage.setItem("refresh-expired", personalInfo.refreshExp)
     await localStorage.setItem("id", personalInfo.id)
-    // await useStorage("expired", personalInfo.data.me.exp)
-    // await useStorage("id", personalInfo.data.me.id)
+    await localStorage.setItem("email", personalInfo.email)
   }
 }
 

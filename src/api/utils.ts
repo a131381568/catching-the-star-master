@@ -71,11 +71,15 @@ export function getSelfInfo() {
 export function loginAuthentication(email: string, password: string) {
   return client.mutate({
     mutation: gql`
-      mutation Mutation($email: String!, $password: String!) {
+      mutation Login($email: String!, $password: String!) {
         login(email: $email, password: $password) {
-          token
+          name
           id
+          email
+          token
           exp
+          refreshToken
+          refreshExp
         }
       }
     `,
