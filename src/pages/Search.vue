@@ -74,7 +74,7 @@
 <script setup lang="ts">
 import { getSearchArtists } from '@/api/science'
 import { ArtistsArr, PageInfo } from '@/types/graphql/types'
-import { watchDebounced } from '@vueuse/core'
+import { watchDebounced, useDebounceFn } from '@vueuse/core'
 // 取得路由
 const route = useRoute()
 const routeName = String(route.name)
@@ -126,7 +126,8 @@ function loadMoreData() {
   defaultData(3, null, searchPageInfo.value.end, null)
 }
 
-function searchData() {
+// 設置訪抖搜尋
+const searchData = useDebounceFn(() => {
   const text = searchWord.value
   if (text.split(' ').join('').length === 0) {
     // 僅空格的情況
@@ -142,7 +143,7 @@ function searchData() {
       defaultData(7, null, null, null)
     }, 300);
   }
-}
+}, 1000)
 
 async function defaultData(
   first: number | null,

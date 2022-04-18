@@ -255,7 +255,7 @@
           Catch the stars</div>
       </div>
       <!-- 登入 -->
-      <Form :validation-schema="verifyRules" v-slot="{ errors }" class="relative">
+      <Form ref="loginForm" :validation-schema="verifyRules" v-slot="{ errors }" class="relative">
         <Field name="email" type="text"
           class="h-table:w-5/12 w-10/12 h-8 block m-auto bg-transparent border-t-0 border-b-2 border-x-0 text-middle placeholder-main-color-dark px-0 py-7 border-main-color-black border-opacity-30 focus:outline-0 focus:ring-0 focus:border-opacity-70 focus:border-main-color-black focus:placeholder-transparent"
           :class="{ 'border-red-700 border-opacity-100': errors.email }" placeholder="帳號" v-model="loginAccount" />
@@ -275,48 +275,50 @@
       </Form>
     </div>
   </div>
-  <Footer class="animate__animated animate__fadeIn"
-    :class="[{ 'animate__delay-5s': getFirstEnter === true }, { 'animate__delay-2s': getFirstEnter === false }]" />
+  <Footer class="animate__animated animate__fadeIn" />
 </template>
 <script setup lang="ts">
 import schema from '@/utils/vee-validate-schema'
-import { Field, Form, useForm } from 'vee-validate';
-import { loginAuthentication, getSelfInfo } from '@/api/utils'
-const store = useStore();
-const getFirstEnter = computed(() => store.get_firstEnter);
-const loginAccount = ref("")
-const loginPassword = ref("")
+import { Field, Form } from 'vee-validate';
+import { loginAuthentication } from '@/api/utils'
+import { useDebounceFn } from '@vueuse/core'
 // 取得路由
 const router = useRouter()
 const route = useRoute()
 const routeName = String(route.name)
-
+// 輸入欄位綁定
+const loginForm = ref({
+  validate: () => { return { valid: false } }
+})
+const loginAccount = ref("")
+const loginPassword = ref("")
 const verifyRules = {
   email: schema.email,
   password: schema.password
 }
-
-async function actionLoginAuth() {
-  console.log("成功執行")
-  // const res = await loginAuthentication(loginAccount.value, loginPassword.value, routeName)
-
-  // // 如果登入成功
-  // if (res) {
-  //   const personalInfo = res.data.login
-  //   await localStorage.setItem("token", personalInfo.token)
-  //   await localStorage.setItem("expired", personalInfo.exp)
-  //   await localStorage.setItem("refresh-token", personalInfo.refreshToken)
-  //   await localStorage.setItem("refresh-expired", personalInfo.refreshExp)
-  //   await localStorage.setItem("id", personalInfo.id)
-  //   await localStorage.setItem("email", personalInfo.email)
-  // }
-
+// 送出防抖表單
+const actionLoginAuth = useDebounceFn(async () => {
+  const { valid } = await loginForm.value.validate()
+  // console.log(valid)
+  if (valid) {
+    const res = await loginAuthentication(loginAccount.value, loginPassword.value, routeName)
+    if (res) {
+      const personalInfo = res.data.login
+      await localStorage.setItem("token", personalInfo.token)
+      await localStorage.setItem("expired", personalInfo.exp)
+      await localStorage.setItem("refresh-token", personalInfo.refreshToken)
+      await localStorage.setItem("refresh-expired", personalInfo.refreshExp)
+      await localStorage.setItem("id", personalInfo.id)
+      await localStorage.setItem("email", personalInfo.email)
+      await router.push({ path: '/board' })
+    }
+  }
   // 如果有問題
   // 帳密錯誤
   // 不可輸入空白
   // 不可連點
+}, 1000)
 
 
-  // router.push({ path: '/board' })
-}
+
 </script>
