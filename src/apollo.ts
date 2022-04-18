@@ -27,17 +27,17 @@ const refreshLink = new TokenRefreshLink({
     // 正常情況
     if (localExp.length === 10 && localRefreshExp.length === 10) {
       if (nowTimeStamp > expiredTimeStamp) {
-        console.log("token 已過期")
+        // console.log("token 已過期")
         tokenState = false
       } else {
-        console.log("token 正常")
+        // console.log("token 正常")
         tokenState = true
       }
       if (nowTimeStamp > reFreshTokenTimeStamp) {
-        console.log("reFresh 已過期")
+        // console.log("reFresh 已過期")
         refreshState = false
       } else {
-        console.log("reFresh 正常")
+        // console.log("reFresh 正常")
         refreshState = true
       }
       if (!tokenState && refreshState) {
@@ -55,7 +55,7 @@ const refreshLink = new TokenRefreshLink({
       }
     } else {
       // 兩個 token 值都有問題回傳
-      console.log("token 都有問題")
+      // console.log("token 都有問題")
       // 彈回登入頁
       window.location.pathname = '/login';
       return true

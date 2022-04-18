@@ -143,7 +143,7 @@ const routes = [
     }
   },
   {
-    path: '/stargazer',
+    path: '/board/stargazer',
     name: 'Stargazer',
     component: Stargazer,
     meta: {

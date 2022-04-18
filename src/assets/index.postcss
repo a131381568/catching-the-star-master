@@ -293,22 +293,33 @@
   .md-container hr{
     @apply h-table:my-20 my-11
   }
-  .md-container table{
-    @apply text-left w-full block mobile:overflow-x-auto mobile:whitespace-nowrap
+  .table-container table{
+    @apply text-left w-full mobile:overflow-x-auto mobile:whitespace-nowrap text-main-color-light
   }
-  .md-container thead{
+  .md-container table{
+    @apply text-left w-full block mobile:overflow-x-auto mobile:whitespace-nowrap text-main-color-light
+  }
+  .md-container thead, .table-container thead{
     @apply border-b-2  border-main-color-light
   }
-  .md-container tr{
+  .md-container tr, .table-container tr{
     @apply border-b  border-main-color-light
   }
-  .md-container th{
+  .md-container th, .table-container th{
     @apply font-semibold
   }
-  .md-container td, .md-container th{
+  .md-container td, .md-container th, .table-container td, .table-container th, .table-container th{
     @apply p-3
   }
-  .md-container thead th:nth-child(1), .md-container td:nth-child(1){
+  .table-container thead th:nth-last-child(1),
+  .table-container thead th:nth-last-child(2){
+    @apply px-0
+  }
+  .table-container tbody td:nth-last-child(1),
+  .table-container tbody td:nth-last-child(2){
+    @apply text-right pr-1 cursor-pointer
+  }
+  .md-container thead th:nth-child(1), .md-container td:nth-child(1), .table-container thead th:nth-child(1), .table-container td:nth-child(1){
     @apply pl-0
   }
 
