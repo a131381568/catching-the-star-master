@@ -304,21 +304,19 @@ const actionLoginAuth = useDebounceFn(async () => {
     const res = await loginAuthentication(loginAccount.value, loginPassword.value, routeName)
     if (res) {
       const personalInfo = res.data.login
-      await localStorage.setItem("token", personalInfo.token)
-      await localStorage.setItem("expired", personalInfo.exp)
-      await localStorage.setItem("refresh-token", personalInfo.refreshToken)
-      await localStorage.setItem("refresh-expired", personalInfo.refreshExp)
-      await localStorage.setItem("id", personalInfo.id)
-      await localStorage.setItem("email", personalInfo.email)
-      await router.push({ path: '/board' })
+      if (personalInfo.errorMsg) {
+        // 錯誤回傳
+        alert(personalInfo.errorMsg)
+      } else {
+        await localStorage.setItem("token", personalInfo.token)
+        await localStorage.setItem("expired", personalInfo.exp)
+        await localStorage.setItem("refresh-token", personalInfo.refreshToken)
+        await localStorage.setItem("refresh-expired", personalInfo.refreshExp)
+        await localStorage.setItem("id", personalInfo.id)
+        await localStorage.setItem("email", personalInfo.email)
+        await router.push({ path: '/board' })
+      }
     }
   }
-  // 如果有問題
-  // 帳密錯誤
-  // 不可輸入空白
-  // 不可連點
 }, 1000)
-
-
-
 </script>

@@ -87,6 +87,8 @@ export function loginAuthentication(email: string, password: string, pageRouteNa
           exp
           refreshToken
           refreshExp
+          errorTitle
+          errorMsg
         }
       }
     `,
