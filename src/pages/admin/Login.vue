@@ -255,25 +255,32 @@
           Catch the stars</div>
       </div>
       <!-- 登入 -->
-      <form>
-        <input type="text"
+      <Form :validation-schema="verifyRules" v-slot="{ errors }" class="relative">
+        <Field name="email" type="text"
           class="h-table:w-5/12 w-10/12 h-8 block m-auto bg-transparent border-t-0 border-b-2 border-x-0 text-middle placeholder-main-color-dark px-0 py-7 border-main-color-black border-opacity-30 focus:outline-0 focus:ring-0 focus:border-opacity-70 focus:border-main-color-black focus:placeholder-transparent"
-          placeholder="帳號" v-model="loginAccount" />
-        <input type="password"
+          :class="{ 'border-red-700 border-opacity-100': errors.email }" placeholder="帳號" v-model="loginAccount" />
+        <Field name="password" type="password"
           class="h-table:w-5/12 w-10/12 h-8 block m-auto bg-transparent border-t-0 border-b-2 border-x-0 text-middle placeholder-main-color-dark px-0 py-7 border-main-color-black border-opacity-30 focus:outline-0 focus:ring-0 focus:border-opacity-70 focus:border-main-color-black focus:placeholder-transparent mt-2"
-          placeholder="密碼" v-model="loginPassword" />
+          :class="{ 'border-red-700 border-opacity-100': errors.email }" placeholder="密碼" v-model="loginPassword" />
         <button @click.prevent="actionLoginAuth"
           class="h-table:w-5/12 w-10/12 btn border block font-bold mt-14 m-auto text-middle shadow-none text-main-color-black border-main-color-black tracking-wider hover:bg-main-color-dark transition-all duration-1000 hover:text-main-color-light">
           登入後台
         </button>
-      </form>
+        <span v-show="errors.email" class="text-red-700 text-xs h-table:w-5/12 w-10/12 h-5 block m-auto mt-2">{{
+          errors.email
+        }}</span>
+        <span v-show="errors.password" class="text-red-700 text-xs h-table:w-5/12 w-10/12 h-5 block m-auto">{{
+          errors.password
+        }}</span>
+      </Form>
     </div>
   </div>
-
   <Footer class="animate__animated animate__fadeIn"
     :class="[{ 'animate__delay-5s': getFirstEnter === true }, { 'animate__delay-2s': getFirstEnter === false }]" />
 </template>
 <script setup lang="ts">
+import schema from '@/utils/vee-validate-schema'
+import { Field, Form, useForm } from 'vee-validate';
 import { loginAuthentication, getSelfInfo } from '@/api/utils'
 const store = useStore();
 const getFirstEnter = computed(() => store.get_firstEnter);
@@ -284,7 +291,13 @@ const router = useRouter()
 const route = useRoute()
 const routeName = String(route.name)
 
+const verifyRules = {
+  email: schema.email,
+  password: schema.password
+}
+
 async function actionLoginAuth() {
+  console.log("成功執行")
   // const res = await loginAuthentication(loginAccount.value, loginPassword.value, routeName)
 
   // // 如果登入成功
