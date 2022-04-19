@@ -34,23 +34,23 @@ export type ArtistsCategories = {
 }[]
 
 export type Artists = {
-  postid: number;
-  content: string;
-  title: string;
-  categoryid: string;
-  updatetime: string;
-  description: string;
-  image: string;
+  postid: number
+  content: string
+  title: string
+  categoryid: string
+  updatetime: string
+  description: string
+  image: string
 };
 
 export type ArtistsArr = {
-  postid: number;
-  content: string;
-  title: string;
-  categoryid: string;
-  updatetime: string;
-  description: string;
-  image: string;
+  postid: number
+  content: string
+  title: string
+  categoryid: string
+  updatetime: string
+  description: string
+  image: string
 }[];
 
 export type ArtistsList = {
@@ -59,11 +59,19 @@ export type ArtistsList = {
 };
 
 export type PageInfo = {
-  hasNextPage: boolean;
-  hasPreviousPage: boolean;
-  start: number | null;
-  end: number | null;
+  hasNextPage: boolean
+  hasPreviousPage: boolean
+  start: number | null
+  end: number | null
 };
+
+export type PageInfoPush = {
+  hasNextPage: Boolean
+  hasPreviousPage: Boolean
+  start: number
+  end: number
+  totalPagi: number
+}
 
 export type FacilitiesArr = {
   facilities_title: String
@@ -78,25 +86,57 @@ export type ObservatoriesArr = {
   observatory_post_content: String
 }[]
 
+
+export type Stargazing = {
+  stargazing_title: String
+  stargazing_latitude: number
+  stargazing_longitude: number
+  stargazing_image: String
+  stargazing_description: String
+  stargazing_address: String
+  stargazing_link: String
+  stargazing_lid: String
+  published: Boolean
+}
+
+export type StargazingArr = {
+  stargazing_title: String
+  stargazing_latitude: number
+  stargazing_longitude: number
+  stargazing_image: String
+  stargazing_description: String
+  stargazing_address: String
+  stargazing_link: String
+  stargazing_lid: String
+  published: Boolean
+}[];
+
+export type StargazingConnectionPush = {
+  edges: [Stargazing]
+  pageInfo: PageInfoPush
+}
+
 // map
 export type coordinate = {
-  stargazing_title: string,
-  stargazing_latitude: number,
-  stargazing_longitude: number,
-  stargazing_image: string,
-  stargazing_description: string,
+  stargazing_title: string
+  stargazing_latitude: number
+  stargazing_longitude: number
+  stargazing_image: string
+  stargazing_description: string
   stargazing_address: string
   stargazing_link: string
 }
 
 export type stargazingListArr = {
-  stargazing_title: string,
-  stargazing_latitude: number,
-  stargazing_longitude: number,
-  stargazing_image: string,
-  stargazing_description: string,
+  stargazing_title: string
+  stargazing_latitude: number
+  stargazing_longitude: number
+  stargazing_image: string
+  stargazing_description: string
   stargazing_address: string
   stargazing_link: string
+  stargazing_lid: string
+  published: boolean
 }[];
 
 export type markType = {

@@ -2,17 +2,18 @@
   <div class="flex">
     <AdminSidebar />
     <div
-      class="w-4/5 h-table:flex flex-wrap items-start justify-center content-start middle-pc:pt-36 h-table:pt-32 pb-32 middle-pc:px-20 h-table:px-6 px-8 mobile:pt-32 relative">
+      class="w-4/5 h-table:flex flex-wrap items-start justify-center content-start middle-pc:pt-36 h-table:pt-32 pb-52 middle-pc:px-20 h-table:px-6 px-8 mobile:pt-32 relative">
       <!-- 標題區塊 -->
       <div class="w-9/12 flex justify-between mb-20">
         <h1 class="text-white relative -left-2 -top-2 mobile:text-5xl w-3/4">觀星地點列表</h1>
-        <button class="btn draw meet w-2/12 h-14 btn">
+        <router-link to="/board/stargazer/add"
+          class="flex btn draw meet w-2/12 h-12 btn text-center items-center p-0 justify-center pb-1">
           新增
-        </button>
+        </router-link>
       </div>
       <!-- 表格區塊 -->
       <div class="w-9/12 table-container">
-        <table id="responsive-table" v-if="stargazingList.length > 0 && stargazingList">
+        <table id="responsive-table" v-if="stargazingEdges.length > 0 && stargazingEdges">
           <thead>
             <tr>
               <th>地點名稱</th>
@@ -22,12 +23,12 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(val, key) in stargazingList" :key="key">
+            <tr v-for="(val, key) in stargazingEdges" :key="key">
               <td>{{ val.stargazing_title }}</td>
               <td>{{ val.stargazing_address }}</td>
               <td>
-                <svg @click.prevent="editPlace()" class="inline-block w-28px h-auto" version="1.1"
-                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                <svg @click.prevent="editPlace(String(val.stargazing_lid))" class="inline-block w-28px h-auto"
+                  version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                   xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px" width="26px" height="26px"
                   viewBox="-0.8 -0.1 26 26" enable-background="new -0.8 -0.1 26 26" xml:space="preserve">
                   <defs>
@@ -676,8 +677,8 @@
                 </svg>
               </td>
               <td>
-                <svg @click.prevent="deletePlace()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25"
-                  class="fill-main-color-light w-29px h-auto inline-block">
+                <svg @click.prevent="deletePlace(String(val.stargazing_lid))" xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 25 25" class="fill-main-color-light w-29px h-auto inline-block">
                   <g id="trash">
                     <path class="cls-1"
                       d="M20.5,4H16.86l-.69-2.06A1.37,1.37,0,0,0,14.87,1H10.13a1.37,1.37,0,0,0-1.3.94L8.14,4H4.5a.5.5,0,0,0,0,1h.34l1,17.59A1.45,1.45,0,0,0,7.2,24H17.8a1.45,1.45,0,0,0,1.41-1.41L20.16,5h.34a.5.5,0,0,0,0-1ZM9.77,2.26A.38.38,0,0,1,10.13,2h4.74a.38.38,0,0,1,.36.26L15.81,4H9.19Zm8.44,20.27a.45.45,0,0,1-.41.47H7.2a.45.45,0,0,1-.41-.47L5.84,5H19.16Z" />
@@ -690,39 +691,50 @@
             </tr>
           </tbody>
         </table>
+        <Pagination :hasNextPage="Boolean(stargazingPageInfo.hasNextPage)"
+          :hasPreviousPage="Boolean(stargazingPageInfo.hasPreviousPage)" />
       </div>
       <Footer class="absolute bottom-0" />
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import { stargazingMapInfo } from '@/api/stargazing'
-import { stargazingListArr } from '@/types/graphql/types'
-const store = useStore();
-const getFirstEnter = computed(() => store.get_firstEnter);
+import { stargazerList } from '@/api/stargazing'
+import { StargazingArr, PageInfoPush } from '@/types/graphql/types'
+import Pagination from '../../../components/Pagination.vue'
+
 // 取得路由
 const route = useRoute()
 const routeName = String(route.name)
+
 // 宣告列表預設值
-const stargazingList = ref<stargazingListArr>([])
+const stargazingEdges = ref<StargazingArr>([])
+const stargazingPageInfo = ref<PageInfoPush>({
+  hasNextPage: false,
+  hasPreviousPage: false,
+  start: 0,
+  end: 0,
+  totalPagi: 0
+})
 
 // 生命週期 --------------------------------------------------------------
 onMounted(async () => {
   // 取得地圖列表資訊
-  await getStargazingMapInfo()
+  await getStargazerList()
 });
 
 // ======================= 函式 ==============================
-async function getStargazingMapInfo() {
-  const res = await stargazingMapInfo(routeName)
-  stargazingList.value = res.data.stargazingList
+async function getStargazerList() {
+  const res = await stargazerList(1, 10, routeName)
+  stargazingEdges.value = res.data.stargazingPagi.edges
+  stargazingPageInfo.value = res.data.stargazingPagi.pageInfo
 }
 
-function editPlace() {
-  console.log("編輯")
+function editPlace(lid: string) {
+  console.log("edit", lid)
 }
 
-function deletePlace() {
-  console.log("刪除")
+function deletePlace(lid: string) {
+  console.log("delete", lid)
 }
 </script>

@@ -12,6 +12,8 @@ declare module 'vue' {
     Header: typeof import('./src/components/Header.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     Loading: typeof import('./src/components/Loading.vue')['default']
+    Pagi: typeof import('./src/components/pagi.vue')['default']
+    Pagination: typeof import('./src/components/Pagination.vue')['default']
     Timeline: typeof import('./src/components/Timeline.vue')['default']
     TitleBox: typeof import('./src/components/TitleBox.vue')['default']
   }
