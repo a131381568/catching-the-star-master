@@ -1,20 +1,22 @@
 <template>
-  <div class="flex">
+  <div class="flex items-stretch">
     <AdminSidebar />
     <div
-      class="w-4/5 h-table:flex flex-wrap items-start justify-center content-start middle-pc:pt-36 h-table:pt-32 pb-52 middle-pc:px-20 h-table:px-6 px-8 mobile:pt-32 relative">
+      class="laptop:w-4/5 laptop:left-0 left-7 mobile:left-11 w-full mobile:w-admin-m-content h-table:flex flex-wrap items-start justify-center content-start middle-pc:pt-36 h-table:pt-32 pb-52 middle-pc:px-20 h-table:px-6 px-8 mobile:pt-32 relative">
       <!-- 標題區塊 -->
-      <div class="w-9/12 flex justify-between mb-20">
-        <h1 class="text-white relative -left-2 -top-2 mobile:text-5xl w-3/4">觀星地點列表</h1>
+      <div class="w-9/12 mobile:w-11/12 flex justify-between mb-20 mobile:mb-9 mobile:block mobile:mx-auto">
+        <h1 class="text-white relative -left-2 -top-2 mobile:text-5xl w-3/4 mobile:w-full">觀星地點列表</h1>
         <router-link to="/board/stargazer/add"
-          class="flex btn draw meet w-2/12 h-12 btn text-center items-center p-0 justify-center pb-1">
+          class="flex btn draw meet text-lg w-2/12 mobile:w-1/3 mobile:mt-6 h-12 btn text-center items-center p-0 justify-center pb-1">
           新增
         </router-link>
       </div>
       <!-- 表格區塊 -->
-      <div class="w-9/12 table-container">
-        <table id="responsive-table" v-if="stargazingEdges.length > 0 && stargazingEdges">
-          <thead>
+      <!-- class="before:content-[attr(data-title)]" -->
+      <div class="w-9/12 mobile:w-11/12 table-container mobile:m-auto">
+        <table id="responsive-table" v-if="stargazingEdges.length > 0 && stargazingEdges"
+          class="animate__animated animate__fadeIn">
+          <thead class="mobile:hidden">
             <tr>
               <th>地點名稱</th>
               <th>地址說明</th>
@@ -24,11 +26,14 @@
           </thead>
           <tbody>
             <tr v-for="(val, key) in stargazingEdges" :key="key">
-              <td>{{ val.stargazing_title }}</td>
-              <td>{{ val.stargazing_address }}</td>
-              <td>
-                <svg @click.prevent="editPlace(String(val.stargazing_lid))" class="inline-block w-28px h-auto"
-                  version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+              <td data-title="名稱">{{
+                val.stargazing_title
+              }}</td>
+              <td data-title="說明">{{ val.stargazing_address }}</td>
+              <td data-title="編輯">
+                <svg @click.prevent="editPlace(String(val.stargazing_lid))"
+                  class="fill-main-color-light inline-block w-28px h-auto group" version="1.1"
+                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                   xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px" width="26px" height="26px"
                   viewBox="-0.8 -0.1 26 26" enable-background="new -0.8 -0.1 26 26" xml:space="preserve">
                   <defs>
@@ -668,7 +673,7 @@
                       </g>
                     </pattern>
                   </defs>
-                  <path id="XMLID_1_" fill="#c5c5ca" d="M0.1,25.2c1.7-0.8,5-2.3,6.7-3.1c0.1,0,0.1,0,0.2,0c0,0,0,0,0,0c0,0,0,0,0,0
+                  <path id="XMLID_1_" class="group-hover:fill-sub-color-dark" fill="#c5c5ca" d="M0.1,25.2c1.7-0.8,5-2.3,6.7-3.1c0.1,0,0.1,0,0.2,0c0,0,0,0,0,0c0,0,0,0,0,0
 	c0.1,0,0.3-0.1,0.4-0.2c4.7-4.8,9.3-9.6,14-14.3c0.7-0.7,1.3-1.4,2-2c0,0,0.1-0.1,0.1-0.1c1.1-1.4,1.1-3.3-0.2-4.5
 	c-1.3-1.3-3.4-1.2-4.7,0.1c-4.7,4.8-9.3,9.6-14,14.3c-0.7,0.7-1.3,1.4-2,2c-0.2,0.2-0.2,0.4-0.1,0.6c-0.2,0.5-0.4,0.9-0.6,1.4
 	c-0.1,0.2-0.2,0.4-0.3,0.7c-0.5,1.3-1.2,3.4-1.8,4.7 M22.9,4.3c-1-0.9-1.9-1.9-2.9-2.8C21.7,0.4,23.8,2.5,22.9,4.3z M17.6,3.9
@@ -676,9 +681,10 @@
 	 M3.4,19.2c0.7,0.7,1.5,1.5,2.2,2.2c-0.7,0.3-1.4,0.6-2.2,1c-0.3-0.3-0.7-0.6-1-1C2.8,20.7,3.1,19.9,3.4,19.2z" />
                 </svg>
               </td>
-              <td>
+              <td data-title="刪除">
                 <svg @click.prevent="deletePlace(String(val.stargazing_lid))" xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 25 25" class="fill-main-color-light w-29px h-auto inline-block">
+                  viewBox="0 0 25 25"
+                  class="fill-main-color-light w-29px h-auto inline-block hover:fill-sub-color-dark">
                   <g id="trash">
                     <path class="cls-1"
                       d="M20.5,4H16.86l-.69-2.06A1.37,1.37,0,0,0,14.87,1H10.13a1.37,1.37,0,0,0-1.3.94L8.14,4H4.5a.5.5,0,0,0,0,1h.34l1,17.59A1.45,1.45,0,0,0,7.2,24H17.8a1.45,1.45,0,0,0,1.41-1.41L20.16,5h.34a.5.5,0,0,0,0-1ZM9.77,2.26A.38.38,0,0,1,10.13,2h4.74a.38.38,0,0,1,.36.26L15.81,4H9.19Zm8.44,20.27a.45.45,0,0,1-.41.47H7.2a.45.45,0,0,1-.41-.47L5.84,5H19.16Z" />
@@ -691,10 +697,11 @@
             </tr>
           </tbody>
         </table>
-        <Pagination :hasNextPage="Boolean(stargazingPageInfo.hasNextPage)"
-          :hasPreviousPage="Boolean(stargazingPageInfo.hasPreviousPage)" />
+        <Pagination @selectPagi="selectPagi" :hasNextPage="Boolean(stargazingPageInfo.hasNextPage)"
+          :hasPreviousPage="Boolean(stargazingPageInfo.hasPreviousPage)" :totalPagi="stargazingPageInfo.totalPagi"
+          :actionPage="actionPage" />
       </div>
-      <Footer class="absolute bottom-0" />
+      <Footer class="absolute bottom-0 mobile:left-0" />
     </div>
   </div>
 </template>
@@ -708,6 +715,7 @@ const route = useRoute()
 const routeName = String(route.name)
 
 // 宣告列表預設值
+const actionPage = ref(1)
 const stargazingEdges = ref<StargazingArr>([])
 const stargazingPageInfo = ref<PageInfoPush>({
   hasNextPage: false,
@@ -720,14 +728,17 @@ const stargazingPageInfo = ref<PageInfoPush>({
 // 生命週期 --------------------------------------------------------------
 onMounted(async () => {
   // 取得地圖列表資訊
-  await getStargazerList()
+  await getStargazerList(1)
 });
 
 // ======================= 函式 ==============================
-async function getStargazerList() {
-  const res = await stargazerList(1, 10, routeName)
-  stargazingEdges.value = res.data.stargazingPagi.edges
-  stargazingPageInfo.value = res.data.stargazingPagi.pageInfo
+async function getStargazerList(pagi: Number) {
+  const res = await stargazerList(Number(pagi), 10, routeName)
+  stargazingEdges.value = []
+  setTimeout(() => {
+    stargazingEdges.value = res.data.stargazingPagi.edges
+    stargazingPageInfo.value = res.data.stargazingPagi.pageInfo
+  }, 300);
 }
 
 function editPlace(lid: string) {
@@ -736,5 +747,10 @@ function editPlace(lid: string) {
 
 function deletePlace(lid: string) {
   console.log("delete", lid)
+}
+
+function selectPagi(pagi: Number) {
+  actionPage.value = Number(pagi)
+  getStargazerList(pagi)
 }
 </script>

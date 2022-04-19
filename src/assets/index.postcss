@@ -294,7 +294,7 @@
     @apply h-table:my-20 my-11
   }
   .table-container table{
-    @apply text-left w-full mobile:overflow-x-auto mobile:whitespace-nowrap text-main-color-light
+    @apply text-left w-full mobile:overflow-x-auto text-main-color-light
   }
   .md-container table{
     @apply text-left w-full block mobile:overflow-x-auto mobile:whitespace-nowrap text-main-color-light
@@ -323,6 +323,41 @@
     @apply pl-0
   }
 
+  /*-------------------------------- RWD Table ----------------------------------*/
+  @media only screen and (max-width: 760px),
+    (min-device-width: 768px) and (max-device-width: 1024px) {
+    table#responsive-table,
+    #responsive-table tbody,
+    #responsive-table th,
+    #responsive-table td,
+    #responsive-table tr {
+      @apply block
+    }
+
+    .table-container tbody tr td:nth-child(1){
+      @apply pb-0 pl-3 text-2xl text-white
+    }
+    
+    .table-container tbody tr td:nth-last-child(3){
+      @apply border-b border-white border-opacity-10
+    }
+
+    .table-container #responsive-table tbody tr td:nth-last-child(1),
+    .table-container #responsive-table tbody tr td:nth-last-child(2){
+      @apply inline-block w-1/2 text-center pl-0
+    }
+
+    .table-container tbody tr td:nth-last-child(1){
+      /* border-left: 1px solid rgb(255 255 255 / 10%); */
+      @apply border-l border-white border-opacity-10
+    }
+
+    .table-container tbody tr {
+      @apply border-0 bg-opacity-10 bg-white mb-6
+    }
+  }
+  /*------------------------------------------------------------------*/
+
   /* facilities md container */
   .facilities-md-container thead th:nth-child(1){
     @apply w-30/100 
@@ -341,14 +376,14 @@
   .admin-login-svg-obj path{
     @apply fill-main-color-dark stroke-main-color-dark
   }
-
   .header-svg-obj path{
     @apply fill-white stroke-white
   }
   .header-svg-obj.active path{
     @apply fill-main-color-dark stroke-main-color-dark 
   }
-  .header-logo:hover .header-svg-obj path{
+  .header-logo:hover .header-svg-obj path,
+  .sidebar-logo:hover .admin-login-svg-obj path{
     @apply fill-sp-color-light stroke-sp-color-light
   }
 

@@ -1,9 +1,9 @@
 <template>
-  <div class="w-10/12 mt-14 -ml-2">
-    <nav aria-label="Page navigation example">
+  <div class="w-10/12 mt-14 -ml-2 animate__animated animate__fadeIn mobile:m-auto" v-show="!barShow">
+    <nav aria-label="Page navigation">
       <ul class="inline-flex items-center -space-x-px">
-        <li>
-          <a href="#" class="block py-0 pr-3 ml-0 text-main-color-light mt-1 opacity-50">
+        <li :class="{ 'pointer-events-none opacity-50': !hasPreviousPage }" @click="actionPreviousPagi()">
+          <a class="cursor-pointer block py-0 pr-3 ml-0 text-main-color-light mt-1">
             <span class="sr-only">Previous</span>
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd"
@@ -12,24 +12,15 @@
             </svg>
           </a>
         </li>
-        <li>
-          <a href="#"
-            class="w-6 h-6 inline-flex items-center justify-center text-main-color-dark text-middle rounded-full bg-main-color-light pb-2px mx-1">1</a>
+        <li :class="{ 'pointer-events-none': actionPage === index }" v-for="index in totalPagi" :key="index"
+          @click="actionSelectPagi(index)">
+          <a class="transition-all duration-700 cursor-pointer w-6 h-6 inline-flex items-center justify-center
+          text-main-color-light text-middle rounded-full pb-2px mx-1 hover:text-main-color-dark hover:bg-main-color-light"
+            :class="{ '!text-main-color-dark bg-main-color-light': actionPage === index }">
+            {{ index }}</a>
         </li>
-        <li>
-          <a href="#"
-            class="w-6 h-6 inline-flex items-center justify-center text-main-color-light text-middle rounded-full pb-2px mx-1">2</a>
-        </li>
-        <li>
-          <a href="#"
-            class="w-6 h-6 inline-flex items-center justify-center text-main-color-light text-middle rounded-full pb-2px mx-1">3</a>
-        </li>
-        <li>
-          <a href="#"
-            class="w-6 h-6 inline-flex items-center justify-center text-main-color-light text-middle rounded-full pb-2px mx-1">4</a>
-        </li>
-        <li>
-          <a href="#" class="block py-0 px-3 text-main-color-light mt-1">
+        <li :class="{ 'pointer-events-none opacity-50': !hasNextPage }" @click="actionNextPagi()">
+          <a class="cursor-pointer block py-0 px-3 text-main-color-light mt-1">
             <span class="sr-only">Next</span>
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd"
@@ -39,10 +30,8 @@
           </a>
         </li>
       </ul>
-      <div class="text-main-color-light">{{ props.hasNextPage }},{{ props.hasPreviousPage }}</div>
     </nav>
   </div>
-
 </template>
 <script setup lang="ts">
 const route = useRoute()
@@ -52,4 +41,34 @@ const props = defineProps({
   totalPagi: Number,
   actionPage: Number
 })
+const barShow = ref(false)
+const emit = defineEmits<{
+  (e: 'selectPagi', pagi: Number): Number
+}>()
+function actionPreviousPagi() {
+  if (props.actionPage) {
+    emit("selectPagi", props.actionPage - 1)
+    setDelyAnimate()
+  }
+}
+function actionNextPagi() {
+  if (props.actionPage) {
+    emit("selectPagi", props.actionPage + 1)
+    setDelyAnimate()
+  }
+}
+function actionSelectPagi(pagi: number) {
+  emit("selectPagi", pagi)
+  setDelyAnimate()
+}
+function setDelyAnimate() {
+  const origin = document.querySelector(".app-inner")
+  if (origin) {
+    origin.scrollTop = 0
+  }
+  barShow.value = true
+  setTimeout(() => {
+    barShow.value = false
+  }, 600);
+}
 </script>
