@@ -161,7 +161,7 @@ const routes = [
     }
   },
   {
-    path: '/board/stargazer/add/:lid',
+    path: '/board/stargazer/add',
     name: 'AddSingleStargazer',
     component: AddSingleStargazer,
     meta: {

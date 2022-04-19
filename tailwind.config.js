@@ -60,7 +60,8 @@ module.exports = {
         'menu-search': 'url("' + bgPath + '/menu-bg-06.jpg")',
         'about-writing': 'url("' + bgPath + '/bg-about-white.jpg")',
         'story-featured': 'url("' + bgPath + '/story-bg-02.jpg")',
-        'admin-featured': 'url("' + bgPath + '/admin-bg.jpg")'
+        'admin-featured': 'url("' + bgPath + '/admin-bg.jpg")',
+        'default-upload-img': 'url("' + bgPath + '/default-image-438x438.gif")'
       },
       backgroundSize: {
         'auto-500': 'auto 500px'
@@ -128,7 +129,8 @@ module.exports = {
         '7px': '7px',
         '5px': '5px',
         '4px': '4px',
-        '1/2-7px': 'calc(50% - 7px)'
+        '1/2-7px': 'calc(50% - 7px)',
+        '1/2-3px': 'calc(50% - 3px)'
       },
       minHeight: {
         '100px': '100px'
