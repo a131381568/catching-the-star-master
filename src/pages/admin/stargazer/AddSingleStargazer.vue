@@ -49,7 +49,7 @@
           <div class="input-group mb-14">
             <div class="map-search-bar flex justify-between">
               <h4 class="text-main-color-light font-normal">地點經緯度</h4>
-              <button class="w-24 h-9 bg-sub-color-light text-middle">地圖查詢</button>
+              <button class="w-24 h-9 bg-sub-color-light text-middle" @click.prevent="openModal">地圖查詢</button>
             </div>
             <div
               class="relative place-lat-lon-container flex space-x-3 justify-between before:content-[','] before:block before:absolute before:-bottom-1 before:left-1/2-3px before:text-main-color-light before:opacity-70">
@@ -84,15 +84,214 @@
       </div>
       <Footer class="absolute bottom-0 mobile:left-0" />
     </div>
+    <!-------------- 燈箱 --------------->
+    <div
+      class="admin-stargazer-modal bg-black bg-opacity-80 w-full h-full fixed left-0 top-0 flex items-center justify-center animate__animated"
+      :class="[{ animate__fadeOut: !modal }, { animate__fadeIn: modal }, { 'z-9999': modalInner }, { '-z-50': !modalInner }]">
+      <button class="absolute right-4 top-4 button small text-white" title="close" @click.prevent="closeModal">
+        𝖷
+      </button>
+      <div id="map-container" ref="mapModalRef" class="w-5/6 h-4/5 modal-inner">
+      </div>
+    </div>
   </div>
 </template>
 <script setup lang="ts">
+import L from "leaflet";
+import { markType, layerClickEvent } from '@/types/graphql/types'
 import schema from '@/utils/vee-validate-schema'
 import { Field, Form } from 'vee-validate';
 import { stargazerList } from '@/api/stargazing'
 import { StargazingArr, PageInfoPush } from '@/types/graphql/types'
 import { updateFile } from '@/api/utils'
-import { useDebounceFn } from '@vueuse/core'
+import { useDebounceFn, onClickOutside } from '@vueuse/core'
+
+// ================================= 設定燈箱 =========================================
+
+const modalInner = ref(false)
+const mapModalRef = ref(null)
+const modal = ref(false)
+
+onClickOutside(mapModalRef,
+  (event) => {
+    if (modal.value === true || modalInner.value === true) {
+      closeModal()
+    }
+  }
+)
+
+function closeModal() {
+  // console.log("closeModal")
+  modal.value = false
+  setTimeout(() => {
+    modalInner.value = false
+  }, 1000);
+}
+
+function openModal() {
+  // console.log("openModal")
+  modal.value = true
+  setTimeout(() => {
+    modalInner.value = true
+  }, 300);
+}
+
+// ================================= 設定地圖 =========================================
+
+// 宣告欄位
+let popupLayer = ref({
+  setLatLng: (x: object) => true,
+  setContent: (y: string) => true,
+  openOn: (z: object) => true
+})
+let actMarkName = ref<string>("")
+let actMarkLatitude = ref<number>(0)
+let actMarkLongitude = ref<number>(0)
+let actMarkImg = ref<string>("")
+let actMarkDescription = ref<string>("")
+let actMarkAddress = ref<string>("")
+let actMarkLink = ref<string>("")
+
+// 預設地圖物件
+let coordinate = ref([0, 0])
+
+let map = ref({
+  zoomControl: {
+    setPosition: (n: string) => ""
+  },
+  remove(): void { },
+  on(n: string, event: any): void { },
+  setView: (x: Array<Number>, y: Number) => true,
+  closePopup(): void { },
+  removeLayer(layerObj: object): void { }
+})
+
+const customIcon = L.icon({
+  iconUrl: '/img/mark-op.png',
+  iconSize: [50, 50]
+});
+
+// circle life --------------------------------------------------------------
+onMounted(async () => {
+  // 先設定預設值
+  await setDefaultActData()
+  // 地圖實體化
+  await mapInit()
+});
+
+onBeforeUnmount(() => {
+  destroyMap()
+});
+
+function mapInit() {
+  // 建立 map 實例
+  map.value = L.map('map-container', {
+    center: coordinate.value,
+    zoom: 10, // 0-18
+    attributionControl: false, // leaflet
+    zoomControl: true, // - + 按鈕
+    scrollWheelZoom: false,
+    zoomAnimation: true,
+    fadeAnimation: true,
+    markerZoomAnimation: true,
+    attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+  })
+  L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png').addTo(map.value);
+  map.value.zoomControl.setPosition('topright');
+
+  // 建立座標圖層
+  let markersLayer = L.featureGroup().addTo(map.value);
+
+  // 設置 popup 
+  popupLayer.value = L.popup({ offset: [0, -13], className: 'stargazing-map-pop' });
+  map.value.on('click', function (event: layerClickEvent) {
+    onMapClick(event, markersLayer);
+  })
+}
+
+function onMapClick(event: layerClickEvent, layer: any) {
+  let lat = event.latlng.lat; // 緯度
+  let lng = event.latlng.lng; // 經度
+  let placeInfo = {
+    "stargazing_title": "",
+    "stargazing_latitude": lat,
+    "stargazing_longitude": lng,
+    "stargazing_image": "",
+    "stargazing_description": "",
+    "stargazing_address": "",
+    "stargazing_link": "",
+    "stargazing_lid": ""
+  }
+
+  // 地圖插點
+  layer.clearLayers();
+  setMark(placeInfo, layer)
+
+  // 綁定 popup 內容
+  popupLayer.value.setLatLng(event.latlng)
+  popupLayer.value.setContent(`<div class="admin-stargazer-pop">緯度：${lat}<br/>經度：${lng}<br /><button id="pop-check-btn">套用座標</button></div>`)
+  popupLayer.value.openOn(map.value);
+
+  // 綁定套用座標事件
+  const popBtn = document.getElementById("pop-check-btn")
+  L.DomEvent.on(popBtn, 'click', (event: MouseEvent) => {
+    setActMarkData(placeInfo)
+    closeModal()
+    applyLatLon()
+  })
+
+  // 針對點擊座標定位縮放
+  map.value.setView([lat, lng], 10)
+
+  // 將 active 欄位儲存
+  actMarkLatitude.value = lat
+  actMarkLongitude.value = lng
+}
+
+function applyLatLon() {
+  placeLat.value = actMarkLatitude.value
+  placeLon.value = actMarkLongitude.value
+}
+
+function setMark(markInfo: markType, layer: object) {
+  const marker = L.marker(
+    [markInfo.stargazing_latitude, markInfo.stargazing_longitude], {
+    icon: customIcon,
+    title: markInfo.stargazing_title,
+    opacity: 1.0
+  }).addTo(layer);
+}
+
+function setDefaultActData() {
+  let defaultPlaceInfo = {
+    "stargazing_title": "",
+    "stargazing_latitude": 22.828574143383403,
+    "stargazing_longitude": 121.15307085653819,
+    "stargazing_image": "",
+    "stargazing_description": "",
+    "stargazing_address": "",
+    "stargazing_link": "",
+    "stargazing_lid": ""
+  }
+  coordinate.value = [defaultPlaceInfo.stargazing_latitude, defaultPlaceInfo.stargazing_longitude]
+  setActMarkData(defaultPlaceInfo)
+}
+
+function setActMarkData(obj: markType) {
+  actMarkName.value = obj.stargazing_title
+  actMarkLatitude.value = obj.stargazing_latitude
+  actMarkLongitude.value = obj.stargazing_longitude
+  actMarkImg.value = obj.stargazing_image
+  actMarkDescription.value = obj.stargazing_description
+  actMarkAddress.value = obj.stargazing_address
+  actMarkLink.value = obj.stargazing_link
+}
+
+function destroyMap() {
+  map.value.remove()
+}
+
+////////////////////////////
 
 // 輸入欄位綁定
 const addPlaceForm = ref({
@@ -102,8 +301,8 @@ const addPlaceForm = ref({
 const placeName = ref("")
 const placeDescription = ref("")
 const placeIntroduction = ref("")
-const placeLat = ref(null)  // 緯度
-const placeLon = ref(null) // 經度
+const placeLat = ref<number | null>(null)  // 緯度
+const placeLon = ref<number | null>(null) // 經度
 const placeImg = ref("")  // 緯度
 const verifyRules = {
   placeNameRef: schema.required,
