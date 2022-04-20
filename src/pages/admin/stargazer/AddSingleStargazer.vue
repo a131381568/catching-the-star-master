@@ -18,7 +18,7 @@
           <div class="input-group mb-14">
             <h4 class="text-main-color-light font-normal">地點名稱</h4>
             <Field name="placeNameRef" type="text"
-              class="w-full h-8 block m-auto bg-transparent border-t-0 border-b border-x-0 text-middle px-0 py-7 border-main-color-light border-opacity-30 focus:outline-0 focus:ring-0 focus:border-opacity-70 focus:border-white text-main-color-light"
+              class="w-full h-8 block m-auto bg-transparent border-t-0 border-b border-x-0 text-lg px-0 py-7 border-main-color-light border-opacity-30 focus:outline-0 focus:ring-0 focus:border-opacity-70 focus:border-white text-main-color-light"
               :class="{ 'border-red-700 border-opacity-100': errors.placeNameRef }" v-model="placeName" />
             <span v-show="errors.placeNameRef" class="text-red-700 text-xs w-full h-5 block m-auto mt-2">{{
               errors.placeNameRef
@@ -28,7 +28,7 @@
           <div class="input-group mb-14">
             <h4 class="text-main-color-light font-normal">地址說明</h4>
             <Field name="placeDescriptionRef" type="text"
-              class="w-full h-8 block m-auto bg-transparent border-t-0 border-b border-x-0 text-middle px-0 py-7 border-main-color-light border-opacity-30 focus:outline-0 focus:ring-0 focus:border-opacity-70 focus:border-white text-main-color-light"
+              class="w-full h-8 block m-auto bg-transparent border-t-0 border-b border-x-0 text-lg px-0 py-7 border-main-color-light border-opacity-30 focus:outline-0 focus:ring-0 focus:border-opacity-70 focus:border-white text-main-color-light"
               :class="{ 'border-red-700 border-opacity-100': errors.placeDescriptionRef }" v-model="placeDescription" />
             <span v-show="errors.placeDescriptionRef" class="text-red-700 text-xs w-full h-5 block m-auto mt-2">{{
               errors.placeDescriptionRef
@@ -38,7 +38,7 @@
           <div class="input-group mb-14">
             <h4 class="text-main-color-light font-normal">地點介紹</h4>
             <Field name="placeIntroductionRef" type="text" as="textarea"
-              class="w-full h-200px resize-none block m-auto bg-transparent border-t-0 border-b border-x-0 text-middle px-0 py-7 border-main-color-light border-opacity-30 focus:outline-0 focus:ring-0 focus:border-opacity-70 focus:border-white text-main-color-light"
+              class="w-full h-200px resize-none block m-auto bg-transparent border-t-0 border-b border-x-0 text-lg px-0 py-7 border-main-color-light border-opacity-30 focus:outline-0 focus:ring-0 focus:border-opacity-70 focus:border-white text-main-color-light"
               :class="{ 'border-red-700 border-opacity-100': errors.placeIntroductionRef }"
               v-model="placeIntroduction" />
             <span v-show="errors.placeIntroductionRef" class="text-red-700 text-xs w-full h-5 block m-auto mt-2">{{
@@ -74,12 +74,13 @@
         </Form>
         <div class="w-5/12">
           <div class="h-52 w-full bg-slate-500 bg-default-upload-img bg-no-repeat bg-cover bg-center"></div>
-          <div class="upload-bar flex justify-between my-7">
+          <div class="upload-bar flex justify-between mt-7 mb-1">
             <h4 class="text-main-color-light font-normal">地點圖片</h4>
             <button class="w-24 h-9 bg-sub-color-light text-middle">上傳圖片
               <input type="file" @change="updateFileAct($event)" multiple>
             </button>
           </div>
+          <h5 class="text-main-color-light mb-7">{{ placeImg }}</h5>
         </div>
       </div>
       <Footer class="absolute bottom-0 mobile:left-0" />
@@ -105,6 +106,9 @@ import { stargazerList } from '@/api/stargazing'
 import { StargazingArr, PageInfoPush } from '@/types/graphql/types'
 import { updateFile } from '@/api/utils'
 import { useDebounceFn, onClickOutside } from '@vueuse/core'
+// 取得路由
+const route = useRoute()
+const routeName = String(route.name)
 
 // ================================= 設定燈箱 =========================================
 
@@ -303,7 +307,7 @@ const placeDescription = ref("")
 const placeIntroduction = ref("")
 const placeLat = ref<number | null>(null)  // 緯度
 const placeLon = ref<number | null>(null) // 經度
-const placeImg = ref("")  // 緯度
+const placeImg = ref("")  // 圖片名稱
 const verifyRules = {
   placeNameRef: schema.required,
   placeDescriptionRef: schema.required,
@@ -312,36 +316,9 @@ const verifyRules = {
   placeLonRef: schema.required
 }
 
-// 取得路由
-const route = useRoute()
-const routeName = String(route.name)
-
-// 宣告列表預設值
-const actionPage = ref(1)
-const stargazingEdges = ref<StargazingArr>([])
-const stargazingPageInfo = ref<PageInfoPush>({
-  hasNextPage: false,
-  hasPreviousPage: false,
-  start: 0,
-  end: 0,
-  totalPagi: 0
-})
-
-// 生命週期 --------------------------------------------------------------
-onMounted(async () => {
-  // 取得地圖列表資訊
-  await getStargazerList(1)
-});
 
 // ======================= 函式 ==============================
-async function getStargazerList(pagi: Number) {
-  const res = await stargazerList(Number(pagi), 10, routeName)
-  stargazingEdges.value = []
-  setTimeout(() => {
-    stargazingEdges.value = res.data.stargazingPagi.edges
-    stargazingPageInfo.value = res.data.stargazingPagi.pageInfo
-  }, 300);
-}
+
 
 // 測試上傳檔案
 const localFile = ref(null)
@@ -352,7 +329,8 @@ async function updateFileAct(event: Event) {
   if (fileList !== null) {
     const res = await updateFile(fileList[0], routeName)
     localFile.value = res.data.singleUpload
+    placeImg.value = res.data.singleUpload.filename
   }
-  console.log(localFile.value)
+  // console.log(localFile.value)
 }
 </script>
