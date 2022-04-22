@@ -263,7 +263,7 @@
           class="h-table:w-5/12 w-10/12 h-8 block m-auto bg-transparent border-t-0 border-b-2 border-x-0 text-middle placeholder-main-color-dark px-0 py-7 border-main-color-black border-opacity-30 focus:outline-0 focus:ring-0 focus:border-opacity-70 focus:border-main-color-black focus:placeholder-transparent mt-2"
           :class="{ 'border-red-700 border-opacity-100': errors.email }" placeholder="密碼" v-model="loginPassword" />
         <button @click.prevent="actionLoginAuth"
-          class="h-table:w-5/12 w-10/12 btn border block font-bold mt-14 m-auto text-middle shadow-none text-main-color-black border-main-color-black tracking-wider hover:bg-main-color-dark transition-all duration-1000 hover:text-main-color-light">
+          class="h-table:w-5/12 w-10/12 btn border block font-bold mt-14 m-auto text-middle shadow-none text-main-color-black border-main-color-black tracking-wide-content hover:bg-main-color-dark transition-all duration-300 hover:text-main-color-light h-12 text-center items-center p-0 justify-center">
           登入後台
         </button>
         <span v-show="errors.email" class="text-red-700 text-xs h-table:w-5/12 w-10/12 h-5 block m-auto mt-2">{{

@@ -7,7 +7,7 @@
       <div class="w-9/12 mobile:w-11/12 flex justify-between mb-20 mobile:mb-9 mobile:block mobile:mx-auto">
         <h1 class="text-white relative -left-2 -top-2 mobile:text-5xl w-3/4 mobile:w-full">新增觀星地點</h1>
         <router-link to="/board/stargazer/add"
-          class="flex btn draw meet text-lg w-2/12 mobile:w-1/3 mobile:mt-6 h-12 btn text-center items-center p-0 justify-center pb-1">
+          class="flex btn draw meet text-lg w-2/12 mobile:w-1/3 mobile:mt-6 h-12 btn text-center items-center p-0 justify-center">
           儲存新增
         </router-link>
       </div>

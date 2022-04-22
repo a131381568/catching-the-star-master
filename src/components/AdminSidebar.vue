@@ -354,7 +354,7 @@ const adminMenu = ref([
   },
   {
     title: "前台首頁",
-    path: "/board/stargazer"
+    path: "/"
   },
   {
     title: "登出",
