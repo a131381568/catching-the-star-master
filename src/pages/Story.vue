@@ -23,7 +23,7 @@
             </div>
             <div class="middle-pc:w-9/12">
               <router-link :to="'/story/' + item.postid">
-                <h2 class="text-3xl text-white font-semibold group-hover:text-sp-color-light delay-75 duration-1000">{{
+                <h2 class="text-3xl text-white group-hover:text-sp-color-light delay-75 duration-1000">{{
                   item.title
                 }}</h2>
               </router-link>
@@ -46,7 +46,7 @@
     <div class="h-table:w-10/12 w-table:text-center text-left"
       v-show="storyPageInfo.hasNextPage && postList.length > 0">
       <button class="mt-20 btn draw meet" @click.prevent="loadMoreTimeLine()">
-        <span>Load More</span>
+        <span>加載更多</span>
       </button>
     </div>
   </div>

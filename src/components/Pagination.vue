@@ -15,7 +15,7 @@
         <li :class="{ 'pointer-events-none': actionPage === index }" v-for="index in totalPagi" :key="index"
           @click="actionSelectPagi(index)">
           <a class="transition-all duration-700 cursor-pointer w-6 h-6 inline-flex items-center justify-center
-          text-main-color-light text-middle rounded-full pb-2px mx-1 hover:text-main-color-dark hover:bg-main-color-light"
+          text-main-color-light text-middle rounded-full pl-2px pb-2px mx-1 hover:text-main-color-dark hover:bg-main-color-light font-semibold"
             :class="{ '!text-main-color-dark bg-main-color-light': actionPage === index }">
             {{ index }}</a>
         </li>

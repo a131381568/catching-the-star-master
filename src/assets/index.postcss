@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400&family=Playfair+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400&family=Playfair+Display&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -37,13 +37,13 @@
 @layer base {
   /* global variable */
   h1 {
-    @apply text-7xl tracking-wide-content;
+    @apply text-7xl tracking-wide-title;
   }
   h2 {
-    @apply text-4xl tracking-wide-content;
+    @apply text-4xl tracking-wide-title;
   }
   h3 {
-    @apply text-3xl tracking-wide-content;
+    @apply text-3xl tracking-wide-title;
   }
   h4 {
     @apply text-2xl;
@@ -208,7 +208,7 @@
   /* read btn + load btn */
   .btn{
     padding: 0.6rem 3.1rem 0.8rem;
-    @apply align-middle border-0 bg-none box-border relative large-pc:text-lg text-sm text-main-color-light transition-all duration-500 shadow-btn-default;
+    @apply align-middle border-0 bg-none box-border relative large-pc:text-lg text-sm text-main-color-light transition-all duration-500 shadow-btn-default uppercase font-sans tracking-wide-content;
   }
   .draw {
     transition: color 0.25s
@@ -267,7 +267,7 @@
     @apply mb-3
   }
   .md-container blockquote *{
-    @apply text-white font-semibold
+    @apply text-white font-normal
   }
   .md-container blockquote{
     @apply pl-4 border-l-4 border-white my-6

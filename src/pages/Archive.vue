@@ -27,7 +27,7 @@
       </div>
       <div class="w-full text-center" v-show="archivePageInfo.hasNextPage && postList.length > 0">
         <button class="middle-pc:mt-16 h-table:mt-12 mobile:mt-10 btn draw meet" @click.prevent="loadMoreData()">
-          <span>Load More</span>
+          <span>加載更多</span>
         </button>
       </div>
     </div>

@@ -35,7 +35,7 @@
           <p class="text-main-color-light font-light mt-6 text-lg grid-des-box">{{ val.facilities_description }}</p>
           <!-- link -->
           <a class="mt-7 btn draw meet inline-block" :href="String(val.facilities_link)" target="_blank">
-            <span>Read More</span>
+            <span>查看更多</span>
           </a>
         </div>
       </div>

@@ -82,7 +82,7 @@
 
           <!-- link -->
           <router-link class="mt-10 btn draw meet inline-block" :to="'/science/' + val.postid">
-            <span>Read More</span>
+            <span>查看更多</span>
           </router-link>
         </div>
       </div>
@@ -90,7 +90,7 @@
     <div :class="['h-table:w-10/12', 'h-screen']" v-show="postList.length === 0"></div>
     <div class="h-table:w-10/12 text-center" v-show="sciencePageInfo.hasNextPage && postList.length > 0">
       <button class="h-table:mt-24 mt-6 mobile:mt-11 btn draw meet" @click.prevent="loadMoreData()">
-        <span>Load More</span>
+        <span>加載更多</span>
       </button>
     </div>
   </div>

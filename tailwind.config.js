@@ -8,8 +8,8 @@ module.exports = {
     extend: {
       fontFamily: {
         // sans: [...defaultTheme.fontFamily.sans],
-        'sans': ['Noto Sans TC', "微軟正黑體", "Microsoft JhengHei", "黑體", 'sans-serif', 'serif'],
-        'serif': ['Playfair\\ Display', 'Georgia', 'Times', ' serif']
+        'sans': ['Times New Roman', 'Noto Serif TC', "微軟正黑體", "Microsoft JhengHei", "黑體", 'sans-serif'],
+        'serif': ['Playfair\\ Display', 'Times New Roman', 'Georgia', 'Times', ' serif']
       },
       fontSize: {
         'tiny': '.938rem',
@@ -80,6 +80,7 @@ module.exports = {
       letterSpacing: {
         'wide-menu': '0.5rem',
         'wide-content': '0.15rem',
+        'wide-title': '0.3rem'
       },
       borderWidth: {
         'callout-box-boder': '10px'
