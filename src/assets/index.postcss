@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400&family=Playfair+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -193,7 +193,7 @@
 
   /* leaflet pop */
   .stargazing-map-pop .leaflet-popup-content{
-    @apply tracking-normal font-normal 
+    @apply tracking-normal font-normal font-sans
   }
 
   /* post grid */
@@ -242,6 +242,9 @@
   .meet:hover::after {
     transition: width 0.25s ease-out 0.25s;
     @apply border-danger border-t-0 border-r-0 border-b border-l;
+  }
+  .admin-sbtn{
+    @apply hover:bg-sp-color-light hover:text-white duration-300 transition-all w-24 h-9 bg-sub-color-light text-middle tracking-widest
   }
 
   /* markdown */
@@ -380,7 +383,7 @@
     @apply font-normal text-middle
   }
   .admin-stargazer-pop button{
-    @apply bg-sp-color-light text-main-color-dark w-full py-1 mt-2 tracking-wide-content
+    @apply hover:bg-sp-color-light text-white w-full py-1 mt-2 tracking-wide-content bg-main-color-dark transition-all duration-300
   }
 
   /* logo */

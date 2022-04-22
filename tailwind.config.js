@@ -9,7 +9,7 @@ module.exports = {
       fontFamily: {
         // sans: [...defaultTheme.fontFamily.sans],
         'sans': ['Times New Roman', 'Noto Serif TC', "微軟正黑體", "Microsoft JhengHei", "黑體", 'sans-serif'],
-        'serif': ['Playfair\\ Display', 'Times New Roman', 'Georgia', 'Times', ' serif']
+        'serif': ['Times New Roman', 'Georgia', 'Times', ' serif']
       },
       fontSize: {
         'tiny': '.938rem',

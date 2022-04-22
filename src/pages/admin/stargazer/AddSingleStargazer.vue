@@ -49,8 +49,7 @@
           <div class="input-group mb-14">
             <div class="map-search-bar flex justify-between">
               <h4 class="text-main-color-light font-normal">地點經緯度</h4>
-              <button class="w-24 h-9 bg-sub-color-light text-middle tracking-widest"
-                @click.prevent="openModal">地圖查詢</button>
+              <button class="admin-sbtn" @click.prevent="openModal">地圖查詢</button>
             </div>
             <div
               class="relative place-lat-lon-container flex space-x-3 justify-between before:content-[','] before:block before:absolute before:-bottom-1 before:left-1/2-3px before:text-main-color-light before:opacity-70">
@@ -77,7 +76,7 @@
           <div class="h-52 w-full bg-slate-500 bg-default-upload-img bg-no-repeat bg-cover bg-center"></div>
           <div class="upload-bar flex justify-between mt-7 mb-1">
             <h4 class="text-main-color-light font-normal">地點圖片</h4>
-            <button class="w-24 h-9 bg-sub-color-light text-middle tracking-widest">上傳圖片
+            <button class="admin-sbtn">上傳圖片
               <input type="file" @change="updateFileAct($event)" multiple>
             </button>
           </div>
