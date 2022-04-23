@@ -257,19 +257,25 @@
       <!-- 登入 -->
       <Form ref="loginForm" :validation-schema="verifyRules" v-slot="{ errors }" class="relative">
         <Field name="email" type="text"
-          class="h-table:w-5/12 w-10/12 h-8 block m-auto bg-transparent border-t-0 border-b-2 border-x-0 text-middle placeholder-main-color-dark px-0 py-7 border-main-color-black border-opacity-30 focus:outline-0 focus:ring-0 focus:border-opacity-70 focus:border-main-color-black focus:placeholder-transparent"
-          :class="{ 'border-red-700 border-opacity-100': errors.email }" placeholder="帳號" v-model="loginAccount" />
+          class="h-table:w-5/12 w-10/12 h-8 block m-auto bg-transparent border-t-0 border-b-2 border-x-0 text-middle placeholder-main-color-dark px-0 py-7 border-opacity-30 focus:outline-0 focus:ring-0 focus:border-opacity-70 focus:border-main-color-black focus:placeholder-transparent"
+          :class="[
+            { 'border-sp-color-dark border-opacity-100': errors.email },
+            { 'border-main-color-black': !errors.email }
+          ]" placeholder="帳號" v-model="loginAccount" />
         <Field name="password" type="password"
-          class="h-table:w-5/12 w-10/12 h-8 block m-auto bg-transparent border-t-0 border-b-2 border-x-0 text-middle placeholder-main-color-dark px-0 py-7 border-main-color-black border-opacity-30 focus:outline-0 focus:ring-0 focus:border-opacity-70 focus:border-main-color-black focus:placeholder-transparent mt-2"
-          :class="{ 'border-red-700 border-opacity-100': errors.email }" placeholder="密碼" v-model="loginPassword" />
+          class="h-table:w-5/12 w-10/12 h-8 block m-auto bg-transparent border-t-0 border-b-2 border-x-0 text-middle placeholder-main-color-dark px-0 py-7 border-opacity-30 focus:outline-0 focus:ring-0 focus:border-opacity-70 focus:border-main-color-black focus:placeholder-transparent mt-2"
+          :class="[
+            { 'border-sp-color-dark border-opacity-100': errors.password },
+            { 'border-main-color-black': !errors.password }
+          ]" placeholder="密碼" v-model="loginPassword" />
         <button @click.prevent="actionLoginAuth"
           class="h-table:w-5/12 w-10/12 btn border block font-bold mt-14 m-auto text-middle shadow-none text-main-color-black border-main-color-black tracking-wide-content hover:bg-main-color-dark transition-all duration-300 hover:text-main-color-light h-12 text-center items-center p-0 justify-center">
           登入後台
         </button>
-        <span v-show="errors.email" class="text-red-700 text-xs h-table:w-5/12 w-10/12 h-5 block m-auto mt-2">{{
+        <span v-show="errors.email" class="text-sp-color-dark text-xs h-table:w-5/12 w-10/12 h-5 block m-auto mt-2">{{
           errors.email
         }}</span>
-        <span v-show="errors.password" class="text-red-700 text-xs h-table:w-5/12 w-10/12 h-5 block m-auto">{{
+        <span v-show="errors.password" class="text-sp-color-dark text-xs h-table:w-5/12 w-10/12 h-5 block m-auto">{{
           errors.password
         }}</span>
       </Form>

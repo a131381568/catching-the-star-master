@@ -19,6 +19,7 @@ module.exports = {
       },
       colors: {
         'sp-color-light': '#80b884',
+        'sp-color-dark': '#00910a',
         'main-color-light': '#c5c5ca',
         'main-color-middle': '#747475',
         'main-color-dark': '#1f1f39',
@@ -30,6 +31,7 @@ module.exports = {
         'secondary': '#c5c5ca',
         'danger': '#80b884',
         'sp-color-light': '#80b884',
+        'sp-color-dark': '#00910a',
         'main-color-light': '#c5c5ca',
         'main-color-middle': '#747475',
         'main-color-dark': '#1f1f39',
@@ -42,6 +44,7 @@ module.exports = {
         'secondary': '#bbb494',
         'danger': '#80b884',
         'sp-color-light': '#80b884',
+        'sp-color-dark': '#00910a',
         'main-color-light': '#c5c5ca',
         'main-color-middle': '#747475',
         'main-color-dark': '#1f1f39',

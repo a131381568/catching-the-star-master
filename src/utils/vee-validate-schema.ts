@@ -18,5 +18,9 @@ export default {
       return '請輸入信箱格式'
     }
     return true
+  },
+  image(value: string) {
+    if (!value) return '請上傳圖片'
+    return true
   }
 }
