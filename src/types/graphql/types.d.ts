@@ -7,6 +7,7 @@ export type File = {
   filename: String
   mimetype: String
   encoding: String
+  s3Path: String
 }
 
 export type AboutInfo = {
