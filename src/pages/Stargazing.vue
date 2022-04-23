@@ -64,7 +64,9 @@
     </div>
     <div class="px-4 text-sub-color-light flex items-center row-span-1 mobile:pb-2">
       <img class="w-15px mr-2" src="/svg/mark.svg" />
-      <a :href="actMarkLink" target="_blank">{{ actMarkAddress }}</a>
+      <a :href="`https://maps.google.com?q=${actMarkLatitude},${actMarkLongitude}`" target="_blank">{{
+        actMarkAddress
+      }}</a>
     </div>
   </div>
   <!-- 地圖容器 -->

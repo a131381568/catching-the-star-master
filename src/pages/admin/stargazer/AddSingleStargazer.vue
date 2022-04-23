@@ -114,15 +114,15 @@
 </template>
 <script setup lang="ts">
 import L from "leaflet";
-import { markType, layerClickEvent } from '@/types/graphql/types'
+import { markType, layerClickEvent, StargazingArr, PageInfoPush, CommonResponse } from '@/types/graphql/types'
 import schema from '@/utils/vee-validate-schema'
 import { Field, Form } from 'vee-validate';
-import { stargazerList } from '@/api/stargazing'
-import { StargazingArr, PageInfoPush } from '@/types/graphql/types'
+import { stargazerList, setNewStargazer } from '@/api/stargazing'
 import { updateFile } from '@/api/utils'
 import { useDebounceFn, onClickOutside } from '@vueuse/core'
 // 取得路由
 const route = useRoute()
+const router = useRouter()
 const routeName = String(route.name)
 
 
@@ -359,18 +359,28 @@ const uploadImgPath = computed(() => {
   }
 })
 
-
 // 送出防抖表單
 const actionAddPlace = useDebounceFn(async () => {
   const { valid } = await addPlaceForm.value.validate()
   console.log(valid)
   if (valid) {
     console.log("可以新增")
-  } else {
-    console.log("不能新增")
+    const res = await setNewStargazer(
+      placeName.value,
+      placeLat.value || 0,
+      placeLon.value || 0,
+      placeImgPath.value,
+      placeIntroduction.value,
+      placeDescription.value,
+      true,
+      routeName
+    )
+    if (res.data.setNewStargazer.code) {
+      alert(res.data.setNewStargazer.message)
+    }
+    router.push("/board/stargazer")
   }
 })
-
 
 // 生命週期 --------------------------------------------------------------
 onMounted(async () => {

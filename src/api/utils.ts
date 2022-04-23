@@ -46,7 +46,8 @@ export function updateFile(file: any, pageRouteName: string) {
     variables: {
       file,
       pageRouteName
-    }
+    },
+    fetchPolicy: 'no-cache'
   })
 }
 
@@ -98,6 +99,7 @@ export function loginAuthentication(email: string, password: string, pageRouteNa
       email,
       password,
       pageRouteName
-    }
+    },
+    fetchPolicy: 'no-cache'
   })
 }

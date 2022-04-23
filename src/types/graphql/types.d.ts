@@ -118,6 +118,12 @@ export type StargazingConnectionPush = {
   pageInfo: PageInfoPush
 }
 
+// 新增編輯回傳格式
+export type CommonResponse = {
+  code: number
+  message: string
+}
+
 // map
 export type coordinate = {
   stargazing_title: string
