@@ -8,6 +8,7 @@ export type File = {
   mimetype: String
   encoding: String
   s3Path: String
+  errorTitle: String
 }
 
 export type AboutInfo = {

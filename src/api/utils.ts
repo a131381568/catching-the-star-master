@@ -39,6 +39,7 @@ export function updateFile(file: any, pageRouteName: string) {
           mimetype
           encoding
           s3Path
+          errorTitle
         }
       }
     `,

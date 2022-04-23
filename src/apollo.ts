@@ -153,7 +153,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
       alert(networkError)
       console.log(`[Network error]: ${networkError}`);
       // 彈回 404
-      window.location.pathname = '/notfound';
+      // window.location.pathname = '/notfound';
     }
   }
 });

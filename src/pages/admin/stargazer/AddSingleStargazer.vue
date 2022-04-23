@@ -76,9 +76,9 @@
           <div class="h-52 w-full bg-slate-500 bg-default-upload-img bg-no-repeat bg-cover bg-center"></div>
           <div class="upload-bar flex justify-between mt-7 mb-1">
             <h4 class="text-main-color-light font-normal">地點圖片</h4>
-            <button class="admin-sbtn">上傳圖片
-              <input type="file" @change="updateFileAct($event)" multiple>
-            </button>
+            <label class="admin-sbtn relative flex items-center justify-center">上傳圖片
+              <input class="hidden" type="file" @change="updateFileAct($event)">
+            </label>
           </div>
           <h5 class="text-main-color-light mb-7">{{ placeImg }}</h5>
         </div>
