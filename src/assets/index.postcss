@@ -325,6 +325,30 @@
   .md-container thead th:nth-child(1), .md-container td:nth-child(1), .table-container thead th:nth-child(1), .table-container td:nth-child(1){
     @apply pl-0
   }
+  .md-container .v-md-editor__toolbar ul{
+    @apply list-none ml-0
+  }
+  .md-container .v-md-editor-preview{
+    @apply bg-main-color-dark text-main-color-light p-5
+  }
+  .view-mode{
+    @apply bg-main-color-light px-10 py-8
+  }
+  .edit-mode{
+    @apply bg-white px-10 py-6 
+  }
+  .view-mode .home-title{
+    @apply text-2xl mb-3 block
+  }
+  .view-mode .home-title i{
+    @apply not-italic text-2xl text-sp-color-dark
+  }
+  .edit-mode input{
+    @apply text-base block border-b border-main-color-light w-full text-main-color-dark outline-none shadow-none
+  }
+  .md-container .v-md-textarea-editor textarea{
+    @apply font-sans text-base
+  }
 
   /*-------------------------------- RWD Table ----------------------------------*/
   @media only screen and (max-width: 760px),

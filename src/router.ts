@@ -12,8 +12,8 @@ import Search from '@/pages/Search.vue'
 import NotFound from '@/pages/NotFound.vue'
 import Login from '@/pages/admin/Login.vue'
 import Board from '@/pages/admin//Board.vue'
+import Slogan from '@/pages/admin//Slogan.vue'
 import Stargazer from '@/pages/admin/stargazer/Stargazer.vue'
-import EditSingleStargazer from '@/pages/admin/stargazer/EditSingleStargazer.vue'
 import AddSingleStargazer from '@/pages/admin/stargazer/AddSingleStargazer.vue'
 
 const routes = [
@@ -139,6 +139,15 @@ const routes = [
     component: Board,
     meta: {
       title: '後台系統管理',
+      manage: true
+    }
+  },
+  {
+    path: '/board/slogan',
+    name: 'Slogan',
+    component: Slogan,
+    meta: {
+      title: '標語管理',
       manage: true
     }
   },

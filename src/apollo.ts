@@ -1,20 +1,21 @@
-import { from } from '@apollo/client/core'
-import { ApolloClient, HttpLink } from '@apollo/client/core'
-import { InMemoryCache } from '@apollo/client/cache'
+import { from } from "@apollo/client/core"
+import { ApolloClient, HttpLink } from "@apollo/client/core"
+import { InMemoryCache } from "@apollo/client/cache"
 import { onError } from "@apollo/client/link/error";
-import { setContext } from 'apollo-link-context'
-import { createUploadLink } from 'apollo-upload-client'
+import { setContext } from "apollo-link-context"
+import { createUploadLink } from "apollo-upload-client"
 import { TokenRefreshLink } from "apollo-link-token-refresh";
 
 const refreshLink = new TokenRefreshLink({
-  accessTokenField: 'accessToken',
+  accessTokenField: "accessToken",
   // 判斷是否過期
   // ↓ !isTokenExpired() || typeof getAccessToken() !== 'string'
   isTokenValidOrUndefined: operation => {
     // console.log("第一個")
+    const routeName = operation.variables.pageRouteName
     const reqName = operation.operationName
-    const localExp = localStorage.getItem('expired') || ""
-    const localRefreshExp = localStorage.getItem('refresh-expired') || ""
+    const localExp = localStorage.getItem("expired") || ""
+    const localRefreshExp = localStorage.getItem("refresh-expired") || ""
     const nowTimeStamp = Math.floor(new Date().getTime() / 1000)
     const expiredTimeStamp = Number(localExp)
     const reFreshTokenTimeStamp = Number(localRefreshExp)
@@ -43,11 +44,11 @@ const refreshLink = new TokenRefreshLink({
       if (!tokenState && refreshState) {
         return false
       } else if (!tokenState && !tokenState) {
-        if (operation.variables.pageRouteName === "Login") {
+        if (routeName === "Login") {
           // 已經在登入頁
         } else {
           // 彈回登入頁
-          window.location.pathname = '/login';
+          window.location.pathname = "/login";
         }
         return true
       } else {
@@ -56,8 +57,15 @@ const refreshLink = new TokenRefreshLink({
     } else {
       // 兩個 token 值都有問題回傳
       // console.log("token 都有問題")
-      // 彈回登入頁
-      window.location.pathname = '/login';
+      // 設置無 token 可以在前台檢視的頁面
+      const frontEndPage = [
+        "Home", "About", "Science", "SingleScience", "Story", "SingleStory", "Facilities", "Stargazing", "Archive", "Search", "NotFound", "Login"
+      ]
+      const inClude = frontEndPage.filter((item) => item === routeName)
+      if (inClude.length === 0) {
+        // 彈回登入頁
+        window.location.pathname = '/login';
+      }
       return true
     }
   },
