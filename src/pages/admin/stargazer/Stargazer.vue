@@ -16,7 +16,7 @@
 			<div class="w-9/12 mobile:w-11/12 table-container mobile:m-auto">
 				<table id="responsive-table" v-if="stargazingEdges.length > 0 && stargazingEdges"
 					class="animate__animated animate__fadeIn">
-					<thead class="mobile:hidden">
+					<thead class="w-table:table-header-group  hidden">
 						<tr>
 							<th>地點名稱</th>
 							<th>地址說明</th>

@@ -4,8 +4,10 @@
     <div
       class="laptop:w-4/5 laptop:left-0 left-7 mobile:left-11 w-full mobile:w-admin-m-content h-table:flex flex-wrap items-start justify-center content-start middle-pc:pt-36 h-table:pt-32 pb-52 middle-pc:px-20 h-table:px-6 px-8 mobile:pt-32 relative">
       <!-- 標題區塊 -->
-      <div class="w-9/12 mobile:w-11/12 flex justify-between mb-20 mobile:mb-9 mobile:block mobile:mx-auto">
-        <h1 class="text-white relative -left-2 -top-2 mobile:text-5xl w-3/4 mobile:w-full">新增觀星地點</h1>
+      <div class="w-9/12 mobile:w-11/12 flex justify-between mb-20 mobile:mb-9 mobile:block mobile:mx-auto flex-wrap">
+        <h1
+          class="text-white relative -left-2 -top-2 mobile:text-5xl w-table:w-3/4 w-full mobile:w-full w-table:m-0 mb-5">
+          新增觀星地點</h1>
         <button @click.prevent="setConfirmModal"
           class="flex btn draw meet text-lg w-2/12 mobile:w-1/3 mobile:mt-6 h-12 btn text-center items-center p-0 justify-center">
           儲存新增
@@ -13,8 +15,8 @@
       </div>
       <!-- 表單區塊 -->
       <Form ref="addPlaceForm" :validation-schema="verifyRules" v-slot="{ errors }"
-        class="w-9/12 flex mobile:w-11/12 table-container mobile:m-auto justify-between">
-        <div class="w-5/12">
+        class="w-9/12 flex flex-wrap mobile:w-11/12 table-container mobile:m-auto justify-between">
+        <div class="w-table:w-5/12 w-full">
           <!-- 地點名稱 -->
           <div class="input-group mb-14">
             <h4 class="text-main-color-light font-normal">地點名稱</h4>
@@ -77,7 +79,7 @@
             </div>
           </div>
         </div>
-        <div class="w-5/12">
+        <div class="w-table:w-5/12 w-full">
           <div class="animate__animated h-52 w-full bg-no-repeat bg-cover bg-center "
             :style="{ 'background-image': 'url(' + uploadImgPath + ')' }"
             :class="[{ 'animate__fadeIn': localBgOpacity }, { 'animate__fadeOut': !localBgOpacity }]">
@@ -95,7 +97,6 @@
             errors.placeImgPathRef
           }}</span>
         </div>
-
       </Form>
 
       <Footer class="absolute bottom-0 mobile:left-0" />
