@@ -154,7 +154,7 @@ const routes = [
   {
     path: '/board/stargazer/edit/:lid',
     name: 'EditSingleStargazer',
-    component: EditSingleStargazer,
+    component: AddSingleStargazer,
     meta: {
       title: '編輯觀星地點',
       manage: true

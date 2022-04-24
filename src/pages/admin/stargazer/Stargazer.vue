@@ -713,6 +713,7 @@ import Pagination from '../../../components/Pagination.vue'
 const store = useStore();
 
 // 取得路由
+const router = useRouter()
 const route = useRoute()
 const routeName = String(route.name)
 
@@ -764,7 +765,8 @@ async function popBtnCheck() {
 }
 
 function editPlace(lid: string) {
-	console.log("edit", lid)
+	// console.log("edit", lid)
+	router.push("/board/stargazer/edit/" + lid)
 }
 
 

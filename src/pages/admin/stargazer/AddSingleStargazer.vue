@@ -7,10 +7,10 @@
       <div class="w-9/12 mobile:w-11/12 flex justify-between mb-20 mobile:mb-9 mobile:block mobile:mx-auto flex-wrap">
         <h1
           class="text-white relative -left-2 -top-2 mobile:text-5xl w-table:w-3/4 w-full mobile:w-full w-table:m-0 mb-5">
-          新增觀星地點</h1>
+          {{ stargazerTitle }}</h1>
         <button @click.prevent="setConfirmModal"
           class="flex btn draw meet text-lg w-2/12 mobile:w-1/3 mobile:mt-6 h-12 btn text-center items-center p-0 justify-center">
-          儲存新增
+          {{ stargazerSaveBtn }}
         </button>
       </div>
       <!-- 表單區塊 -->
@@ -127,16 +127,32 @@ import L from "leaflet";
 import { markType, layerClickEvent, StargazingArr, PageInfoPush, CommonResponse } from '@/types/graphql/types'
 import schema from '@/utils/vee-validate-schema'
 import { Field, Form } from 'vee-validate';
-import { stargazerList, setNewStargazer } from '@/api/stargazing'
+import { setNewStargazer, getSingleStargazer, editStargazer } from '@/api/stargazing'
 import { updateFile } from '@/api/utils'
 import { useDebounceFn, onClickOutside } from '@vueuse/core'
 // 取得路由
 const route = useRoute()
 const router = useRouter()
 const routeName = String(route.name)
-
-// 設置警示燈箱
 const store = useStore();
+
+// ================================= 設置新增/編輯的標題和按鈕 =================================
+
+const stargazerTitle = computed(() => {
+  if (routeName === "AddSingleStargazer") {
+    return "新增觀星地點"
+  } else {
+    return "編輯觀星地點"
+  }
+})
+
+const stargazerSaveBtn = computed(() => {
+  if (routeName === "AddSingleStargazer") {
+    return "儲存新增"
+  } else {
+    return "儲存編輯"
+  }
+})
 
 // ================================= 設定送出表單欄位 =========================================
 
@@ -394,28 +410,77 @@ const actionAddPlace = useDebounceFn(async () => {
   const { valid } = await addPlaceForm.value.validate()
   await popBtnCheckVal
   if (valid && popBtnCheckVal.value) {
-    console.log("可以新增")
-    const res = await setNewStargazer(
-      placeName.value,
-      placeLat.value || 0,
-      placeLon.value || 0,
-      placeImgPath.value,
-      placeIntroduction.value,
-      placeDescription.value,
-      true,
-      routeName
-    )
-    if (res.data.setNewStargazer.code) {
-      if (res.data.setNewStargazer.code > 0) {
-        router.push("/board/stargazer")
-      } else {
-        store.openPopMsg(res.data.setNewStargazer.message, false)
+
+    if (routeName === "AddSingleStargazer") {
+      // 如果是新增版型
+      console.log("可以新增")
+      const res = await setNewStargazer(
+        placeName.value,
+        placeLat.value || 0,
+        placeLon.value || 0,
+        placeImgPath.value,
+        placeIntroduction.value,
+        placeDescription.value,
+        true,
+        routeName
+      )
+      if (res.data.setNewStargazer.code) {
+        if (res.data.setNewStargazer.code > 0) {
+          router.push("/board/stargazer")
+        } else {
+          store.openPopMsg(res.data.setNewStargazer.message, false)
+        }
       }
+    } else {
+      // 如果是編輯版型
+      console.log("可以編輯")
+      const path = String(route.params.lid)
+      const res = await editStargazer(
+        path,
+        placeName.value,
+        placeLat.value || 0,
+        placeLon.value || 0,
+        placeImgPath.value,
+        placeIntroduction.value,
+        placeDescription.value,
+        routeName
+      )
+      if (res.data.editStargazer.code) {
+        if (res.data.editStargazer.code > 0) {
+          router.push("/board/stargazer")
+        } else {
+          store.openPopMsg(res.data.editStargazer.message, false)
+        }
+      }
+
     }
+
   }
 })
 
-// 生命週期 --------------------------------------------------------------
+// ================================= 取得指定 lid 觀星地點資料 =========================================
+
+async function loadEditStargazer() {
+  const lid = String(route.params.lid)
+  if (routeName === "EditSingleStargazer" && lid) {
+    const res = await getSingleStargazer(lid, routeName)
+    placeName.value = String(res.data.getSingleStargazer.stargazing_title)
+    placeDescription.value = String(res.data.getSingleStargazer.stargazing_address)
+    placeIntroduction.value = String(res.data.getSingleStargazer.stargazing_description)
+    placeLat.value = Number(res.data.getSingleStargazer.stargazing_latitude)
+    placeLon.value = Number(res.data.getSingleStargazer.stargazing_longitude)
+    let path = String(res.data.getSingleStargazer.stargazing_image)
+    let split = path.split('/')
+    placeImg.value = split[split.length]
+    placeImgPath.value = path
+  }
+}
+
+// ================================= 生命週期 =========================================
+
+// 僅在編輯版型 load 資料
+loadEditStargazer()
+
 onMounted(async () => {
   // 先設定預設值
   await setDefaultActData()
