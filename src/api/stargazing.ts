@@ -120,3 +120,29 @@ export function setNewStargazer(
     fetchPolicy: 'no-cache'
   })
 }
+
+type resDeleteStargazer = {
+  data: {
+    deleteStargazer: CommonResponse;
+  };
+};
+export function deleteStargazer(
+  stargazingLid: string,
+  pageRouteName: string
+) {
+  return client.mutate({
+    mutation: gql`
+      mutation DeleteStargazer($stargazingLid: String!) {
+        deleteStargazer(stargazing_lid: $stargazingLid) {
+          code
+          message
+        }
+      }
+    `,
+    variables: {
+      stargazingLid,
+      pageRouteName
+    },
+    fetchPolicy: 'no-cache'
+  })
+}

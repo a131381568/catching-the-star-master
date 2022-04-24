@@ -6,7 +6,7 @@
       <!-- 標題區塊 -->
       <div class="w-9/12 mobile:w-11/12 flex justify-between mb-20 mobile:mb-9 mobile:block mobile:mx-auto">
         <h1 class="text-white relative -left-2 -top-2 mobile:text-5xl w-3/4 mobile:w-full">新增觀星地點</h1>
-        <button @click.prevent="actionAddPlace"
+        <button @click.prevent="setConfirmModal"
           class="flex btn draw meet text-lg w-2/12 mobile:w-1/3 mobile:mt-6 h-12 btn text-center items-center p-0 justify-center">
           儲存新增
         </button>
@@ -84,7 +84,7 @@
           </div>
           <div class="upload-bar flex justify-between mt-7 mb-1">
             <h4 class="text-main-color-light font-normal">地點圖片</h4>
-            <label class="admin-sbtn relative flex items-center justify-center">上傳圖片
+            <label class="cursor-pointer admin-sbtn relative flex items-center justify-center">上傳圖片
               <Field name="placeImgPathRef" v-model="placeImgPath" class="hidden" type="file"
                 @change="updateFileAct($event)" />
             </label>
@@ -102,15 +102,24 @@
     </div>
     <!-------------- 燈箱 --------------->
     <div
-      class="admin-stargazer-modal bg-black bg-opacity-80 w-full h-full fixed left-0 top-0 flex items-center justify-center animate__animated"
+      class="admin-stargazer-modal bg-black bg-opacity-50 w-full h-full fixed left-0 top-0 flex items-center justify-center animate__animated"
       :class="[{ animate__fadeOut: !modal }, { animate__fadeIn: modal }, { 'z-9999': modalInner }, { '-z-50': !modalInner }]">
-      <button class="absolute right-4 top-4 button small text-white" title="close" @click.prevent="closeModal">
-        𝖷
+      <button class="absolute right-4 top-4 button small text-white cursor-pointer group" title="close"
+        @click.prevent="closeModal">
+        <span class="w-12 h-12 inline-block">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" enable-background="new 0 0 40 40">
+            <line class="group-hover:stroke-sp-color-light transition-all duration-700" x1="15" y1="15" x2="25" y2="25"
+              stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-miterlimit="10"></line>
+            <line class="group-hover:stroke-sp-color-light transition-all duration-700" x1="25" y1="15" x2="15" y2="25"
+              stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-miterlimit="10"></line>
+          </svg>
+        </span>
       </button>
       <div id="map-container" ref="mapModalRef" class="w-5/6 h-4/5 modal-inner">
       </div>
     </div>
   </div>
+  <PopMessage @popBtnCheck="popBtnCheck"></PopMessage>
 </template>
 <script setup lang="ts">
 import L from "leaflet";
@@ -125,6 +134,8 @@ const route = useRoute()
 const router = useRouter()
 const routeName = String(route.name)
 
+// 設置警示燈箱
+const store = useStore();
 
 // ================================= 設定送出表單欄位 =========================================
 
@@ -359,11 +370,29 @@ const uploadImgPath = computed(() => {
   }
 })
 
+// ================================= 送出表單 =========================================
+
+// 跳出燈箱詢問是否確定新增?
+function setConfirmModal() {
+  store.openPopMsg("確定新增觀星地點?", true)
+}
+
+// 確認框 Y/N
+const popBtnCheckVal = computed(() => store.get_popMsgBtnReturn)
+
+// 點擊確認
+async function popBtnCheck() {
+  await popBtnCheckVal
+  if (popBtnCheckVal.value) {
+    actionAddPlace()
+  }
+}
+
 // 送出防抖表單
 const actionAddPlace = useDebounceFn(async () => {
   const { valid } = await addPlaceForm.value.validate()
-  console.log(valid)
-  if (valid) {
+  await popBtnCheckVal
+  if (valid && popBtnCheckVal.value) {
     console.log("可以新增")
     const res = await setNewStargazer(
       placeName.value,
@@ -376,9 +405,12 @@ const actionAddPlace = useDebounceFn(async () => {
       routeName
     )
     if (res.data.setNewStargazer.code) {
-      alert(res.data.setNewStargazer.message)
+      if (res.data.setNewStargazer.code > 0) {
+        router.push("/board/stargazer")
+      } else {
+        store.openPopMsg(res.data.setNewStargazer.message, false)
+      }
     }
-    router.push("/board/stargazer")
   }
 })
 

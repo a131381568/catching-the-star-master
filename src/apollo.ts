@@ -141,6 +141,7 @@ const authLink = setContext(async (_, { headers }) => {
 });
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
+  const storage = window.localStorage
   if (graphQLErrors) {
     graphQLErrors.forEach(({ message, locations, path }) =>
       console.log(
@@ -150,8 +151,9 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   }
   if (networkError) {
     if (JSON.parse(JSON.stringify(networkError)).statusCode !== 200) {
-      alert(networkError)
+      // alert(networkError)
       console.log(`[Network error]: ${networkError}`);
+      storage.setItem("apollo-error", JSON.stringify(networkError))
       // 彈回 404
       // window.location.pathname = '/notfound';
     }

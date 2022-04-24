@@ -68,7 +68,6 @@ onMounted(async () => {
       // 設置主視覺
       circleBg.value = artistsData.data.getSinglePost.image
     } else {
-      alert("無此頁面")
       router.push("/notfound")
     }
   } else {

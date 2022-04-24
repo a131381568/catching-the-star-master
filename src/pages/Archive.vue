@@ -74,7 +74,6 @@ async function defaultData(
     postList.value = pushList
     archivePageInfo.value = res.data.artists.pageInfo
   } else {
-    alert("無此頁面")
     router.push("/notfound")
   }
 }

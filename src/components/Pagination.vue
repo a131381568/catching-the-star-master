@@ -1,5 +1,5 @@
 <template>
-  <div class="w-10/12 mt-14 -ml-2 animate__animated animate__fadeIn mobile:m-auto" v-show="!barShow">
+  <div class="w-10/12 mt-14 -ml-2 animate__animated animate__fadeIn mobile:m-auto" v-show="!barShow && totalPagi > 1">
     <nav aria-label="Page navigation">
       <ul class="inline-flex items-center -space-x-px">
         <li :class="{ 'pointer-events-none opacity-50': !hasPreviousPage }" @click="actionPreviousPagi()">

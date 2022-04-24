@@ -15,7 +15,12 @@ export const useStore = defineStore('main', {
     isHeaderTop: true,
     loading: false,
     firstEnter: true,
-    artistsCat: []
+    artistsCat: [],
+    popMsgState: false,
+    popMsgStateInner: false,
+    popMsgContent: "",
+    popMsgBtnReturn: false,
+    popMsgConfirm: true
   }),
   actions: {
     setPageTitle(value: string) {
@@ -61,6 +66,29 @@ export const useStore = defineStore('main', {
       } else {
         return ""
       }
+    },
+    closePopMsg() {
+      this.popMsgBtnReturn = false
+      this.popMsgState = false
+      setTimeout(() => {
+        this.popMsgStateInner = false
+      }, 1000);
+    },
+    openPopMsg(content: string, value: boolean) {
+      this.popMsgConfirm = value
+      this.popMsgContent = content
+      this.popMsgBtnReturn = false
+      this.popMsgState = true
+      setTimeout(() => {
+        this.popMsgStateInner = true
+      }, 300);
+    },
+    popMsgCheckTrun() {
+      this.popMsgBtnReturn = true
+      this.popMsgState = false
+      setTimeout(() => {
+        this.popMsgStateInner = false
+      }, 1000);
     }
   },
   getters: {
@@ -78,6 +106,21 @@ export const useStore = defineStore('main', {
     },
     get_firstEnter: (state) => {
       return state.firstEnter
+    },
+    get_popMsgState: (state) => {
+      return state.popMsgState
+    },
+    get_popMsgStateInner: (state) => {
+      return state.popMsgStateInner
+    },
+    get_popMsgContent: (state) => {
+      return state.popMsgContent
+    },
+    get_popMsgBtnReturn: (state) => {
+      return state.popMsgBtnReturn
+    },
+    get_popMsgConfirm: (state) => {
+      return state.popMsgConfirm
     },
   }
 })

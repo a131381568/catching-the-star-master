@@ -57,7 +57,6 @@ onMounted(async () => {
         catId: artistsData.data.getSinglePost.categoryid
       }
     } else {
-      alert("無此頁面")
       router.push("/notfound")
     }
   } else {

@@ -682,7 +682,7 @@
 								</svg>
 							</td>
 							<td data-title="刪除">
-								<svg @click.prevent="deletePlace(String(val.stargazing_lid))" xmlns="http://www.w3.org/2000/svg"
+								<svg @click.prevent="setConfirmModal(String(val.stargazing_lid))" xmlns="http://www.w3.org/2000/svg"
 									viewBox="0 0 25 25"
 									class="fill-main-color-light w-29px h-auto inline-block hover:fill-sub-color-dark">
 									<g id="trash">
@@ -704,11 +704,13 @@
 			<Footer class="absolute bottom-0 mobile:left-0" />
 		</div>
 	</div>
+	<PopMessage @popBtnCheck="popBtnCheck"></PopMessage>
 </template>
 <script setup lang="ts">
-import { stargazerList } from '@/api/stargazing'
+import { stargazerList, deleteStargazer } from '@/api/stargazing'
 import { StargazingArr, PageInfoPush } from '@/types/graphql/types'
 import Pagination from '../../../components/Pagination.vue'
+const store = useStore();
 
 // 取得路由
 const route = useRoute()
@@ -724,10 +726,11 @@ const stargazingPageInfo = ref<PageInfoPush>({
 	end: 0,
 	totalPagi: 0
 })
+const lidRef = ref("")
 
 // 生命週期 --------------------------------------------------------------
 onMounted(async () => {
-	// 取得地圖列表資訊
+	// 取得列表資訊
 	await getStargazerList(1)
 });
 
@@ -741,13 +744,29 @@ async function getStargazerList(pagi: Number) {
 	}, 300);
 }
 
+// 跳出燈箱詢問是否確定刪除?
+function setConfirmModal(lid: string) {
+	lidRef.value = lid
+	store.openPopMsg("確定刪除此地點?", true)
+}
+
+// 確認框 Y/N
+const popBtnCheckVal = computed(() => store.get_popMsgBtnReturn)
+
+// 點擊確認刪除
+async function popBtnCheck() {
+	await popBtnCheckVal
+	if (popBtnCheckVal.value) {
+		await deleteStargazer(lidRef.value, routeName)
+		// 刪除後重抓列表, 並跳至第一頁
+		await getStargazerList(1)
+	}
+}
+
 function editPlace(lid: string) {
 	console.log("edit", lid)
 }
 
-function deletePlace(lid: string) {
-	console.log("delete", lid)
-}
 
 function selectPagi(pagi: Number) {
 	actionPage.value = Number(pagi)
