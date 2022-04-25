@@ -107,3 +107,49 @@ export function mutAboutSlogan(
     fetchPolicy: 'no-cache'
   })
 }
+
+
+// 僅更新關於我們引言區塊
+export function mutAboutQuote(
+  quoteRef: string,
+  pageRouteName: string
+) {
+  return client.mutate({
+    mutation: gql`
+      mutation MutAboutQuote($quoteRef: String!) {
+        mutAboutQuote(quoteRef: $quoteRef) {
+          code
+          message
+        }
+      }
+    `,
+    variables: {
+      quoteRef,
+      pageRouteName
+    },
+    fetchPolicy: 'no-cache'
+  })
+}
+
+
+// 僅更新關於我們結語區塊
+export function mutAboutEpilogue(
+  epilogueRef: string,
+  pageRouteName: string
+) {
+  return client.mutate({
+    mutation: gql`
+      mutation MutAboutEpilogue($epilogueRef: String!) {
+        mutAboutEpilogue(epilogueRef: $epilogueRef) {
+          code
+          message
+        }
+      }
+    `,
+    variables: {
+      epilogueRef,
+      pageRouteName
+    },
+    fetchPolicy: 'no-cache'
+  })
+}

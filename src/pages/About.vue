@@ -29,8 +29,7 @@
       </div>
       <div class="text-main-color-light animate__animated animate__fadeIn"
         :class="[{ 'animate__delay-5s': getFirstEnter === true }, { 'animate__delay-2s': getFirstEnter === false }]">
-        <!-- <p v-html="philosophyRef"></p> -->
-        <v-md-preview class="markdown-body" :text="philosophyRef" height="400px"></v-md-preview>
+        <v-md-preview class="markdown-body" :text="philosophyRef"></v-md-preview>
       </div>
     </div>
   </div>
@@ -41,7 +40,8 @@
       class="h-table:w-10/12 text-center grid laptop:grid-cols-none h-table:grid-cols-3 animate__animated animate__delay-1s opacity-0"
       :class="{ 'animate__fadeIn': block_black_isVisible }">
       <img class="mx-auto mb-10" src="/svg/hand.svg" />
-      <p class="text-left laptop:text-center laptop:col-auto h-table:col-span-2" v-html="quoteRef"></p>
+      <v-md-preview class="markdown-body laptop:text-center laptop:col-auto text-left h-table:col-span-2"
+        :text="quoteRef"></v-md-preview>
     </div>
   </div>
   <!-- 結語區塊 -->
@@ -50,7 +50,8 @@
     <div
       class="middle-pc:w-7/12 laptop:w-5/12 h-table:w-10/12 text-left laptop:pb-0 pb-320px text-main-color-black animate__animated animate__delay-2s"
       :class="{ 'animate__fadeIn': block_black_isVisible }">
-      <p v-html="epilogueRef"></p>
+      <!-- <p v-html="epilogueRef"></p> -->
+      <v-md-preview class="markdown-body" :text="epilogueRef"></v-md-preview>
     </div>
     <div class="middle-pc:w-3/12 h-table:w-5/12"></div>
   </div>

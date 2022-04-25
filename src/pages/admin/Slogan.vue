@@ -4,17 +4,17 @@
     <div
       class="laptop:w-4/5 laptop:left-0 left-7 mobile:left-11 w-full mobile:w-admin-m-content h-table:flex flex-wrap items-start justify-center content-start middle-pc:pt-36 h-table:pt-32 pb-52 middle-pc:px-20 h-table:px-6 px-8 mobile:pt-32 relative">
       <!-- 標題區塊 -->
-      <div class="w-9/12 mobile:w-11/12 flex justify-between mb-20 mobile:mb-9 mobile:block mobile:mx-auto flex-wrap">
-        <h1
-          class="text-white relative -left-2 -top-2 mobile:text-5xl w-table:w-3/4 w-full mobile:w-full w-table:m-0 mb-5">
+      <div class="h-table:w-9/12 w-full flex justify-between mb-20 mobile:mb-9 mobile:block mobile:mx-auto flex-wrap">
+        <!-- -left-2 -top-2 -->
+        <h1 class="text-white relative mobile:text-5xl w-table:w-3/4 w-full mobile:w-full w-table:m-0 mb-5">
           標語管理</h1>
       </div>
       <!-- 編輯區塊 -->
-      <div class="editer-container w-9/12">
+      <div class="editer-container h-table:w-9/12 w-full">
         <Form ref="homeSloganForm" :validation-schema="homeSloganFormRules" v-slot="{ errors }"
           class="home-slogan w-full mb-14">
-          <div class="map-search-bar flex justify-between mb-8">
-            <h2 class="text-main-color-light">首頁—主視覺文字</h2>
+          <div class="flex justify-between mb-8 flex-wrap mobile:mb-4">
+            <h2 class="text-main-color-light mobile:text-3xl mobile:w-full mobile:mb-4">首頁—主視覺文字</h2>
             <button class="admin-sbtn" @click.prevent="setEditMode('homeSloganForm')"
               v-if="!homeSloganEditMode">編輯標語</button>
             <button class="admin-edit-sbtn" @click.prevent="setConfirmModal('homeSloganForm')"
@@ -41,8 +41,8 @@
         </Form>
         <Form ref="aboutSloganForm" :validation-schema="aboutSloganFormRules" v-slot="{ errors }"
           class="about-slogan w-full mb-14">
-          <div class="map-search-bar flex justify-between mb-8">
-            <h2 class="text-main-color-light">關於我們—理念</h2>
+          <div class="flex justify-between mb-8 flex-wrap mobile:mb-4">
+            <h2 class="text-main-color-light mobile:text-3xl mobile:w-full mobile:mb-4">關於我們—理念</h2>
             <button class="admin-sbtn" @click.prevent="setEditMode('aboutSloganForm')"
               v-if="!aboutSloganEditMode">編輯標語</button>
             <button class="admin-edit-sbtn" @click.prevent="setConfirmModal('aboutSloganForm')"
@@ -68,8 +68,8 @@
         </Form>
         <Form ref="aboutQuoteForm" :validation-schema="aboutQuoteFormRules" v-slot="{ errors }"
           class="about-quote w-full mb-14">
-          <div class="map-search-bar flex justify-between mb-8">
-            <h2 class="text-main-color-light">關於我們—引言</h2>
+          <div class="flex justify-between mb-8 flex-wrap mobile:mb-4">
+            <h2 class="text-main-color-light mobile:text-3xl mobile:w-full mobile:mb-4">關於我們—引言</h2>
             <button class="admin-sbtn" @click.prevent="setEditMode('aboutQuoteForm')"
               v-if="!aboutQuoteEditMode">編輯標語</button>
             <button class="admin-edit-sbtn" @click.prevent="setConfirmModal('aboutQuoteForm')"
@@ -88,8 +88,8 @@
         </Form>
         <Form ref="aboutEpilogueForm" :validation-schema="aboutEpilogueFormRules" v-slot="{ errors }"
           class="about-epilogue w-full mb-14">
-          <div class="map-search-bar flex justify-between mb-8">
-            <h2 class="text-main-color-light">關於我們—引言</h2>
+          <div class="flex justify-between mb-8 flex-wrap mobile:mb-4">
+            <h2 class="text-main-color-light mobile:text-3xl mobile:w-full mobile:mb-4">關於我們—引言</h2>
             <button class="admin-sbtn" @click.prevent="setEditMode('aboutEpilogueForm')"
               v-if="!aboutEpilogueEditMode">編輯標語</button>
             <button class="admin-edit-sbtn" @click.prevent="setConfirmModal('aboutEpilogueForm')"
@@ -116,7 +116,7 @@
 import { markType, layerClickEvent, StargazingArr, PageInfoPush, CommonResponse } from '@/types/graphql/types'
 import schema from '@/utils/vee-validate-schema'
 import { Field, Form } from 'vee-validate';
-import { sloganLoad, editHomeSlogan, mutAboutSlogan } from '@/api/about'
+import { sloganLoad, editHomeSlogan, mutAboutSlogan, mutAboutQuote, mutAboutEpilogue } from '@/api/about'
 import { useDebounceFn } from '@vueuse/core'
 // 取得路由
 const route = useRoute()
@@ -230,27 +230,25 @@ const popBtnCheck = useDebounceFn(async () => {
   switch (activeFormeRef.value) {
     case "homeSloganForm":
       if (popBtnCheckVal.value && homeSloganFormCheck.valid) {
-        console.log("homeSloganForm")
         editHomeSlogan(pageTitle.value, pageSubTitle.value, routeName)
         homeSloganEditMode.value = false
       }
       break;
     case "aboutSloganForm":
       if (popBtnCheckVal.value && aboutSloganFormCheck.valid) {
-        console.log("aboutSloganForm")
         mutAboutSlogan(sloganRef.value, philosophyRef.value, routeName)
         aboutSloganEditMode.value = false
       }
       break;
     case "aboutQuoteForm":
       if (popBtnCheckVal.value && aboutQuoteFormCheck.valid) {
-        console.log("aboutQuoteForm")
+        mutAboutQuote(quoteRef.value, routeName)
         aboutQuoteEditMode.value = false
       }
       break;
     case "aboutEpilogueForm":
       if (popBtnCheckVal.value && aboutEpilogueFormCheck.valid) {
-        console.log("aboutEpilogueForm")
+        mutAboutEpilogue(epilogueRef.value, routeName)
         aboutEpilogueEditMode.value = false
       }
       break;
