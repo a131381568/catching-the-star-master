@@ -406,7 +406,6 @@ const actionAddPlace = useDebounceFn(async () => {
   const { valid } = await addPlaceForm.value.validate()
   await popBtnCheckVal
   if (valid && popBtnCheckVal.value) {
-
     if (routeName === "AddSingleStargazer") {
       // 如果是新增版型
       console.log("可以新增")
@@ -448,11 +447,9 @@ const actionAddPlace = useDebounceFn(async () => {
           store.openPopMsg(res.data.editStargazer.message, false)
         }
       }
-
     }
-
   }
-})
+}, 1000)
 
 // ================================= 取得指定 lid 觀星地點資料 =========================================
 

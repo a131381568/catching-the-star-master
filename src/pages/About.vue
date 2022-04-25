@@ -29,7 +29,8 @@
       </div>
       <div class="text-main-color-light animate__animated animate__fadeIn"
         :class="[{ 'animate__delay-5s': getFirstEnter === true }, { 'animate__delay-2s': getFirstEnter === false }]">
-        <p v-html="philosophyRef"></p>
+        <!-- <p v-html="philosophyRef"></p> -->
+        <v-md-preview class="markdown-body" :text="philosophyRef" height="400px"></v-md-preview>
       </div>
     </div>
   </div>
