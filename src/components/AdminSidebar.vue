@@ -260,7 +260,7 @@
         </h5>
         <router-link v-else :to="val.path"
           class="text-main-color-dark mt-1 block hover:text-sub-color-dark transition-all duration-1000">{{
-            val.title
+              val.title
           }}</router-link>
       </li>
     </ul>
@@ -298,7 +298,7 @@ const adminMenu = ref([
   {
     title: "關於我們",
     categories: "標語管理",
-    path: "/board/slogan"
+    path: "/board/slogan?edit=about"
   },
   {
     title: "文章分類管理",

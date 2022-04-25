@@ -41,7 +41,7 @@
         </Form>
         <Form ref="aboutSloganForm" :validation-schema="aboutSloganFormRules" v-slot="{ errors }"
           class="about-slogan w-full mb-14">
-          <div class="flex justify-between mb-8 flex-wrap mobile:mb-4">
+          <div ref="aboutSloganEditOuter" class="flex justify-between mb-8 flex-wrap mobile:mb-4">
             <h2 class="text-main-color-light mobile:text-3xl mobile:w-full mobile:mb-4">關於我們—理念</h2>
             <button class="admin-sbtn" @click.prevent="setEditMode('aboutSloganForm')"
               v-if="!aboutSloganEditMode">編輯標語</button>
@@ -89,7 +89,7 @@
         <Form ref="aboutEpilogueForm" :validation-schema="aboutEpilogueFormRules" v-slot="{ errors }"
           class="about-epilogue w-full mb-14">
           <div class="flex justify-between mb-8 flex-wrap mobile:mb-4">
-            <h2 class="text-main-color-light mobile:text-3xl mobile:w-full mobile:mb-4">關於我們—引言</h2>
+            <h2 class="text-main-color-light mobile:text-3xl mobile:w-full mobile:mb-4">關於我們—結語</h2>
             <button class="admin-sbtn" @click.prevent="setEditMode('aboutEpilogueForm')"
               v-if="!aboutEpilogueEditMode">編輯標語</button>
             <button class="admin-edit-sbtn" @click.prevent="setConfirmModal('aboutEpilogueForm')"
@@ -113,15 +113,14 @@
   <PopMessage @popBtnCheck="popBtnCheck"></PopMessage>
 </template>
 <script setup lang="ts">
-import { markType, layerClickEvent, StargazingArr, PageInfoPush, CommonResponse } from '@/types/graphql/types'
 import schema from '@/utils/vee-validate-schema'
 import { Field, Form } from 'vee-validate';
 import { sloganLoad, editHomeSlogan, mutAboutSlogan, mutAboutQuote, mutAboutEpilogue } from '@/api/about'
-import { useDebounceFn } from '@vueuse/core'
+import { useDebounceFn, useElementBounding, watchThrottled } from '@vueuse/core'
 // 取得路由
 const route = useRoute()
-const router = useRouter()
 const routeName = String(route.name)
+const routeQuery = computed(() => String(route.query.edit));
 const store = useStore();
 
 // ================================= 設定送出表單欄位 =========================================
@@ -161,7 +160,6 @@ function setEditMode(refName: string) {
       break;
   }
 }
-
 
 // ================================= 驗證容器和規則 ================================= 
 
@@ -257,13 +255,31 @@ const popBtnCheck = useDebounceFn(async () => {
   }
 }, 1000)
 
+// ================================= 監聽和滾動關於我們理念區塊 =========================================
+
+const aboutSloganEditOuter = ref(null)
+const aboutRect = reactive(useElementBounding(aboutSloganEditOuter))
+function scrollToAbout() {
+  setTimeout(() => {
+    if (routeQuery.value === "about") {
+      const top = aboutRect.top
+      const origin = document.querySelector(".app-inner")
+      if (origin) {
+        origin.scrollTo({ 'behavior': 'smooth', 'top': 5 + top })
+      }
+    }
+  }, 700)
+}
+watch(routeQuery, () => {
+  scrollToAbout()
+})
 
 // ================================= 生命週期 =========================================
 
 initSloganDate()
 
-onMounted(async () => {
-  //
+onMounted(() => {
+  scrollToAbout()
 });
 
 onBeforeUnmount(() => {
