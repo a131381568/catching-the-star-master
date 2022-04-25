@@ -15,6 +15,8 @@ import Board from '@/pages/admin//Board.vue'
 import Slogan from '@/pages/admin//Slogan.vue'
 import Stargazer from '@/pages/admin/stargazer/Stargazer.vue'
 import AddSingleStargazer from '@/pages/admin/stargazer/AddSingleStargazer.vue'
+import Categories from '@/pages/admin/categories/Categories.vue'
+import AddSingleCategories from '@/pages/admin/categories/AddSingleCategories.vue'
 
 const routes = [
   {
@@ -175,6 +177,33 @@ const routes = [
     component: AddSingleStargazer,
     meta: {
       title: '新增觀星地點',
+      manage: true
+    }
+  },
+  {
+    path: '/board/categories',
+    name: 'Categories',
+    component: Categories,
+    meta: {
+      title: '文章分類管理',
+      manage: true
+    }
+  },
+  {
+    path: '/board/categories/edit/:cid',
+    name: 'EditSingleCategories',
+    component: AddSingleCategories,
+    meta: {
+      title: '編輯文章分類',
+      manage: true
+    }
+  },
+  {
+    path: '/board/categories/add',
+    name: 'AddSingleCategories',
+    component: AddSingleCategories,
+    meta: {
+      title: '新增文章分類',
       manage: true
     }
   }
