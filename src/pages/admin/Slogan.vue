@@ -11,7 +11,8 @@
       </div>
       <!-- 編輯區塊 -->
       <div class="editer-container w-9/12">
-        <div class="home-slogan w-full">
+        <Form ref="homeSloganForm" :validation-schema="verifyRules" v-slot="{ errors }"
+          class="home-slogan w-full mb-14">
           <div class="map-search-bar flex justify-between mb-8">
             <h2 class="text-main-color-light">首頁—主視覺文字</h2>
             <button class="admin-sbtn" @click.prevent="changehomeSloganEditMode()"
@@ -19,16 +20,27 @@
             <button class="admin-edit-sbtn" @click.prevent="changehomeSloganEditMode()"
               v-if="homeSloganEditMode">儲存標語</button>
           </div>
-          <div class="editer-inner view-mode mb-14" v-if="!homeSloganEditMode">
+          <div class="editer-inner view-mode" v-if="!homeSloganEditMode">
             <h4 class="home-title"><i>{{ pageTitleFirst }}</i>{{ pageTitleLast }}</h4>
             <p>{{ pageSubTitle }}</p>
           </div>
           <div class="editer-inner edit-mode mb-8" v-if="homeSloganEditMode">
-            <input v-model="pageTitle" class="home-title-input mb-4">
-            <input v-model="pageSubTitle" class="home-slogan mb-2">
+            <Field name="pageTitleRule" type="text" v-model="pageTitle"
+              class="home-title-input mb-4 bottom-line-input-gray" placeholder="主視覺標語"
+              :class="{ '!border-sp-color-dark': errors.pageTitleRule }" />
+            <span v-show="errors.pageTitleRule" class="text-sp-color-dark text-xs w-full h-5 block mt-2">{{
+                errors.pageTitleRule
+            }}</span>
+            <Field name="pageSubTitleRule" type="text" v-model="pageSubTitle"
+              class="home-slogan mb-2 bottom-line-input-gray" placeholder="主視覺引言"
+              :class="{ '!border-sp-color-dark': errors.pageSubTitleRule }" />
+            <span v-show="errors.pageSubTitleRule" class="text-sp-color-dark text-xs w-full h-5 block mt-2">{{
+                errors.pageSubTitleRule
+            }}</span>
           </div>
-        </div>
-        <div class="about-slogan w-full">
+        </Form>
+        <Form ref="aboutSloganForm" :validation-schema="verifyRules" v-slot="{ errors }"
+          class="about-slogan w-full mb-14">
           <div class="map-search-bar flex justify-between mb-8">
             <h2 class="text-main-color-light">關於我們—理念</h2>
             <button class="admin-sbtn" @click.prevent="changeaboutSloganEditMode()"
@@ -42,10 +54,18 @@
             <v-md-preview class="markdown-body" :text="philosophyRef" height="400px"></v-md-preview>
           </div>
           <div class="editer-inner edit-mode md-container" v-if="aboutSloganEditMode">
-            <input v-model="sloganRef" class="p-6">
+            <Field name="sloganRule" v-model="sloganRef" class="p-6"
+              :class="{ '!bg-sp-color-light': errors.sloganRule }" placeholder="關於我們標語" />
+            <span v-show="errors.sloganRule" class="text-sp-color-dark text-xs w-full h-5 block mt-2 mb-5">{{
+                errors.sloganRule
+            }}</span>
+            <Field v-show="false" name="philosophyRule" v-model="philosophyRef" height="400px" />
             <v-md-editor class="markdown-body" v-model="philosophyRef" height="400px"></v-md-editor>
+            <span v-show="errors.philosophyRule" class="text-sp-color-dark text-xs w-full h-5 block mt-2">{{
+                errors.philosophyRule
+            }}</span>
           </div>
-        </div>
+        </Form>
         <div class="about-quote w-full">
           <div class="map-search-bar flex justify-between mb-8">
             <h2 class="text-main-color-light">關於我們—引言</h2>
@@ -82,7 +102,6 @@
   </div>
 </template>
 <script setup lang="ts">
-import L from "leaflet";
 import { markType, layerClickEvent, StargazingArr, PageInfoPush, CommonResponse } from '@/types/graphql/types'
 import schema from '@/utils/vee-validate-schema'
 import { Field, Form } from 'vee-validate';
@@ -130,25 +149,22 @@ function changeAboutEpilogueEditMode() {
   aboutEpilogueEditMode.value = !aboutEpilogueEditMode.value
 }
 
-///////////////////
-const addPlaceForm = ref({
+// 驗證容器和規則
+const homeSloganForm = ref({
   validate: () => { return { valid: false } }
 })
 
-const placeName = ref("")
-const placeDescription = ref("")
-const placeIntroduction = ref("")
-const placeLat = ref<number | null>(null)  // 緯度
-const placeLon = ref<number | null>(null) // 經度
-const placeImg = ref("")  // 圖片名稱
-const placeImgPath = ref("")  // 圖片路徑
+const aboutSloganForm = ref({
+  validate: () => { return { valid: false } }
+})
+
 const verifyRules = {
-  placeNameRef: schema.required,
-  placeDescriptionRef: schema.required,
-  placeIntroductionRef: schema.required,
-  placeLatRef: schema.required,
-  placeLonRef: schema.required,
-  placeImgPathRef: schema.image
+  pageTitleRule: schema.required,
+  pageSubTitleRule: schema.required,
+  sloganRule: schema.required,
+  philosophyRule: schema.required,
+  quoteRule: schema.required,
+  epilogueRule: schema.required
 }
 
 // ================================= 生命週期 =========================================

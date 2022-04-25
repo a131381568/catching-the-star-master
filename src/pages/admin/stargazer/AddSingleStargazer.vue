@@ -20,34 +20,32 @@
           <!-- 地點名稱 -->
           <div class="input-group mb-14">
             <h4 class="text-main-color-light font-normal">地點名稱</h4>
-            <Field name="placeNameRef" type="text"
-              class="w-full h-8 block m-auto bg-transparent border-t-0 border-b border-x-0 text-lg px-0 py-7 border-main-color-light border-opacity-30 focus:outline-0 focus:ring-0 focus:border-opacity-70 focus:border-white text-main-color-light"
+            <Field name="placeNameRef" type="text" class="h-8 block m-auto bottom-line-input text-lg"
               :class="{ 'border-sp-color-dark border-opacity-100': errors.placeNameRef }" v-model="placeName" />
             <span v-show="errors.placeNameRef" class="text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">{{
-              errors.placeNameRef
+                errors.placeNameRef
             }}</span>
           </div>
           <!-- 地址說明 -->
           <div class="input-group mb-14">
             <h4 class="text-main-color-light font-normal">地址說明</h4>
-            <Field name="placeDescriptionRef" type="text"
-              class="w-full h-8 block m-auto bg-transparent border-t-0 border-b border-x-0 text-lg px-0 py-7 border-main-color-light border-opacity-30 focus:outline-0 focus:ring-0 focus:border-opacity-70 focus:border-white text-main-color-light"
+            <Field name="placeDescriptionRef" type="text" class="h-8 block m-auto bottom-line-input text-lg"
               :class="{ 'border-sp-color-dark border-opacity-100': errors.placeDescriptionRef }"
               v-model="placeDescription" />
             <span v-show="errors.placeDescriptionRef" class="text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">{{
-              errors.placeDescriptionRef
+                errors.placeDescriptionRef
             }}</span>
           </div>
           <!-- 地點介紹 -->
           <div class="input-group mb-14">
             <h4 class="text-main-color-light font-normal">地點介紹</h4>
             <Field name="placeIntroductionRef" type="text" as="textarea"
-              class="w-full h-200px resize-none block m-auto bg-transparent border-t-0 border-b border-x-0 text-lg px-0 py-7 border-main-color-light border-opacity-30 focus:outline-0 focus:ring-0 focus:border-opacity-70 focus:border-white text-main-color-light"
+              class="bottom-line-input h-200px resize-none block m-auto text-lg"
               :class="{ 'border-sp-color-dark border-opacity-100': errors.placeIntroductionRef }"
               v-model="placeIntroduction" />
             <span v-show="errors.placeIntroductionRef"
               class="text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">{{
-                errors.placeIntroductionRef
+                  errors.placeIntroductionRef
               }}</span>
           </div>
           <!-- 地點經緯度 -->
@@ -58,23 +56,21 @@
             </div>
             <div
               class="relative place-lat-lon-container flex space-x-3 justify-between before:content-[','] before:block before:absolute before:-bottom-1 before:left-1/2-3px before:text-main-color-light before:opacity-70">
-              <Field name="placeLatRef" type="text" placeholder="Latitude"
-                class="w-full h-8 bg-transparent border-t-0 border-b border-x-0 text-middle px-0 py-7 border-main-color-light border-opacity-30 focus:outline-0 focus:ring-0 focus:border-opacity-70 focus:border-white text-main-color-light focus:placeholder-transparent"
+              <Field name="placeLatRef" type="text" placeholder="Latitude" class="bottom-line-input h-8"
                 :class="{ 'border-sp-color-dark border-opacity-100': errors.placeLatRef }" v-model="placeLat" />
-              <Field name="placeLonRef" type="text" placeholder="Longitude"
-                class="w-full h-8 bg-transparent border-t-0 border-b border-x-0 text-middle px-0 py-7 border-main-color-light border-opacity-30 focus:outline-0 focus:ring-0 focus:border-opacity-70 focus:border-white text-main-color-light focus:placeholder-transparent"
+              <Field name="placeLonRef" type="text" placeholder="Longitude" class="bottom-line-input h-8"
                 :class="{ 'border-sp-color-dark border-opacity-100': errors.placeLonRef }" v-model="placeLon" />
             </div>
             <div class="alert-message flex space-x-3 justify-between">
               <div :class="{ 'visible': errors.placeLatRef }"
                 class="text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">
                 {{
-                  errors.placeLatRef
+                    errors.placeLatRef
                 }}</div>
               <div :class="{ 'visible': errors.placeLonRef }"
                 class="text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">
                 {{
-                  errors.placeLonRef
+                    errors.placeLonRef
                 }}</div>
             </div>
           </div>
@@ -94,7 +90,7 @@
           <h5 class="text-main-color-light mb-7">{{ placeImg }}</h5>
 
           <span v-show="errors.placeImgPathRef" class="text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">{{
-            errors.placeImgPathRef
+              errors.placeImgPathRef
           }}</span>
         </div>
       </Form>

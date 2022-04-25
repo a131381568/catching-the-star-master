@@ -160,6 +160,14 @@
     @apply bg-sp-color-light text-main-color-black
   }
 
+  /* line style input */
+  .bottom-line-input{
+    @apply w-full bg-transparent border-t-0 border-b border-x-0 text-middle px-0 py-2 border-main-color-light border-opacity-30 focus:outline-0 focus:ring-0 focus:border-opacity-70 focus:border-white text-main-color-light focus:placeholder-transparent
+  }
+  .bottom-line-input-gray{
+    @apply w-full bg-transparent border-t-0 border-b border-x-0 text-middle px-0 py-2 border-main-color-light focus:outline-0 focus:ring-0 focus:border-sub-color-dark text-main-color-light focus:placeholder-transparent
+  }
+
   /* timeline */
   .timeline-grid:before{
     content: "";
@@ -332,7 +340,10 @@
     @apply list-none ml-0
   }
   .md-container .v-md-editor-preview{
-    @apply bg-main-color-dark text-main-color-light p-5
+    @apply text-main-color-light p-5
+  }
+  .md-container .v-md-editor__preview-wrapper{
+    @apply bg-main-color-dark
   }
   .view-mode{
     @apply bg-main-color-light px-10 py-8
