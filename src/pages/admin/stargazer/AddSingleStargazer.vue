@@ -9,7 +9,7 @@
           class="text-white relative -left-2 -top-2 mobile:text-5xl w-table:w-3/4 w-full mobile:w-full w-table:m-0 mb-5">
           {{ stargazerTitle }}</h1>
         <button @click.prevent="setConfirmModal"
-          class="flex btn draw meet text-lg w-2/12 mobile:w-1/3 mobile:mt-6 h-12 btn text-center items-center p-0 justify-center">
+          class="flex btn draw meet text-lg w-2/12 mobile:w-full mobile:mt-6 h-12 btn text-center items-center p-0 justify-center">
           {{ stargazerSaveBtn }}
         </button>
       </div>

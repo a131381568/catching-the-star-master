@@ -75,6 +75,7 @@
 
   /* star bg */
   :root {
+    --animate-delay: 0.8s;
     --twinkle-duration: 4s;
   }
   .stop-star-wrapper {
@@ -211,6 +212,11 @@
     display: -webkit-box;
     text-overflow: ellipsis;
     overflow: hidden;
+  }
+
+  /* infobox */
+  .infobox-icon{
+    @apply bg-main-color-light rounded-full w-150px h-150px flex justify-center items-center hover:bg-main-color-dark transition-all duration-700 shadow-30-box
   }
 
   /* read btn + load btn */

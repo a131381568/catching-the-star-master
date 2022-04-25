@@ -101,6 +101,7 @@ module.exports = {
         '480px': '480px',
         '380px': '380px',
         '200px': '200px',
+        '150px': '150px',
         '37/100': '37%',
         '30/100': '30%',
         '15/100': '15%',
@@ -120,6 +121,7 @@ module.exports = {
         '480px': '480px',
         '380px': '380px',
         '200px': '200px',
+        '150px': '150px',
         '130px': '130px',
         '15px': '15px',
         '9px': '9px',
@@ -179,6 +181,7 @@ module.exports = {
       '2xl': '1536px',
       // add
       'mini-mobile': { 'max': '375px' },
+      'middle-mobile': { 'max': '500px' },
       'mobile': { 'max': '767px' },
       'h-table': '768px',
       'w-table': '992px',

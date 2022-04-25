@@ -281,8 +281,4 @@ initSloganDate()
 onMounted(() => {
   scrollToAbout()
 });
-
-onBeforeUnmount(() => {
-  //
-});
 </script>
