@@ -4,6 +4,8 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    AddSingleCategories: typeof import('./src/components/AddSingleCategories.vue')['default']
+    AddSingleStargazer: typeof import('./src/components/AddSingleStargazer.vue')['default']
     AdminSidebar: typeof import('./src/components/AdminSidebar.vue')['default']
     Enter: typeof import('./src/components/Enter.vue')['default']
     Footer: typeof import('./src/components/Footer.vue')['default']
@@ -13,6 +15,7 @@ declare module 'vue' {
     Loading: typeof import('./src/components/Loading.vue')['default']
     Pagination: typeof import('./src/components/Pagination.vue')['default']
     PopMessage: typeof import('./src/components/PopMessage.vue')['default']
+    SingleStargazer: typeof import('./src/components/SingleStargazer.vue')['default']
     Timeline: typeof import('./src/components/Timeline.vue')['default']
     TitleBox: typeof import('./src/components/TitleBox.vue')['default']
   }

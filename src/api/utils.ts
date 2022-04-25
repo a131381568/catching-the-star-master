@@ -25,6 +25,7 @@ export function pageInfo(pageRouteName: string): Promise<resPageInfo> {
   })
 }
 
+
 type resFileInfo = {
   data: {
     singleUpload: File;
@@ -50,7 +51,6 @@ export function updateFile(file: any, pageRouteName: string) {
     fetchPolicy: 'no-cache'
   })
 }
-
 
 
 // type resFileInfo = {
@@ -98,6 +98,47 @@ export function loginAuthentication(email: string, password: string, pageRouteNa
     variables: {
       email,
       password,
+      pageRouteName
+    },
+    fetchPolicy: 'no-cache'
+  })
+}
+
+
+// 新增文章分類
+export function setNewCategory(categoryName: string, categoryId: string, pageRouteName: string) {
+  return client.mutate({
+    mutation: gql`
+      mutation SetNewCategory($categoryName: String!, $categoryId: String!) {
+        setNewCategory(categoryName: $categoryName, categoryId: $categoryId) {
+          code
+          message
+        }
+      }
+    `,
+    variables: {
+      categoryName,
+      categoryId,
+      pageRouteName
+    },
+    fetchPolicy: 'no-cache'
+  })
+}
+
+
+// 刪除文章分類
+export function deleteCategory(categoryId: string, pageRouteName: string) {
+  return client.mutate({
+    mutation: gql`
+      mutation DeleteCategory($categoryId: String!) {
+        deleteCategory(categoryId: $categoryId) {
+          code
+          message
+        }
+      }
+    `,
+    variables: {
+      categoryId,
       pageRouteName
     },
     fetchPolicy: 'no-cache'

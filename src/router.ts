@@ -15,6 +15,7 @@ import Board from '@/pages/admin//Board.vue'
 import Slogan from '@/pages/admin//Slogan.vue'
 import Stargazer from '@/pages/admin/stargazer/Stargazer.vue'
 import AddSingleStargazer from '@/pages/admin/stargazer/AddSingleStargazer.vue'
+import EditSingleStargazer from '@/pages/admin/stargazer/EditSingleStargazer.vue'
 import Categories from '@/pages/admin/categories/Categories.vue'
 import AddSingleCategories from '@/pages/admin/categories/AddSingleCategories.vue'
 
@@ -165,7 +166,7 @@ const routes = [
   {
     path: '/board/stargazer/edit/:lid',
     name: 'EditSingleStargazer',
-    component: AddSingleStargazer,
+    component: EditSingleStargazer,
     meta: {
       title: '編輯觀星地點',
       manage: true

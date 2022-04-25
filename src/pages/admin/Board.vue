@@ -2047,7 +2047,7 @@
 <script setup lang="ts">
 import { sloganLoad } from '@/api/about'
 const store = useStore();
-const getFirstEnter = computed(() => store.get_firstEnter);
+
 // 取得路由
 const route = useRoute()
 const routeName = String(route.name)

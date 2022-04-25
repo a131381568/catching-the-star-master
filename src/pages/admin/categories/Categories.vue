@@ -6,7 +6,7 @@
 			<!-- 標題區塊 -->
 			<div class="w-9/12 mobile:w-11/12 flex justify-between mb-20 mobile:mb-9 mobile:block mobile:mx-auto">
 				<h1 class="text-white relative -left-2 -top-2 mobile:text-5xl w-3/4 mobile:w-full">文章分類管理</h1>
-				<router-link to="/board/stargazer/add"
+				<router-link to="/board/categories/add"
 					class="flex btn draw meet text-lg w-2/12 mobile:w-full mobile:mt-6 h-12 btn text-center items-center p-0 justify-center">
 					新增
 				</router-link>
@@ -31,7 +31,7 @@
 							}}</td>
 							<td data-title="ID">{{ val.post_category_id }}</td>
 							<td data-title="編輯">
-								<svg @click.prevent="editPlace(String(val.post_category_id))"
+								<svg @click.prevent="editCategories(String(val.post_category_id))"
 									class="fill-main-color-light inline-block w-28px h-auto group" version="1.1"
 									xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
 									xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px" width="26px" height="26px"
@@ -730,7 +730,7 @@ onMounted(async () => {
 // 跳出燈箱詢問是否確定刪除?
 function setConfirmModal(cid: string) {
 	cidRef.value = cid
-	store.openPopMsg("確定刪除此地點?", true)
+	store.openPopMsg("確定刪除此分類?", true)
 }
 
 // 確認框 Y/N
@@ -746,7 +746,7 @@ async function popBtnCheck() {
 	}
 }
 
-function editPlace(cid: string) {
+function editCategories(cid: string) {
 	router.push("/board/categories/edit/" + cid)
 }
 
