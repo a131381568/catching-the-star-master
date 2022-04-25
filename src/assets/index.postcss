@@ -246,6 +246,9 @@
   .admin-sbtn{
     @apply hover:bg-sp-color-light hover:text-white duration-300 transition-all w-24 h-9 bg-sub-color-light text-middle tracking-widest
   }
+  .admin-edit-sbtn{
+    @apply hover:bg-sub-color-light hover:text-main-color-dark bg-sp-color-light text-white duration-300 transition-all w-24 h-9 text-middle tracking-widest
+  }
 
   /* markdown */
   .md-container > div >*{
@@ -334,7 +337,7 @@
   .view-mode{
     @apply bg-main-color-light px-10 py-8
   }
-  .edit-mode{
+  .home-slogan .edit-mode{
     @apply bg-white px-10 py-6 
   }
   .view-mode .home-title{
@@ -348,6 +351,12 @@
   }
   .md-container .v-md-textarea-editor textarea{
     @apply font-sans text-base
+  }
+  .md-container .v-md-editor--editable{
+    @apply rounded-none
+  }
+  .view-mode .v-md-editor-preview strong{
+    @apply text-sp-color-dark
   }
 
   /*-------------------------------- RWD Table ----------------------------------*/

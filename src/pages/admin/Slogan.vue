@@ -14,25 +14,66 @@
         <div class="home-slogan w-full">
           <div class="map-search-bar flex justify-between mb-8">
             <h2 class="text-main-color-light">首頁—主視覺文字</h2>
-            <button class="admin-sbtn">編輯標語</button>
+            <button class="admin-sbtn" @click.prevent="changehomeSloganEditMode()"
+              v-if="!homeSloganEditMode">編輯標語</button>
+            <button class="admin-edit-sbtn" @click.prevent="changehomeSloganEditMode()"
+              v-if="homeSloganEditMode">儲存標語</button>
           </div>
-          <div class="editer-inner view-mode mb-14">
-            <h4 class="home-title"><i>Catch</i> the stars</h4>
-            <p>誰能數得清天上的星星？誰能說出它們對世界的影響？——詹・湯姆遜</p>
+          <div class="editer-inner view-mode mb-14" v-if="!homeSloganEditMode">
+            <h4 class="home-title"><i>{{ pageTitleFirst }}</i>{{ pageTitleLast }}</h4>
+            <p>{{ pageSubTitle }}</p>
           </div>
-          <!-- <div class="editer-inner edit-mode mb-8">
-            <input value="Catch" class="home-title-first mb-4">
-            <input value="the stars" class="home-title-last mb-4">
-            <input value="誰能數得清天上的星星？誰能說出它們對世界的影響？——詹・湯姆遜" class="home-slogan mb-2">
-          </div> -->
+          <div class="editer-inner edit-mode mb-8" v-if="homeSloganEditMode">
+            <input v-model="pageTitle" class="home-title-input mb-4">
+            <input v-model="pageSubTitle" class="home-slogan mb-2">
+          </div>
         </div>
         <div class="about-slogan w-full">
           <div class="map-search-bar flex justify-between mb-8">
             <h2 class="text-main-color-light">關於我們—理念</h2>
-            <button class="admin-sbtn">編輯標語</button>
+            <button class="admin-sbtn" @click.prevent="changeaboutSloganEditMode()"
+              v-if="!aboutSloganEditMode">編輯標語</button>
+            <button class="admin-edit-sbtn" @click.prevent="changeaboutSloganEditMode()"
+              v-if="aboutSloganEditMode">儲存標語</button>
           </div>
-          <div class="editer-inner md-container">
-            <v-md-editor class="markdown-body" v-model="inputContent" height="400px"></v-md-editor>
+          <div class="editer-inner view-mode mb-14" v-if="!aboutSloganEditMode">
+            <h4 class="text-xl">{{ sloganRef }}</h4>
+            <hr class="border-main-color-middle my-8">
+            <v-md-preview class="markdown-body" :text="philosophyRef" height="400px"></v-md-preview>
+          </div>
+          <div class="editer-inner edit-mode md-container" v-if="aboutSloganEditMode">
+            <input v-model="sloganRef" class="p-6">
+            <v-md-editor class="markdown-body" v-model="philosophyRef" height="400px"></v-md-editor>
+          </div>
+        </div>
+        <div class="about-quote w-full">
+          <div class="map-search-bar flex justify-between mb-8">
+            <h2 class="text-main-color-light">關於我們—引言</h2>
+            <button class="admin-sbtn" @click.prevent="changeAboutQuoteEditMode()"
+              v-if="!aboutQuoteEditMode">編輯標語</button>
+            <button class="admin-edit-sbtn" @click.prevent="changeAboutQuoteEditMode()"
+              v-if="aboutQuoteEditMode">儲存標語</button>
+          </div>
+          <div class="editer-inner view-mode mb-14" v-if="!aboutQuoteEditMode">
+            <v-md-preview class="markdown-body" :text="quoteRef" height="400px"></v-md-preview>
+          </div>
+          <div class="editer-inner edit-mode md-container" v-if="aboutQuoteEditMode">
+            <v-md-editor class="markdown-body" v-model="quoteRef" height="400px"></v-md-editor>
+          </div>
+        </div>
+        <div class="about-epilogue w-full">
+          <div class="map-search-bar flex justify-between mb-8">
+            <h2 class="text-main-color-light">關於我們—引言</h2>
+            <button class="admin-sbtn" @click.prevent="changeAboutEpilogueEditMode()"
+              v-if="!aboutEpilogueEditMode">編輯標語</button>
+            <button class="admin-edit-sbtn" @click.prevent="changeAboutEpilogueEditMode()"
+              v-if="aboutEpilogueEditMode">儲存標語</button>
+          </div>
+          <div class="editer-inner view-mode mb-14" v-if="!aboutEpilogueEditMode">
+            <v-md-preview class="markdown-body" :text="epilogueRef" height="400px"></v-md-preview>
+          </div>
+          <div class="editer-inner edit-mode md-container" v-if="aboutEpilogueEditMode">
+            <v-md-editor class="markdown-body" v-model="epilogueRef" height="400px"></v-md-editor>
           </div>
         </div>
       </div>
@@ -54,78 +95,42 @@ const router = useRouter()
 const routeName = String(route.name)
 const store = useStore();
 
-let textttt = `
-## 科學家介紹
+const pageTitle = ref("Catch the stars")
+const pageTitleFirst = computed(() => pageTitle.value.split(" ")[0]);
+const pageTitleLast = computed(() => pageTitle.value.replace(pageTitleFirst.value, ''));
+const pageSubTitle = ref("誰能數得清天上的星星？誰能說出它們對世界的影響？——詹・湯姆遜")
 
-> 德國人，著名的天文學家、數學家，為天文學家第谷的助手。
+const sloganRef = ref("我們是「雲上的小貓」，致力於寫下故事、留下故事。")
 
-<br>
-<br>
+const philosophyRef = ref("人是被賦予豐富情感的動物，會笑、會哭、會憤怒、會感動，所以有溫度的故事是能夠觸動人心的，甚至能夠在心中種下一顆希望的種子，在未來成長為茁壯的大樹。<br /><br />正因凡走過必留下痕跡，可以是歷史？<br />也可以是虛構的童話？<br />不管它是什麼？<br /><br />總會能夠會帶給我們些什麼？<br />對吧？<br /><br />無論是虛無飄渺的疑問？還是膽戰心驚的恐懼？又或著肯定的勇氣？每個人都有故事，因為這是我們自己開啟的故事——。")
 
-### 宇宙的神祕
-克卜勒相信日心說，認為太陽是宇宙的中心，在其著作《宇宙的神秘》一書中，克卜勒提出了自己的太陽系模型，首先最外面是土星天球，接著土星天球內部放置一個正6面體和天球相接，然後再放上木星天球和正6面體相接。
+const quoteRef = ref("「我和他就好像天上的星星，遠看好像距離很近，但實際上卻是相當遙遠的。」<br /><br />「這片夜空中，只有一顆星星在微弱的閃鑠著，好像很孤單一樣？但是我們每個人只要一抬頭就能看見它，<br />所以即使身在遠方，星星也能夠獨自努力發光了。」<br /><br />——《虎與龍》")
 
-#### 以下遵循相同的順序：
-- 依次放入正4面體
-- 火星天球
-- 正12面體
-- 地球天球
-- 正20面體
-- 金星天球
-- 正8面體
-- 水星天球。
-
-
-\`\`\`
-\/\/ \planetary orbit
-由於在當時，人們認為天體的運行是完美的，是一個完整的圓，所以在模型當中，天球是圓的，代表著行星運行的軌道。
-\`\`\`
-
-
-為了驗證自己的理論究竟是否正確，克卜勒需要天文觀測數據來佐證，但因為他本身的視力薄弱，限制了他的天文觀察能力，於是在1600年，克卜勒成為第谷的助手，並且在第谷死後，開始處理他所遺留下來的大量觀測資料。
-
-
-克卜勒最先處理火星的軌道數據，但初期並不順利，後來克卜勒決定先計算出地球的軌道，由於火星繞日周期為1.88年，所以若只觀看每1.88年的數值，火星便好像固定在天空中一樣，而地球繞日周期為1年，因此每1.88年都會出現在不同的位置，將這些位置連接起來，便是地球的軌道。而在計算的過程當中，克卜勒發現一件事情：「當地球繞太陽運轉時，若經過相同的時間，則地球和太陽的連線所形成的扇形面積會相同。」根據這個定律，當地球靠近太陽時速度較快，遠離時則較慢，這就是\`克卜勒第二運動定律\`。
-
-
-闡明地球的軌道之後，克卜勒把心力放回一開始的目標─求出火星的軌道，由於已經知道地球的軌道，因此，若從某個時刻(位置)觀察火星，以及1.88年後地球所在的位置，這兩個位置往火星的方向便會有一個交叉，此交叉點便是火星在軌道上的一點，以此方法反覆進行，便能夠得到火星的軌道。最後得到的結果，顯示出火星的軌道為橢圓，這可說是非常大的震撼彈，雖然[哥白尼](https://taea.tn.edu.tw/taea/astro_news/book_detail/5fb53e40-0917-11eb-b691-562538ac20d1)提出了日心說，但他仍然相信軌道是圓的，克卜勒的這項發現可說是再度推翻天文學的「常識」。現在我們也知道，行星是以橢圓軌道環繞太陽公轉，太陽位在橢圓的其中一個焦點上，這就是克卜勒第一運動定律。
-
-<br>
-
-![#](https://taea.tn.edu.tw/taea_file/assets/990/Kepler-solar-system-1.png)
-(克卜勒的太陽系模型，Credit：Johannes Kepler, Public domain, via Wikimedia Commons)
-
-<br>
-
-發現第一、第二運動定律之後，克卜勒想知道太陽系中的所有行星在公轉時是否有共同的規律可遵循，便重新審視了觀察資料，而最後他發現：「行星公轉軌道平均半徑(半長軸)的立方，和公轉周期的平方，其比值為一個定值。」這就是克卜勒第三運動定律。
-
-
-克卜勒將他發現的三大定律收錄在1609年出版的《新天文學》中，但在當時並沒有受到眾人的重視。除了行星運動之外，由於在1604年，剛好發生一次超新星爆炸(克卜勒超新星，位於蛇夫座足部)，所以克卜勒也對此現象做了深入的研究。
-
-
-雖然我們現在用牛頓定律便可直接導出克卜勒運動定律，但在當時，克卜勒只憑藉觀察和計算，便能發現令人震驚的星空秘密，可說是非常不簡單。直到現在，我們仍然會使用到克卜勒定律，包括衛星的軌道變動、太空船的對接、前往其他星球的太空探測船等，克卜勒的貢獻可說是居功厥偉。
-
-
-----
-
-#### 清明節日期
-
-| 起訖年份 | 清明節日期(4年1次巡迴)  |
-|-------------|-------------------------|
-| 1912年~1943年 | 4月5日(連續3年) + 4月6日(1年)   |
-| 1944年~1975年 | 4月5日(固定)                |
-| 1976年~2007年 | 4月4日(1年) + 4月5日(連續3年)   |
-| 2008年~2039年 | 4月4日(連續2年) + 4月5日(連續2年) |
-| 2040年~2071年 | 4月4日(連續3年) + 4月5日(1年)   |
-| 2072年~2099年 | 4月4日(固定)                |
-`
-
-
-const inputContent = ref(textttt)
-
+const epilogueRef = ref("『打從地球誕生的那一刻起，天空就已經用這樣的姿態為我們在夜晚蓋上滿天星斗的布幕了。』<br /><br />在這宏觀的世界，世人們將星座和神話故事相互結合，把夜空中同一個區域的星星，分為一個個的星座，每一個星座都有屬於它們自己的故事，令人嚮往和好奇。<br /><br />而製造這浪漫的舞台，究竟是什麼構造？它們的由來又什麼？是否是我們能夠觸手可及的呢？<br />它們一直都存在我們的身旁，只是我們一直都沒注意到而已。<br /><br /><strong class=\"text-sp-color-light\">這次讓我們來好好記下它們的存在的軌跡。</strong>")
 
 // ================================= 設定送出表單欄位 =========================================
 
+const homeSloganEditMode = ref(false)
+function changehomeSloganEditMode() {
+  homeSloganEditMode.value = !homeSloganEditMode.value
+}
+
+const aboutSloganEditMode = ref(false)
+function changeaboutSloganEditMode() {
+  aboutSloganEditMode.value = !aboutSloganEditMode.value
+}
+
+const aboutQuoteEditMode = ref(false)
+function changeAboutQuoteEditMode() {
+  aboutQuoteEditMode.value = !aboutQuoteEditMode.value
+}
+
+const aboutEpilogueEditMode = ref(false)
+function changeAboutEpilogueEditMode() {
+  aboutEpilogueEditMode.value = !aboutEpilogueEditMode.value
+}
+
+///////////////////
 const addPlaceForm = ref({
   validate: () => { return { valid: false } }
 })
