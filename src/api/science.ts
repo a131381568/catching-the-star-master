@@ -166,7 +166,6 @@ export function getSearchArtists(
 }
 
 
-
 // 新增文章分類
 export function setNewCategory(categoryName: string, categoryId: string, pageRouteName: string) {
   return client.mutate({
@@ -229,7 +228,6 @@ export function mutCategory(categoryName: string, categoryId: string, pageRouteN
 }
 
 
-
 // 依 ID 查詢單一分類
 type resPostCategory = {
   data: {
@@ -251,5 +249,102 @@ export function getSingleCategory(categoryId: string, pageRouteName: string): Pr
       pageRouteName
     },
     fetchPolicy: "no-cache"
+  })
+}
+
+
+// 文章列表 ( 分頁 )
+type resArtistsPagi = {
+  data: {
+    artistsPagi: ArtistsList;
+  };
+};
+export function artistsPagi(
+  pageNumber: Number | null,
+  linesPerpage: Number | null,
+  pageRouteName: string
+): Promise<resArtistsPagi> {
+  return client.query({
+    query: gql`
+      query ArtistsPagi($pageNumber: Int, $linesPerpage: Int) {
+        artistsPagi(pageNumber: $pageNumber, linesPerpage: $linesPerpage) {
+          edges {
+            postid
+            title
+            categoryid
+            updatetime
+          }
+          pageInfo {
+            hasNextPage
+            hasPreviousPage
+            start
+            end
+            totalPagi
+          }
+        }
+      }
+    `,
+    variables: {
+      pageNumber,
+      linesPerpage,
+      pageRouteName
+    },
+    fetchPolicy: 'no-cache'
+  })
+}
+
+
+// 新增單一文章
+export function SetNewPost(
+  postid: number,
+  title: string,
+  categoryid: string,
+  updatetime: string,
+  content: string,
+  image: string,
+  pageRouteName: string
+) {
+  return client.mutate({
+    mutation: gql`
+      mutation SetNewPost($postid: Int, $title: String, $categoryid: String, $updatetime: String, $content: String, $image: String) {
+        setNewPost(postid: $postid, title: $title, categoryid: $categoryid, updatetime: $updatetime, content: $content, image: $image) {
+          code
+          message
+        }
+      }
+    `,
+    variables: {
+      postid,
+      title,
+      categoryid,
+      updatetime,
+      content,
+      image,
+      pageRouteName
+    },
+    fetchPolicy: 'no-cache'
+  })
+}
+
+
+// 刪除單一文章
+export function deletePost(
+  postid: number,
+  pageRouteName: string
+) {
+  return client.mutate({
+    mutation: gql`
+      mutation DeletePost($postid: Int) {
+        deletePost(postid: $postid) {
+          code
+          message
+        }
+      }
+    `,
+    variables: {
+      postid,
+      pageRouteName
+    },
+    fetchPolicy: 'no-cache'
   })
 }

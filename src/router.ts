@@ -19,6 +19,9 @@ import EditSingleStargazer from '@/pages/admin/stargazer/EditSingleStargazer.vue
 import Categories from '@/pages/admin/categories/Categories.vue'
 import AddSingleCategories from '@/pages/admin/categories/AddSingleCategories.vue'
 import EditSingleCategories from '@/pages/admin/categories/EditSingleCategories.vue'
+import Article from '@/pages/admin/article/Article.vue'
+import AddSingleArticle from '@/pages/admin/article/AddSingleArticle.vue'
+import EditSingleArticle from '@/pages/admin/article/EditSingleArticle.vue'
 
 const routes = [
   {
@@ -206,6 +209,33 @@ const routes = [
     component: AddSingleCategories,
     meta: {
       title: '新增文章分類',
+      manage: true
+    }
+  },
+  {
+    path: '/board/article',
+    name: 'Article',
+    component: Article,
+    meta: {
+      title: '文章列表',
+      manage: true
+    }
+  },
+  {
+    path: '/board/article/edit/:pid',
+    name: 'EditSingleArticle',
+    component: EditSingleArticle,
+    meta: {
+      title: '編輯文章',
+      manage: true
+    }
+  },
+  {
+    path: '/board/article/add',
+    name: 'AddSingleArticle',
+    component: AddSingleArticle,
+    meta: {
+      title: '新增文章',
       manage: true
     }
   }

@@ -55,6 +55,11 @@ export type ArtistsArr = {
   image: string
 }[];
 
+export type ArtistConnectionPush = {
+  edges: [Artists]
+  pageInfo: PageInfoPush
+}
+
 export type ArtistsList = {
   edges: [Artists]
   pageInfo: PageInfo

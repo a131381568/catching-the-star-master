@@ -2,7 +2,7 @@ import client from '../apollo'
 import gql from 'graphql-tag';
 import { SinglePageInfo, File } from '../types/graphql/types'
 
-// 文章分類
+// 頁面路由標題對照表
 type resPageInfo = {
   data: {
     pageInfo: [SinglePageInfo];

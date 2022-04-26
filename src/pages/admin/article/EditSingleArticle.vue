@@ -1,0 +1,3 @@
+<template>
+  <SingleStargazer></SingleStargazer>
+</template>
