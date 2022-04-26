@@ -29,8 +29,10 @@
           <!-- 地址說明 -->
           <div class="input-group mb-14">
             <h4 class="text-main-color-light font-normal">分類 ID</h4>
-            <Field name="categoryIdRef" type="text" class="h-16 block m-auto bottom-line-input text-lg"
-              :class="{ 'border-sp-color-dark border-opacity-100': errors.categoryIdRef }" v-model="categoryId" />
+            <Field name="categoryIdRef" type="text" class="h-16 block m-auto bottom-line-input text-lg" :class="[
+              { 'border-sp-color-dark border-opacity-100': errors.categoryIdRef },
+              { 'pointer-events-none border-0': routeName === 'EditSingleCategories' }
+            ]" v-model="categoryId" />
             <span v-show="errors.categoryIdRef" class="text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">{{
                 errors.categoryIdRef
             }}</span>
@@ -38,7 +40,7 @@
         </div>
       </Form>
       <div class="w-table:w-9/12 w-full" v-if="routeName === 'EditSingleCategories'">
-        <button class="admin-delete-sbtn">
+        <button class="admin-delete-sbtn" @click.prevent="setDelConfirmModal()">
           刪除
         </button>
       </div>
@@ -50,12 +52,13 @@
 <script setup lang="ts">
 import schema from '@/utils/vee-validate-schema'
 import { Field, Form } from 'vee-validate';
-import { deleteCategory, setNewCategory } from '@/api/utils'
+import { deleteCategory, mutCategory, setNewCategory, getSingleCategory } from '@/api/science'
 import { useDebounceFn } from '@vueuse/core'
 // 取得路由
 const route = useRoute()
 const router = useRouter()
 const routeName = String(route.name)
+const routeCid = String(route.params.cid)
 const store = useStore();
 
 // ================================= 設置新增/編輯的標題和按鈕 =================================
@@ -91,8 +94,18 @@ const verifyRules = {
 
 // ================================= 送出表單 =========================================
 
+// 設置刪除模式欄位
+const modelDelMode = ref(false)
+
+// 跳出燈箱詢問是否確定刪除?
+function setDelConfirmModal() {
+  modelDelMode.value = true
+  store.openPopMsg("確定刪除文章分類?", true)
+}
+
 // 跳出燈箱詢問是否確定新增?
 function setConfirmModal() {
+  modelDelMode.value = false
   store.openPopMsg("確定" + categoriesTitle.value + "?", true)
 }
 
@@ -102,8 +115,16 @@ const popBtnCheckVal = computed(() => store.get_popMsgBtnReturn)
 // 點擊確認
 async function popBtnCheck() {
   await popBtnCheckVal
-  if (popBtnCheckVal.value) {
+  if (popBtnCheckVal.value && !modelDelMode.value) {
     actionAddCategories()
+  }
+  if (popBtnCheckVal.value && modelDelMode.value) {
+    // console.log("走刪除路線")
+    actionDelCategory()
+  }
+  if (!popBtnCheckVal.value) {
+    modelDelMode.value = false
+    // console.log("取消刪除: ", modelDelMode.value)
   }
 }
 
@@ -116,13 +137,10 @@ const actionAddCategories = useDebounceFn(async () => {
       // 如果是新增版型
       console.log("可以新增")
       const res = await setNewCategory(
-        String(categoryName),
-        String(categoryId),
+        String(categoryName.value),
+        String(categoryId.value),
         routeName
       )
-
-      console.log(res)
-
       if (res.data.setNewCategory.code) {
         if (res.data.setNewCategory.code > 0) {
           router.push("/board/categories")
@@ -133,22 +151,40 @@ const actionAddCategories = useDebounceFn(async () => {
     } else {
       // 如果是編輯版型
       console.log("可以編輯")
-      // const path = String(route.params.lid)
-      // const res = await editStargazer(categoryName,routeName)
-      // if (res.data.editStargazer.code) {
-      //   if (res.data.editStargazer.code > 0) {
-      //     router.push("/board/stargazer")
-      //   } else {
-      //     store.openPopMsg(res.data.editStargazer.message, false)
-      //   }
-      // }
+      const res = await mutCategory(String(categoryName.value), routeCid, routeName)
+      if (res.data.mutCategory.code) {
+        if (res.data.mutCategory.code > 0) {
+          router.push("/board/categories")
+        } else {
+          store.openPopMsg(res.data.mutCategory.message, false)
+        }
+      }
     }
   }
 }, 1000)
 
+
+// 送出刪除表單
+const actionDelCategory = async () => {
+  console.log("可以刪除")
+  await deleteCategory(routeCid, routeName)
+  await setTimeout(() => {
+    router.push("/board/categories")
+  }, 1000);
+}
+
+
+// ================================= 取得指定 cid 文章分類資料 =========================================
+
+async function loadEditCategory() {
+  const res = await getSingleCategory(routeCid, routeName)
+  categoryName.value = String(res.data.getSingleCategory.post_category_name)
+  categoryId.value = String(res.data.getSingleCategory.post_category_id)
+}
+
 // ================================= 生命週期 =========================================
 
-onMounted(async () => {
-  // 
-});
+// 僅在編輯版型 load 資料
+loadEditCategory()
+
 </script>

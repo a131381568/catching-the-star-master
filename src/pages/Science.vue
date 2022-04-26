@@ -70,7 +70,7 @@
           <p class="text-tiny mt-1 text-main-color-light">
             {{ store.changeDate(Number(val.updatetime)) }},
             <router-link :to="'/archive/' + val.categoryid" class="text-sub-color-light hover:text-sp-color-light">{{
-              store.changeCatName(filterCategories, val.categoryid)
+                store.changeCatName(filterCategories, val.categoryid)
             }}</router-link>
           </p>
           <!-- des -->
@@ -137,7 +137,7 @@ function closeDefaultMenu() {
 
 getArtistsCategories()
 async function getArtistsCategories() {
-  const res = await artistsCategories(routeName)
+  const res = await artistsCategories(routeName, true)
   const filterBar = res.data.artistsCategories.filter(item => item.post_category_id !== 'story')
   // const filterBar = res.data.artistsCategories
   filterCategories.value = filterBar

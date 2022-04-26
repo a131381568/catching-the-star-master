@@ -26,6 +26,7 @@ export function pageInfo(pageRouteName: string): Promise<resPageInfo> {
 }
 
 
+// 檔案上傳
 type resFileInfo = {
   data: {
     singleUpload: File;
@@ -53,11 +54,7 @@ export function updateFile(file: any, pageRouteName: string) {
 }
 
 
-// type resFileInfo = {
-//   data: {
-//     singleUpload: File;
-//   };
-// };
+// 取得會員資料
 export function getSelfInfo(pageRouteName: string) {
   return client.query({
     query: gql`
@@ -78,6 +75,7 @@ export function getSelfInfo(pageRouteName: string) {
 }
 
 
+// 登入
 export function loginAuthentication(email: string, password: string, pageRouteName: string) {
   return client.mutate({
     mutation: gql`
@@ -98,47 +96,6 @@ export function loginAuthentication(email: string, password: string, pageRouteNa
     variables: {
       email,
       password,
-      pageRouteName
-    },
-    fetchPolicy: 'no-cache'
-  })
-}
-
-
-// 新增文章分類
-export function setNewCategory(categoryName: string, categoryId: string, pageRouteName: string) {
-  return client.mutate({
-    mutation: gql`
-      mutation SetNewCategory($categoryName: String!, $categoryId: String!) {
-        setNewCategory(categoryName: $categoryName, categoryId: $categoryId) {
-          code
-          message
-        }
-      }
-    `,
-    variables: {
-      categoryName,
-      categoryId,
-      pageRouteName
-    },
-    fetchPolicy: 'no-cache'
-  })
-}
-
-
-// 刪除文章分類
-export function deleteCategory(categoryId: string, pageRouteName: string) {
-  return client.mutate({
-    mutation: gql`
-      mutation DeleteCategory($categoryId: String!) {
-        deleteCategory(categoryId: $categoryId) {
-          code
-          message
-        }
-      }
-    `,
-    variables: {
-      categoryId,
       pageRouteName
     },
     fetchPolicy: 'no-cache'

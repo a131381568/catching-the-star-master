@@ -49,7 +49,7 @@ const circleBg = ref("")
 
 onMounted(async () => {
   // 取得分類  
-  const artistsCatRes = await artistsCategories(routeName)
+  const artistsCatRes = await artistsCategories(routeName, true)
   // 判斷參數是否正常
   if (getnNid.value) {
     // 取得單一資料

@@ -704,9 +704,8 @@
 	<PopMessage @popBtnCheck="popBtnCheck"></PopMessage>
 </template>
 <script setup lang="ts">
-import { artistsCategories } from '@/api/science'
-import { stargazerList, deleteStargazer } from '@/api/stargazing'
-import { StargazingArr, PageInfoPush, ArtistsCategories } from '@/types/graphql/types'
+import { artistsCategories, deleteCategory } from '@/api/science'
+import { ArtistsCategories } from '@/types/graphql/types'
 const store = useStore();
 
 // 取得路由
@@ -740,9 +739,9 @@ const popBtnCheckVal = computed(() => store.get_popMsgBtnReturn)
 async function popBtnCheck() {
 	await popBtnCheckVal
 	if (popBtnCheckVal.value) {
-		// await deleteStargazer(cidRef.value, routeName)
+		await deleteCategory(cidRef.value, routeName)
 		// 刪除後重抓列表
-		// await getStargazerList(1)
+		await getArtistsCategories()
 	}
 }
 
@@ -751,9 +750,8 @@ function editCategories(cid: string) {
 }
 
 
-
 async function getArtistsCategories() {
-	const res = await artistsCategories(routeName)
+	const res = await artistsCategories(routeName, false)
 	const filterBar = res.data.artistsCategories.filter(item => item.post_category_name !== '全部分類')
 	// const filterBar = res.data.artistsCategories
 	postCategories.value = filterBar

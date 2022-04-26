@@ -90,7 +90,11 @@ type resPostCategories = {
     artistsCategories: [ArtistsCategory];
   };
 };
-export function artistsCategories(pageRouteName: string): Promise<resPostCategories> {
+export function artistsCategories(pageRouteName: string, cacheMode: boolean): Promise<resPostCategories> {
+  // let cacheName = "no-cache"
+  // if (cacheMode === true) {
+  //   cacheName = "cache-first"
+  // }
   return client.query({
     query: gql`
       query ArtistsCategories {
@@ -102,7 +106,8 @@ export function artistsCategories(pageRouteName: string): Promise<resPostCategor
     `,
     variables: {
       pageRouteName
-    }
+    },
+    fetchPolicy: cacheMode ? "cache-first" : "no-cache"
   })
 }
 
@@ -157,5 +162,94 @@ export function getSearchArtists(
       keyword,
       pageRouteName
     }
+  })
+}
+
+
+
+// 新增文章分類
+export function setNewCategory(categoryName: string, categoryId: string, pageRouteName: string) {
+  return client.mutate({
+    mutation: gql`
+      mutation SetNewCategory($categoryName: String!, $categoryId: String!) {
+        setNewCategory(categoryName: $categoryName, categoryId: $categoryId) {
+          code
+          message
+        }
+      }
+    `,
+    variables: {
+      categoryName,
+      categoryId,
+      pageRouteName
+    },
+    fetchPolicy: 'no-cache'
+  })
+}
+
+
+// 刪除文章分類
+export function deleteCategory(categoryId: string, pageRouteName: string) {
+  return client.mutate({
+    mutation: gql`
+      mutation DeleteCategory($categoryId: String!) {
+        deleteCategory(categoryId: $categoryId) {
+          code
+          message
+        }
+      }
+    `,
+    variables: {
+      categoryId,
+      pageRouteName
+    },
+    fetchPolicy: 'no-cache'
+  })
+}
+
+
+// 編輯文章分類
+export function mutCategory(categoryName: string, categoryId: string, pageRouteName: string) {
+  return client.mutate({
+    mutation: gql`
+      mutation MutCategory($categoryName: String!, $categoryId: String!) {
+        mutCategory(categoryName: $categoryName, categoryId: $categoryId) {
+          code
+          message
+        }
+      }
+    `,
+    variables: {
+      categoryName,
+      categoryId,
+      pageRouteName
+    },
+    fetchPolicy: 'no-cache'
+  })
+}
+
+
+
+// 依 ID 查詢單一分類
+type resPostCategory = {
+  data: {
+    getSingleCategory: ArtistsCategory;
+  };
+};
+export function getSingleCategory(categoryId: string, pageRouteName: string): Promise<resPostCategory> {
+  return client.query({
+    query: gql`
+      query GetSingleCategory($categoryId: String!) {
+        getSingleCategory(categoryId: $categoryId) {
+          post_category_name
+          post_category_id
+        }
+      }
+    `,
+    variables: {
+      categoryId,
+      pageRouteName
+    },
+    fetchPolicy: "no-cache"
   })
 }

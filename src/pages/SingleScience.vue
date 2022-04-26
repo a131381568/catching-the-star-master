@@ -35,7 +35,7 @@ const mdContent = ref("")
 
 onMounted(async () => {
   // 取得分類  
-  const artistsCatRes = await artistsCategories(routeName)
+  const artistsCatRes = await artistsCategories(routeName, true)
   // 判斷參數是否正常
   if (getSid.value) {
     // 取得單一資料
