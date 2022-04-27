@@ -14,7 +14,7 @@
 			<!-- 表格區塊 -->
 			<!-- class="before:content-[attr(data-title)]" -->
 			<div class="w-9/12 mobile:w-11/12 table-container mobile:m-auto">
-				<table id="responsive-table" v-if="postCategories.length > 0 && postCategories"
+				<table id="responsive-table" v-if="facilitiesListRef.length > 0 && facilitiesListRef"
 					class="animate__animated animate__fadeIn">
 					<thead class="w-table:table-header-group  hidden">
 						<tr>
@@ -25,13 +25,13 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr v-for="(val, key) in postCategories" :key="key">
+						<tr v-for="(val, key) in facilitiesListRef" :key="key">
 							<td data-title="機構">{{
 									val.facilities_title
 							}}</td>
 							<td data-title="連結">{{ val.facilities_link }}</td>
 							<td data-title="編輯">
-								<svg @click.prevent="editCategories(val.facilities_orderid)"
+								<svg @click.prevent="editPage(val.facilities_orderid)"
 									class="fill-main-color-light inline-block w-28px h-auto group" version="1.1"
 									xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
 									xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px" width="26px" height="26px"
@@ -705,8 +705,7 @@
 </template>
 <script setup lang="ts">
 import { facilitiesList, deleteOrganization } from '@/api/facilities'
-import { artistsCategories, deleteCategory } from '@/api/science'
-import { ArtistsCategories } from '@/types/graphql/types'
+import { FacilitiesArr } from '@/types/graphql/types'
 const store = useStore();
 
 // 取得路由
@@ -715,14 +714,13 @@ const route = useRoute()
 const routeName = String(route.name)
 
 // 宣告列表預設值
-const postCategories = ref<ArtistsCategories>([])
-const actionPage = ref(1)
+const facilitiesListRef = ref<FacilitiesArr>([])
 const oidRef = ref("")
 
 // 生命週期 --------------------------------------------------------------
 onMounted(async () => {
 	// 取得列表資訊
-	await getArtistsCategories()
+	await getOrganizationList()
 });
 
 // ======================= 函式 ==============================
@@ -742,18 +740,18 @@ async function popBtnCheck() {
 	if (popBtnCheckVal.value) {
 		await deleteOrganization(oidRef.value, routeName)
 		// 刪除後重抓列表
-		await getArtistsCategories()
+		await getOrganizationList()
 	}
 }
 
-function editCategories(oid: Number) {
+function editPage(oid: Number) {
 	const path = "/board/organization/edit/" + oid
 	router.push(path)
 }
 
 
-async function getArtistsCategories() {
+async function getOrganizationList() {
 	const res = await facilitiesList(routeName)
-	postCategories.value = res.data.facilitiesList
+	facilitiesListRef.value = res.data.facilitiesList
 }
 </script>

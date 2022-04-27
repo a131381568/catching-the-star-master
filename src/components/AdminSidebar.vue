@@ -334,7 +334,7 @@ const adminMenu = ref([
   },
   {
     title: "天文台管理",
-    path: "/board/organization/add"
+    path: "/board/observatories"
   },
   {
     title: "觀星地點列表",

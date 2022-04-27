@@ -154,3 +154,49 @@ export function mutOrganization(facilitiesOrderid: number, facilitiesTitle: stri
     fetchPolicy: 'no-cache'
   })
 }
+
+
+
+// 天文台列表
+type resObservatoriesList = {
+  data: {
+    observatoriesList: ObservatoriesArr
+  };
+};
+export function observatoriesList(pageRouteName: string): Promise<resObservatoriesList> {
+  return client.query({
+    query: gql`
+      query ObservatoriesList {
+        observatoriesList {
+          observatory_category_name
+          observatory_category_id
+        }
+      }
+    `,
+    variables: {
+      pageRouteName
+    },
+    fetchPolicy: "no-cache"
+  })
+}
+
+
+
+// 刪除天文台
+export function deleteObservatories(observatoryCategoryId: string, pageRouteName: string) {
+  return client.mutate({
+    mutation: gql`
+      mutation DeleteObservatories($observatoryCategoryId: String!) {
+        deleteObservatories(observatory_category_id: $observatoryCategoryId) {
+          code
+          message
+        }
+      }
+    `,
+    variables: {
+      observatoryCategoryId,
+      pageRouteName
+    },
+    fetchPolicy: 'no-cache'
+  })
+}

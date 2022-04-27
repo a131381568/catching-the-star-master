@@ -5,8 +5,8 @@
 			class="laptop:w-4/5 laptop:left-0 left-7 mobile:left-11 w-full mobile:w-admin-m-content h-table:flex flex-wrap items-start justify-center content-start middle-pc:pt-36 h-table:pt-32 pb-52 middle-pc:px-20 h-table:px-6 px-8 mobile:pt-32 relative">
 			<!-- 標題區塊 -->
 			<div class="w-9/12 mobile:w-11/12 flex justify-between mb-20 mobile:mb-9 mobile:block mobile:mx-auto">
-				<h1 class="text-white relative -left-2 -top-2 mobile:text-5xl w-3/4 mobile:w-full">天文機構管理</h1>
-				<router-link to="/board/organization/add"
+				<h1 class="text-white relative -left-2 -top-2 mobile:text-5xl w-3/4 mobile:w-full">天文台管理</h1>
+				<router-link to="/board/observatories/add"
 					class="flex btn draw meet text-lg w-2/12 mobile:w-full mobile:mt-6 h-12 btn text-center items-center p-0 justify-center">
 					新增
 				</router-link>
@@ -14,24 +14,24 @@
 			<!-- 表格區塊 -->
 			<!-- class="before:content-[attr(data-title)]" -->
 			<div class="w-9/12 mobile:w-11/12 table-container mobile:m-auto">
-				<table id="responsive-table" v-if="postCategories.length > 0 && postCategories"
+				<table id="responsive-table" v-if="observatoriesRef.length > 0 && observatoriesRef"
 					class="animate__animated animate__fadeIn">
 					<thead class="w-table:table-header-group  hidden">
 						<tr>
-							<th>機構名稱</th>
-							<th>外部連結</th>
+							<th>天文台分類</th>
+							<th>分類 ID</th>
 							<th class="w-20 text-right">編輯</th>
 							<th class="w-20 text-right">刪除</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr v-for="(val, key) in postCategories" :key="key">
-							<td data-title="機構">{{
-									val.facilities_title
+						<tr v-for="(val, key) in observatoriesRef" :key="key">
+							<td data-title="分類">{{
+									val.observatory_category_name
 							}}</td>
-							<td data-title="連結">{{ val.facilities_link }}</td>
+							<td data-title="ID">{{ val.observatory_category_id }}</td>
 							<td data-title="編輯">
-								<svg @click.prevent="editCategories(val.facilities_orderid)"
+								<svg @click.prevent="editPage(val.observatory_category_id)"
 									class="fill-main-color-light inline-block w-28px h-auto group" version="1.1"
 									xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
 									xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px" width="26px" height="26px"
@@ -682,7 +682,7 @@
 								</svg>
 							</td>
 							<td data-title="刪除">
-								<svg @click.prevent="setConfirmModal(val.facilities_orderid)" xmlns="http://www.w3.org/2000/svg"
+								<svg @click.prevent="setConfirmModal(val.observatory_category_id)" xmlns="http://www.w3.org/2000/svg"
 									viewBox="0 0 25 25"
 									class="fill-main-color-light w-29px h-auto inline-block hover:fill-sub-color-dark">
 									<g id="trash">
@@ -704,9 +704,8 @@
 	<PopMessage @popBtnCheck="popBtnCheck"></PopMessage>
 </template>
 <script setup lang="ts">
-import { facilitiesList, deleteOrganization } from '@/api/facilities'
-import { artistsCategories, deleteCategory } from '@/api/science'
-import { ArtistsCategories } from '@/types/graphql/types'
+import { deleteObservatories, observatoriesList } from '@/api/facilities'
+import { ObservatoriesArr } from '@/types/graphql/types'
 const store = useStore();
 
 // 取得路由
@@ -715,21 +714,21 @@ const route = useRoute()
 const routeName = String(route.name)
 
 // 宣告列表預設值
-const postCategories = ref<ArtistsCategories>([])
-const actionPage = ref(1)
-const oidRef = ref("")
+const observatoriesRef = ref<ObservatoriesArr>([])
+const midRef = ref("")
 
 // 生命週期 --------------------------------------------------------------
+
 onMounted(async () => {
 	// 取得列表資訊
-	await getArtistsCategories()
+	await getObservatoriesList()
 });
 
 // ======================= 函式 ==============================
 
 // 跳出燈箱詢問是否確定刪除?
-function setConfirmModal(oid: number) {
-	oidRef.value = oid
+function setConfirmModal(mid: String) {
+	midRef.value = mid
 	store.openPopMsg("確定刪除?", true)
 }
 
@@ -740,20 +739,20 @@ const popBtnCheckVal = computed(() => store.get_popMsgBtnReturn)
 async function popBtnCheck() {
 	await popBtnCheckVal
 	if (popBtnCheckVal.value) {
-		await deleteOrganization(oidRef.value, routeName)
+		await deleteObservatories(midRef.value, routeName)
 		// 刪除後重抓列表
-		await getArtistsCategories()
+		await getObservatoriesList()
 	}
 }
 
-function editCategories(oid: Number) {
-	const path = "/board/organization/edit/" + oid
+function editPage(mid: String) {
+	const path = "/board/observatories/edit/" + oid
 	router.push(path)
 }
 
 
-async function getArtistsCategories() {
-	const res = await facilitiesList(routeName)
-	postCategories.value = res.data.facilitiesList
+async function getObservatoriesList() {
+	const res = await observatoriesList(routeName)
+	observatoriesRef.value = res.data.observatoriesList
 }
 </script>

@@ -19,6 +19,7 @@ declare module 'vue' {
     SingleObservatories: typeof import('./src/components/SingleObservatories.vue')['default']
     SingleOrganization: typeof import('./src/components/SingleOrganization.vue')['default']
     SingleStargazer: typeof import('./src/components/SingleStargazer.vue')['default']
+    Timeline: typeof import('./src/components/Timeline.vue')['default']
     TitleBox: typeof import('./src/components/TitleBox.vue')['default']
   }
 }

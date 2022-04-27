@@ -7,10 +7,10 @@
       <div class="w-9/12 mobile:w-11/12 flex justify-between mb-20 mobile:mb-9 mobile:block mobile:mx-auto flex-wrap">
         <h1
           class="text-white relative -left-2 -top-2 mobile:text-5xl w-table:w-3/4 w-full mobile:w-full w-table:m-0 mb-5">
-          {{ stargazerTitle }}</h1>
+          {{ organizationTitle }}</h1>
         <button @click.prevent="setConfirmModal"
           class="flex btn draw meet text-lg w-2/12 mobile:w-full mobile:mt-6 h-12 text-center items-center p-0 justify-center">
-          {{ stargazerSaveBtn }}
+          {{ organizationSaveBtn }}
         </button>
       </div>
       <!-- 表單區塊 -->
@@ -96,7 +96,7 @@ const store = useStore();
 
 // ================================= 設置新增/編輯的標題和按鈕 =================================
 
-const stargazerTitle = computed(() => {
+const organizationTitle = computed(() => {
   if (routeName === "AddSingleOrganization") {
     return "新增機構"
   } else {
@@ -104,7 +104,7 @@ const stargazerTitle = computed(() => {
   }
 })
 
-const stargazerSaveBtn = computed(() => {
+const organizationSaveBtn = computed(() => {
   if (routeName === "AddSingleOrganization") {
     return "儲存新增"
   } else {
@@ -182,7 +182,7 @@ function setDelConfirmModal() {
 // 跳出燈箱詢問是否確定新增/編輯?
 function setConfirmModal() {
   modelDelMode.value = false
-  store.openPopMsg("確定" + stargazerTitle.value + "?", true)
+  store.openPopMsg("確定" + organizationTitle.value + "?", true)
 }
 
 // 確認框 Y/N

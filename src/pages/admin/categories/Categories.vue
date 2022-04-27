@@ -715,7 +715,6 @@ const routeName = String(route.name)
 
 // 宣告列表預設值
 const postCategories = ref<ArtistsCategories>([])
-const actionPage = ref(1)
 const cidRef = ref("")
 
 // 生命週期 --------------------------------------------------------------

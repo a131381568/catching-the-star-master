@@ -25,6 +25,9 @@ import EditSingleArticle from '@/pages/admin/article/EditSingleArticle.vue'
 import Organization from '@/pages/admin/organization/Organization.vue'
 import AddSingleOrganization from '@/pages/admin/organization/AddSingleOrganization.vue'
 import EditSingleOrganization from '@/pages/admin/organization/EditSingleOrganization.vue'
+import Observatories from '@/pages/admin/observatories/Observatories.vue'
+import AddSingleObservatories from '@/pages/admin/observatories/AddSingleObservatories.vue'
+import EditSingleObservatories from '@/pages/admin/observatories/EditSingleObservatories.vue'
 
 const routes = [
   {
@@ -266,6 +269,33 @@ const routes = [
     component: AddSingleOrganization,
     meta: {
       title: '新增機構',
+      manage: true
+    }
+  },
+  {
+    path: '/board/observatories',
+    name: 'Observatories',
+    component: Observatories,
+    meta: {
+      title: '天文台管理',
+      manage: true
+    }
+  },
+  {
+    path: '/board/observatories/edit/:mid',
+    name: 'EditSingleObservatories',
+    component: EditSingleObservatories,
+    meta: {
+      title: '編輯天文台',
+      manage: true
+    }
+  },
+  {
+    path: '/board/observatories/add',
+    name: 'AddSingleObservatories',
+    component: AddSingleObservatories,
+    meta: {
+      title: '新增天文台',
       manage: true
     }
   }
