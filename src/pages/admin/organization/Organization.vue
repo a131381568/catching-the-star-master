@@ -730,7 +730,7 @@ onMounted(async () => {
 // 跳出燈箱詢問是否確定刪除?
 function setConfirmModal(oid: number) {
 	oidRef.value = oid
-	store.openPopMsg("確定刪除此分類?", true)
+	store.openPopMsg("確定刪除?", true)
 }
 
 // 確認框 Y/N

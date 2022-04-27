@@ -252,7 +252,7 @@ const routes = [
     }
   },
   {
-    path: '/board/organization/edit/{oid}',
+    path: '/board/organization/edit/:oid',
     name: 'EditSingleOrganization',
     component: EditSingleOrganization,
     meta: {

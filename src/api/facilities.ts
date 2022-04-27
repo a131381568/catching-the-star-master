@@ -1,6 +1,6 @@
 import client from '../apollo'
 import gql from 'graphql-tag';
-import { FacilitiesArr, ObservatoriesArr } from '../types/graphql/types'
+import { FacilitiesArr, ObservatoriesArr, Facility } from '../types/graphql/types'
 
 // 設施+天文台列表
 type resFacilities = {
@@ -75,5 +75,57 @@ export function deleteOrganization(facilitiesOrderid: number, pageRouteName: str
       pageRouteName
     },
     fetchPolicy: 'no-cache'
+  })
+}
+
+
+
+// 新增設施
+export function setNewOrganization(facilitiesTitle: string, facilitiesDescription: string, facilitiesImage: string, facilitiesLink: string, pageRouteName: string) {
+  return client.mutate({
+    mutation: gql`
+      mutation SetNewOrganization($facilitiesTitle: String!, $facilitiesDescription: String!, $facilitiesImage: String!, $facilitiesLink: String!) {
+        setNewOrganization(facilities_title: $facilitiesTitle, facilities_description: $facilitiesDescription, facilities_image: $facilitiesImage, facilities_link: $facilitiesLink) {
+          code
+          message
+        }
+      }
+    `,
+    variables: {
+      facilitiesTitle,
+      facilitiesDescription,
+      facilitiesImage,
+      facilitiesLink,
+      pageRouteName
+    },
+    fetchPolicy: 'no-cache'
+  })
+}
+
+
+// 查詢指定 oid 設施
+type resGetSingleOrganization = {
+  data: {
+    getSingleOrganization: Facility
+  };
+};
+export function getSingleOrganization(facilitiesOrderid: number, pageRouteName: string): Promise<resGetSingleOrganization> {
+  return client.query({
+    query: gql`
+      query GetSingleOrganization($facilitiesOrderid: Int!) {
+        getSingleOrganization(facilities_orderid: $facilitiesOrderid) {
+          facilities_orderid
+          facilities_title
+          facilities_description
+          facilities_image
+          facilities_link
+        }
+      }
+    `,
+    variables: {
+      facilitiesOrderid,
+      pageRouteName
+    },
+    fetchPolicy: "no-cache"
   })
 }

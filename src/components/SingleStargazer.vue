@@ -500,7 +500,7 @@ async function loadEditStargazer() {
     placeLon.value = Number(res.data.getSingleStargazer.stargazing_longitude)
     let path = String(res.data.getSingleStargazer.stargazing_image)
     let split = path.split('/')
-    placeImg.value = split[split.length]
+    placeImg.value = split[split.length - 1]
     placeImgPath.value = path
   }
 }

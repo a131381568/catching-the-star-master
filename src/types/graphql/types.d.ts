@@ -88,6 +88,14 @@ export type FacilitiesArr = {
   facilities_link: String
 }[]
 
+export type Facility = {
+  facilities_orderid: number
+  facilities_title: String
+  facilities_description: String
+  facilities_image: String
+  facilities_link: String
+}
+
 export type ObservatoriesArr = {
   observatory_category_name: String
   observatory_category_id: String
