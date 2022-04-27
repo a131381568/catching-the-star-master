@@ -1,0 +1,3 @@
+<template>
+  <SingleOrganization></SingleOrganization>
+</template>

@@ -9,7 +9,7 @@ type resFacilities = {
     observatoriesList: ObservatoriesArr
   };
 };
-export function facilitiesData(pageRouteName: string): Promise<resFacilities> {
+export function facilitiesData(pageRouteName: string, cacheMode: boolean): Promise<resFacilities> {
   return client.query({
     query: gql`
       query FacilitiesList {
@@ -28,6 +28,52 @@ export function facilitiesData(pageRouteName: string): Promise<resFacilities> {
     `,
     variables: {
       pageRouteName
-    }
+    },
+    fetchPolicy: cacheMode ? "cache-first" : "no-cache"
+  })
+}
+
+
+// 設施列表
+type resFacilitiesList = {
+  data: {
+    facilitiesList: FacilitiesArr
+  };
+};
+export function facilitiesList(pageRouteName: string): Promise<resFacilitiesList> {
+  return client.query({
+    query: gql`
+      query FacilitiesList {
+        facilitiesList {
+          facilities_orderid
+          facilities_title
+          facilities_link
+        }
+      }
+    `,
+    variables: {
+      pageRouteName
+    },
+    fetchPolicy: "no-cache"
+  })
+}
+
+
+// 刪除設施
+export function deleteOrganization(facilitiesOrderid: number, pageRouteName: string) {
+  return client.mutate({
+    mutation: gql`
+      mutation DeleteOrganization($facilitiesOrderid: Int!) {
+        deleteOrganization(facilities_orderid: $facilitiesOrderid) {
+          code
+          message
+        }
+      }
+    `,
+    variables: {
+      facilitiesOrderid,
+      pageRouteName
+    },
+    fetchPolicy: 'no-cache'
   })
 }

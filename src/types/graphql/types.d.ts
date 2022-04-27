@@ -81,6 +81,7 @@ export type PageInfoPush = {
 }
 
 export type FacilitiesArr = {
+  facilities_orderid: number
   facilities_title: String
   facilities_description: String
   facilities_image: String

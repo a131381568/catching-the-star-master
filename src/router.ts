@@ -22,6 +22,9 @@ import EditSingleCategories from '@/pages/admin/categories/EditSingleCategories.
 import Article from '@/pages/admin/article/Article.vue'
 import AddSingleArticle from '@/pages/admin/article/AddSingleArticle.vue'
 import EditSingleArticle from '@/pages/admin/article/EditSingleArticle.vue'
+import Organization from '@/pages/admin/organization/Organization.vue'
+import AddSingleOrganization from '@/pages/admin/organization/AddSingleOrganization.vue'
+import EditSingleOrganization from '@/pages/admin/organization/EditSingleOrganization.vue'
 
 const routes = [
   {
@@ -236,6 +239,33 @@ const routes = [
     component: AddSingleArticle,
     meta: {
       title: '新增文章',
+      manage: true
+    }
+  },
+  {
+    path: '/board/organization',
+    name: 'Organization',
+    component: Organization,
+    meta: {
+      title: '機構管理',
+      manage: true
+    }
+  },
+  {
+    path: '/board/organization/edit/{oid}',
+    name: 'EditSingleOrganization',
+    component: EditSingleOrganization,
+    meta: {
+      title: '編輯機構',
+      manage: true
+    }
+  },
+  {
+    path: '/board/organization/add',
+    name: 'AddSingleOrganization',
+    component: AddSingleOrganization,
+    meta: {
+      title: '新增機構',
       manage: true
     }
   }

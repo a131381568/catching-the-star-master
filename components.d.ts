@@ -9,7 +9,6 @@ declare module 'vue' {
     AdminSidebar: typeof import('./src/components/AdminSidebar.vue')['default']
     Enter: typeof import('./src/components/Enter.vue')['default']
     Footer: typeof import('./src/components/Footer.vue')['default']
-    'Footer - 複製': typeof import('./src/components/Footer - 複製.vue')['default']
     Header: typeof import('./src/components/Header.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     Loading: typeof import('./src/components/Loading.vue')['default']
@@ -17,8 +16,8 @@ declare module 'vue' {
     PopMessage: typeof import('./src/components/PopMessage.vue')['default']
     SingleArticle: typeof import('./src/components/SingleArticle.vue')['default']
     SingleCategories: typeof import('./src/components/SingleCategories.vue')['default']
+    SingleOrganization: typeof import('./src/components/SingleOrganization.vue')['default']
     SingleStargazer: typeof import('./src/components/SingleStargazer.vue')['default']
-    'SingleStargazer - 複製': typeof import('./src/components/SingleStargazer - 複製.vue')['default']
     Timeline: typeof import('./src/components/Timeline.vue')['default']
     TitleBox: typeof import('./src/components/TitleBox.vue')['default']
   }

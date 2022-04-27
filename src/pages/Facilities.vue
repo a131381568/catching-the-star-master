@@ -111,7 +111,7 @@ const eduCategories = ref<FacilitiesArr>([])
 getFacilitiesListData()
 
 async function getFacilitiesListData() {
-  const res = await facilitiesData(routeName)
+  const res = await facilitiesData(routeName, true)
   if (res && res.data.facilitiesList && res.data.observatoriesList) {
     eduCategories.value = res.data.facilitiesList
     observatoryCategories.value = res.data.observatoriesList
