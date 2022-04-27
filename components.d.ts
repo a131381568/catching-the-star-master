@@ -15,8 +15,10 @@ declare module 'vue' {
     Loading: typeof import('./src/components/Loading.vue')['default']
     Pagination: typeof import('./src/components/Pagination.vue')['default']
     PopMessage: typeof import('./src/components/PopMessage.vue')['default']
+    SingleArticle: typeof import('./src/components/SingleArticle.vue')['default']
     SingleCategories: typeof import('./src/components/SingleCategories.vue')['default']
     SingleStargazer: typeof import('./src/components/SingleStargazer.vue')['default']
+    'SingleStargazer - 複製': typeof import('./src/components/SingleStargazer - 複製.vue')['default']
     Timeline: typeof import('./src/components/Timeline.vue')['default']
     TitleBox: typeof import('./src/components/TitleBox.vue')['default']
   }

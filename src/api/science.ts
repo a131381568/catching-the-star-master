@@ -63,7 +63,7 @@ type resSinglePost = {
     getSinglePost: Artists;
   };
 };
-export function getSinglePostById(postid: Number, pageRouteName: string): Promise<resSinglePost> {
+export function getSinglePostById(postid: Number, pageRouteName: string, cacheMode: boolean): Promise<resSinglePost> {
   return client.query({
     query: gql`
       query GetSinglePost($postid: Int!) {
@@ -79,7 +79,8 @@ export function getSinglePostById(postid: Number, pageRouteName: string): Promis
     variables: {
       postid,
       pageRouteName
-    }
+    },
+    fetchPolicy: cacheMode ? "cache-first" : "no-cache"
   })
 }
 
@@ -295,29 +296,25 @@ export function artistsPagi(
 
 
 // 新增單一文章
-export function SetNewPost(
-  postid: number,
+export function setNewPost(
   title: string,
   categoryid: string,
-  updatetime: string,
   content: string,
   image: string,
   pageRouteName: string
 ) {
   return client.mutate({
     mutation: gql`
-      mutation SetNewPost($postid: Int, $title: String, $categoryid: String, $updatetime: String, $content: String, $image: String) {
-        setNewPost(postid: $postid, title: $title, categoryid: $categoryid, updatetime: $updatetime, content: $content, image: $image) {
+      mutation SetNewPost($title: String, $categoryid: String, $content: String, $image: String) {
+        setNewPost(title: $title, categoryid: $categoryid, content: $content, image: $image) {
           code
           message
         }
       }
     `,
     variables: {
-      postid,
       title,
       categoryid,
-      updatetime,
       content,
       image,
       pageRouteName

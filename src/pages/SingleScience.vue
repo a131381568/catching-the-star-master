@@ -39,7 +39,7 @@ onMounted(async () => {
   // 判斷參數是否正常
   if (getSid.value) {
     // 取得單一資料
-    const artistsData = await getSinglePostById(getSid.value, routeName)
+    const artistsData = await getSinglePostById(getSid.value, routeName, true)
     if (artistsData.data.getSinglePost) {
       // 查詢分類物件
       const artistCatActName = store.changeCatName(
