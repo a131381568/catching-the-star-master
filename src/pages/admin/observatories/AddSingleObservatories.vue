@@ -1,0 +1,3 @@
+<template>
+  <SingleObservatories></SingleObservatories>
+</template>

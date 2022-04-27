@@ -129,3 +129,28 @@ export function getSingleOrganization(facilitiesOrderid: number, pageRouteName: 
     fetchPolicy: "no-cache"
   })
 }
+
+
+
+// 編輯設施
+export function mutOrganization(facilitiesOrderid: number, facilitiesTitle: string, facilitiesDescription: string, facilitiesImage: string, facilitiesLink: string, pageRouteName: string) {
+  return client.mutate({
+    mutation: gql`
+      mutation MutOrganization($facilitiesOrderid: Int!, $facilitiesTitle: String!, $facilitiesDescription: String!, $facilitiesImage: String!, $facilitiesLink: String!) {
+        mutOrganization(facilities_orderid: $facilitiesOrderid, facilities_title: $facilitiesTitle, facilities_description: $facilitiesDescription, facilities_image: $facilitiesImage, facilities_link: $facilitiesLink) {
+          code
+          message
+        }
+      }
+    `,
+    variables: {
+      facilitiesOrderid,
+      facilitiesTitle,
+      facilitiesDescription,
+      facilitiesImage,
+      facilitiesLink,
+      pageRouteName
+    },
+    fetchPolicy: 'no-cache'
+  })
+}

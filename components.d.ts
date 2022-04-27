@@ -16,9 +16,9 @@ declare module 'vue' {
     PopMessage: typeof import('./src/components/PopMessage.vue')['default']
     SingleArticle: typeof import('./src/components/SingleArticle.vue')['default']
     SingleCategories: typeof import('./src/components/SingleCategories.vue')['default']
+    SingleObservatories: typeof import('./src/components/SingleObservatories.vue')['default']
     SingleOrganization: typeof import('./src/components/SingleOrganization.vue')['default']
     SingleStargazer: typeof import('./src/components/SingleStargazer.vue')['default']
-    Timeline: typeof import('./src/components/Timeline.vue')['default']
     TitleBox: typeof import('./src/components/TitleBox.vue')['default']
   }
 }
