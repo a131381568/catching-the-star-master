@@ -34,7 +34,7 @@
           <div class="input-group mb-14">
             <h4 class="text-main-color-light font-normal">分類 ID</h4>
             <Field name="observatoriesCatIdRef" type="text" class="h-16 block m-auto bottom-line-input text-lg"
-              :class="{ 'border-sp-color-dark border-opacity-100': errors.observatoriesCatIdRef }"
+              :class="[{ 'border-sp-color-dark border-opacity-100': errors.observatoriesCatIdRef }, { 'pointer-events-none border-0': routeName === 'EditSingleObservatories' }]"
               v-model="observatoryCatId" />
             <span v-show="errors.observatoriesCatIdRef"
               class="text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">{{
@@ -53,7 +53,7 @@
             }}</span>
           </div>
         </div>
-        <div class="w-table:w-10/12 w-full" v-if="routeName === 'EditSingleObservatories'">
+        <div class="w-table:w-10/12 w-full mt-16" v-if="routeName === 'EditSingleObservatories'">
           <button class="admin-delete-sbtn" @click.prevent="setDelConfirmModal()">
             刪除
           </button>
@@ -67,7 +67,7 @@
 <script setup lang="ts">
 import schema from '@/utils/vee-validate-schema'
 import { Field, Form } from 'vee-validate';
-import { deleteObservatories, setNewOrganization, getSingleOrganization, mutOrganization } from '@/api/facilities'
+import { deleteObservatories, setNewObservatories, getSingleObservatory, mutObservatories } from '@/api/facilities'
 import { useDebounceFn } from '@vueuse/core'
 // 取得路由
 const route = useRoute()
@@ -141,7 +141,6 @@ async function popBtnCheck() {
   }
   if (!popBtnCheckVal.value) {
     modelDelMode.value = false
-    // console.log("取消刪除: ", modelDelMode.value)
   }
 }
 
@@ -153,36 +152,35 @@ const actionAdd = useDebounceFn(async () => {
     if (routeName === "AddSingleObservatories") {
       // 如果是新增版型
       console.log("可以新增")
-      // const res = await setNewOrganization(
-      //   observatoryTitle.value,
-      //   observatoryContnet.value,
-      //   observatoryCatId.value,
-      //   routeName
-      // )
-      // if (res.data.setNewOrganization.code) {
-      //   if (res.data.setNewOrganization.code > 0) {
-      //     router.push("/board/organization")
-      //   } else {
-      //     store.openPopMsg(res.data.setNewOrganization.message, false)
-      //   }
-      // }
+      const res = await setNewObservatories(
+        observatoryTitle.value,
+        observatoryCatId.value,
+        observatoryContnet.value,
+        routeName
+      )
+      if (res.data.setNewObservatories.code) {
+        if (res.data.setNewObservatories.code > 0) {
+          router.push("/board/observatories")
+        } else {
+          store.openPopMsg(res.data.setNewObservatories.message, false)
+        }
+      }
     } else {
       // 如果是編輯版型
       console.log("可以編輯")
-      // const res = await mutOrganization(
-      //   routeMid,
-      //   observatoryTitle.value,
-      //   observatoryContnet.value,
-      //   observatoryCatId.value,
-      //   routeName
-      // )
-      // if (res.data.mutOrganization.code) {
-      //   if (res.data.mutOrganization.code > 0) {
-      //     router.push("/board/organization")
-      //   } else {
-      //     store.openPopMsg(res.data.mutOrganization.message, false)
-      //   }
-      // }
+      const res = await mutObservatories(
+        observatoryTitle.value,
+        observatoryCatId.value,
+        observatoryContnet.value,
+        routeName
+      )
+      if (res.data.mutObservatories.code) {
+        if (res.data.mutObservatories.code > 0) {
+          router.push("/board/observatories")
+        } else {
+          store.openPopMsg(res.data.mutObservatories.message, false)
+        }
+      }
     }
   }
 }, 1000)
@@ -200,10 +198,10 @@ const actionDel = async () => {
 
 async function loadEditObservatories() {
   if (routeName === "EditSingleObservatories" && routeMid) {
-    // const res = await getSingleOrganization(routeMid, routeName)
-    // observatoryTitle.value = res.data.getSingleOrganization.facilities_title
-    // observatoryContnet.value = res.data.getSingleOrganization.facilities_description
-    // observatoryCatId.value = res.data.getSingleOrganization.facilities_link
+    const res = await getSingleObservatory(routeMid, routeName)
+    observatoryTitle.value = String(res.data.getSingleObservatory.observatory_category_name)
+    observatoryCatId.value = String(res.data.getSingleObservatory.observatory_category_id)
+    observatoryContnet.value = String(res.data.getSingleObservatory.observatory_post_content)
   }
 }
 

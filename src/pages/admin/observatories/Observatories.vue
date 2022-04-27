@@ -728,7 +728,7 @@ onMounted(async () => {
 
 // 跳出燈箱詢問是否確定刪除?
 function setConfirmModal(mid: String) {
-	midRef.value = mid
+	midRef.value = String(mid)
 	store.openPopMsg("確定刪除?", true)
 }
 
@@ -746,7 +746,7 @@ async function popBtnCheck() {
 }
 
 function editPage(mid: String) {
-	const path = "/board/observatories/edit/" + oid
+	const path = "/board/observatories/edit/" + mid
 	router.push(path)
 }
 

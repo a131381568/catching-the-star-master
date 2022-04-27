@@ -1,6 +1,6 @@
 import client from '../apollo'
 import gql from 'graphql-tag';
-import { FacilitiesArr, ObservatoriesArr, Facility } from '../types/graphql/types'
+import { FacilitiesArr, ObservatoriesArr, Facility, Observatory } from '../types/graphql/types'
 
 // 設施+天文台列表
 type resFacilities = {
@@ -182,6 +182,33 @@ export function observatoriesList(pageRouteName: string): Promise<resObservatori
 
 
 
+// 取得單一天文台
+type resGetSingleObservatory = {
+  data: {
+    getSingleObservatory: Observatory
+  };
+};
+export function getSingleObservatory(observatoryCategoryId: string, pageRouteName: string): Promise<resGetSingleObservatory> {
+  return client.query({
+    query: gql`
+      query GetSingleObservatory($observatoryCategoryId: String!) {
+        getSingleObservatory(observatory_category_id: $observatoryCategoryId) {
+          observatory_category_name
+          observatory_category_id
+          observatory_post_content
+        }
+      }
+    `,
+    variables: {
+      observatoryCategoryId,
+      pageRouteName
+    },
+    fetchPolicy: "no-cache"
+  })
+}
+
+
+
 // 刪除天文台
 export function deleteObservatories(observatoryCategoryId: string, pageRouteName: string) {
   return client.mutate({
@@ -195,6 +222,62 @@ export function deleteObservatories(observatoryCategoryId: string, pageRouteName
     `,
     variables: {
       observatoryCategoryId,
+      pageRouteName
+    },
+    fetchPolicy: 'no-cache'
+  })
+}
+
+
+
+// 新增天文台
+export function setNewObservatories(
+  observatoryCategoryName: string,
+  observatoryCategoryId: string,
+  observatoryPostContent: string,
+  pageRouteName: string
+) {
+  return client.mutate({
+    mutation: gql`
+      mutation SetNewObservatories($observatoryCategoryName: String!, $observatoryCategoryId: String!, $observatoryPostContent: String!) {
+        setNewObservatories(observatory_category_name: $observatoryCategoryName, observatory_category_id: $observatoryCategoryId, observatory_post_content: $observatoryPostContent) {
+          code
+          message
+        }
+      }
+    `,
+    variables: {
+      observatoryCategoryName,
+      observatoryCategoryId,
+      observatoryPostContent,
+      pageRouteName
+    },
+    fetchPolicy: 'no-cache'
+  })
+}
+
+
+
+// 編輯天文台
+export function mutObservatories(
+  observatoryCategoryName: string,
+  observatoryCategoryId: string,
+  observatoryPostContent: string,
+  pageRouteName: string
+) {
+  return client.mutate({
+    mutation: gql`
+      mutation MutObservatories($observatoryCategoryName: String!, $observatoryCategoryId: String!, $observatoryPostContent: String!) {
+        mutObservatories(observatory_category_name: $observatoryCategoryName, observatory_category_id: $observatoryCategoryId, observatory_post_content: $observatoryPostContent) {
+          code
+          message
+        }
+      }
+    `,
+    variables: {
+      observatoryCategoryName,
+      observatoryCategoryId,
+      observatoryPostContent,
       pageRouteName
     },
     fetchPolicy: 'no-cache'

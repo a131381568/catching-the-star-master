@@ -102,6 +102,11 @@ export type ObservatoriesArr = {
   observatory_post_content: String
 }[]
 
+export type Observatory = {
+  observatory_category_name: String
+  observatory_category_id: String
+  observatory_post_content: String
+}
 
 export type Stargazing = {
   stargazing_title: String
