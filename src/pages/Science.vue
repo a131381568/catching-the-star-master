@@ -69,14 +69,13 @@
           <!-- date & cat -->
           <p class="text-tiny mt-1 text-main-color-light">
             {{ store.changeDate(Number(val.updatetime)) }},
-            <router-link :to="'/archive/' + val.categoryid" class="text-sub-color-light hover:text-sp-color-light">{{
-                store.changeCatName(filterCategories, val.categoryid)
-            }}</router-link>
+            <span v-if="!store.changeCatName(filterCategories, val.categoryid)" class="text-lg">未分類</span>
+            <router-link v-else :to="'/archive/' + val.categoryid"
+              class="text-sub-color-light hover:text-sp-color-light">{{
+                  store.changeCatName(filterCategories, val.categoryid)
+              }}</router-link>
           </p>
           <!-- des -->
-          <!-- <p
-            class="text-main-color-light font-light mt-5 text-lg grid-des-box"
-          >{{ val.description }}</p>-->
           <v-md-preview class="text-main-color-light font-light mt-5 grid-des-box" :text="val.description"
             height="400px"></v-md-preview>
 

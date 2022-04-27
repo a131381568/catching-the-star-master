@@ -30,7 +30,7 @@
 							<td data-title="標題">{{
 									val.title
 							}}</td>
-							<td data-title="分類">{{ store.changeCatName(postCatList, val.categoryid) }}</td>
+							<td data-title="分類">{{ store.changeCatName(postCatList, val.categoryid) || '未分類' }}</td>
 							<td data-title="時間">{{ store.changeDate(Number(val.updatetime)) }}</td>
 							<td data-title="編輯">
 								<svg @click.prevent="editPlace(String(val.postid))"

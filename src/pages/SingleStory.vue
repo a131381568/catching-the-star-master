@@ -62,7 +62,7 @@ onMounted(async () => {
       )
       // 設置標題
       store.setPageTitle(artistsData.data.getSinglePost.title)
-      store.setPageSubTitlee(artistCatActName)
+      store.setPageSubTitlee(artistCatActName || '未分類')
       // 設置內文
       mdContent.value = artistsData.data.getSinglePost.content
       // 設置主視覺

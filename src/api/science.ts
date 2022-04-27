@@ -345,3 +345,34 @@ export function deletePost(
     fetchPolicy: 'no-cache'
   })
 }
+
+
+// 修改單一文章
+export function mutSinglePost(
+  postid: number,
+  title: string,
+  categoryid: string,
+  content: string,
+  image: string,
+  pageRouteName: string
+) {
+  return client.mutate({
+    mutation: gql`
+      mutation MutSinglePost($postid: Int!, $title: String, $categoryid: String, $content: String, $image: String) {
+        mutSinglePost(postid: $postid, title: $title, categoryid: $categoryid, content: $content, image: $image) {
+          code
+          message
+        }
+      }
+    `,
+    variables: {
+      postid,
+      title,
+      categoryid,
+      content,
+      image,
+      pageRouteName
+    },
+    fetchPolicy: 'no-cache'
+  })
+}

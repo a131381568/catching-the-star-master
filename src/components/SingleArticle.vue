@@ -16,13 +16,14 @@
       <!-- 表單區塊 -->
       <Form ref="addArticleForm" :validation-schema="verifyRules" v-slot="{ errors }"
         class="w-9/12 flex flex-wrap mobile:w-11/12 table-container mobile:m-auto justify-between editer-container">
-        <div class="w-table:w-7/12 w-full flex content-center">
+        <div class="pro-pc:w-7/12 middle-pc:w-2/3 w-full flex content-center large-pc:mb-0 mb-14 mobile:flex-wrap">
           <!-- 上傳封面圖片 -->
-          <div class="animate__animated h-304px w-304px bg-no-repeat bg-cover bg-center rounded-full mr-8"
+          <div
+            class="flex-shrink-0 animate__animated h-304px w-304px mini-mobile:w-200px mini-mobile:h-200px bg-no-repeat bg-cover bg-center rounded-full"
             :style="{ 'background-image': 'url(' + uploadImgPath + ')' }"
             :class="[{ 'animate__fadeIn': localBgOpacity }, { 'animate__fadeOut': !localBgOpacity }]">
           </div>
-          <div class="upload-bar mobile:mt-7 self-center">
+          <div class="flex-shrink-0 upload-bar mobile:mt-7 self-center relative h-table:left-8">
             <h4 class="text-main-color-light font-normal w-full mb-4">封面圖片</h4>
             <h5 class="text-main-color-light mb-4 truncate w-10/12">{{ postImg }}</h5>
             <label class="cursor-pointer admin-sbtn relative w-24 flex justify-center pt-1">上傳圖片
@@ -34,7 +35,7 @@
             }}</span>
           </div>
         </div>
-        <div class="w-table:w-5/12 w-full">
+        <div class="pro-pc:w-5/12 large-pc:w-1/3 w-full">
           <!-- 文章標題 -->
           <div class="input-group mb-14">
             <h4 class="text-main-color-light font-normal">文章標題</h4>
@@ -83,7 +84,7 @@
               errors.postContentRef
           }}</span>
         </div>
-        <div class="w-table:w-10/12 w-full mt-16" v-if="routeName === 'EditSingleArticle'">
+        <div class="middle-pc:w-10/12 w-full mt-16" v-if="routeName === 'EditSingleArticle'">
           <button class="admin-delete-sbtn" @click.prevent="setDelConfirmModal()">
             刪除
           </button>
@@ -99,7 +100,7 @@ import { ArtistsCategories } from '@/types/graphql/types'
 import schema from '@/utils/vee-validate-schema'
 import { Field, Form } from 'vee-validate';
 import { artistsCategories } from '@/api/science'
-import { setNewPost, deletePost, getSinglePostById } from '@/api/science'
+import { setNewPost, deletePost, getSinglePostById, mutSinglePost } from '@/api/science'
 import { updateFile } from '@/api/utils'
 import { useDebounceFn, onClickOutside, useToggle } from '@vueuse/core'
 // 取得路由
@@ -255,24 +256,14 @@ const actionAddPlace = useDebounceFn(async () => {
     } else {
       // 如果是編輯版型
       console.log("可以編輯")
-      // const path = String(route.params.lid)
-      // const res = await editStargazer(
-      //   path,
-      //   postTitle.value,
-      //   placeLat.value || 0,
-      //   placeLon.value || 0,
-      //   postImgPath.value,
-      //   placeIntroduction.value,
-      //   placeDescription.value,
-      //   routeName
-      // )
-      // if (res.data.editStargazer.code) {
-      //   if (res.data.editStargazer.code > 0) {
-      //     router.push("/board/stargazer")
-      //   } else {
-      //     store.openPopMsg(res.data.editStargazer.message, false)
-      //   }
-      // }
+      const res = await mutSinglePost(routePid, postTitle.value, selectCat.value, postContent.value, postImgPath.value, routeName)
+      if (res.data.mutSinglePost.code) {
+        if (res.data.mutSinglePost.code > 0) {
+          router.push("/board/article")
+        } else {
+          store.openPopMsg(res.data.mutSinglePost.message, false)
+        }
+      }
     }
   }
 }, 1000)
@@ -280,9 +271,9 @@ const actionAddPlace = useDebounceFn(async () => {
 // 送出刪除表單
 const actionDelPlace = async () => {
   console.log("可以刪除")
-  // await deleteStargazer(routeLid, routeName)
+  await deletePost(routePid, routeName)
   await setTimeout(() => {
-    router.push("/board/stargazer")
+    router.push("/board/article")
   }, 1000);
 }
 
@@ -321,12 +312,18 @@ async function loadEditArtcle() {
     let split = path.split('/')
     postImg.value = split[split.length - 1]
     postImgPath.value = path
+
+    // 如果是未分類就清空值
+    if (selectName.value === '選擇分類') {
+      selectCat.value = ""
+    }
   }
 }
 
 // ================================= 生命週期 =========================================
 
-getArtistsCategories()
-loadEditArtcle()
-
+onBeforeMount(async () => {
+  await getArtistsCategories()
+  await loadEditArtcle()
+})
 </script>
