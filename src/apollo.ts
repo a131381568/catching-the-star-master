@@ -73,7 +73,7 @@ const refreshLink = new TokenRefreshLink({
     // console.log("第二個")
     // 請求 token
     const oriToken = await localStorage.getItem('token') || "";
-    const userId = await Number(localStorage.getItem('id')) || null;
+    const userId = await Number(localStorage.getItem('uid')) || null;
     const userMail = await localStorage.getItem('email') || "";
     const reFreshToken = await localStorage.getItem('refresh-token') || "";
     const response = await fetch(<string>import.meta.env.VITE_API_URL, {
@@ -159,11 +159,11 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   }
   if (networkError) {
     if (JSON.parse(JSON.stringify(networkError)).statusCode !== 200) {
-      // alert(networkError)
+      alert(networkError)
       console.log(`[Network error]: ${networkError}`);
-      storage.setItem("apollo-error", JSON.stringify(networkError))
+      // storage.setItem("apollo-error", JSON.stringify(networkError))
       // 彈回 404
-      // window.location.pathname = '/notfound';
+      window.location.pathname = '/notfound';
     }
   }
 });
