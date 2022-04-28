@@ -285,7 +285,8 @@
 </template>
 <script setup lang="ts">
 const toggleSideBar = ref(false)
-const route = useRoute()
+const store = useStore()
+const router = useRouter()
 const adminMenu = ref([
   {
     title: "標語管理",
@@ -361,8 +362,10 @@ const adminMenu = ref([
     path: "logout"
   }
 ])
-function logoutAction() {
-  console.log("登出")
+async function logoutAction() {
+  await store.logOut()
+  await router.push("/")
+  // console.log("登出")
 }
 
 </script>

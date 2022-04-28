@@ -318,8 +318,8 @@ const actionLoginAuth = useDebounceFn(async () => {
         await localStorage.setItem("expired", personalInfo.exp)
         await localStorage.setItem("refresh-token", personalInfo.refreshToken)
         await localStorage.setItem("refresh-expired", personalInfo.refreshExp)
-        await localStorage.setItem("uid", personalInfo.uid)
-        await localStorage.setItem("email", personalInfo.email)
+        // await localStorage.setItem("uid", personalInfo.uid)
+        // await localStorage.setItem("email", personalInfo.email)
         await router.push({ path: '/board' })
       }
     }

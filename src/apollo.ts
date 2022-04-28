@@ -46,8 +46,11 @@ const refreshLink = new TokenRefreshLink({
       } else if (!tokenState && !tokenState) {
         if (routeName === "Login") {
           // 已經在登入頁
+          console.log("token 已經在登入頁")
         } else {
           // 彈回登入頁
+          console.log("token 不在登入頁")
+          alert("登入已逾時，請重新登入。")
           window.location.pathname = "/login";
         }
         return true
@@ -56,7 +59,7 @@ const refreshLink = new TokenRefreshLink({
       }
     } else {
       // 兩個 token 值都有問題回傳
-      // console.log("token 都有問題")
+      console.log("token 都有問題")
       // 設置無 token 可以在前台檢視的頁面
       const frontEndPage = [
         "Home", "About", "Science", "SingleScience", "Story", "SingleStory", "Facilities", "Stargazing", "Archive", "Search", "NotFound", "Login"
@@ -73,8 +76,8 @@ const refreshLink = new TokenRefreshLink({
     // console.log("第二個")
     // 請求 token
     const oriToken = await localStorage.getItem('token') || "";
-    const userId = await Number(localStorage.getItem('uid')) || null;
-    const userMail = await localStorage.getItem('email') || "";
+    // const userId = await Number(localStorage.getItem('uid')) || null;
+    // const userMail = await localStorage.getItem('email') || "";
     const reFreshToken = await localStorage.getItem('refresh-token') || "";
     const response = await fetch(<string>import.meta.env.VITE_API_URL, {
       method: 'POST',
@@ -84,8 +87,8 @@ const refreshLink = new TokenRefreshLink({
       },
       body: JSON.stringify({
         query: `
-          mutation ExtendExpired($userId: Int!, $oriReToken: String!, $email: String!) {
-            extendExpired(userId: $userId, oriReToken: $oriReToken, email: $email) {
+          mutation ExtendExpired( $oriReToken: String!) {
+            extendExpired(oriReToken: $oriReToken) {
               name
               uid
               email
@@ -98,8 +101,6 @@ const refreshLink = new TokenRefreshLink({
           }
         `,
         variables: {
-          "userId": userId,
-          "email": userMail,
           "oriReToken": reFreshToken
         }
       })
@@ -170,7 +171,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 
 const cache = new InMemoryCache()
 const apolloClient = new ApolloClient({
-  link: from([authLink, refreshLink, errorLink, uploadLink]),
+  link: from([refreshLink, authLink, errorLink, uploadLink]),
   cache
 })
 

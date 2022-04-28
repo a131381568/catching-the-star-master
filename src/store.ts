@@ -89,6 +89,9 @@ export const useStore = defineStore('main', {
       setTimeout(() => {
         this.popMsgStateInner = false
       }, 1000);
+    },
+    logOut() {
+      localStorage.clear();
     }
   },
   getters: {
