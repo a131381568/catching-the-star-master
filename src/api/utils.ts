@@ -82,7 +82,7 @@ export function loginAuthentication(email: string, password: string, pageRouteNa
       mutation Login($email: String!, $password: String!) {
         login(email: $email, password: $password) {
           name
-          id
+          uid
           email
           token
           exp

@@ -380,12 +380,13 @@
 <script setup lang="ts">
 import { useElementHover } from '@vueuse/core'
 import { pageInfo } from '@/api/utils'
+import { artistsCategories } from '@/api/science'
 
 // 取得路由對應標題資訊
 const route = useRoute()
-const routeName = route.name
+const routeName = String(route.name)
 
-setTitleInfo(String(routeName));
+setTitleInfo(routeName);
 async function setTitleInfo(thisPath: string) {
   const res = await pageInfo(thisPath)
   const pageDataArry = await res.data.pageInfo
@@ -396,6 +397,20 @@ async function setTitleInfo(thisPath: string) {
   } else if (thisPathInfo[0].page_route === 'SingleStory' || thisPathInfo[0].page_route === 'SingleScience') {
     // store.setPageTitle("單一頁面")
     // store.setPageSubTitlee("Single Page")
+  } else if (thisPathInfo[0].page_route === 'Archive') {
+    // 取得分類
+    let artistCatActName = "標籤彙整"
+    let tagName = "Tag"
+    if (route.params.tagid) {
+      tagName = String(route.params.tagid)
+    }
+    const artistsCatRes = await artistsCategories(routeName, true)
+    artistCatActName = await store.changeCatName(
+      artistsCatRes.data.artistsCategories,
+      tagName
+    )
+    store.setPageTitle(artistCatActName)
+    store.setPageSubTitlee(tagName)
   } else {
     store.setPageTitle(String(thisPathInfo[0].page_title))
     store.setPageSubTitlee(String(thisPathInfo[0].sub_page_title))

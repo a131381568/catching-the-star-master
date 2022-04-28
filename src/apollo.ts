@@ -87,7 +87,7 @@ const refreshLink = new TokenRefreshLink({
           mutation ExtendExpired($userId: Int!, $oriReToken: String!, $email: String!) {
             extendExpired(userId: $userId, oriReToken: $oriReToken, email: $email) {
               name
-              id
+              uid
               email
               iat
               token

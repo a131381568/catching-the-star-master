@@ -273,10 +273,10 @@
           登入後台
         </button>
         <span v-show="errors.email" class="text-sp-color-dark text-xs h-table:w-5/12 w-10/12 h-5 block m-auto mt-2">{{
-          errors.email
+            errors.email
         }}</span>
         <span v-show="errors.password" class="text-sp-color-dark text-xs h-table:w-5/12 w-10/12 h-5 block m-auto">{{
-          errors.password
+            errors.password
         }}</span>
       </Form>
     </div>
@@ -318,7 +318,7 @@ const actionLoginAuth = useDebounceFn(async () => {
         await localStorage.setItem("expired", personalInfo.exp)
         await localStorage.setItem("refresh-token", personalInfo.refreshToken)
         await localStorage.setItem("refresh-expired", personalInfo.refreshExp)
-        await localStorage.setItem("id", personalInfo.id)
+        await localStorage.setItem("uid", personalInfo.uid)
         await localStorage.setItem("email", personalInfo.email)
         await router.push({ path: '/board' })
       }
