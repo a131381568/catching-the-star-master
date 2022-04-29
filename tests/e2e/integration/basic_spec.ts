@@ -1,10 +1,16 @@
 // https://docs.cypress.io/api/introduction/api.html
 
-describe('Homepage', () => {
-  it('Shows correct text', () => {
-    cy.visit('/')
+const VERSION = Cypress.env('VITE_APP_VERSION');
 
-    cy.contains('h2', 'Hello World Component')
+describe('Login', () => {
+  it('Shows correct text', () => {
+    cy.visit('/login')
+    cy.get('input[name="email"]').type("test@gmail.com");
+    cy.get('input[name="password"]').type("test");
+    cy.get('button#submit-login').click();
+    cy.url().should('include', '/board')
+    console.log(VERSION)
+    // cy.contains('li.items-end', 'Header')
   })
 
   it('Should not have vertical scroll bars on mobile or desktop', () => {

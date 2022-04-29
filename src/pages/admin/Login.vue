@@ -268,7 +268,7 @@
             { 'border-sp-color-dark border-opacity-100': errors.password },
             { 'border-main-color-black': !errors.password }
           ]" placeholder="密碼" v-model="loginPassword" />
-        <button @click.prevent="actionLoginAuth"
+        <button @click.prevent="actionLoginAuth" id="submit-login"
           class="h-table:w-5/12 w-10/12 btn border block font-bold mt-14 m-auto text-middle shadow-none text-main-color-black border-main-color-black tracking-wide-content hover:bg-main-color-dark transition-all duration-300 hover:text-main-color-light h-12 text-center items-center p-0 justify-center">
           登入後台
         </button>

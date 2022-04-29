@@ -130,3 +130,7 @@ dist
 # apple
 .DS_Store
 .eslintrc-auto-import.json
+
+# cypress
+*.mp4
+test-user.json
