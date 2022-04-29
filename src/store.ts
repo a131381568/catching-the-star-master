@@ -8,6 +8,7 @@ const versionString =
 
 export const useStore = defineStore('main', {
   state: () => ({
+    count: 0,
     debug: import.meta.env.MODE === 'development',
     version: versionString,
     pageTitle: "",
@@ -23,6 +24,9 @@ export const useStore = defineStore('main', {
     popMsgConfirm: true
   }),
   actions: {
+    increment(value = 1) {
+      this.count += value
+    },
     setPageTitle(value: string) {
       this.pageTitle = value
     },

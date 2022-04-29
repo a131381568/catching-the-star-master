@@ -36,10 +36,22 @@
 <script setup lang="ts">
 const route = useRoute()
 const props = defineProps({
-  hasNextPage: Boolean,
-  hasPreviousPage: Boolean,
-  totalPagi: Number,
-  actionPage: Number
+  hasNextPage: {
+    type: Boolean,
+    default: false
+  },
+  hasPreviousPage: {
+    type: Boolean,
+    default: false
+  },
+  totalPagi: {
+    type: Number,
+    default: 1
+  },
+  actionPage: {
+    type: Number,
+    default: 1
+  }
 })
 const barShow = ref(false)
 const emit = defineEmits<{
