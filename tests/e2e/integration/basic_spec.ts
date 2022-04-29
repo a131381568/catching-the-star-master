@@ -1,15 +1,20 @@
 // https://docs.cypress.io/api/introduction/api.html
 
-const VERSION = Cypress.env('VITE_APP_VERSION');
-
-describe('Login', () => {
+describe('Login', function () {
+  let _email = ''
+  let _password = ''
+  before(() => {
+    cy.fixture('test-user.json').then(res => {
+      _email = res.email
+      _password = res.password
+    })
+  })
   it('Shows correct text', () => {
     cy.visit('/login')
-    cy.get('input[name="email"]').type("test@gmail.com");
-    cy.get('input[name="password"]').type("test");
+    cy.get('input[name="email"]').type(_email);
+    cy.get('input[name="password"]').type(_password);
     cy.get('button#submit-login').click();
     cy.url().should('include', '/board')
-    console.log(VERSION)
     // cy.contains('li.items-end', 'Header')
   })
 
