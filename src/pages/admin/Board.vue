@@ -12,7 +12,7 @@
 				</router-link>
 			</div>
 			<div class="w-9/12 mobile:w-11/12 table-container mobile:m-auto">
-				<div
+				<div v-if="philosophyRef && philosophyRef.length > 0"
 					class="callout-box bg-main-color-light py-10 pl-10 pr-14 mb-20 border-l-callout-box-boder border-sub-color-dark relative mobile:py-4 mobile:px-4 shadow-30-box">
 					<div class="text-main-color-black font-bold mb-2 text-xl">{{ pageSubTitle }}</div>
 					<p>{{ philosophyFirst }}</p>

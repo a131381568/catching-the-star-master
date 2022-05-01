@@ -20,21 +20,21 @@
     </div>
     <!-- 內文 -->
     <div class="laptop:w-5/12 h-table:w-10/12 middle-pc:pl-24 laptop:pl-10 laptop:mt-0 mt-10">
-      <div
+      <div v-show="sloganRef"
         class="animate__animated animate__flipInX callout-box bg-main-color-light py-10 pl-10 pr-14 mb-8 border-l-callout-box-boder border-sub-color-dark relative mobile:py-4 mobile:pl-4"
         :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]">
         <div class="text-main-color-black font-bold" v-html="sloganRef"></div>
         <span
           class="text-sub-color-dark text-9xl font-serif font-light absolute -top-2 right-1 mobile:text-8xl">”</span>
       </div>
-      <div class="text-main-color-light animate__animated animate__fadeIn"
+      <div v-show="philosophyRef" class="text-main-color-light animate__animated animate__fadeIn"
         :class="[{ 'animate__delay-5s': getFirstEnter === true }, { 'animate__delay-2s': getFirstEnter === false }]">
         <v-md-preview class="markdown-body" :text="philosophyRef"></v-md-preview>
       </div>
     </div>
   </div>
   <!-- 引言 -->
-  <div
+  <div v-show="quoteRef"
     class="h-table:flex flex-wrap items-start justify-center py-24 px-4 bg-main-color-black text-main-color-light mobile:px-8">
     <div ref="block_black_target"
       class="h-table:w-10/12 text-center grid laptop:grid-cols-none h-table:grid-cols-3 animate__animated animate__delay-1s opacity-0"
@@ -45,7 +45,7 @@
     </div>
   </div>
   <!-- 結語區塊 -->
-  <div
+  <div v-show="epilogueRef"
     class="h-table:flex flex-wrap items-start justify-center pt-32 pb-52 middle-pc:px-20 h-table:px-6 px-4 bg-white bg-about-writing bg-right-bottom bg-no-repeat middle-pc:bg-contain h-table:bg-auto-500 mobile:px-8 mobile:bg-contain">
     <div
       class="middle-pc:w-7/12 laptop:w-5/12 h-table:w-10/12 text-left laptop:pb-0 pb-320px text-main-color-black animate__animated animate__delay-2s"
