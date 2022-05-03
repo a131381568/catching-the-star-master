@@ -3,6 +3,7 @@ module.exports = {
     service: {
       "name": "ctsm-sql",
       // GraphQL API
+      // http://localhost:4000/graphql
       url: 'http://localhost:4000/graphql',
     },
     includes: [

@@ -4,8 +4,6 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
-    AddSingleCategories: typeof import('./src/components/AddSingleCategories.vue')['default']
-    AddSingleStargazer: typeof import('./src/components/AddSingleStargazer.vue')['default']
     AdminSidebar: typeof import('./src/components/AdminSidebar.vue')['default']
     Enter: typeof import('./src/components/Enter.vue')['default']
     Footer: typeof import('./src/components/Footer.vue')['default']
