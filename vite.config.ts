@@ -20,7 +20,7 @@ function _resolve(dir: string) {
 }
 
 export default defineConfig({
-  base: './',
+  base: process.env.NODE_ENV === 'production' ? '/' : './',
   plugins: [
     vue({
       script: {

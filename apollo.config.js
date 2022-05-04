@@ -4,7 +4,7 @@ module.exports = {
       "name": "ctsm-sql",
       // GraphQL API
       // http://localhost:4000/graphql
-      url: 'http://localhost:4000/graphql',
+      url: import.meta.env.VITE_API_URL
     },
     includes: [
       'src/**/*.vue',
