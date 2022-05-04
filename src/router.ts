@@ -1,3 +1,4 @@
+import { useHead } from '@vueuse/head'
 import { createRouter, createWebHistory } from 'vue-router'
 import Index from '@/pages/Index.vue'
 import About from '@/pages/About.vue'

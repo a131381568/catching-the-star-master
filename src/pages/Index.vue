@@ -22,7 +22,8 @@
           :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-2s': getFirstEnter === false }]"
           v-html="pageSubTitle">
         </h4>
-        <router-link class="btn draw meet inline-block animate__animated animate__flipInX large-pc:mt-12 mt-8"
+        <router-link
+          class="home-read-more btn draw meet inline-block animate__animated animate__flipInX large-pc:mt-12 mt-8"
           :class="[{ 'animate__delay-5s': getFirstEnter === true }, { 'animate__delay-3s': getFirstEnter === false }]"
           to="/science">
           <span>查看更多</span>
@@ -50,21 +51,6 @@ const pageTitle = computed(() => {
   return titleArray
 });
 const pageSubTitle = computed(() => store.pageSubTitle || subTitleBak);
-useHead({
-  bodyAttrs: {
-    title: route.meta.title,
-  },
-  meta: [
-    {
-      property: "og:title",
-      content: route.meta.title,
-    },
-    {
-      name: "twitter:title",
-      content: route.meta.title,
-    },
-  ],
-});
 
 const VERSION = import.meta.env.VITE_APP_VERSION;
 const BUILD_DATE = import.meta.env.VITE_APP_BUILD_EPOCH

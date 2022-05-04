@@ -23,13 +23,13 @@
       <div v-show="sloganRef"
         class="animate__animated animate__flipInX callout-box bg-main-color-light py-10 pl-10 pr-14 mb-8 border-l-callout-box-boder border-sub-color-dark relative mobile:py-4 mobile:pl-4"
         :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]">
-        <div class="text-main-color-black font-bold" v-html="sloganRef"></div>
+        <div class="text-main-color-black font-bold about-slogan" v-html="sloganRef"></div>
         <span
           class="text-sub-color-dark text-9xl font-serif font-light absolute -top-2 right-1 mobile:text-8xl">”</span>
       </div>
       <div v-show="philosophyRef" class="text-main-color-light animate__animated animate__fadeIn"
         :class="[{ 'animate__delay-5s': getFirstEnter === true }, { 'animate__delay-2s': getFirstEnter === false }]">
-        <v-md-preview class="markdown-body" :text="philosophyRef"></v-md-preview>
+        <v-md-preview class="markdown-body about-philosophy" :text="philosophyRef"></v-md-preview>
       </div>
     </div>
   </div>
@@ -40,7 +40,7 @@
       class="h-table:w-10/12 text-center grid laptop:grid-cols-none h-table:grid-cols-3 animate__animated animate__delay-1s opacity-0"
       :class="{ 'animate__fadeIn': block_black_isVisible }">
       <img class="mx-auto mb-10" src="/svg/hand.svg" />
-      <v-md-preview class="markdown-body laptop:text-center laptop:col-auto text-left h-table:col-span-2"
+      <v-md-preview class="markdown-body laptop:text-center laptop:col-auto text-left h-table:col-span-2 about-quote"
         :text="quoteRef"></v-md-preview>
     </div>
   </div>
@@ -51,7 +51,7 @@
       class="middle-pc:w-7/12 laptop:w-5/12 h-table:w-10/12 text-left laptop:pb-0 pb-320px text-main-color-black animate__animated animate__delay-2s"
       :class="{ 'animate__fadeIn': block_black_isVisible }">
       <!-- <p v-html="epilogueRef"></p> -->
-      <v-md-preview class="markdown-body" :text="epilogueRef"></v-md-preview>
+      <v-md-preview class="markdown-body about-epilogue" :text="epilogueRef"></v-md-preview>
     </div>
     <div class="middle-pc:w-3/12 h-table:w-5/12"></div>
   </div>

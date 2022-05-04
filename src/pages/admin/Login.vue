@@ -272,15 +272,18 @@
           class="h-table:w-5/12 w-10/12 btn border block font-bold mt-14 m-auto text-middle shadow-none text-main-color-black border-main-color-black tracking-wide-content hover:bg-main-color-dark transition-all duration-300 hover:text-main-color-light h-12 text-center items-center p-0 justify-center">
           登入後台
         </button>
-        <span v-show="errors.email" class="text-sp-color-dark text-xs h-table:w-5/12 w-10/12 h-5 block m-auto mt-2">{{
-            errors.email
-        }}</span>
-        <span v-show="errors.password" class="text-sp-color-dark text-xs h-table:w-5/12 w-10/12 h-5 block m-auto">{{
-            errors.password
-        }}</span>
+        <span v-show="errors.email"
+          class="text-sp-color-dark text-xs h-table:w-5/12 w-10/12 h-5 block m-auto mt-2 errors-tip">{{
+              errors.email
+          }}</span>
+        <span v-show="errors.password"
+          class="text-sp-color-dark text-xs h-table:w-5/12 w-10/12 h-5 block m-auto errors-tip">{{
+              errors.password
+          }}</span>
       </Form>
     </div>
   </div>
+  <PopMessage></PopMessage>
   <Footer class="animate__animated animate__fadeIn" />
 </template>
 <script setup lang="ts">
@@ -292,6 +295,8 @@ import { useDebounceFn } from '@vueuse/core'
 const router = useRouter()
 const route = useRoute()
 const routeName = String(route.name)
+const store = useStore();
+
 // 輸入欄位綁定
 const loginForm = ref({
   validate: () => { return { valid: false } }
@@ -302,6 +307,7 @@ const verifyRules = {
   email: schema.email,
   password: schema.password
 }
+
 // 送出防抖表單
 const actionLoginAuth = useDebounceFn(async () => {
   const { valid } = await loginForm.value.validate()
@@ -312,7 +318,8 @@ const actionLoginAuth = useDebounceFn(async () => {
       const personalInfo = res.data.login
       if (personalInfo.errorMsg) {
         // 錯誤回傳
-        alert(personalInfo.errorMsg)
+        // alert(personalInfo.errorMsg)
+        store.openPopMsg(personalInfo.errorMsg, false)
       } else {
         await localStorage.setItem("token", personalInfo.token)
         await localStorage.setItem("expired", personalInfo.exp)

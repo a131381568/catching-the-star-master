@@ -437,6 +437,8 @@ import { useScroll } from '@vueuse/core'
 import Loading from './components/Loading.vue'
 const route = useRoute()
 const routManage = computed(() => route.meta.manage);
+const routTopTitle = computed(() => `Catch The Stars — ${route.meta.title}`);
+const routTitle = computed(() => route.meta.title);
 const store = useStore();
 const el = ref<HTMLElement | null>(null)
 const { arrivedState } = useScroll(el) // , { throttle: 300 }
@@ -445,4 +447,22 @@ const arrivedStateVal = computed(() => {
   return arrivedState.top
 })
 const getLoading = computed(() => store.get_loading);
+
+// 設定標題
+useHead({
+  title: routTopTitle,
+  bodyAttrs: {
+    title: routTitle,
+  },
+  meta: [
+    {
+      property: "og:title",
+      content: routTitle,
+    },
+    {
+      name: "twitter:title",
+      content: routTitle,
+    },
+  ],
+});
 </script>

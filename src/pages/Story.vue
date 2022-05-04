@@ -24,7 +24,7 @@
             <div class="middle-pc:w-9/12">
               <router-link :to="'/story/' + item.postid">
                 <h2 class="text-3xl text-white group-hover:text-sp-color-light delay-75 duration-1000">{{
-                  item.title
+                    item.title
                 }}</h2>
               </router-link>
               <div class="w-full">
@@ -80,22 +80,6 @@ const gridWidth = computed(() => {
     return Math.floor(masonryRefWidth.value)
   }
 })
-
-useHead({
-  bodyAttrs: {
-    title: route.meta.title,
-  },
-  meta: [
-    {
-      property: "og:title",
-      content: route.meta.title,
-    },
-    {
-      name: "twitter:title",
-      content: route.meta.title,
-    },
-  ],
-});
 
 // =============== 載入文章資料 ===============
 
