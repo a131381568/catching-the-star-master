@@ -11,7 +11,7 @@
       <v-md-preview class="markdown-body" :text="mdContent" height="400px"></v-md-preview>
       <!-- <singlePost /> -->
     </div>
-    <div class="h-table:w-10/12 h-table:mt-8 mt-5">
+    <div class="h-table:w-10/12 h-table:mt-8 mt-5 post-bottom-meta">
       <span class="text-main-color-light text-tiny">{{ date }},</span>
       <router-link class="text-sub-color-light text-tiny" :to="'/archive/' + tag.catId">{{ tag.name }}</router-link>
     </div>

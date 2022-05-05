@@ -1,9 +1,9 @@
 // https://docs.cypress.io/api/introduction/api.html
 describe('登入操作', function () {
-  it('進入後台登入頁', () => {
+  it('進入後台登入頁。', () => {
     cy.visit('/login')
   })
-  it('檢查不會左右水平滑動', () => {
+  it('檢查不會左右水平滑動。', () => {
     cy.checkHoriScroll()
   })
   it('帳號空白登入，下方顯示警示。', () => {

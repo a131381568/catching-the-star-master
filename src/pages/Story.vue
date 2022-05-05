@@ -22,7 +22,7 @@
               <span class="self-center bg-sub-color-dark rounded-full h-9px w-9px block relative -left-4px"></span>
             </div>
             <div class="middle-pc:w-9/12">
-              <router-link :to="'/story/' + item.postid">
+              <router-link class="single-timeline-grid-link" :to="'/story/' + item.postid">
                 <h2 class="text-3xl text-white group-hover:text-sp-color-light delay-75 duration-1000">{{
                     item.title
                 }}</h2>

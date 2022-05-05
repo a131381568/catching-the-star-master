@@ -6,10 +6,10 @@
     <TitleBox />
     <!-- 篩選列 -->
     <div
-      class="animate__animated animate__fadeIn w-10/12 middle-pc:mt-16 middle-pc:mb-20 mt-6 mb-16 hidden laptop:inline-flex"
+      class="science-filter-bar animate__animated animate__fadeIn w-10/12 middle-pc:mt-16 middle-pc:mb-20 mt-6 mb-16 hidden laptop:inline-flex"
       :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]">
       <ul class="flex" v-if="filterCategories.length > 0 && filterCategories">
-        <li v-for="(val, key) in filterCategories" :key="key" class="min-w-min w-auto"
+        <li v-for="(val, key) in filterCategories" :key="key" class="min-w-min w-auto science-filter-item"
           @click="reSearchData(String(val.post_category_id))">
           <div class="flex items-center group large-pc:mr-10 laptop:mr-6">
             <input :id="String(val.post_category_id)" class="hidden" :value="val.post_category_id" />
@@ -58,7 +58,7 @@
       <div v-for="(val, key) in postList" :key="key">
         <!-- card -->
         <div
-          class="h-96 py-12 px-8 bg-white hover:bg-opacity-0 delay-75 duration-1000 border border-white border-opacity-0 hover:border-opacity-60 animate__animated animate__fadeInUp"
+          class="grid-card h-96 py-12 px-8 bg-white hover:bg-opacity-0 delay-75 duration-1000 border border-white border-opacity-0 hover:border-opacity-60 animate__animated animate__fadeInUp"
           :class="[
             { 'bg-opacity-18': (key + 1) % 3 === 0 },
             { 'bg-opacity-12': (key + 3) % 3 === 1 },
@@ -71,7 +71,7 @@
             {{ store.changeDate(Number(val.updatetime)) }},
             <span v-if="!store.changeCatName(filterCategories, val.categoryid)" class="text-lg">未分類</span>
             <router-link v-else :to="'/archive/' + val.categoryid"
-              class="text-sub-color-light hover:text-sp-color-light">{{
+              class="text-sub-color-light hover:text-sp-color-light grid-card-tag">{{
                   store.changeCatName(filterCategories, val.categoryid)
               }}</router-link>
           </p>
@@ -80,7 +80,7 @@
             height="400px"></v-md-preview>
 
           <!-- link -->
-          <router-link class="mt-10 btn draw meet inline-block" :to="'/science/' + val.postid">
+          <router-link class="mt-10 btn draw meet inline-block grid-card-read" :to="'/science/' + val.postid">
             <span>查看更多</span>
           </router-link>
         </div>
@@ -138,7 +138,6 @@ getArtistsCategories()
 async function getArtistsCategories() {
   const res = await artistsCategories(routeName, true)
   const filterBar = res.data.artistsCategories.filter(item => item.post_category_id !== 'story')
-  // const filterBar = res.data.artistsCategories
   filterCategories.value = filterBar
 }
 

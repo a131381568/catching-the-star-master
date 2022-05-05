@@ -11,9 +11,9 @@
     </div>
     <!-- post grid -->
     <div
-      class="grid grid-cols-1 middle-pc:w-6/12 w-table:w-5/12 w-10/12 mobile:w-full overflow-hidden w-table:mt-36 animate__animated animate__fadeInUp"
+      class="search-items grid grid-cols-1 middle-pc:w-6/12 w-table:w-5/12 w-10/12 mobile:w-full overflow-hidden w-table:mt-36 animate__animated animate__fadeInUp"
       :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]">
-      <div v-for="(val, key) in postList" :key="key" class="animate__animated animate__fadeInUp">
+      <div v-for="(val, key) in postList" :key="key" class="search-item animate__animated animate__fadeInUp">
         <router-link :to="'/science/' + val.postid">
           <!-- card -->
           <div
