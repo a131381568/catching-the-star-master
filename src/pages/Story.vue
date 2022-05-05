@@ -45,7 +45,7 @@
     </div>
     <div class="h-table:w-10/12 w-table:text-center text-left"
       v-show="storyPageInfo.hasNextPage && postList.length > 0">
-      <button class="mt-20 btn draw meet" @click.prevent="loadMoreTimeLine()">
+      <button class="mt-20 btn draw meet timeline-loadmore" @click.prevent="loadMoreTimeLine()">
         <span>加載更多</span>
       </button>
     </div>

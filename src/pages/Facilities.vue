@@ -15,9 +15,9 @@
     </div>
     <!-- post grid -->
     <div
-      class="grid laptop:grid-cols-3 grid-cols-1 large-pc:gap-24 h-table:gap-10 gap-8 h-table:w-10/12 overflow-hidden laptop:pr-0 h-table:pr-36">
-      <div class="group animate__animated animate__fadeInUp" :class="{ 'animate__delay-4s': getFirstEnter === true }"
-        v-for="(val, key) in eduCategories" :key="key">
+      class="facility-items grid laptop:grid-cols-3 grid-cols-1 large-pc:gap-24 h-table:gap-10 gap-8 h-table:w-10/12 overflow-hidden laptop:pr-0 h-table:pr-36">
+      <div class="facility-item group animate__animated animate__fadeInUp"
+        :class="{ 'animate__delay-4s': getFirstEnter === true }" v-for="(val, key) in eduCategories" :key="key">
         <img
           class="object-cover h-130px w-full delay-75 duration-1000 border border-white border-opacity-0 group-hover:border-opacity-60 border-b-0"
           :src="String(val.facilities_image)" />
@@ -46,7 +46,7 @@
         :class="{ 'animate__fadeIn': block_observatory_target_isVisible }">天文台</h2>
     </div>
     <!-- 篩選列 -->
-    <div class="w-10/12 mt-14 mb-8 inline-flex animate__animated animate__faster"
+    <div class="table-filter w-10/12 mt-14 mb-8 inline-flex animate__animated animate__faster"
       :class="{ 'animate__fadeIn': block_observatory_target_isVisible }">
       <ul class="flex flex-wrap" v-if="observatoryCategories">
         <li v-for="(val, key) in observatoryCategories" :key="key">
