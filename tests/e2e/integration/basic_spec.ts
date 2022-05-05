@@ -140,6 +140,7 @@
 
 describe('天文設施', function () {
   let facilitiesLen = 0
+  let tableFilter = 0
   it('進入頁面。', () => {
     cy.visit('/facilities')
     cy.title().should('eq', 'Catch The Stars — 天文設施')
@@ -166,8 +167,20 @@ describe('天文設施', function () {
       cy.get('.facility-item a').eq(index).should('have.attr', 'href')
     }
   })
+  it('確認-天文台篩選-頁籤', () => {
+    cy.get('.table-filter li').then($tab => {
+      tableFilter = $tab.length
+      expect($tab.length > 0).to.be.true
+    })
+  })
 
-
+  it('天文台-頁籤內容確認', () => {
+    for (let index = 0; index < tableFilter; index++) {
+      cy.get('.table-filter li label').eq(index).click()
+      cy.wait(1500)
+      cy.get('.facilities-md-container .github-markdown-body').eq(index).invoke('text').should('not.be.empty')
+    }
+  })
 
 })
 
