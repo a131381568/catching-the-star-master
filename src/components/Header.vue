@@ -259,8 +259,8 @@
         </div>
         <!-- Icon Menu Section -->
         <div class="flex items-end space-x-5 self-center hover:animate-pulse">
-          <div class="bars cursor-pointer text-base inline-block group" :class="{ active: modal === true }"
-            @click.prevent="toggleModal">
+          <div class="menu-toggle-btn bars cursor-pointer text-base inline-block group"
+            :class="{ active: modal === true }" @click.prevent="toggleModal">
             <div
               class="top-bar bg-white transition-all duration-300 ease-in-out w-1-8em h-0-2em mb-0-4em rounded-2em group-hover:bg-sp-color-light"
               :class="[
@@ -304,7 +304,7 @@
       <div
         class="grid w-table:grid-cols-2 h-table:grid-cols-none mobile:grid-cols-none h-screen py-20 laptop:px-40 h-table:px-20 h-table:pt-36 h-table:pb-10 mobile:px-9">
         <ul
-          class="grid grid-flow-row gap-7 w-table:gap-9 large-pc:gap-12 screens-h-900:auto-rows-max large-pc:auto-rows-auto auto-rows-max">
+          class="menu-grid-ul grid grid-flow-row gap-7 w-table:gap-9 large-pc:gap-12 screens-h-900:auto-rows-max large-pc:auto-rows-auto auto-rows-max">
           <li>
             <router-link ref="aboutRef" to="/about" title="關於我們"
               class="font-serif tracking-wide-menu text-main-color-dark hover:text-sp-color-light duration-1000 h-table:text-8xl w-table:text-7xl large-pc:text-menu-title mobile:text-5xl screens-h-900:text-5xl">

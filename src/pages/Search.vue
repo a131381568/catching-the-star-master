@@ -18,7 +18,7 @@
           <input
             class="w-full bg-transparent border-transparent focus:border-transparent border-none mr-3 px-2 h-table:text-3xl text-xl text-main-color-middle focus:outline-0 focus:ring-0 focus:text-main-color-light"
             type="text" placeholder="Search" v-model="searchWord" @keyup.enter="searchData()" />
-          <button type="submit" class="absolute right-0 top-0 h-table:mt-3 h-table:mr-4 mt-5 mr-1"
+          <button type="submit" class="search-btn absolute right-0 top-0 h-table:mt-3 h-table:mr-4 mt-5 mr-1"
             @click.prevent="searchData()">
             <svg class="h-table:h-10 h-6 w-auto fill-white opacity-25 hover:opacity-60 duration-500"
               xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1"
@@ -29,12 +29,13 @@
             </svg>
           </button>
         </div>
-        <p class="text-sp-color-light font-light h-table:mt-5 mt-1 text-lg truncate" v-show="spaceAlert">請輸入關鍵字</p>
+        <p class="errors-tip text-sp-color-light font-light h-table:mt-5 mt-1 text-lg truncate" v-show="spaceAlert">
+          請輸入關鍵字</p>
       </div>
     </div>
     <div class="h-table:w-10/12 h-200px mt-16" v-show="postList.length === 0">
       <!-- 搜尋無結果 -->
-      <div class="animate__animated animate__fadeIn animate__delay-1s" v-show="searchIsNothing">
+      <div class="search-nothing-tip animate__animated animate__fadeIn animate__delay-1s" v-show="searchIsNothing">
         <p class="h-table:text-3xl text-xl font-normal text-white">查無結果</p>
         <p class="text-main-color-light font-light h-table:mt-5 mt-1 text-lg truncate">請使用其它關鍵字搜尋</p>
       </div>
@@ -47,10 +48,10 @@
     </div>
     <!-- post grid -->
     <div
-      class="grid grid-cols-1 middle-pc:w-6/12 w-table:w-5/12 w-10/12 mobile:w-full overflow-hidden w-table:mt-36 mt-14 animate__animated animate__fadeInUp"
+      class="post-grid-items grid grid-cols-1 middle-pc:w-6/12 w-table:w-5/12 w-10/12 mobile:w-full overflow-hidden w-table:mt-36 mt-14 animate__animated animate__fadeInUp"
       :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]">
       <!-- 搜尋有結果 -->
-      <div v-for="(val, key) in postList" :key="key" class="animate__animated animate__fadeInUp">
+      <div v-for="(val, key) in postList" :key="key" class="post-grid-item animate__animated animate__fadeInUp">
         <router-link :to="setArtistRoute(val.categoryid, val.postid)">
           <!-- card -->
           <div
@@ -63,7 +64,8 @@
         </router-link>
       </div>
       <div class="w-full text-center" v-show="searchPageInfo.hasNextPage && postList.length > 0">
-        <button class="middle-pc:mt-16 h-table:mt-12 mobile:mt-10 btn draw meet" @click.prevent="loadMoreData()">
+        <button class="search-loadmore middle-pc:mt-16 h-table:mt-12 mobile:mt-10 btn draw meet"
+          @click.prevent="loadMoreData()">
           <span>Load More</span>
         </button>
       </div>

@@ -32,7 +32,7 @@
   </div>
   <!-- 桌機左側列表樣式 -->
   <div
-    class="middle-pc:w-1/5 w-table:w-1/3 h-table:w-5/12 w-full h-80vh bg-white z-401 absolute px-7 py-8 shadow-2xl overflow-x-hidden hidden h-table:block animate__animated animate__slideInLeft"
+    class="stargazing-menu middle-pc:w-1/5 w-table:w-1/3 h-table:w-5/12 w-full h-80vh bg-white z-401 absolute px-7 py-8 shadow-2xl overflow-x-hidden hidden h-table:block animate__animated animate__slideInLeft"
     :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]">
     <h2 class="font-normal mb-9">地點列表</h2>
     <ul>
@@ -41,31 +41,31 @@
         @click.stop="clickSingleInfo(val.stargazing_latitude, val.stargazing_longitude)">
         <img class="w-15px mr-2" src="/svg/mark.svg" />
         <span class="group-hover:text-sp-color-light delay-75 duration-1000 whitespace-nowrap">{{
-          val.stargazing_title
+            val.stargazing_title
         }}</span>
       </li>
     </ul>
   </div>
   <!-- 單一地點介紹 -->
   <div
-    class="middle-pc:w-1/3 w-table:w-5/12 h-table:w-1/2 w-full h-80vh bg-white z-401 absolute shadow-2xl grid grid-flow-rows animate__animated animate__slideInLeft animate__faster"
+    class="stargazing-info-card middle-pc:w-1/3 w-table:w-5/12 h-table:w-1/2 w-full h-80vh bg-white z-401 absolute shadow-2xl grid grid-flow-rows animate__animated animate__slideInLeft animate__faster"
     :class="[{ 'animate__slideOutLeft': !infoBoxState }, { '-z-9999': isReady }]">
     <div class="w-full flex items-center justify-between p-4 row-span-1">
       <h2 class="tracking-normal font-normal truncate middle-pc:text-4xl h-table:text-xl mobile:text-xl">{{
-        actMarkName
+          actMarkName
       }}</h2>
       <button @click.stop="hideInfoBox"
-        class="p-6 -m-6 relative mobile:right-2 right-7 bottom-7px w-15px h-15px before:absolute before:left-15px before:h-15px before:w-2px before:bg-black before:rotate-45 after:absolute after:left-15px after:h-15px after:w-2px after:bg-black after:-rotate-45"></button>
+        class="close-stargazing-menu-btn p-6 -m-6 relative mobile:right-2 right-7 bottom-7px w-15px h-15px before:absolute before:left-15px before:h-15px before:w-2px before:bg-black before:rotate-45 after:absolute after:left-15px after:h-15px after:w-2px after:bg-black after:-rotate-45"></button>
     </div>
     <div class="w-full min-h-100px bg-bottom bg-no-repeat bg-cover row-span-6 animate__animated animate__faster"
       :style="'background-image: url(' + actMarkImg + ')'" :class="{ 'animate__flipOutX': !actMarkImg }"></div>
     <div class="p-4 text-main-color-middle row-span-4">
-      <div>{{ actMarkDescription }}</div>
+      <div class="stargazing-info-description">{{ actMarkDescription }}</div>
     </div>
     <div class="px-4 text-sub-color-light flex items-center row-span-1 mobile:pb-2">
       <img class="w-15px mr-2" src="/svg/mark.svg" />
       <a :href="`https://maps.google.com?q=${actMarkLatitude},${actMarkLongitude}`" target="_blank">{{
-        actMarkAddress
+          actMarkAddress
       }}</a>
     </div>
   </div>
