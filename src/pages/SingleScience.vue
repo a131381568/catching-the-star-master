@@ -13,7 +13,9 @@
     </div>
     <div class="h-table:w-10/12 h-table:mt-8 mt-5 post-bottom-meta">
       <span class="text-main-color-light text-tiny">{{ date }},</span>
-      <router-link class="text-sub-color-light text-tiny" :to="'/archive/' + tag.catId">{{ tag.name }}</router-link>
+      <span v-if="!tag.name" class="text-tiny text-main-color-light">未分類</span>
+      <router-link v-else class="text-sub-color-light text-tiny" :to="'/archive/' + tag.catId">{{ tag.name }}
+      </router-link>
     </div>
   </div>
   <Footer />
@@ -41,6 +43,10 @@ onMounted(async () => {
     // 取得單一資料
     const artistsData = await getSinglePostById(getSid.value, routeName, true)
     if (artistsData.data.getSinglePost) {
+      // 查無文章資訊 => 跳轉至 404
+      if (artistsData.data.getSinglePost.postid === 0) {
+        router.push("/notfound")
+      }
       // 查詢分類物件
       const artistCatActName = store.changeCatName(
         artistsCatRes.data.artistsCategories,
