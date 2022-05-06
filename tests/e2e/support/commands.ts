@@ -1,3 +1,4 @@
+// import "cypress-localstorage-commands"
 declare global {
   namespace Cypress {
     interface Chainable {
@@ -11,6 +12,7 @@ declare global {
        */
       login: typeof login
       checkHoriScroll: typeof checkHoriScroll
+      loginDirect: typeof loginDirect
     }
   }
 }
@@ -46,16 +48,10 @@ Cypress.Commands.add("login", login)
 // 檢查不會左右水平滑動
 Cypress.Commands.add("checkHoriScroll", checkHoriScroll)
 
+// 自動請求登入
+Cypress.Commands.add("loginDirect", loginDirect)
+
 export function login() {
-  // let _email = ''
-  // let _password = ''
-  // before(() => {
-  //   cy.fixture('test-user.json').then(res => {
-  //     _email = res.email
-  //     _password = res.password
-  //   })
-  // })
-  // it('Shows correct text', () => {
   cy.visit('/login')
   cy.get('input[name="email"]').type("kevin@test.com");
   cy.get('input[name="password"]').type("123456");
@@ -73,7 +69,6 @@ export function checkHoriScroll() {
     const scrollBarWidth = htmlScrollWidth - htmlWidth
     expect(scrollBarWidth).to.be.eq(0)
   })
-
   cy.viewport('macbook-11')
   cy.window().then(() => {
     const htmlScrollWidth = Cypress.$('html')[0].scrollWidth
@@ -81,4 +76,44 @@ export function checkHoriScroll() {
     const scrollBarWidth = htmlScrollWidth - htmlWidth
     expect(scrollBarWidth).to.be.eq(0)
   })
+}
+
+export function loginDirect() {
+  const mutation = ` mutation Login($email: String!, $password: String!) {
+          login(email: $email, password: $password) {
+              name
+              uid
+              email
+              token
+              exp
+              refreshToken
+              refreshExp
+              errorTitle
+              errorMsg
+          }
+      }`;
+  cy.request({
+    url: 'http://localhost:4000/graphql/',  // graphql endpoint
+    method: 'POST',
+    body: {
+      query: mutation, variables: {
+        "email": "kevin@test.com",
+        "password": "123456"
+      }
+    },
+    failOnStatusCode: false,
+    headers: {
+      authorization: ''
+    }
+  }).then((res) => {
+    const personalInfo = res.body.data.login
+    localStorage.setItem("token", personalInfo.token)
+    localStorage.setItem("expired", personalInfo.exp)
+    localStorage.setItem("refresh-token", personalInfo.refreshToken)
+    localStorage.setItem("refresh-expired", personalInfo.refreshExp)
+    expect(localStorage.getItem('token')).to.not.be.null
+    expect(localStorage.getItem('expired')).to.not.be.null
+    expect(localStorage.getItem('refresh-token')).to.not.be.null
+    expect(localStorage.getItem('refresh-expired')).to.not.be.null
+  });
 }

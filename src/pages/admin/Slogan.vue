@@ -17,11 +17,11 @@
             <h2 class="text-main-color-light mobile:text-3xl mobile:w-full mobile:mb-4">首頁—主視覺文字</h2>
             <button class="admin-sbtn" @click.prevent="setEditMode('homeSloganForm')"
               v-if="!homeSloganEditMode">編輯標語</button>
-            <button class="admin-edit-sbtn" @click.prevent="setConfirmModal('homeSloganForm')"
-              v-if="homeSloganEditMode">儲存標語</button>
+            <button class="admin-edit-sbtn" :class="{ 'pointer-events-none': Object.keys(errors).length > 0 }"
+              @click.prevent="setConfirmModal('homeSloganForm')" v-if="homeSloganEditMode">儲存標語</button>
           </div>
           <div class="editer-inner view-mode" v-if="!homeSloganEditMode">
-            <h4 class="home-title"><i>{{ pageTitleFirst }}</i>{{ pageTitleLast }}</h4>
+            <h4 class="home-title home-content-title"><i>{{ pageTitleFirst }}</i>{{ pageTitleLast }}</h4>
             <p>{{ pageSubTitle }}</p>
           </div>
           <div class="editer-inner edit-mode mb-8" v-if="homeSloganEditMode">
@@ -45,11 +45,11 @@
             <h2 class="text-main-color-light mobile:text-3xl mobile:w-full mobile:mb-4">關於我們—理念</h2>
             <button class="admin-sbtn" @click.prevent="setEditMode('aboutSloganForm')"
               v-if="!aboutSloganEditMode">編輯標語</button>
-            <button class="admin-edit-sbtn" @click.prevent="setConfirmModal('aboutSloganForm')"
-              v-if="aboutSloganEditMode">儲存標語</button>
+            <button class="admin-edit-sbtn" :class="{ 'pointer-events-none': Object.keys(errors).length > 0 }"
+              @click.prevent="setConfirmModal('aboutSloganForm')" v-if="aboutSloganEditMode">儲存標語</button>
           </div>
           <div class="editer-inner view-mode mb-14" v-if="!aboutSloganEditMode">
-            <h4 class="text-xl">{{ sloganRef }}</h4>
+            <h4 class="about-content-title text-xl">{{ sloganRef }}</h4>
             <hr class="border-main-color-middle my-8">
             <v-md-preview class="markdown-body" :text="philosophyRef" height="400px"></v-md-preview>
           </div>
@@ -72,8 +72,8 @@
             <h2 class="text-main-color-light mobile:text-3xl mobile:w-full mobile:mb-4">關於我們—引言</h2>
             <button class="admin-sbtn" @click.prevent="setEditMode('aboutQuoteForm')"
               v-if="!aboutQuoteEditMode">編輯標語</button>
-            <button class="admin-edit-sbtn" @click.prevent="setConfirmModal('aboutQuoteForm')"
-              v-if="aboutQuoteEditMode">儲存標語</button>
+            <button class="admin-edit-sbtn" :class="{ 'pointer-events-none': Object.keys(errors).length > 0 }"
+              @click.prevent="setConfirmModal('aboutQuoteForm')" v-if="aboutQuoteEditMode">儲存標語</button>
           </div>
           <div class="editer-inner view-mode mb-14" v-if="!aboutQuoteEditMode">
             <v-md-preview class="markdown-body" :text="quoteRef" height="400px"></v-md-preview>
@@ -92,8 +92,8 @@
             <h2 class="text-main-color-light mobile:text-3xl mobile:w-full mobile:mb-4">關於我們—結語</h2>
             <button class="admin-sbtn" @click.prevent="setEditMode('aboutEpilogueForm')"
               v-if="!aboutEpilogueEditMode">編輯標語</button>
-            <button class="admin-edit-sbtn" @click.prevent="setConfirmModal('aboutEpilogueForm')"
-              v-if="aboutEpilogueEditMode">儲存標語</button>
+            <button class="admin-edit-sbtn" :class="{ 'pointer-events-none': Object.keys(errors).length > 0 }"
+              @click.prevent="setConfirmModal('aboutEpilogueForm')" v-if="aboutEpilogueEditMode">儲存標語</button>
           </div>
           <div class="editer-inner view-mode mb-14" v-if="!aboutEpilogueEditMode">
             <v-md-preview class="markdown-body" :text="epilogueRef" height="400px"></v-md-preview>

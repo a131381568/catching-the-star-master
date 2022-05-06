@@ -67,11 +67,11 @@ const refreshLink = new TokenRefreshLink({
       const inClude = frontEndPage.filter((item) => item === routeName)
       if (inClude.length === 0) {
         // 彈回登入頁
-        console.log(`
-        localExp:         ${localExp}
-        localRefreshExp:  ${localRefreshExp}
-        `)
-        // window.location.pathname = '/login';
+        // console.log(`
+        // localExp:         ${localExp}
+        // localRefreshExp:  ${localRefreshExp}
+        // `)
+        window.location.pathname = '/login';
       }
       return true
     }
@@ -127,7 +127,6 @@ const refreshLink = new TokenRefreshLink({
     await localStorage.setItem("refresh-token", tokenTotalInfo.refreshToken)
     await localStorage.setItem("expired", tokenTotalInfo.accessExp)
     await localStorage.setItem("refresh-expired", tokenTotalInfo.refreshExp)
-
     return tokenTotalInfo
   },
   handleError: err => {

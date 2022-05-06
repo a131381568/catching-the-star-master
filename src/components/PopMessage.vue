@@ -20,11 +20,11 @@
       </div>
       <div class="pop-msg-footer w-full text-middle flex content-center">
         <button @click.prevent="popBtnCheck(true)" v-show="modalConfirmStyle"
-          class="w-1/2 border-r border-main-color-light hover:bg-sp-color-light transition-all duration-700">確定</button>
+          class="confirm-true-btn w-1/2 border-r border-main-color-light hover:bg-sp-color-light transition-all duration-700">確定</button>
         <button @click.prevent="popBtnCheck(false)" v-show="modalConfirmStyle"
-          class="w-1/2 hover:bg-main-color-dark hover:text-main-color-light transition-all duration-700">取消</button>
+          class="confirm-false-btn w-1/2 hover:bg-main-color-dark hover:text-main-color-light transition-all duration-700">取消</button>
         <button @click.prevent="popBtnCheck(false)" v-show="!modalConfirmStyle"
-          class="w-full hover:bg-main-color-dark hover:text-main-color-light transition-all duration-700">確定</button>
+          class="only-true-btn w-full hover:bg-main-color-dark hover:text-main-color-light transition-all duration-700">確定</button>
       </div>
     </div>
   </div>
