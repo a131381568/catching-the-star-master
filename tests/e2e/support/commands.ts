@@ -59,7 +59,7 @@ export function login() {
   cy.visit('/login')
   cy.get('input[name="email"]').type("kevin@test.com");
   cy.get('input[name="password"]').type("123456");
-  cy.get('button#submit-login').click();
+  cy.get('button#submit-login').click()
   cy.url().should('include', '/board')
   // cy.contains('li.items-end', 'Header')
   // })

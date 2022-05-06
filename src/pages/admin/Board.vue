@@ -2,16 +2,17 @@
 	<div class="flex">
 		<AdminSidebar />
 		<div
-			class="laptop:w-4/5 laptop:left-0 left-7 mobile:left-11 w-full mobile:w-admin-m-content h-table:flex flex-wrap items-start justify-center content-start middle-pc:pt-64 pb-80 mobile:pb-48 h-table:pt-32 middle-pc:px-20 h-table:px-6 px-8 mobile:pt-32 relative">
+			class="board-box laptop:w-4/5 laptop:left-0 left-7 mobile:left-11 w-full mobile:w-admin-m-content h-table:flex flex-wrap items-start justify-center content-start middle-pc:pt-64 pb-80 mobile:pb-48 h-table:pt-32 middle-pc:px-20 h-table:px-6 px-8 mobile:pt-32 relative">
 			<!-- 標題區塊 -->
-			<div class="w-9/12 mobile:w-11/12 flex justify-between mb-12 mobile:mb-6 mobile:block mobile:mx-auto">
+			<div
+				class="board-box-title w-9/12 mobile:w-11/12 flex justify-between mb-12 mobile:mb-6 mobile:block mobile:mx-auto">
 				<h1 class="text-white relative -top-2 mobile:text-5xl w-3/4 mobile:w-full">{{ pageTitle }}</h1>
 				<router-link to="/board/slogan"
 					class="flex btn draw meet text-lg w-2/12 mobile:w-full mobile:mt-6 h-12 btn text-center items-center p-0 justify-center">
 					編輯標語
 				</router-link>
 			</div>
-			<div class="w-9/12 mobile:w-11/12 table-container mobile:m-auto">
+			<div class="board-box-content w-9/12 mobile:w-11/12 table-container mobile:m-auto">
 				<div v-if="philosophyRef && philosophyRef.length > 0"
 					class="callout-box bg-main-color-light py-10 pl-10 pr-14 mb-20 border-l-callout-box-boder border-sub-color-dark relative mobile:py-4 mobile:px-4 shadow-30-box">
 					<div class="text-main-color-black font-bold mb-2 text-xl">{{ pageSubTitle }}</div>

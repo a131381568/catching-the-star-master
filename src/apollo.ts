@@ -67,7 +67,11 @@ const refreshLink = new TokenRefreshLink({
       const inClude = frontEndPage.filter((item) => item === routeName)
       if (inClude.length === 0) {
         // 彈回登入頁
-        window.location.pathname = '/login';
+        console.log(`
+        localExp:         ${localExp}
+        localRefreshExp:  ${localRefreshExp}
+        `)
+        // window.location.pathname = '/login';
       }
       return true
     }

@@ -6,7 +6,7 @@
       <!-- 標題區塊 -->
       <div class="h-table:w-9/12 w-full flex justify-between mb-20 mobile:mb-9 mobile:block mobile:mx-auto flex-wrap">
         <!-- -left-2 -top-2 -->
-        <h1 class="text-white relative mobile:text-5xl w-table:w-3/4 w-full mobile:w-full w-table:m-0 mb-5">
+        <h1 class="admin-title text-white relative mobile:text-5xl w-table:w-3/4 w-full mobile:w-full w-table:m-0 mb-5">
           標語管理</h1>
       </div>
       <!-- 編輯區塊 -->
