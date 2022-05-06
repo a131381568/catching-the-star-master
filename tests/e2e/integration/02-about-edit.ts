@@ -1,3 +1,8 @@
+// 統一管理路由資訊
+const routePath = "/board/slogan"
+const pageTitle = "標語管理"
+
+
 describe('首頁主視覺文字-編輯', function () {
   // 欄位值統一設定
   const homeEditModeBtn = "form.home-slogan .admin-sbtn"
@@ -13,7 +18,7 @@ describe('首頁主視覺文字-編輯', function () {
 
   // 開始測試動作
   it('進入標語管理', () => {
-    cy.checkVisitPage("/board/slogan", "標語管理")
+    cy.checkVisitPage(routePath, pageTitle)
   })
   it('編輯-主視覺文字-上方欄位', () => {
     let option = {
@@ -108,7 +113,7 @@ describe('關於我們—理念-編輯', function () {
 
   // 開始測試動作
   it('進入標語管理', () => {
-    cy.checkVisitPage("/board/slogan", "標語管理")
+    cy.checkVisitPage(routePath, pageTitle)
   })
   it('編輯-上方標題', () => {
     let option = {
@@ -200,7 +205,7 @@ describe('關於我們—引言-編輯', function () {
 
   // 開始測試動作
   it('進入標語管理', () => {
-    cy.checkVisitPage("/board/slogan", "標語管理")
+    cy.checkVisitPage(routePath, pageTitle)
   })
   it('開啟編輯模式', () => {
     let option = {
@@ -254,7 +259,7 @@ describe('關於我們—結語-編輯', function () {
 
   // 開始測試動作
   it('進入標語管理', () => {
-    cy.checkVisitPage("/board/slogan", "標語管理")
+    cy.checkVisitPage(routePath, pageTitle)
   })
   it('開啟編輯模式', () => {
     let option = {
