@@ -28,15 +28,17 @@
             <Field name="pageTitleRule" type="text" v-model="pageTitle"
               class="home-title-input mb-4 bottom-line-input-gray" placeholder="主視覺標語"
               :class="{ '!border-sp-color-dark': errors.pageTitleRule }" />
-            <span v-show="errors.pageTitleRule" class="text-sp-color-dark text-xs w-full h-5 block mt-2">{{
-                errors.pageTitleRule
-            }}</span>
+            <span v-show="errors.pageTitleRule"
+              class="home-title-errors-tip text-sp-color-dark text-xs w-full h-5 block mt-2">{{
+                  errors.pageTitleRule
+              }}</span>
             <Field name="pageSubTitleRule" type="text" v-model="pageSubTitle"
               class="home-slogan mb-2 bottom-line-input-gray" placeholder="主視覺引言"
               :class="{ '!border-sp-color-dark': errors.pageSubTitleRule }" />
-            <span v-show="errors.pageSubTitleRule" class="text-sp-color-dark text-xs w-full h-5 block mt-2">{{
-                errors.pageSubTitleRule
-            }}</span>
+            <span v-show="errors.pageSubTitleRule"
+              class="home-slogan-errors-tip text-sp-color-dark text-xs w-full h-5 block mt-2">{{
+                  errors.pageSubTitleRule
+              }}</span>
           </div>
         </Form>
         <Form ref="aboutSloganForm" :validation-schema="aboutSloganFormRules" v-slot="{ errors }"
@@ -56,14 +58,16 @@
           <div class="editer-inner edit-mode md-container" v-if="aboutSloganEditMode">
             <Field name="sloganRule" v-model="sloganRef" class="p-6"
               :class="{ '!bg-sp-color-light': errors.sloganRule }" placeholder="關於我們標語" />
-            <span v-show="errors.sloganRule" class="text-sp-color-dark text-xs w-full h-5 block mt-2 mb-5">{{
-                errors.sloganRule
-            }}</span>
+            <span v-show="errors.sloganRule"
+              class="about-content-title-errors-tip text-sp-color-dark text-xs w-full h-5 block mt-2 mb-5">{{
+                  errors.sloganRule
+              }}</span>
             <Field v-show="false" name="philosophyRule" v-model="philosophyRef" />
             <v-md-editor class="markdown-body" v-model="philosophyRef" height="400px"></v-md-editor>
-            <span v-show="errors.philosophyRule" class="text-sp-color-dark text-xs w-full h-5 block mt-2">{{
-                errors.philosophyRule
-            }}</span>
+            <span v-show="errors.philosophyRule"
+              class="about-content-philosophy-errors-tip text-sp-color-dark text-xs w-full h-5 block mt-2">{{
+                  errors.philosophyRule
+              }}</span>
           </div>
         </Form>
         <Form ref="aboutQuoteForm" :validation-schema="aboutQuoteFormRules" v-slot="{ errors }"
@@ -81,9 +85,10 @@
           <div class="editer-inner edit-mode md-container" v-if="aboutQuoteEditMode">
             <Field v-show="false" name="quoteRule" v-model="quoteRef" />
             <v-md-editor class="markdown-body" v-model="quoteRef" height="400px"></v-md-editor>
-            <span v-show="errors.quoteRule" class="text-sp-color-dark text-xs w-full h-5 block mt-2">{{
-                errors.quoteRule
-            }}</span>
+            <span v-show="errors.quoteRule"
+              class="about-content-quote-errors-tip text-sp-color-dark text-xs w-full h-5 block mt-2">{{
+                  errors.quoteRule
+              }}</span>
           </div>
         </Form>
         <Form ref="aboutEpilogueForm" :validation-schema="aboutEpilogueFormRules" v-slot="{ errors }"
@@ -101,9 +106,10 @@
           <div class="editer-inner edit-mode md-container" v-if="aboutEpilogueEditMode">
             <Field v-show="false" name="epilogueRule" v-model="epilogueRef" />
             <v-md-editor class="markdown-body" v-model="epilogueRef" height="400px"></v-md-editor>
-            <span v-show="errors.epilogueRule" class="text-sp-color-dark text-xs w-full h-5 block mt-2">{{
-                errors.epilogueRule
-            }}</span>
+            <span v-show="errors.epilogueRule"
+              class="about-content-epilogue-errors-tip text-sp-color-dark text-xs w-full h-5 block mt-2">{{
+                  errors.epilogueRule
+              }}</span>
           </div>
         </Form>
       </div>
