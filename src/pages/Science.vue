@@ -65,7 +65,7 @@
             { 'bg-opacity-6': (key + 4) % 3 === 1 }
           ]">
           <!-- title -->
-          <p class="text-3xl font-normal text-white truncate">{{ val.title }}</p>
+          <p class="grid-card-title text-3xl font-normal text-white truncate">{{ val.title }}</p>
           <!-- date & cat -->
           <p class="text-tiny mt-1 text-main-color-light">
             {{ store.changeDate(Number(val.updatetime)) }},
