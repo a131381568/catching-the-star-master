@@ -4,7 +4,8 @@
 		<div
 			class="laptop:w-4/5 laptop:left-0 left-7 mobile:left-11 w-full mobile:w-admin-m-content h-table:flex flex-wrap items-start justify-center content-start middle-pc:pt-36 h-table:pt-32 pb-52 middle-pc:px-20 h-table:px-6 px-8 mobile:pt-32 relative">
 			<!-- 標題區塊 -->
-			<div class="w-9/12 mobile:w-11/12 flex justify-between mb-20 mobile:mb-9 mobile:block mobile:mx-auto">
+			<div
+				class="categories-title-box w-9/12 mobile:w-11/12 flex justify-between mb-20 mobile:mb-9 mobile:block mobile:mx-auto">
 				<h1 class="text-white relative -left-2 -top-2 mobile:text-5xl w-3/4 mobile:w-full">文章分類管理</h1>
 				<router-link to="/board/categories/add"
 					class="flex btn draw meet text-lg w-2/12 mobile:w-full mobile:mt-6 h-12 btn text-center items-center p-0 justify-center">

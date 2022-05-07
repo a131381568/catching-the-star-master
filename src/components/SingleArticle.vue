@@ -4,11 +4,13 @@
     <div @click.self="closeDefaultMenu()"
       class="laptop:w-4/5 laptop:left-0 left-7 mobile:left-11 w-full mobile:w-admin-m-content h-table:flex flex-wrap items-start justify-center content-start middle-pc:pt-36 h-table:pt-32 pb-52 middle-pc:px-20 h-table:px-6 px-8 mobile:pt-32 relative">
       <!-- 標題區塊 -->
-      <div class="w-9/12 mobile:w-11/12 flex justify-between mb-20 mobile:mb-9 mobile:block mobile:mx-auto flex-wrap">
+      <div
+        class="post-title-box w-9/12 mobile:w-11/12 flex justify-between mb-20 mobile:mb-9 mobile:block mobile:mx-auto flex-wrap">
         <h1
           class="text-white relative -left-2 -top-2 mobile:text-5xl w-table:w-3/4 w-full mobile:w-full w-table:m-0 mb-5">
           {{ articleTitle }}</h1>
         <button @click.prevent="setConfirmModal"
+          :class="{ 'pointer-events-none': !postTitle || !postContent || !selectCat || !postImgPath }"
           class="flex btn draw meet text-lg w-2/12 mobile:w-full mobile:mt-6 h-12 text-center items-center p-0 justify-center">
           {{ articleSaveBtn }}
         </button>
@@ -27,7 +29,7 @@
             <h4 class="text-main-color-light font-normal w-full mb-4">封面圖片</h4>
             <h5 class="text-main-color-light mb-4 truncate w-10/12">{{ postImg }}</h5>
             <label class="cursor-pointer admin-sbtn relative w-24 flex justify-center pt-1">上傳圖片
-              <Field name="postImgPathRef" v-model="postImgPath" class="hidden" type="file"
+              <Field name="postImgPathRef" v-model="postImgPath" class="update-btn hidden" type="file"
                 @change="updateFileAct($event)" />
             </label>
             <span v-show="errors.postImgPathRef" class="text-sp-color-dark text-xs w-full h-5 block m-auto mt-4">{{
@@ -39,18 +41,19 @@
           <!-- 文章標題 -->
           <div class="input-group mb-14">
             <h4 class="text-main-color-light font-normal">文章標題</h4>
-            <Field name="postTitleRef" type="text" class="h-16 block m-auto bottom-line-input text-lg"
+            <Field name="postTitleRef" type="text" class="post-title-input h-16 block m-auto bottom-line-input text-lg"
               :class="{ 'border-sp-color-dark border-opacity-100': errors.postTitleRef }" v-model="postTitle" />
-            <span v-show="errors.postTitleRef" class="text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">{{
-                errors.postTitleRef
-            }}</span>
+            <span v-show="errors.postTitleRef"
+              class="post-title-input-error-tip text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">{{
+                  errors.postTitleRef
+              }}</span>
           </div>
           <!-- 文章分類 -->
           <div class="input-group mb-14">
             <h4 class="text-main-color-light font-normal mb-4">文章分類</h4>
-            <Field name="selectCatRule" type="text" v-model="selectCat" v-show="false" />
+            <Field name="selectCatRule" type="text" class="post-cat-input" v-model="selectCat" v-show="false" />
             <!-- 選單樣式 -->
-            <div class="dropdown-menu z-40 w-full mb-4 relative animate__animated animate__fadeIn">
+            <div class="post-cat-select dropdown-menu z-40 w-full mb-4 relative animate__animated animate__fadeIn">
               <button id="dropdownDefault"
                 class="w-full duration-1000 text-main-color-light border border-white border-opacity-30 hover:border-opacity-0 bg-opacity-0 bg-white hover:bg-opacity-18 hover:text-sub-color-light focus:bg-opacity-18 focus:outline-none focus:border-opacity-0 focus:text-sub-color-light text-lg pl-4 p-3 relative text-center inline-flex items-center tracking-wide-content"
                 type="button" @click.prevent="toggleFilter()">
@@ -72,17 +75,19 @@
                 </ul>
               </div>
             </div>
-            <span v-show="errors.selectCatRule" class="text-sp-color-dark text-xs w-full h-5 block m-auto">{{
-                errors.selectCatRule
-            }}</span>
+            <span v-show="errors.selectCatRule"
+              class="post-cat-select-error-tip text-sp-color-dark text-xs w-full h-5 block m-auto">{{
+                  errors.selectCatRule
+              }}</span>
           </div>
         </div>
         <div class="w-full editer-inner edit-mode md-container mt-16">
           <Field v-show="false" name="postContentRef" v-model="postContent" />
           <v-md-editor class="markdown-body" v-model="postContent" height="550px"></v-md-editor>
-          <span v-show="errors.postContentRef" class="text-sp-color-dark text-xs w-full h-5 block mt-2">{{
-              errors.postContentRef
-          }}</span>
+          <span v-show="errors.postContentRef"
+            class="post-content-error-tip text-sp-color-dark text-xs w-full h-5 block mt-2">{{
+                errors.postContentRef
+            }}</span>
         </div>
         <div class="middle-pc:w-10/12 w-full mt-16" v-if="routeName === 'EditSingleArticle'">
           <button class="admin-delete-sbtn" @click.prevent="setDelConfirmModal()">

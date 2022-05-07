@@ -1,4 +1,4 @@
-// import "cypress-localstorage-commands"
+import 'cypress-file-upload';
 declare global {
   namespace Cypress {
     interface Chainable {
@@ -18,6 +18,7 @@ declare global {
       restoreEdit: typeof restoreEdit
       checkEmptyValAlert: typeof checkEmptyValAlert
       checkVisitPage: typeof checkVisitPage
+      updateImage: typeof updateImage
     }
   }
 }
@@ -70,6 +71,9 @@ Cypress.Commands.add("checkEmptyValAlert", checkEmptyValAlert)
 
 // 進入指定頁面並檢查
 Cypress.Commands.add("checkVisitPage", checkVisitPage)
+
+// 上傳圖片
+Cypress.Commands.add("updateImage", updateImage)
 
 export function login() {
   cy.visit('/login')
@@ -216,4 +220,8 @@ export function checkVisitPage(path, title) {
   // 進入標語管理頁面
   cy.visit(path)
   cy.title().should('eq', 'Catch The Stars — ' + title)
+}
+
+export function updateImage(updateInput) {
+  cy.get(updateInput).attachFile('testimg-260x260.jpg')
 }
