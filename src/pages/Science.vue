@@ -69,7 +69,8 @@
           <!-- date & cat -->
           <p class="text-tiny mt-1 text-main-color-light">
             {{ store.changeDate(Number(val.updatetime)) }},
-            <span v-if="!store.changeCatName(filterCategories, val.categoryid)" class="text-lg">未分類</span>
+            <span v-if="!store.changeCatName(filterCategories, val.categoryid)"
+              class="text-lg grid-card-tag grid-card-tag-nothing">未分類</span>
             <router-link v-else :to="'/archive/' + val.categoryid"
               class="text-sub-color-light hover:text-sp-color-light grid-card-tag">{{
                   store.changeCatName(filterCategories, val.categoryid)

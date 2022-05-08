@@ -19,6 +19,10 @@ declare global {
       checkEmptyValAlert: typeof checkEmptyValAlert
       checkVisitPage: typeof checkVisitPage
       updateImage: typeof updateImage
+      checkTagContent: typeof checkTagContent
+      checkPostContent: typeof checkPostContent
+      checkScienceTagPost: typeof checkScienceTagPost
+      saveTableEditAction: typeof saveTableEditAction
     }
   }
 }
@@ -74,6 +78,19 @@ Cypress.Commands.add("checkVisitPage", checkVisitPage)
 
 // 上傳圖片
 Cypress.Commands.add("updateImage", updateImage)
+
+// 確認標籤頁內容
+Cypress.Commands.add("checkTagContent", checkTagContent)
+
+// 確認文章內容
+Cypress.Commands.add("checkPostContent", checkPostContent)
+
+// 確認天文科普新增標籤和文章內容
+Cypress.Commands.add("checkScienceTagPost", checkScienceTagPost)
+
+// 儲存表格的動作, 和確認編輯後的列表是否存在
+Cypress.Commands.add("saveTableEditAction", saveTableEditAction)
+
 
 export function login() {
   cy.visit('/login')
@@ -224,4 +241,50 @@ export function checkVisitPage(path, title) {
 
 export function updateImage(updateInput) {
   cy.get(updateInput).attachFile('testimg-260x260.jpg')
+}
+
+export function checkTagContent(tagName, postTitle) {
+  cy.get('.post-bottom-meta a').click()
+  cy.get('h1.title-box-text').should('have.text', tagName)
+  cy.get('.search-item p').should('contain', postTitle)
+}
+
+export function checkPostContent(tagName, postTitle) {
+  cy.get('.title-box-text').should('have.text', postTitle)
+  cy.get('.title-box-tag').should('have.text', tagName)
+  cy.get('.github-markdown-body h2').should('have.text', '測試用內文')
+  cy.get('.github-markdown-body blockquote').should('contain', 'quotequote')
+  cy.get('.github-markdown-body ul li').should('contain', '111111')
+  cy.get('.github-markdown-body ul li').should('contain', '222222')
+  cy.get('.github-markdown-body ul li').should('contain', '333333')
+  cy.get('.github-markdown-body > p').should('contain', 'endend')
+}
+
+export function checkScienceTagPost(tagName, postTitle, isDel) {
+  cy.checkVisitPage('/science', '天文科普')
+  if (isDel === true) {
+    // 檢查被刪除的標籤
+    cy.get('.science-filter-bar li label').should('not.contain', tagName)
+    cy.get('.grid-card').first().find('.grid-card-tag').should('have.text', '未分類')
+  } else {
+    // 檢查新增的文章是否有出現在下方區塊？
+    cy.get('.science-filter-bar li label').should('contain', tagName)
+    cy.get('.grid-card').first().find('.grid-card-tag').should('have.text', tagName)
+  }
+  cy.get('.grid-card').first().find('.grid-card-title').should('have.text', postTitle)
+  cy.get('.grid-card').first().find('.grid-card-read').click()
+}
+
+export function saveTableEditAction(btn, firstOrder, tdTitle, tdText) {
+  cy.loginDirect()
+  cy.wait(2000)
+  cy.get(btn).click()
+  cy.wait(1000)
+  cy.get('.admin-stargazer-modal .confirm-true-btn').click()
+  cy.wait(1000)
+  if (firstOrder === true) {
+    cy.get('#responsive-table tbody tr').first().children('td[data-title="' + tdTitle + '"]').should('have.text', tdText)
+  } else {
+    cy.get('#responsive-table tbody tr').last().children('td[data-title="' + tdTitle + '"]').should('have.text', tdText)
+  }
 }

@@ -13,8 +13,8 @@
     </div>
     <div class="h-table:w-10/12 h-table:mt-8 mt-5 post-bottom-meta">
       <span class="text-main-color-light text-tiny">{{ date }},</span>
-      <span v-if="!tag.name" class="text-tiny text-main-color-light">未分類</span>
-      <router-link v-else class="text-sub-color-light text-tiny" :to="'/archive/' + tag.catId">{{ tag.name }}
+      <span v-if="!tag.name" class="text-tiny text-main-color-light tag-name">未分類</span>
+      <router-link v-else class="text-sub-color-light text-tiny tag-name" :to="'/archive/' + tag.catId">{{ tag.name }}
       </router-link>
     </div>
   </div>

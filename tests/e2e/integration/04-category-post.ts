@@ -19,11 +19,11 @@ const catIdError = '.category-id-error-tip'
 const singleCatPageSaveBtn = '.category-layout-title-box button'
 
 
-// describe('新增文章分類。', function () {
+
+// describe('新增分類。', function () {
 //   // 開始測試動作
 //   it('進入文章分類新增頁。', () => {
 //     cy.checkVisitPage(addcatRoutePath, addcatPageTitle)
-//     // cy.checkVisitPage(catRoutePath, catPageTitle)
 //   })
 //   it('填空值顯示警示文字。', () => {
 //     cy.get(catNameInput).clear()
@@ -39,13 +39,7 @@ const singleCatPageSaveBtn = '.category-layout-title-box button'
 //     cy.get(catIdInput).type('cataaaa');
 //   })
 //   it('儲存新增資料。', () => {
-//     // 先取得權限
-//     cy.loginDirect()
-//     cy.get(singleCatPageSaveBtn).click()
-//     cy.wait(1000)
-//     cy.get('.admin-stargazer-modal .confirm-true-btn').click()
-//     cy.wait(1000)
-//     cy.get('#responsive-table tr').last().children('td[data-title="名稱"]').should('have.text', '分類AAAA')
+//     cy.saveTableEditAction(singleCatPageSaveBtn, false, '名稱', '分類AAAA')
 //   })
 // })
 
@@ -64,7 +58,6 @@ const singleCatPageSaveBtn = '.category-layout-title-box button'
 //   it('進入文章新增頁。', () => {
 //     cy.checkVisitPage(addPostRoutePath, addPostTitle)
 //   })
-
 //   it('檢查填空值顯示警示文字。', () => {
 //     cy.get(postTitleVal).clear()
 //     cy.get(singlePostPageTitle).click();
@@ -73,7 +66,6 @@ const singleCatPageSaveBtn = '.category-layout-title-box button'
 //     cy.get(postContentError).should('have.text', '此欄位必填')
 //     cy.get(postSaveBtn).should('have.css', 'pointer-events', 'none')
 //   })
-
 //   it('輸入文章資料。', () => {
 //     // 先取得權限
 //     cy.loginDirect()
@@ -87,49 +79,78 @@ const singleCatPageSaveBtn = '.category-layout-title-box button'
 //     // 上傳圖片
 //     cy.updateImage('.update-btn')
 //   })
-
 //   it('儲存新增資料，並檢查後台列表是否已新增？', () => {
-//     // cy.checkVisitPage(postListRoutePath, postListTitle)
+//     cy.saveTableEditAction(postSaveBtn, true, '標題', '測試用文章AAAA')
+//   })
+//   it('進入前台天文科普，檢查分類篩選列，是否有新增分類？', () => {
+//     cy.checkScienceTagPost('分類AAAA', '測試用文章AAAA',false)
+//   })
+//   it('檢查新增的文章內容。', () => {
+//     cy.checkPostContent('分類AAAA', '測試用文章AAAA')
+//   })
+//   it('檢查標籤彙整頁。', () => {
+//     cy.checkTagContent('分類AAAA', '測試用文章AAAA')
+//   })
+// })
+
+
+
+// describe('編輯分類。', function () {
+//   // 開始測試動作
+//   it('進入文章分類列表頁後，指定測試分類編輯。', () => {
+//     cy.checkVisitPage(catRoutePath, catPageTitle)
+//     cy.get('#responsive-table tr').last().children('td[data-title="名稱"]').should('have.text', '分類AAAA').next().next('td[data-title="編輯"]').children('svg').click()
+//   })
+//   it('測試空白呆後，修改分類名稱。', () => {
+//     // 先取得權限
 //     cy.loginDirect()
-//     cy.wait(2000)
-//     cy.get(postSaveBtn).click()
+//     cy.get(catNameInput).clear()
+//     cy.get(singlecatPageTitle).click();
+//     cy.get(catNameError).should('have.text', '此欄位必填')
+//     cy.get(catNameInput).type('分類AAAAB').invoke('val').should('eq', '分類AAAAB');
+//   })
+//   it('儲存新增資料。', () => {
+//     cy.saveTableEditAction(singleCatPageSaveBtn, false, '名稱', '分類AAAAB')
+//   })
+//   it('檢查分類篩選列，分類是否已改變？', () => {
+//     cy.checkScienceTagPost('分類AAAAB', '測試用文章AAAA',false)
+//   })
+//   it('檢查編輯後的文章內容。', () => {
+//     cy.checkPostContent('分類AAAAB', '測試用文章AAAA')
+//   })
+//   it('檢查標籤彙整頁。', () => {
+//     cy.checkTagContent('分類AAAAB', '測試用文章AAAA')
+//   })
+// })
+
+
+
+// describe('刪除分類。', function () {
+//   it('進入文章分類列表頁後，指定要刪除的分類。', () => {
+//     cy.checkVisitPage(catRoutePath, catPageTitle)
+//     cy.get('#responsive-table tbody tr').last().children('td[data-title="名稱"]').should('have.text', '分類AAAAB').next().next().next('td[data-title="刪除"]').children('svg').click()
 //     cy.wait(1000)
 //     cy.get('.admin-stargazer-modal .confirm-true-btn').click()
 //     cy.wait(1000)
-//     cy.get('#responsive-table tbody tr').first().children('td[data-title="標題"]').should('have.text', '測試用文章AAAA')
+//     cy.get('#responsive-table tbody tr').last().children('td[data-title="名稱"]').should('not.have.text', '分類AAAAB')
 //   })
-
-//   it('進入前台天文科普。', () => {
-//     cy.checkVisitPage(scienceRoutePath, scienceTitle)
+//   it('檢查分類篩選列，分類是否已消失？', () => {
+//     cy.checkScienceTagPost('分類AAAAB', '測試用文章AAAA', true)
 //   })
-
-//   it('檢查分類篩選列，是否有新增分類？', () => {
-//     cy.get('.science-filter-bar li label').should('contain', '分類AAAA')
-//   })
-
-//   it('檢查新增的文章是否有出現在下方區塊？', () => {
-//     cy.get('.grid-card').first().find('.grid-card-title').should('have.text', '測試用文章AAAA')
-//     cy.get('.grid-card').first().find('.grid-card-tag').should('have.text', '分類AAAA')
-//     cy.get('.grid-card').first().find('.grid-card-read').click()
-//   })
-
-//   it('檢查新增的文章內容。', () => {
-//     cy.get('.title-box-text').should('have.text', '測試用文章AAAA')
-//     cy.get('.title-box-tag').should('have.text', '分類AAAA')
-//     cy.get('.github-markdown-body h2').should('have.text', '測試用內文')
-//     cy.get('.github-markdown-body blockquote').should('contain', 'quotequote')
-//     cy.get('.github-markdown-body ul li').should('contain', '111111')
-//     cy.get('.github-markdown-body ul li').should('contain', '222222')
-//     cy.get('.github-markdown-body ul li').should('contain', '333333')
-//     cy.get('.github-markdown-body > p').should('contain', 'endend')
-//   })
-
-//   it('檢查標籤彙整頁。', () => {
-//     cy.get('.post-bottom-meta a').click()
-//     cy.get('h4.title-box-tag').should('have.text', 'cataaaa')
-//     cy.get('h1.title-box-text').should('have.text', '分類AAAA')
-//     cy.get('.search-item p').should('contain', '測試用文章AAAA')
+//   it('檢查編輯後的文章內容。', () => {
+//     cy.checkPostContent('未分類', '測試用文章AAAA')
 //   })
 // })
+
+
+describe('編輯文章。', function () {
+  it('進入文章列表頁。', () => {
+    cy.checkVisitPage(postListRoutePath, postListTitle)
+    cy.get('#responsive-table tbody tr').first().children('td[data-title="標題"]').should('have.text', '測試用文章AAAA')
+
+  })
+
+})
+
 
 
