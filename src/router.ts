@@ -251,7 +251,7 @@ const routes = [
     name: 'Organization',
     component: Organization,
     meta: {
-      title: '機構管理',
+      title: '天文機構管理',
       manage: true
     }
   },

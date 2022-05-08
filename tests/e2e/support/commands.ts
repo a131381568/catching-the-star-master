@@ -23,6 +23,7 @@ declare global {
       checkPostContent: typeof checkPostContent
       checkScienceTagPost: typeof checkScienceTagPost
       saveTableEditAction: typeof saveTableEditAction
+      checkFacilitiesOrgan: typeof checkFacilitiesOrgan
     }
   }
 }
@@ -91,6 +92,8 @@ Cypress.Commands.add("checkScienceTagPost", checkScienceTagPost)
 // 儲存表格的動作, 和確認編輯後的列表是否存在
 Cypress.Commands.add("saveTableEditAction", saveTableEditAction)
 
+// 確認前台的天文機構是否新增成功
+Cypress.Commands.add("checkFacilitiesOrgan", checkFacilitiesOrgan)
 
 export function login() {
   cy.visit('/login')
@@ -286,5 +289,14 @@ export function saveTableEditAction(btn, firstOrder, tdTitle, tdText) {
     cy.get('#responsive-table tbody tr').first().children('td[data-title="' + tdTitle + '"]').should('have.text', tdText)
   } else {
     cy.get('#responsive-table tbody tr').last().children('td[data-title="' + tdTitle + '"]').should('have.text', tdText)
+  }
+}
+
+export function checkFacilitiesOrgan(organTitle, isDel) {
+  cy.checkVisitPage('/facilities', '天文設施')
+  if (isDel === true) {
+    cy.get('.facility-item').last().find('.facility-item-title').should('not.contain', organTitle)
+  } else {
+    cy.get('.facility-item').last().find('.facility-item-title').should('contain', organTitle)
   }
 }

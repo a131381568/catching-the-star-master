@@ -383,7 +383,8 @@ const uploadImgPath = computed(() => {
     setTimeout(() => {
       localBgOpacity.value = true
     }, 1000);
-    return 'https://puraliena.com' + placeImgPath.value
+    // 'https://puraliena.com' +
+    return placeImgPath.value
   } else {
     setTimeout(() => {
       localBgOpacity.value = true

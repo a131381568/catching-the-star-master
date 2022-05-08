@@ -715,7 +715,7 @@ const routeName = String(route.name)
 
 // 宣告列表預設值
 const facilitiesListRef = ref<FacilitiesArr>([])
-const oidRef = ref("")
+const oidRef = ref(0)
 
 // 生命週期 --------------------------------------------------------------
 onMounted(async () => {

@@ -4,11 +4,13 @@
     <div
       class="laptop:w-4/5 laptop:left-0 left-7 mobile:left-11 w-full mobile:w-admin-m-content h-table:flex flex-wrap items-start justify-center content-start middle-pc:pt-36 h-table:pt-32 pb-52 middle-pc:px-20 h-table:px-6 px-8 mobile:pt-32 relative">
       <!-- 標題區塊 -->
-      <div class="w-9/12 mobile:w-11/12 flex justify-between mb-20 mobile:mb-9 mobile:block mobile:mx-auto flex-wrap">
+      <div
+        class="single-organ-title-box w-9/12 mobile:w-11/12 flex justify-between mb-20 mobile:mb-9 mobile:block mobile:mx-auto flex-wrap">
         <h1
           class="text-white relative -left-2 -top-2 mobile:text-5xl w-table:w-3/4 w-full mobile:w-full w-table:m-0 mb-5">
           {{ organizationTitle }}</h1>
         <button @click.prevent="setConfirmModal"
+          :class="{ 'pointer-events-none': !facilitiesTitle || !facilitiesDescription || !facilitiesImagePath || !facilitiesLink }"
           class="flex btn draw meet text-lg w-2/12 mobile:w-full mobile:mt-6 h-12 text-center items-center p-0 justify-center">
           {{ organizationSaveBtn }}
         </button>
@@ -23,9 +25,10 @@
             <Field name="facilitiesTitleRef" type="text" class="h-16 block m-auto bottom-line-input text-lg"
               :class="{ 'border-sp-color-dark border-opacity-100': errors.facilitiesTitleRef }"
               v-model="facilitiesTitle" />
-            <span v-show="errors.facilitiesTitleRef" class="text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">{{
-                errors.facilitiesTitleRef
-            }}</span>
+            <span v-show="errors.facilitiesTitleRef"
+              class="organ-title-error-tip text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">{{
+                  errors.facilitiesTitleRef
+              }}</span>
           </div>
           <!-- 外部連結 -->
           <div class="input-group mb-14">
@@ -33,9 +36,10 @@
             <Field name="facilitiesLinkRef" type="text" class="h-16 block m-auto bottom-line-input text-lg"
               :class="{ 'border-sp-color-dark border-opacity-100': errors.facilitiesLinkRef }"
               v-model="facilitiesLink" />
-            <span v-show="errors.facilitiesLinkRef" class="text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">{{
-                errors.facilitiesLinkRef
-            }}</span>
+            <span v-show="errors.facilitiesLinkRef"
+              class="organ-link-error-tip text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">{{
+                  errors.facilitiesLinkRef
+              }}</span>
           </div>
           <!-- 機構介紹 -->
           <div class="input-group mb-14">
@@ -45,7 +49,7 @@
               :class="{ 'border-sp-color-dark border-opacity-100': errors.facilitiesDescriptionRef }"
               v-model="facilitiesDescription" />
             <span v-show="errors.facilitiesDescriptionRef"
-              class="text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">{{
+              class="organ-des-error-tip text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">{{
                   errors.facilitiesDescriptionRef
               }}</span>
           </div>
@@ -58,7 +62,7 @@
           <div class="upload-bar flex justify-between mt-7 mb-1">
             <h4 class="text-main-color-light font-normal">機構圖片</h4>
             <label class="cursor-pointer admin-sbtn relative flex items-center justify-center">上傳圖片
-              <Field name="facilitiesImagePathRef" v-model="facilitiesImagePath" class="hidden" type="file"
+              <Field name="facilitiesImagePathRef" v-model="facilitiesImagePath" class="update-btn hidden" type="file"
                 @change="updateFileAct($event)" />
             </label>
           </div>
@@ -159,7 +163,7 @@ const uploadImgPath = computed(() => {
     setTimeout(() => {
       localBgOpacity.value = true
     }, 1000);
-    return 'https://puraliena.com' + facilitiesImagePath.value
+    return facilitiesImagePath.value
   } else {
     setTimeout(() => {
       localBgOpacity.value = true
@@ -262,9 +266,9 @@ const actionDelPlace = async () => {
 async function loadEditOrganization() {
   if (routeName === "EditSingleOrganization" && routeOid) {
     const res = await getSingleOrganization(routeOid, routeName)
-    facilitiesTitle.value = res.data.getSingleOrganization.facilities_title
-    facilitiesDescription.value = res.data.getSingleOrganization.facilities_description
-    facilitiesLink.value = res.data.getSingleOrganization.facilities_link
+    facilitiesTitle.value = String(res.data.getSingleOrganization.facilities_title)
+    facilitiesDescription.value = String(res.data.getSingleOrganization.facilities_description)
+    facilitiesLink.value = String(res.data.getSingleOrganization.facilities_link)
     let path = String(res.data.getSingleOrganization.facilities_image)
     let split = path.split('/')
     facilitiesImage.value = split[split.length - 1]

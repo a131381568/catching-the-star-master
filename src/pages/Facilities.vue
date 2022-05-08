@@ -30,7 +30,7 @@
             { 'bg-opacity-6': (key + 4) % 3 === 1 }
           ]">
           <!-- title -->
-          <p class="text-3xl text-white truncate font-normal">{{ val.facilities_title }}</p>
+          <p class="facility-item-title text-3xl text-white truncate font-normal">{{ val.facilities_title }}</p>
           <!-- des -->
           <p class="text-main-color-light font-light mt-6 text-lg grid-des-box">{{ val.facilities_description }}</p>
           <!-- link -->

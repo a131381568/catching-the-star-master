@@ -4,11 +4,13 @@
     <div
       class="laptop:w-4/5 laptop:left-0 left-7 mobile:left-11 w-full mobile:w-admin-m-content h-table:flex flex-wrap items-start justify-center content-start middle-pc:pt-36 h-table:pt-32 pb-52 middle-pc:px-20 h-table:px-6 px-8 mobile:pt-32 relative">
       <!-- 標題區塊 -->
-      <div class="w-9/12 mobile:w-11/12 flex justify-between mb-20 mobile:mb-9 mobile:block mobile:mx-auto flex-wrap">
+      <div
+        class="single-obs-title-box w-9/12 mobile:w-11/12 flex justify-between mb-20 mobile:mb-9 mobile:block mobile:mx-auto flex-wrap">
         <h1
           class="text-white relative -left-2 -top-2 mobile:text-5xl w-table:w-3/4 w-full mobile:w-full w-table:m-0 mb-5">
           {{ observatoriesTitle }}</h1>
         <button @click.prevent="setConfirmModal"
+          :class="{ 'pointer-events-none': !observatoryTitle || !observatoryCatId || !observatoryContnet }"
           class="flex btn draw meet text-lg w-2/12 mobile:w-full mobile:mt-6 h-12 text-center items-center p-0 justify-center">
           {{ observatoriesSaveBtn }}
         </button>
@@ -24,7 +26,7 @@
               :class="{ 'border-sp-color-dark border-opacity-100': errors.observatoriesTitleRef }"
               v-model="observatoryTitle" />
             <span v-show="errors.observatoriesTitleRef"
-              class="text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">{{
+              class="obs-cat-name-error-tip text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">{{
                   errors.observatoriesTitleRef
               }}</span>
           </div>
@@ -37,7 +39,7 @@
               :class="[{ 'border-sp-color-dark border-opacity-100': errors.observatoriesCatIdRef }, { 'pointer-events-none border-0': routeName === 'EditSingleObservatories' }]"
               v-model="observatoryCatId" />
             <span v-show="errors.observatoriesCatIdRef"
-              class="text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">{{
+              class="obs-cat-id-error-tip text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">{{
                   errors.observatoriesCatIdRef
               }}</span>
           </div>
@@ -48,9 +50,10 @@
             <h4 class="text-main-color-light font-normal">表格內容</h4>
             <Field v-show="false" name="observatoriesContentRef" v-model="observatoryContnet" />
             <v-md-editor class="markdown-body" v-model="observatoryContnet" height="550px"></v-md-editor>
-            <span v-show="errors.observatoriesContentRef" class="text-sp-color-dark text-xs w-full h-5 block mt-2">{{
-                errors.observatoriesContentRef
-            }}</span>
+            <span v-show="errors.observatoriesContentRef"
+              class="obs-content-error-tip marker:text-sp-color-dark text-xs w-full h-5 block mt-2">{{
+                  errors.observatoriesContentRef
+              }}</span>
           </div>
         </div>
         <div class="w-table:w-10/12 w-full mt-16" v-if="routeName === 'EditSingleObservatories'">
