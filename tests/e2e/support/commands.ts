@@ -24,6 +24,7 @@ declare global {
       checkScienceTagPost: typeof checkScienceTagPost
       saveTableEditAction: typeof saveTableEditAction
       checkFacilitiesOrgan: typeof checkFacilitiesOrgan
+      checkFacilitiesObs: typeof checkFacilitiesObs
     }
   }
 }
@@ -94,6 +95,10 @@ Cypress.Commands.add("saveTableEditAction", saveTableEditAction)
 
 // 確認前台的天文機構是否新增成功
 Cypress.Commands.add("checkFacilitiesOrgan", checkFacilitiesOrgan)
+
+// 確認前台的天文台是否新增成功
+Cypress.Commands.add("checkFacilitiesObs", checkFacilitiesObs)
+
 
 export function login() {
   cy.visit('/login')
@@ -298,5 +303,15 @@ export function checkFacilitiesOrgan(organTitle, isDel) {
     cy.get('.facility-item').last().find('.facility-item-title').should('not.contain', organTitle)
   } else {
     cy.get('.facility-item').last().find('.facility-item-title').should('contain', organTitle)
+  }
+}
+
+export function checkFacilitiesObs(obsCatName, isDel) {
+  cy.checkVisitPage('/facilities', '天文設施')
+  if (isDel === true) {
+    cy.get('.table-filter li').last().find('.table-name').should('not.contain', obsCatName)
+  } else {
+    cy.get('.table-filter li').last().find('.table-name').should('contain', obsCatName).click()
+    cy.get('.v-md-editor-preview').last().find('tbody tr td').first().should('contain', '天文台')
   }
 }

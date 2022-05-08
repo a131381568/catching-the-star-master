@@ -61,10 +61,10 @@ describe('編輯機構。', function () {
     cy.get(linkInputLocation).clear().type(scOrganLinkVal)
     cy.get(desInputLocation).clear().type(scOrganDesVal)
   })
-  it('儲存新增資料，並檢查後台列表是否已新增？', () => {
+  it('儲存修改資料，並檢查後台列表是否已修改？', () => {
     cy.saveTableEditAction(saveBtn, false, '機構', scOrganTitleVal)
   })
-  it('檢查前台天文機構，是否已新增？', () => {
+  it('檢查前台天文機構，是否已修改？', () => {
     cy.checkFacilitiesOrgan(scOrganTitleVal, false)
   })
 })

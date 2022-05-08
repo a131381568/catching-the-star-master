@@ -54,7 +54,7 @@
             <input :id="String(val.observatory_category_id)" type="radio" name="radio" class="hidden"
               v-model="selectCat" :value="val.observatory_category_id" />
             <label :for="String(val.observatory_category_id)" :class="[
-              'delay-75', 'duration-1000',
+              'table-name', 'delay-75', 'duration-1000',
               'flex', 'items-center', 'cursor-pointer', 'text-2xl', 'group-hover:text-sp-color-light',
               { 'text-sub-color-light': val.observatory_category_id === selectCat },
               { 'text-main-color-light': val.observatory_category_id !== selectCat }
