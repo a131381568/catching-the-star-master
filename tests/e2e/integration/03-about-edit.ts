@@ -2,7 +2,6 @@
 const routePath = "/board/slogan"
 const pageTitle = "標語管理"
 
-
 describe('首頁主視覺文字-編輯', function () {
   // 欄位值統一設定
   const homeEditModeBtn = "form.home-slogan .admin-sbtn"
@@ -15,7 +14,6 @@ describe('首頁主視覺文字-編輯', function () {
   const homeEditBlockTitle = "form.home-slogan h2"
   const homeTitleErrorTip = ".home-title-errors-tip"
   const homeSloganErrorTip = ".home-slogan-errors-tip"
-
   // 開始測試動作
   it('進入標語管理', () => {
     cy.checkVisitPage(routePath, pageTitle)
@@ -68,12 +66,10 @@ describe('首頁主視覺文字-編輯', function () {
     cy.restoreEdit(optionTitle)
     cy.restoreEdit(optionSlogan)
   })
-
   it('欄位皆空白，顯示警語。', () => {
     // 開啟編輯模式
     cy.get(homeEditModeBtn).click()
     cy.get(homeEditContainerName).should('have.class', 'edit-mode')
-
     let optionTitle = {
       editBtn: homeEditModeBtn,
       editContainer: homeEditContainerName,
@@ -97,7 +93,6 @@ describe('首頁主視覺文字-編輯', function () {
   })
 })
 
-
 describe('關於我們—理念-編輯', function () {
   // 欄位值統一設定
   const aboutEditModeBtn = "form.about-slogan .admin-sbtn"
@@ -110,7 +105,6 @@ describe('關於我們—理念-編輯', function () {
   const aboutEditBlockTitle = "form.about-slogan h2"
   const aboutTitleErrorTip = ".about-content-philosophy-errors-tip"
   const aboutSloganErrorTip = ".about-content-title-errors-tip"
-
   // 開始測試動作
   it('進入標語管理', () => {
     cy.checkVisitPage(routePath, pageTitle)
@@ -138,7 +132,6 @@ describe('關於我們—理念-編輯', function () {
     }
     cy.editMdContent(option)
   })
-
   it('儲存-下方編輯器-檢視模式-檢查', () => {
     let option = {
       saveBtn: aboutSaveBtn,
@@ -146,7 +139,6 @@ describe('關於我們—理念-編輯', function () {
     }
     cy.saveMdContent(option)
   })
-
   it('恢復原狀', () => {
     let optionMd = {
       editBtn: aboutEditModeBtn,
@@ -165,7 +157,6 @@ describe('關於我們—理念-編輯', function () {
     cy.restoreEdit(optionTitle)
     cy.restoreEdit(optionMd)
   })
-
   it('欄位皆空白，顯示警語。', () => {
     // 開啟編輯模式
     cy.get(aboutEditModeBtn).click()
@@ -192,7 +183,6 @@ describe('關於我們—理念-編輯', function () {
   })
 })
 
-
 describe('關於我們—引言-編輯', function () {
   // 欄位值統一設定
   const quoteEditModeBtn = "form.about-quote .admin-sbtn"
@@ -202,7 +192,6 @@ describe('關於我們—引言-編輯', function () {
   const quoteView = "form.about-quote .view-mode .github-markdown-body"
   const quoteEditBlockTitle = "form.about-quote h2"
   const quoteErrorTip = ".about-content-quote-errors-tip"
-
   // 開始測試動作
   it('進入標語管理', () => {
     cy.checkVisitPage(routePath, pageTitle)
@@ -246,7 +235,6 @@ describe('關於我們—引言-編輯', function () {
   })
 })
 
-
 describe('關於我們—結語-編輯', function () {
   // 欄位值統一設定
   const epilogueEditModeBtn = "form.about-epilogue .admin-sbtn"
@@ -256,7 +244,6 @@ describe('關於我們—結語-編輯', function () {
   const epilogueView = "form.about-epilogue .view-mode .github-markdown-body"
   const epilogueEditBlockTitle = "form.about-epilogue h2"
   const epilogueErrorTip = ".about-content-epilogue-errors-tip"
-
   // 開始測試動作
   it('進入標語管理', () => {
     cy.checkVisitPage(routePath, pageTitle)
@@ -299,7 +286,6 @@ describe('關於我們—結語-編輯', function () {
     cy.checkEmptyValAlert(option)
   })
 })
-
 
 Cypress.on('uncaught:exception', (err, runnable) => {
   if (err) {

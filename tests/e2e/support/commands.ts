@@ -25,6 +25,7 @@ declare global {
       saveTableEditAction: typeof saveTableEditAction
       checkFacilitiesOrgan: typeof checkFacilitiesOrgan
       checkFacilitiesObs: typeof checkFacilitiesObs
+      checkStargazing: typeof checkStargazing
     }
   }
 }
@@ -98,6 +99,9 @@ Cypress.Commands.add("checkFacilitiesOrgan", checkFacilitiesOrgan)
 
 // 確認前台的天文台是否新增成功
 Cypress.Commands.add("checkFacilitiesObs", checkFacilitiesObs)
+
+// 確認前台的觀星地點是否新增成功
+Cypress.Commands.add("checkStargazing", checkStargazing)
 
 
 export function login() {
@@ -313,5 +317,16 @@ export function checkFacilitiesObs(obsCatName, isDel) {
   } else {
     cy.get('.table-filter li').last().find('.table-name').should('contain', obsCatName).click()
     cy.get('.v-md-editor-preview').last().find('tbody tr td').first().should('contain', '天文台')
+  }
+}
+
+export function checkStargazing(stargazerName, isDel) {
+  cy.checkVisitPage('/stargazing', '觀星地點')
+  if (isDel === true) {
+    cy.get('.stargazing-menu li').first().should('not.contain', stargazerName)
+  } else {
+    cy.get('.stargazing-menu li').first().should('contain', stargazerName).click()
+    cy.get('.leaflet-popup-content').should('contain', stargazerName)
+    cy.get('.stargazing-info-card h2').should('contain', stargazerName)
   }
 }

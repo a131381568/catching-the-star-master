@@ -9,7 +9,6 @@ const addPostRoutePath = '/board/article/add'
 const addPostTitle = '新增文章'
 const scienceRoutePath = '/science'
 const scienceTitle = '天文科普'
-
 // 分類
 const singlecatPageTitle = '.category-layout-title-box h1'
 const catNameInput = '.category-name-input'
@@ -21,7 +20,6 @@ const firstNewCatVal = '分類AAAA'
 const firstNewCatIdVal = 'cataaaa'
 const scNewCatVal = '分類AAAAB'
 const thirdNewCatVal = '太陽系和恆星'
-
 // 文章
 const postTitleVal = '.post-title-input'
 const singlePostPageTitle = '.post-title-box h1'

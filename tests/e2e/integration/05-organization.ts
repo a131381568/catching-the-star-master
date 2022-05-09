@@ -3,19 +3,22 @@ const organRoutePath = '/board/organization'
 const organPageTitle = '天文機構管理'
 const addOrganRoutePath = '/board/organization/add'
 const addOrganPageTitle = '新增機構'
-
 // 機構
 const singleOragnTitleLocation = '.single-organ-title-box h1'
 const saveBtn = '.single-organ-title-box button'
+// 第一次輸入資料
 const firstOrganTitleVal = '中央研究院天文物理研究所'
 const firstOrganLinkVal = 'https://www.asiaa.sinica.edu.tw/'
 const firstOrganDesVal = '本所位於國立台灣大學校總區內之「天文數學館」，另於夏威夷設有辦事處。'
+// 第二次輸入資料
 const scOrganTitleVal = '高雄市天文教育館'
 const scOrganLinkVal = 'https://khh.travel/zh-tw/attractions/detail/34'
 const scOrganDesVal = '位於小港區港和國小內的天文教育館於2000年成立了。'
+// 輸入資料欄位
 const titleInputLocation = 'input[name="facilitiesTitleRef"]'
 const linkInputLocation = 'input[name="facilitiesLinkRef"]'
 const desInputLocation = 'textarea[name="facilitiesDescriptionRef"]'
+// 警語位置
 const titleErrorLocation = '.organ-title-error-tip'
 const linkErrorLocation = '.organ-link-error-tip'
 const desErrorLocation = '.organ-des-error-tip'
@@ -48,7 +51,6 @@ describe('新增機構。', function () {
   })
 })
 
-
 describe('編輯機構。', function () {
   it('進入後台機構列表，並進入指定機構編輯頁。', () => {
     cy.checkVisitPage(organRoutePath, organPageTitle)
@@ -68,7 +70,6 @@ describe('編輯機構。', function () {
     cy.checkFacilitiesOrgan(scOrganTitleVal, false)
   })
 })
-
 
 describe('刪除機構。', function () {
   it('進入後台機構列表，並對指定機構點擊刪除。', () => {

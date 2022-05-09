@@ -1,5 +1,4 @@
 // https://docs.cypress.io/api/introduction/api.html
-
 describe('首頁', function () {
   it('進入頁面。', () => {
     cy.visit('/')

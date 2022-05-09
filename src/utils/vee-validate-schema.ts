@@ -22,5 +22,25 @@ export default {
   image(value: string) {
     if (!value) return '請上傳圖片'
     return true
+  },
+  latreg(value: number) {
+    const rule = /^-?((0|1?[0-7]?[0-9]?)(([.][0-9]{1,15})?)|180(([.][0]{1,15})?))$/;
+    if (!value) {
+      return '請輸入緯度'
+    }
+    if (!rule.test(String(value))) {
+      return '請輸入緯度格式'
+    }
+    return true
+  },
+  longrg(value: number) {
+    const rule = /^(\-|\+)?(((\d|[1-9]\d|1[0-7]\d|0{1,3})\.\d{0,15})|(\d|[1-9]\d|1[0-7]\d|0{1,3})|180\.0{0,15}|180)$/;
+    if (!value) {
+      return '請輸入經度'
+    }
+    if (!rule.test(String(value))) {
+      return '請輸入經度格式'
+    }
+    return true
   }
 }

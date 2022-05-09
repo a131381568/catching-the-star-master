@@ -1,4 +1,3 @@
-// https://docs.cypress.io/api/introduction/api.html
 describe('登入操作', function () {
   it('進入後台登入頁。', () => {
     cy.visit('/login')

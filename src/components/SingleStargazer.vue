@@ -4,7 +4,8 @@
     <div
       class="laptop:w-4/5 laptop:left-0 left-7 mobile:left-11 w-full mobile:w-admin-m-content h-table:flex flex-wrap items-start justify-center content-start middle-pc:pt-36 h-table:pt-32 pb-52 middle-pc:px-20 h-table:px-6 px-8 mobile:pt-32 relative">
       <!-- 標題區塊 -->
-      <div class="w-9/12 mobile:w-11/12 flex justify-between mb-20 mobile:mb-9 mobile:block mobile:mx-auto flex-wrap">
+      <div
+        class="single-stargazer-title-box w-9/12 mobile:w-11/12 flex justify-between mb-20 mobile:mb-9 mobile:block mobile:mx-auto flex-wrap">
         <h1
           class="text-white relative -left-2 -top-2 mobile:text-5xl w-table:w-3/4 w-full mobile:w-full w-table:m-0 mb-5">
           {{ stargazerTitle }}</h1>
@@ -22,9 +23,10 @@
             <h4 class="text-main-color-light font-normal">地點名稱</h4>
             <Field name="placeNameRef" type="text" class="h-16 block m-auto bottom-line-input text-lg"
               :class="{ 'border-sp-color-dark border-opacity-100': errors.placeNameRef }" v-model="placeName" />
-            <span v-show="errors.placeNameRef" class="text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">{{
-                errors.placeNameRef
-            }}</span>
+            <span v-show="errors.placeNameRef"
+              class="stargazer-name-error-tip text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">{{
+                  errors.placeNameRef
+              }}</span>
           </div>
           <!-- 地址說明 -->
           <div class="input-group mb-14">
@@ -32,9 +34,10 @@
             <Field name="placeDescriptionRef" type="text" class="h-16 block m-auto bottom-line-input text-lg"
               :class="{ 'border-sp-color-dark border-opacity-100': errors.placeDescriptionRef }"
               v-model="placeDescription" />
-            <span v-show="errors.placeDescriptionRef" class="text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">{{
-                errors.placeDescriptionRef
-            }}</span>
+            <span v-show="errors.placeDescriptionRef"
+              class="stargazer-des-error-tip text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">{{
+                  errors.placeDescriptionRef
+              }}</span>
           </div>
           <!-- 地點介紹 -->
           <div class="input-group mb-14">
@@ -44,7 +47,7 @@
               :class="{ 'border-sp-color-dark border-opacity-100': errors.placeIntroductionRef }"
               v-model="placeIntroduction" />
             <span v-show="errors.placeIntroductionRef"
-              class="text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">{{
+              class="stargazer-intro-error-tip text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">{{
                   errors.placeIntroductionRef
               }}</span>
           </div>
@@ -62,13 +65,13 @@
                 :class="{ 'border-sp-color-dark border-opacity-100': errors.placeLonRef }" v-model="placeLon" />
             </div>
             <div class="alert-message flex space-x-3 justify-between">
-              <div :class="{ 'visible': errors.placeLatRef }"
-                class="text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">
+              <div :class="{ 'visible lat-is-error': errors.placeLatRef }"
+                class="lat-error-tip text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">
                 {{
                     errors.placeLatRef
                 }}</div>
-              <div :class="{ 'visible': errors.placeLonRef }"
-                class="text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">
+              <div :class="{ 'visible lon-is-error': errors.placeLonRef }"
+                class="lon-error-tip text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">
                 {{
                     errors.placeLonRef
                 }}</div>
@@ -83,7 +86,7 @@
           <div class="upload-bar flex justify-between mt-7 mb-1">
             <h4 class="text-main-color-light font-normal">地點圖片</h4>
             <label class="cursor-pointer admin-sbtn relative flex items-center justify-center">上傳圖片
-              <Field name="placeImgPathRef" v-model="placeImgPath" class="hidden" type="file"
+              <Field name="placeImgPathRef" v-model="placeImgPath" class="update-btn hidden" type="file"
                 @change="updateFileAct($event)" />
             </label>
           </div>
@@ -105,8 +108,8 @@
     <div
       class="admin-stargazer-modal bg-black bg-opacity-50 w-full h-full fixed left-0 top-0 flex items-center justify-center animate__animated"
       :class="[{ animate__fadeOut: !modal }, { animate__fadeIn: modal }, { 'z-9999': modalInner }, { '-z-50': !modalInner }]">
-      <button class="absolute right-4 top-4 button small text-white cursor-pointer group" title="close"
-        @click.prevent="closeModal">
+      <button class="pointer-events-none absolute right-4 top-4 button small text-white cursor-pointer group"
+        title="close">
         <span class="w-12 h-16 inline-block">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" enable-background="new 0 0 40 40">
             <line class="group-hover:stroke-sp-color-light transition-all duration-700" x1="15" y1="15" x2="25" y2="25"
@@ -174,8 +177,8 @@ const verifyRules = {
   placeNameRef: schema.required,
   placeDescriptionRef: schema.required,
   placeIntroductionRef: schema.required,
-  placeLatRef: schema.required,
-  placeLonRef: schema.required,
+  placeLatRef: schema.latreg,
+  placeLonRef: schema.longrg,
   placeImgPathRef: schema.image
 }
 
@@ -193,17 +196,21 @@ onClickOutside(mapModalRef,
   }
 )
 
-function closeModal() {
+async function closeModal() {
+  await destroyMap()
   // console.log("closeModal")
-  modal.value = false
-  setTimeout(() => {
-    modalInner.value = false
-  }, 1000);
+  modal.value = await false
+  // await setTimeout(() => {
+  modalInner.value = await false
+  // }, 300);
 }
 
 async function openModal() {
+  // 初始化地圖
   await mapInit()
-  // console.log("openModal")
+  // 如果有值就插點
+  await editModeSetLatLng()
+  // 淡入燈箱
   modal.value = await true
   await setTimeout(() => {
     modalInner.value = true
@@ -240,6 +247,10 @@ let map = ref({
   removeLayer(layerObj: object): void { }
 })
 
+let markersLayer = ref({
+  clearLayers(): void { }
+})
+
 const customIcon = L.icon({
   iconUrl: '/img/mark-op.png',
   iconSize: [50, 50]
@@ -263,13 +274,15 @@ function mapInit() {
   map.value.zoomControl.setPosition('topright');
 
   // 建立座標圖層
-  let markersLayer = L.featureGroup().addTo(map.value);
+  markersLayer.value = L.featureGroup().addTo(map.value);
 
   // 設置 popup 
   popupLayer.value = L.popup({ offset: [0, -13], className: 'stargazing-map-pop' });
   map.value.on('click', function (event: layerClickEvent) {
-    onMapClick(event, markersLayer);
+    onMapClick(event, markersLayer.value);
   })
+
+
 }
 
 function onMapClick(event: layerClickEvent, layer: any) {
@@ -348,6 +361,46 @@ function setActMarkData(obj: markType) {
   actMarkDescription.value = obj.stargazing_description
   actMarkAddress.value = obj.stargazing_address
   actMarkLink.value = obj.stargazing_link
+}
+
+function editModeSetLatLng() {
+  let latData = Number(placeLat.value)
+  let lonData = Number(placeLon.value)
+  let lanErrDom = document.querySelector('.lat-error-tip')
+  let lonErrDom = document.querySelector('.lon-error-tip')
+  let latIsErr = false
+  let lonIsErr = false
+  if (lanErrDom && lonErrDom) {
+    if (lanErrDom.classList.contains('lat-is-error')) {
+      latIsErr = true
+    }
+    if (lonErrDom.classList.contains('lon-is-error')) {
+      lonIsErr = true
+    }
+  }
+  if (!latIsErr && !lonIsErr && latData > 0 && lonData > 0) {
+    // 建立座標圖層
+    actMarkLatitude.value = latData
+    actMarkLongitude.value = lonData
+    let placeInfo = {
+      "stargazing_title": "",
+      "stargazing_latitude": actMarkLatitude.value,
+      "stargazing_longitude": actMarkLongitude.value,
+      "stargazing_image": "",
+      "stargazing_description": "",
+      "stargazing_address": "",
+      "stargazing_link": "",
+      "stargazing_lid": ""
+    }
+    // 地圖插點
+    setMark(placeInfo, markersLayer.value)
+    // 綁定 popup 內容
+    popupLayer.value.setLatLng([actMarkLatitude.value, actMarkLongitude.value])
+    popupLayer.value.setContent(`<div class="admin-stargazer-pop">緯度：${actMarkLatitude.value}<br/>經度：${actMarkLongitude.value}<br /><button id="pop-check-btn">套用座標</button></div>`)
+    popupLayer.value.openOn(map.value);
+    // 針對點擊座標定位縮放
+    map.value.setView([actMarkLatitude.value, actMarkLongitude.value], 10)
+  }
 }
 
 function destroyMap() {
@@ -439,8 +492,8 @@ const actionAddPlace = useDebounceFn(async () => {
       console.log("可以新增")
       const res = await setNewStargazer(
         placeName.value,
-        placeLat.value || 0,
-        placeLon.value || 0,
+        Number(placeLat.value) || 0,
+        Number(placeLon.value) || 0,
         placeImgPath.value,
         placeIntroduction.value,
         placeDescription.value,
@@ -461,8 +514,8 @@ const actionAddPlace = useDebounceFn(async () => {
       const res = await editStargazer(
         path,
         placeName.value,
-        placeLat.value || 0,
-        placeLon.value || 0,
+        Number(placeLat.value) || 0,
+        Number(placeLon.value) || 0,
         placeImgPath.value,
         placeIntroduction.value,
         placeDescription.value,
@@ -494,15 +547,15 @@ async function loadEditStargazer() {
   const lid = String(route.params.lid)
   if (routeName === "EditSingleStargazer" && lid) {
     const res = await getSingleStargazer(lid, routeName)
-    placeName.value = String(res.data.getSingleStargazer.stargazing_title)
-    placeDescription.value = String(res.data.getSingleStargazer.stargazing_address)
-    placeIntroduction.value = String(res.data.getSingleStargazer.stargazing_description)
-    placeLat.value = Number(res.data.getSingleStargazer.stargazing_latitude)
-    placeLon.value = Number(res.data.getSingleStargazer.stargazing_longitude)
-    let path = String(res.data.getSingleStargazer.stargazing_image)
-    let split = path.split('/')
-    placeImg.value = split[split.length - 1]
-    placeImgPath.value = path
+    placeName.value = await String(res.data.getSingleStargazer.stargazing_title)
+    placeDescription.value = await String(res.data.getSingleStargazer.stargazing_address)
+    placeIntroduction.value = await String(res.data.getSingleStargazer.stargazing_description)
+    placeLat.value = await Number(res.data.getSingleStargazer.stargazing_latitude)
+    placeLon.value = await Number(res.data.getSingleStargazer.stargazing_longitude)
+    let path = await String(res.data.getSingleStargazer.stargazing_image)
+    let split = await path.split('/')
+    placeImg.value = await split[split.length - 1]
+    placeImgPath.value = await path
   }
 }
 
@@ -519,6 +572,6 @@ onMounted(async () => {
 });
 
 onBeforeUnmount(() => {
-  destroyMap()
+  // destroyMap()
 });
 </script>

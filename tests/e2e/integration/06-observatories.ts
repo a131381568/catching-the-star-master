@@ -3,19 +3,21 @@ const obsRoutePath = '/board/observatories'
 const obsPageTitle = '天文台管理'
 const addobsRoutePath = '/board/observatories/add'
 const addobsPageTitle = '新增天文台'
-
 // 天文台
 const singleObsTitleLocation = '.single-obs-title-box h1'
 const obsSaveBtn = '.single-obs-title-box button'
-
+// 第一次輸入資料
 const firstObsCatName = '商業行銷'
 const firstObsCatId = 'business'
 const firstObsContent = '|名稱|口徑|廠牌|赤道儀|圓頂直徑|\n|-|-|-|-|-|\n|ooo天文台|36.0 cm|xxx|oo赤道儀|3.0 m|'
+// 第二次輸入資料
 const scObsCatName = '已拆毀'
 const scObsContent = '|名稱|口徑|廠牌|赤道儀|圓頂直徑|\n|-|-|-|-|-|\n|xxx天文台|36.0 cm|xxx|oo赤道儀|3.0 m|'
+// 輸入資料欄位
 const obsCatNameInputLocation = 'input[name="observatoriesTitleRef"]'
 const obsCatIdInputLocation = 'input[name="observatoriesCatIdRef"]'
 const obsContentInputLocation = '.v-md-textarea-editor textarea'
+// 警語位置
 const obsCatNameErrorLocation = '.obs-cat-name-error-tip'
 const obsCatIdErrorLocation = '.obs-cat-id-error-tip'
 const obsContentErrorLocation = '.obs-content-error-tip'
