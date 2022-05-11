@@ -167,7 +167,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
       console.log(`[Network error]: ${networkError}`);
       // storage.setItem("apollo-error", JSON.stringify(networkError))
       // 彈回 404
-      window.location.pathname = '/notfound';
+      // window.location.pathname = '/notfound';
     }
   }
 });

@@ -430,7 +430,7 @@
     </div>
   </div>
   <Loading v-show="getLoading === true"></Loading>
-  <!-- <Enter></Enter> -->
+  <Enter v-show="getFirstEnter"></Enter>
 </template>
 <script setup lang="ts">
 import { useScroll } from '@vueuse/core'
@@ -447,6 +447,7 @@ const arrivedStateVal = computed(() => {
   return arrivedState.top
 })
 const getLoading = computed(() => store.get_loading);
+const getFirstEnter = computed(() => store.get_firstEnter);
 
 // 設定標題
 useHead({
