@@ -7,10 +7,10 @@
 可藉由登入管理後台，進行前台資料的新增、編輯和修改。
 
 - 前台形象網站 - [http://star.puraliena.com](http://star.puraliena.com)
-![home](https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/c414c7143701077.627ef57fe7a72.jpg)
+![home](https://raw.githubusercontent.com/a131381568/catching-the-star-master/main/doc/images/06-fontend-home.jpg)
 
 - 後台管理網站 - [http://star.puraliena.com/login](http://star.puraliena.com/login)
-![login](https://mir-s3-cdn-cf.behance.net/project_modules/fs/0253ed143703311.627f0c895ebaf.jpg)
+![login](https://raw.githubusercontent.com/a131381568/catching-the-star-master/main/doc/images/07-admin-home.jpg)
 
 > 以下是實際製作後，撰寫的記錄、文件和資料。
 
@@ -25,8 +25,12 @@
 
 
 ## 四、操作流程圖（UI Flow）
-- 登入操作圖 - [Whimsical Board](https://whimsical.com/PmgdGzfKqUyTTC2NsZnmny)
-- 編輯標語管理操作圖 - [Whimsical Board](https://whimsical.com/MPM7VXfyB9iLpv2ZeeYDYg)
+- 登入邏輯圖
+![login](https://raw.githubusercontent.com/a131381568/catching-the-star-master/main/doc/images/01-login-logic.gif)
+- 登入操作圖
+![login](https://raw.githubusercontent.com/a131381568/catching-the-star-master/main/doc/images/02-login-flow.gif)
+- 編輯標語管理操作圖
+![login](https://raw.githubusercontent.com/a131381568/catching-the-star-master/main/doc/images/05-about-edit-flow.gif)
 - 觀星地點
   + 新增觀星地點操作圖 - [Whimsical Board](https://whimsical.com/MeP6apkTk96bNkk7npKp8g)
   + 編輯觀星地點操作圖 - [Whimsical Board](https://whimsical.com/BtE268F5MHSR2yqgsUhRHG)
@@ -82,16 +86,16 @@
 - typescript - 能夠讓 JS 也有強型別的概念。
 
 ## 七、前端路由與組件架構（Vue Router）
-![前端路由與組件架構圖](https://raw.githubusercontent.com/a131381568/catching-the-star-master/doc/images/03-vue-route-and-component.gif)
+![前端路由與組件架構圖](https://raw.githubusercontent.com/a131381568/catching-the-star-master/main/doc/images/03-vue-route-and-component.gif)
 
 ## 八、待分類
 部分會移到後端倉庫介紹，和 apollo server 一起。
 
 ### 登入邏輯圖
-![登入邏輯圖](https://raw.githubusercontent.com/a131381568/catching-the-star-master/doc/images/01-login-logic.gif)
+![登入邏輯圖](https://raw.githubusercontent.com/a131381568/catching-the-star-master/main/doc/images/01-login-logic.gif)
 
 ### 資料表
-![資料表介紹](https://raw.githubusercontent.com/a131381568/catching-the-star-master/doc/images/04-data-sheet.gif)
+![資料表介紹](https://raw.githubusercontent.com/a131381568/catching-the-star-master/main/doc/images/04-data-sheet.gif)
 
 ### 測試介紹
 - 測試介紹 ⇒ 測試流程圖 ⇒ 測試影片 - [video](https://youtube.com/playlist?list=PLHcJgg1S4pNcOKaWk1TY1Iuu07o9oUpFc)
