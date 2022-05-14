@@ -103,13 +103,14 @@ Cypress.Commands.add("checkFacilitiesObs", checkFacilitiesObs)
 // 確認前台的觀星地點是否新增成功
 Cypress.Commands.add("checkStargazing", checkStargazing)
 
-
 export function login() {
-  cy.visit('/login')
-  cy.get('input[name="email"]').type("kevin@test.com");
-  cy.get('input[name="password"]').type("123456");
-  cy.get('button#submit-login').click()
-  cy.url().should('include', '/board')
+  cy.fixture('test-user.json').then((data) => {
+    cy.visit('/login')
+    cy.get('input[name="email"]').type(data.email);
+    cy.get('input[name="password"]').type(data.password);
+    cy.get('button#submit-login').click()
+    cy.url().should('include', '/board')
+  })
   // cy.contains('li.items-end', 'Header')
   // })
 }
@@ -145,30 +146,33 @@ export function loginDirect() {
               errorMsg
           }
       }`;
-  cy.request({
-    url: 'http://localhost:4000/graphql/',  // graphql endpoint
-    method: 'POST',
-    body: {
-      query: mutation, variables: {
-        "email": "kevin@test.com",
-        "password": "123456"
+
+  cy.fixture('test-user.json').then((data) => {
+    cy.request({
+      url: data.graphqlUrl,  // graphql endpoint
+      method: 'POST',
+      body: {
+        query: mutation, variables: {
+          "email": data.email,
+          "password": data.password
+        }
+      },
+      failOnStatusCode: false,
+      headers: {
+        authorization: ''
       }
-    },
-    failOnStatusCode: false,
-    headers: {
-      authorization: ''
-    }
-  }).then((res) => {
-    const personalInfo = res.body.data.login
-    localStorage.setItem("token", personalInfo.token)
-    localStorage.setItem("expired", personalInfo.exp)
-    localStorage.setItem("refresh-token", personalInfo.refreshToken)
-    localStorage.setItem("refresh-expired", personalInfo.refreshExp)
-    expect(localStorage.getItem('token')).to.not.be.null
-    expect(localStorage.getItem('expired')).to.not.be.null
-    expect(localStorage.getItem('refresh-token')).to.not.be.null
-    expect(localStorage.getItem('refresh-expired')).to.not.be.null
-  });
+    }).then((res) => {
+      const personalInfo = res.body.data.login
+      localStorage.setItem("token", personalInfo.token)
+      localStorage.setItem("expired", personalInfo.exp)
+      localStorage.setItem("refresh-token", personalInfo.refreshToken)
+      localStorage.setItem("refresh-expired", personalInfo.refreshExp)
+      expect(localStorage.getItem('token')).to.not.be.null
+      expect(localStorage.getItem('expired')).to.not.be.null
+      expect(localStorage.getItem('refresh-token')).to.not.be.null
+      expect(localStorage.getItem('refresh-expired')).to.not.be.null
+    });
+  })
 }
 
 export function editMdContent(option) {
