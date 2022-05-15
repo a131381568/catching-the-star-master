@@ -63,7 +63,7 @@
 
 ## 六、使用技術及套件（NPM）
 - Vue 相關：
-  + vue - SPA 應用框架。
+  + vue - SPA 應用框架，版本為 3.2。
   + pinia - Vuex 的簡化版，管理共用的資料。
   + vue-router - Vue 的路由系統。
   + vue-masonry-wall - 響應式計算砌磚式排列的套件。
@@ -104,16 +104,16 @@ npm run dev
 ## 十、本機測試（Cypress E2E Test）
 依據前面[測試流程圖](https://github.com/a131381568/catching-the-star-master#%E5%9B%9B%E6%93%8D%E4%BD%9C%E6%B5%81%E7%A8%8B%E5%9C%96ui-flow)的邏輯進行模擬使用者的測試撰寫。
 統一放置在 tests/e2e/integration，共用函式則是放在 tests/e2e/support/commands。
-確定[本機開發環境](https://github.com/a131381568/catching-the-star-master#%E4%B9%9D%E6%9C%AC%E6%A9%9F%E9%96%8B%E7%99%BClocal-development)已正常運作，可選擇以下方法其一進行測試。
+確定[本機開發環境](https://github.com/a131381568/catching-the-star-master#%E4%B9%9D%E6%9C%AC%E6%A9%9F%E9%96%8B%E7%99%BClocal-development)已正常運作，可選擇以下介面其一進行測試。
 
-1. GUI 介面測試
+1. GUI
 ```shell
-# 可開啟 cypress 介面
+# 可開啟 Cypress 介面
 npm run test-e2e
 # 點選其中一個項目，即可運行測試項目
 ```
 
-2. CLI 介面測試
+2. CLI
 ```shell
 # 會在 CLI 介面把所有測試跑一遍 
 npm run test:ci-e2e
