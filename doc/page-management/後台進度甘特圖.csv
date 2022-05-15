@@ -1,0 +1,90 @@
+﻿工作細項清單,時間區間,隸屬前台單元,隸屬後台單元,類型
+單一文章新增-設計圖,2022/04/12 → 2022/04/13,,https://www.notion.so/90cdbfd9a31d4ff6ae51f8dfe5e41c54,設計圖
+單一文章編輯-設計圖,2022/04/12 → 2022/04/13,,https://www.notion.so/da1395dd40da4a51b43c84d4cffd872e,設計圖
+文章列表-設計圖,2022/04/12 → 2022/04/13,,https://www.notion.so/ba80837842d44efdb578341047e5ccd5,設計圖
+單一分類新增-設計圖,2022/04/12 → 2022/04/13,,https://www.notion.so/f99736a0b0b142e697e60996743b1f9d,設計圖
+單一分類編輯-設計圖,2022/04/12 → 2022/04/13,,https://www.notion.so/ca0452fbd20a49f787305b585a685dc2,設計圖
+分類管理-設計圖,2022/04/12 → 2022/04/13,,https://www.notion.so/20f79e0ee280435cba7c3ddb71c8fe25,設計圖
+後台首頁-設計圖,2022/04/12 → 2022/04/14,,https://www.notion.so/521aed8023b04560a9f1316ab0ca1fa2,設計圖
+登入-設計圖,2022/04/12,,https://www.notion.so/6fef7370deac49d5a80c300c1849f6e8,設計圖
+標語管理-設計圖,2022/04/13,,https://www.notion.so/92cdb34f12844f13b32b459c079f4c07,設計圖
+單一觀星編輯-設計圖,2022/04/14,,https://www.notion.so/83b2cc3c2b7946cca8e2203e612511b8,設計圖
+單一觀星新增-設計圖,2022/04/14,,https://www.notion.so/617119d405cb4f8e97393ebd7bc93547,設計圖
+觀星管理-設計圖,2022/04/14,,https://www.notion.so/2988bd127b484494a04638ef2012dfa1,設計圖
+單一天文台新增-設計圖,2022/04/14,,https://www.notion.so/ea51ef978f614c13bf6678a11748bf75,設計圖
+單一天文台編輯-設計圖,2022/04/14,,https://www.notion.so/260b497d4796407089315d8ac9ea2cb3,設計圖
+天文台管理-設計圖,2022/04/14,,https://www.notion.so/459c9ccb0b074af792be24caee9803ff,設計圖
+單一機構編輯-設計圖,2022/04/14,,https://www.notion.so/2ce5011cf7e043dd80542f06d09e2c75,設計圖
+單一機構新增-設計圖,2022/04/14,,https://www.notion.so/310659c10f9e465a84937eeaf5e4549d,設計圖
+機構管理-設計圖,2022/04/14,,https://www.notion.so/45f778efe8b84bf9aeaa59cddf16a661,設計圖
+登入-操作流程圖,2022/04/15 → 2022/04/18,,https://www.notion.so/6fef7370deac49d5a80c300c1849f6e8,流程圖˙
+登入-切板,2022/04/17 → 2022/04/21,,https://www.notion.so/6fef7370deac49d5a80c300c1849f6e8,切板
+觀星管理-API串接,2022/04/18 → 2022/04/20,,https://www.notion.so/2988bd127b484494a04638ef2012dfa1,API串接
+後台選單切板,2022/04/18 → 2022/04/19,,,切板
+登入-API串接,2022/04/18 → 2022/04/21,,https://www.notion.so/6fef7370deac49d5a80c300c1849f6e8,API串接
+單一觀星新增-切板,2022/04/18 → 2022/04/24,,https://www.notion.so/617119d405cb4f8e97393ebd7bc93547,切板
+觀星管理-切板,2022/04/18 → 2022/04/20,,https://www.notion.so/2988bd127b484494a04638ef2012dfa1,切板
+新增觀星地點-操作流程圖,2022/04/19 → 2022/04/24,https://www.notion.so/1928ffc7782444d1a79145a2b66a318d,"https://www.notion.so/2988bd127b484494a04638ef2012dfa1, https://www.notion.so/617119d405cb4f8e97393ebd7bc93547",流程圖˙
+單一觀星新增-API串接,2022/04/20 → 2022/04/24,,https://www.notion.so/617119d405cb4f8e97393ebd7bc93547,API串接
+AWS S3 串接,2022/04/22 → 2022/04/23,,"https://www.notion.so/2ce5011cf7e043dd80542f06d09e2c75, https://www.notion.so/310659c10f9e465a84937eeaf5e4549d, https://www.notion.so/617119d405cb4f8e97393ebd7bc93547, https://www.notion.so/83b2cc3c2b7946cca8e2203e612511b8, https://www.notion.so/90cdbfd9a31d4ff6ae51f8dfe5e41c54, https://www.notion.so/da1395dd40da4a51b43c84d4cffd872e",API串接
+單一觀星編輯-API串接,2022/04/23 → 2022/04/24,,https://www.notion.so/83b2cc3c2b7946cca8e2203e612511b8,API串接
+編輯觀星地點-操作流程圖,2022/04/23 → 2022/04/24,"https://www.notion.so/1928ffc7782444d1a79145a2b66a318d, https://www.notion.so/20435a05ed5c42c3969eba0c33616e28","https://www.notion.so/83b2cc3c2b7946cca8e2203e612511b8, https://www.notion.so/2988bd127b484494a04638ef2012dfa1",流程圖˙
+標語管理-API串接,2022/04/25,,https://www.notion.so/92cdb34f12844f13b32b459c079f4c07,API串接
+後台首頁-API串接,2022/04/25 → 2022/04/26,,https://www.notion.so/521aed8023b04560a9f1316ab0ca1fa2,API串接
+標語管理-切板,2022/04/25,,https://www.notion.so/92cdb34f12844f13b32b459c079f4c07,切板
+後台首頁-切板,2022/04/25 → 2022/04/26,,https://www.notion.so/521aed8023b04560a9f1316ab0ca1fa2,切板
+更改標語-操作流程圖,2022/04/25,"https://www.notion.so/a22e407c027949f6971e60595dfae3aa, https://www.notion.so/8ce1260d672b40c88e61ef9fab5d0b61",https://www.notion.so/92cdb34f12844f13b32b459c079f4c07,流程圖˙
+單一分類新增-API串接,2022/04/26,,https://www.notion.so/f99736a0b0b142e697e60996743b1f9d,API串接
+分類管理-API串接,2022/04/26,,https://www.notion.so/20f79e0ee280435cba7c3ddb71c8fe25,API串接
+單一分類編輯-API串接,2022/04/26,,https://www.notion.so/ca0452fbd20a49f787305b585a685dc2,API串接
+單一分類新增-切板,2022/04/26,,https://www.notion.so/f99736a0b0b142e697e60996743b1f9d,切板
+分類管理-切板,2022/04/26,,https://www.notion.so/20f79e0ee280435cba7c3ddb71c8fe25,切板
+單一分類編輯-切板,2022/04/26,,https://www.notion.so/ca0452fbd20a49f787305b585a685dc2,切板
+新增分類-操作流程圖,2022/04/26,"https://www.notion.so/2d7ed1f1ab27488db96c0a4cfb412179, https://www.notion.so/3b32c9f93a6c43bd9d8c1abc2b5fc2ad, https://www.notion.so/ed745ad85b5b4dbabb3280a45f9aac1f, https://www.notion.so/d0d82122111142329994e9f9af66e800, https://www.notion.so/6a36479c548e4974b6558d0173c34b91","https://www.notion.so/20f79e0ee280435cba7c3ddb71c8fe25, https://www.notion.so/f99736a0b0b142e697e60996743b1f9d",流程圖˙
+編輯分類-操作流程圖,2022/04/26,"https://www.notion.so/2d7ed1f1ab27488db96c0a4cfb412179, https://www.notion.so/3b32c9f93a6c43bd9d8c1abc2b5fc2ad, https://www.notion.so/ed745ad85b5b4dbabb3280a45f9aac1f, https://www.notion.so/d0d82122111142329994e9f9af66e800, https://www.notion.so/6a36479c548e4974b6558d0173c34b91","https://www.notion.so/20f79e0ee280435cba7c3ddb71c8fe25, https://www.notion.so/ca0452fbd20a49f787305b585a685dc2",流程圖˙
+單一文章新增-API串接,2022/04/27 → 2022/04/28,,https://www.notion.so/90cdbfd9a31d4ff6ae51f8dfe5e41c54,API串接
+文章列表-API串接,2022/04/27 → 2022/04/28,,https://www.notion.so/ba80837842d44efdb578341047e5ccd5,API串接
+單一文章編輯-API串接,2022/04/27 → 2022/04/28,,https://www.notion.so/da1395dd40da4a51b43c84d4cffd872e,API串接
+單一文章編輯-切板,2022/04/27 → 2022/04/28,,https://www.notion.so/da1395dd40da4a51b43c84d4cffd872e,切板
+單一文章新增-切板,2022/04/27 → 2022/04/28,,https://www.notion.so/90cdbfd9a31d4ff6ae51f8dfe5e41c54,切板
+文章列表-切板,2022/04/27 → 2022/04/28,,https://www.notion.so/ba80837842d44efdb578341047e5ccd5,切板
+編輯文章-操作流程圖,2022/04/27,"https://www.notion.so/2d7ed1f1ab27488db96c0a4cfb412179, https://www.notion.so/3b32c9f93a6c43bd9d8c1abc2b5fc2ad","https://www.notion.so/da1395dd40da4a51b43c84d4cffd872e, https://www.notion.so/ba80837842d44efdb578341047e5ccd5",流程圖˙
+新增文章-操作流程圖,2022/04/27,"https://www.notion.so/3b32c9f93a6c43bd9d8c1abc2b5fc2ad, https://www.notion.so/2d7ed1f1ab27488db96c0a4cfb412179","https://www.notion.so/90cdbfd9a31d4ff6ae51f8dfe5e41c54, https://www.notion.so/ba80837842d44efdb578341047e5ccd5",流程圖˙
+單一機構新增-API串接,2022/04/28 → 2022/04/29,,https://www.notion.so/310659c10f9e465a84937eeaf5e4549d,API串接
+機構管理-API串接,2022/04/28 → 2022/04/29,,https://www.notion.so/45f778efe8b84bf9aeaa59cddf16a661,API串接
+單一機構編輯-API串接,2022/04/28 → 2022/04/29,,https://www.notion.so/2ce5011cf7e043dd80542f06d09e2c75,API串接
+單一機構編輯-切板,2022/04/28 → 2022/04/29,,https://www.notion.so/2ce5011cf7e043dd80542f06d09e2c75,切板
+單一機構新增-切板,2022/04/28 → 2022/04/29,,https://www.notion.so/310659c10f9e465a84937eeaf5e4549d,切板
+機構管理-切板,2022/04/28 → 2022/04/29,,https://www.notion.so/45f778efe8b84bf9aeaa59cddf16a661,切板
+新增機構-操作流程圖,2022/04/28,https://www.notion.so/b661b9fa1c27405faec5db252d789526,"https://www.notion.so/310659c10f9e465a84937eeaf5e4549d, https://www.notion.so/45f778efe8b84bf9aeaa59cddf16a661",流程圖˙
+編輯機構-操作流程圖,2022/04/28,https://www.notion.so/b661b9fa1c27405faec5db252d789526,"https://www.notion.so/2ce5011cf7e043dd80542f06d09e2c75, https://www.notion.so/45f778efe8b84bf9aeaa59cddf16a661",流程圖˙
+登入-撰寫測試,2022/04/29 → 2022/05/01,,https://www.notion.so/6fef7370deac49d5a80c300c1849f6e8,測試
+單一天文台新增-API串接,2022/04/29 → 2022/04/30,,https://www.notion.so/ea51ef978f614c13bf6678a11748bf75,API串接
+天文台管理-API串接,2022/04/29 → 2022/04/30,,https://www.notion.so/459c9ccb0b074af792be24caee9803ff,API串接
+單一天文台編輯-API串接,2022/04/29 → 2022/04/30,,https://www.notion.so/260b497d4796407089315d8ac9ea2cb3,API串接
+單一天文台編輯-切板,2022/04/29 → 2022/04/30,,https://www.notion.so/260b497d4796407089315d8ac9ea2cb3,切板
+單一天文台新增-切板,2022/04/29 → 2022/04/30,,https://www.notion.so/ea51ef978f614c13bf6678a11748bf75,切板
+單一觀星編輯-切板,2022/04/29 → 2022/05/03,,https://www.notion.so/83b2cc3c2b7946cca8e2203e612511b8,切板
+天文台管理-切板,2022/04/29 → 2022/04/30,,https://www.notion.so/459c9ccb0b074af792be24caee9803ff,切板
+新增天文台-操作流程圖,2022/04/29,https://www.notion.so/b661b9fa1c27405faec5db252d789526,"https://www.notion.so/ea51ef978f614c13bf6678a11748bf75, https://www.notion.so/459c9ccb0b074af792be24caee9803ff",流程圖˙
+編輯天文台-操作流程圖,2022/04/29,https://www.notion.so/b661b9fa1c27405faec5db252d789526,"https://www.notion.so/260b497d4796407089315d8ac9ea2cb3, https://www.notion.so/459c9ccb0b074af792be24caee9803ff",流程圖˙
+封裝成 Docker,2022/05/01 → 2022/05/04,,,
+前台頁面-撰寫測試,2022/05/04 → 2022/05/06,"https://www.notion.so/a22e407c027949f6971e60595dfae3aa, https://www.notion.so/8ce1260d672b40c88e61ef9fab5d0b61, https://www.notion.so/d0d82122111142329994e9f9af66e800, https://www.notion.so/2d7ed1f1ab27488db96c0a4cfb412179, https://www.notion.so/6a36479c548e4974b6558d0173c34b91, https://www.notion.so/3b32c9f93a6c43bd9d8c1abc2b5fc2ad, https://www.notion.so/b661b9fa1c27405faec5db252d789526, https://www.notion.so/1928ffc7782444d1a79145a2b66a318d, https://www.notion.so/20435a05ed5c42c3969eba0c33616e28, https://www.notion.so/ed745ad85b5b4dbabb3280a45f9aac1f, https://www.notion.so/517ab5e3c00d43c28fd55458ffa55462, https://www.notion.so/568e5a591f664bf09f4cc98439a66e71, https://www.notion.so/404-f406152fb1544df08d98999eeccb4210",,測試
+編輯標語管理-撰寫測試,2022/05/06 → 2022/05/07,https://www.notion.so/8ce1260d672b40c88e61ef9fab5d0b61,https://www.notion.so/92cdb34f12844f13b32b459c079f4c07,測試
+新增文章-撰寫測試,2022/05/07 → 2022/05/08,"https://www.notion.so/d0d82122111142329994e9f9af66e800, https://www.notion.so/2d7ed1f1ab27488db96c0a4cfb412179, https://www.notion.so/ed745ad85b5b4dbabb3280a45f9aac1f, https://www.notion.so/517ab5e3c00d43c28fd55458ffa55462","https://www.notion.so/ba80837842d44efdb578341047e5ccd5, https://www.notion.so/90cdbfd9a31d4ff6ae51f8dfe5e41c54",測試
+刪除文章-撰寫測試,2022/05/07 → 2022/05/08,"https://www.notion.so/d0d82122111142329994e9f9af66e800, https://www.notion.so/2d7ed1f1ab27488db96c0a4cfb412179, https://www.notion.so/ed745ad85b5b4dbabb3280a45f9aac1f, https://www.notion.so/517ab5e3c00d43c28fd55458ffa55462","https://www.notion.so/ba80837842d44efdb578341047e5ccd5, https://www.notion.so/da1395dd40da4a51b43c84d4cffd872e",測試
+編輯文章-撰寫測試,2022/05/07 → 2022/05/08,"https://www.notion.so/d0d82122111142329994e9f9af66e800, https://www.notion.so/2d7ed1f1ab27488db96c0a4cfb412179, https://www.notion.so/ed745ad85b5b4dbabb3280a45f9aac1f, https://www.notion.so/517ab5e3c00d43c28fd55458ffa55462","https://www.notion.so/ba80837842d44efdb578341047e5ccd5, https://www.notion.so/da1395dd40da4a51b43c84d4cffd872e",測試
+新增文章分類-撰寫測試,2022/05/07 → 2022/05/08,"https://www.notion.so/d0d82122111142329994e9f9af66e800, https://www.notion.so/2d7ed1f1ab27488db96c0a4cfb412179, https://www.notion.so/ed745ad85b5b4dbabb3280a45f9aac1f","https://www.notion.so/20f79e0ee280435cba7c3ddb71c8fe25, https://www.notion.so/f99736a0b0b142e697e60996743b1f9d",測試
+刪除文章分類-撰寫測試,2022/05/07 → 2022/05/08,"https://www.notion.so/d0d82122111142329994e9f9af66e800, https://www.notion.so/2d7ed1f1ab27488db96c0a4cfb412179, https://www.notion.so/ed745ad85b5b4dbabb3280a45f9aac1f","https://www.notion.so/20f79e0ee280435cba7c3ddb71c8fe25, https://www.notion.so/ca0452fbd20a49f787305b585a685dc2",測試
+編輯文章分類-撰寫測試,2022/05/07 → 2022/05/08,"https://www.notion.so/d0d82122111142329994e9f9af66e800, https://www.notion.so/2d7ed1f1ab27488db96c0a4cfb412179, https://www.notion.so/ed745ad85b5b4dbabb3280a45f9aac1f","https://www.notion.so/20f79e0ee280435cba7c3ddb71c8fe25, https://www.notion.so/ca0452fbd20a49f787305b585a685dc2",測試
+刪除天文台-撰寫測試,2022/05/08,https://www.notion.so/b661b9fa1c27405faec5db252d789526,"https://www.notion.so/459c9ccb0b074af792be24caee9803ff, https://www.notion.so/260b497d4796407089315d8ac9ea2cb3",測試
+編輯天文台-撰寫測試,2022/05/08,https://www.notion.so/b661b9fa1c27405faec5db252d789526,"https://www.notion.so/459c9ccb0b074af792be24caee9803ff, https://www.notion.so/260b497d4796407089315d8ac9ea2cb3",測試
+新增天文台-撰寫測試,2022/05/08,https://www.notion.so/d0d82122111142329994e9f9af66e800,"https://www.notion.so/459c9ccb0b074af792be24caee9803ff, https://www.notion.so/ea51ef978f614c13bf6678a11748bf75",測試
+刪除天文機構-撰寫測試,2022/05/08,https://www.notion.so/b661b9fa1c27405faec5db252d789526,"https://www.notion.so/45f778efe8b84bf9aeaa59cddf16a661, https://www.notion.so/2ce5011cf7e043dd80542f06d09e2c75",測試
+新增天文機構-撰寫測試,2022/05/08,https://www.notion.so/b661b9fa1c27405faec5db252d789526,"https://www.notion.so/45f778efe8b84bf9aeaa59cddf16a661, https://www.notion.so/310659c10f9e465a84937eeaf5e4549d",測試
+編輯天文機構-撰寫測試,2022/05/08,https://www.notion.so/b661b9fa1c27405faec5db252d789526,"https://www.notion.so/45f778efe8b84bf9aeaa59cddf16a661, https://www.notion.so/2ce5011cf7e043dd80542f06d09e2c75",測試
+刪除觀星地點-撰寫測試,2022/05/08 → 2022/05/09,https://www.notion.so/1928ffc7782444d1a79145a2b66a318d,"https://www.notion.so/83b2cc3c2b7946cca8e2203e612511b8, https://www.notion.so/2988bd127b484494a04638ef2012dfa1",測試
+新增觀星地點-撰寫測試,2022/05/08 → 2022/05/09,https://www.notion.so/20435a05ed5c42c3969eba0c33616e28,https://www.notion.so/617119d405cb4f8e97393ebd7bc93547,測試
+編輯觀星地點-撰寫測試,2022/05/08 → 2022/05/09,https://www.notion.so/20435a05ed5c42c3969eba0c33616e28,https://www.notion.so/83b2cc3c2b7946cca8e2203e612511b8,測試
+部署至 AWS EC2,2022/05/10 → 2022/05/11,,,
+Vue Router 與組件關係圖,2022/05/15,,,

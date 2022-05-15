@@ -90,7 +90,7 @@
 - [登入邏輯圖](https://github.com/a131381568/ctsm-sql#%E4%B8%89%E7%99%BB%E5%85%A5%E9%82%8F%E8%BC%AF%E5%9C%96login-logic)
 - [資料表關係](https://github.com/a131381568/ctsm-sql#%E5%9B%9B%E8%B3%87%E6%96%99%E8%A1%A8%E9%97%9C%E4%BF%82data-sheet)
 - [API 介紹](https://github.com/a131381568/ctsm-sql#%E4%BA%94%E6%9C%AC%E6%A9%9F%E9%96%8B%E7%99%BC-apiapollo-server-api)
-- 部署
+- [部署相關](https://github.com/a131381568/ctsm-sql#%E5%85%ADdocker-%E9%83%A8%E7%BD%B2deploy)
 
 ## 九、本機開發（Local Development）
 1. 確定後端的`資料庫`和`伺服器`都有正常運作。
