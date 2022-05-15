@@ -2,10 +2,7 @@
 
 ## 一、各單元標題資訊 ( page_info )
 
-| page_title
-( character varying ) | sub_page_title
-( character varying ) | page_route
-( character varying ) |
+| page_title<br />( character varying ) | sub_page_title<br />( character varying ) | page_route<br />( character varying ) |
 | --- | --- | --- |
 | Catch the stars | 誰能數得清天上的星星？誰能說出它們對世界的影響？——詹・湯姆遜 | Home |
 | 關於我們 | about | About |
@@ -20,43 +17,13 @@
 
 ## 二、關於我們 ( about_info )
 
-| visual
-( character varying ) | slogan
-( character varying ) | philosophy
-( text ) | quote
-( text ) | epilogue
-( text ) |
+| visual<br />( character varying ) | slogan<br />( character varying ) | philosophy<br />( text ) | quote<br />( text ) | epilogue<br />( text ) |
 | --- | --- | --- | --- | --- |
-| /img/kenny-logo.png | 我們是「雲上的小貓」，致力於寫下故事、留下故事。 | 人是被賦予豐富情感的動物，會笑、會哭、會憤怒、會感動，所以有溫度的故事是能夠觸動人心的，甚至能夠在心中種下一顆希望的種子，在未來成長為茁壯的大樹。
-<br />
-<br />正因凡走過必留下痕跡，可以是歷史？
-<br />也可以是虛構的童話？
-<br />不管它是什麼？
-<br />
-<br />總會能夠會帶給我們些什麼？
-<br />對吧？
-<br />
-<br />無論是虛無飄渺的疑問？還是膽戰心驚的恐懼？又或著肯定的勇氣？每個人都有故事，因為這是我們自己開啟的故事——。 | 「我和他就好像天上的星星，遠看好像距離很近，但實際上卻是相當遙遠的。」
-<br />
-<br />「這片夜空中，只有一顆星星在微弱的閃鑠著，好像很孤單一樣？但是我們每個人只要一抬頭就能看見它，
-<br />所以即使身在遠方，星星也能夠獨自努力發光了。」
-<br />
-<br />——《虎與龍》 | 『打從地球誕生的那一刻起，天空就已經用這樣的姿態為我們在夜晚蓋上滿天星斗的布幕了。』
-<br />
-<br />在這宏觀的世界，世人們將星座和神話故事相互結合，把夜空中同一個區域的星星，分為一個個的星座，每一個星座都有屬於它們自己的故事，令人嚮往和好奇。
-<br />
-<br />而製造這浪漫的舞台，究竟是什麼構造？它們的由來又什麼？是否是我們能夠觸手可及的呢？
-<br />它們一直都存在我們的身旁，只是我們一直都沒注意到而已。
-<br />
-<br />
-<strong class="text-sp-color-light">這次讓我們來好好記下它們的存在的軌跡。</strong> |
+| /img/kenny-logo.png | 我們是「雲上的小貓」，致力於寫下故事、留下故事。 | 人是被賦予豐富情感的動物，會笑、會哭、會憤怒、會感動，所以有溫度的故事是能夠觸動人心的，甚至能夠在心中種下一顆希望的種子，在未來成長為茁壯的大樹。<br /><br />正因凡走過必留下痕跡，可以是歷史？<br />也可以是虛構的童話？<br />不管它是什麼？<br /><br />總會能夠會帶給我們些什麼？<br />對吧？<br /><br />無論是虛無飄渺的疑問？還是膽戰心驚的恐懼？又或著肯定的勇氣？每個人都有故事，因為這是我們自己開啟的故事——。 | 「我和他就好像天上的星星，遠看好像距離很近，但實際上卻是相當遙遠的。」<br /><br />「這片夜空中，只有一顆星星在微弱的閃鑠著，好像很孤單一樣？但是我們每個人只要一抬頭就能看見它，<br />所以即使身在遠方，星星也能夠獨自努力發光了。」<br /><br />——《虎與龍》 | 『打從地球誕生的那一刻起，天空就已經用這樣的姿態為我們在夜晚蓋上滿天星斗的布幕了。』<br /><br />在這宏觀的世界，世人們將星座和神話故事相互結合，把夜空中同一個區域的星星，分為一個個的星座，每一個星座都有屬於它們自己的故事，令人嚮往和好奇。<br /><br />而製造這浪漫的舞台，究竟是什麼構造？它們的由來又什麼？是否是我們能夠觸手可及的呢？<br />它們一直都存在我們的身旁，只是我們一直都沒注意到而已。<br /><br /><strong class="text-sp-color-light">這次讓我們來好好記下它們的存在的軌跡。</strong> |
 
 ## 三、文章分類 ( post_categories )
 
-| post_category_orderid
-( integer ) | post_category_name
-( character varying ) | post_category_id
-( character varying ) |
+| post_category_orderid<br />( integer ) | post_category_name<br />( character varying ) | post_category_id<br />( character varying ) |
 | --- | --- | --- |
 | 1 | 太陽系和恆星 | solar |
 | 2 | 宇宙 | universe |
@@ -69,26 +36,13 @@
 
 ## 四、天文科普 ( science )
 
-| orderid
-( integer ) | postid
-( integer ) | title
-( character varying ) | categoryid
-( character varying ) | updatetime
-( date ) | content
-( text ) | published
-(boolean) |
+| orderid<br />( integer ) | postid<br />( integer ) | title<br />( character varying ) | categoryid<br />( character varying ) | updatetime<br />( date ) | content<br />( text ) | published<br />(boolean) |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | 4813 | 太陽系 | solar | 2022-04-06 | .md | true |
 
 ## 五、天文設施-機構 ( facilities_list )
 
-| facilities_orderid
-( integer ) | facilities_title
-( character varying ) | facilities_description
-( text ) | facilities_image
-( character varying ) | facilities_link
-( character varying ) | published
-( boolean ) |
+| facilities_orderid<br />( integer ) | facilities_title<br />( character varying ) | facilities_description<br />( text ) | facilities_image<br />( character varying ) | facilities_link<br />( character varying ) | published<br />( boolean ) |
 | --- | --- | --- | --- | --- | --- |
 | 1 | 台北市立天文科學教育館 | 位於臺灣臺北市士林區的臺北科學藝術園區內，為臺北市政府教育局所屬之社會教育機構，成立於1996年11月7日 | /img/facilities-bg-01.jpg | https://www.tam.gov.taipei/ | true |
 | 2 | 南瀛天文教育園區 | 位於台南市大內區的天文教育館，原為台南縣政府以天文推廣教育為主要目的而設立的「南瀛天文教育園區」 | /img/facilities-bg-02.jpg | https://taea.tn.edu.tw/ | true |
@@ -96,12 +50,7 @@
 
 ## 六、天文設施-天文台 ( observatories_list )
 
-| observatory_orderid
-( integer ) | observatory_category_name
-( character varying ) | observatory_category_id
-( character varying ) | observatory_post_content
-( text ) | published
-( boolean ) |
+| observatory_orderid<br />( integer ) | observatory_category_name<br />( character varying ) | observatory_category_id<br />( character varying ) | observatory_post_content<br />( text ) | published<br />( boolean ) |
 | --- | --- | --- | --- | --- |
 | 1 | 研究及學術 | research | research.md | true |
 | 2 | 教育單位 | education | education.md | true |
@@ -113,17 +62,7 @@ http://maps.google.com/?q=緯度,經度
 
 http://maps.google.com/?q=23.12330848849819, 121.40687774577503
 
-| stargazing_orderid
-( integer ) | stargazing_title
-( character varying ) | stargazing_latitude
-( numeric (18,15)) | stargazing_longitude
-( numeric (18,15)) | stargazing_image
-( character varying ) | stargazing_description
-( text ) | stargazing_address
-( character varying ) | stargazing_link
-( character varying ) | stargazing_lid
-( character varying ) | published
-(boolean) |
+| stargazing_orderid<br />( integer ) | stargazing_title<br />( character varying ) | stargazing_latitude<br />( numeric (18,15)) | stargazing_longitude<br />( numeric (18,15)) | stargazing_image<br />( character varying ) | stargazing_description<br />( text ) | stargazing_address<br />( character varying ) | stargazing_link<br />( character varying ) | stargazing_lid<br />( character varying ) | published<br />(boolean) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1 | 台東：三仙台風景區 | 23.12330848849819 | 121.40687774577503 | /img/mark-0001.jpg | 海浪造型的三仙台，是台東地標，來到觀星時節時，有機會清晰地看見銀河系美景，碧藍大海呼應滿天繁星的紫藍色，有種奇幻之美，快來捕捉這絕美的時刻！ | 臺東縣成功鎮三仙里基翬路74號 | https://goo.gl/maps/NTmD84bXT3U37VVt9 | 1650321458 | true |
 | 2 | 台東：南田觀景台 | 22.270049870794672 | 120.88903677645098 | /img/mark-0002.jpg | 透過專業攝影的快門，清楚地看見星星移動的軌跡，讓人就像是穿越時空般浪漫，簡直就像走進璀璨繁星的無敵星星隧道～ | 臺東縣大武鄉南田 | https://goo.gl/maps/j7xnTzti8MASyZcx7 | 1650321459 | true |
