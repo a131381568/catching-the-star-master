@@ -88,14 +88,10 @@
 ## 七、前端路由與組件架構（Vue Router）
 ![前端路由與組件架構圖](https://raw.githubusercontent.com/a131381568/catching-the-star-master/main/doc/images/03-vue-route-and-component.gif)
 
-## 八、待分類
-部分會移到後端倉庫介紹，和 apollo server 一起。
-
-### 登入邏輯圖
-![登入邏輯圖](https://raw.githubusercontent.com/a131381568/catching-the-star-master/main/doc/images/01-login-logic.gif)
-
-### 資料表
-![資料表介紹](https://raw.githubusercontent.com/a131381568/catching-the-star-master/main/doc/images/04-data-sheet.gif)
+## 八、後端相關
+- 登入邏輯圖 - 至xxx觀看
+- 資料表 - 至xxx觀看
+- API - 至xxx觀看
 
 ### 測試介紹
 - 測試介紹 ⇒ 測試流程圖 ⇒ 測試影片 - [video](https://youtube.com/playlist?list=PLHcJgg1S4pNcOKaWk1TY1Iuu07o9oUpFc)
