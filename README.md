@@ -6,10 +6,10 @@
 大多記載文章類型的資料，都被放置在單元`天文科普`、`星星物語`，單元——`天文設施`，介紹天文機構與天文台；單元——`觀星地點`，標註的座標皆為台東耳熟能詳觀星景點。
 可藉由登入管理後台，進行前台資料的新增、編輯和修改。
 
-- 前台形象網站 - [http://star.puraliena.com](http://star.puraliena.com)
+- 前台形象網站 - [https://star.puraliena.com](https://star.puraliena.com)
 ![home](https://raw.githubusercontent.com/a131381568/catching-the-star-master/main/doc/images/06-fontend-home.jpg)
 
-- 後台管理網站 - [http://star.puraliena.com/login](http://star.puraliena.com/login)
+- 後台管理網站 - [https://star.puraliena.com/login](https://star.puraliena.com/login)
 ![login](https://raw.githubusercontent.com/a131381568/catching-the-star-master/main/doc/images/07-admin-home.jpg)
 
 > 以下是實際製作後，撰寫的記錄、文件和資料。
