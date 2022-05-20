@@ -1,4 +1,5 @@
 declare module "leaflet";
+declare module "@types/leaflet";
 declare module "@kangc/v-md-editor/lib/lang/zh-TW";
 declare module "@kangc/v-md-editor";
 declare module "@kangc/v-md-editor/lib/preview";

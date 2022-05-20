@@ -1,24 +1,29 @@
 <template>
   <Header />
-  <div @click.self="closeDefaultMenu()"
-    class="h-table:flex flex-wrap items-start justify-center middle-pc:pt-72 h-table:pt-32 pb-32 middle-pc:px-20 h-table:px-6 px-8 mobile:pt-32">
+  <div 
+    class="h-table:flex flex-wrap items-start justify-center middle-pc:pt-72 h-table:pt-32 pb-32 middle-pc:px-20 h-table:px-6 px-8 mobile:pt-32"
+    @click.self="closeDefaultMenu()"
+  >
     <!-- 標題區塊 -->
     <TitleBox />
     <!-- 篩選列 -->
     <div
       class="science-filter-bar animate__animated animate__fadeIn w-10/12 middle-pc:mt-16 middle-pc:mb-20 mt-6 mb-16 hidden laptop:inline-flex"
       :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]">
-      <ul class="flex" v-if="filterCategories.length > 0 && filterCategories">
-        <li v-for="(val, key) in filterCategories" :key="key" class="min-w-min w-auto science-filter-item"
+      <ul v-if="filterCategories.length > 0 && filterCategories" class="flex">
+        <li
+          v-for="(val, key) in filterCategories" :key="key" class="min-w-min w-auto science-filter-item"
           @click="reSearchData(String(val.post_category_id))">
           <div class="flex items-center group large-pc:mr-10 laptop:mr-6">
             <input :id="String(val.post_category_id)" class="hidden" :value="val.post_category_id" />
-            <label :class="[
-              'flex-none', 'delay-75', 'duration-1000',
-              'flex', 'items-center', 'cursor-pointer', 'text-2xl', 'group-hover:text-sp-color-light',
-              { 'text-sub-color-light': val.post_category_id === selectCat },
-              { 'text-main-color-light': val.post_category_id !== selectCat }
-            ]">
+            <label
+              :class="[
+                'flex-none', 'delay-75', 'duration-1000',
+                'flex', 'items-center', 'cursor-pointer', 'text-2xl', 'group-hover:text-sp-color-light',
+                { 'text-sub-color-light': val.post_category_id === selectCat },
+                { 'text-main-color-light': val.post_category_id !== selectCat }
+              ]"
+            >
               <span
                 class="flex-none w-3 h-3 inline-block mr-2 rounded-full border border-grey flex-no-shrink group-hover:bg-sp-color-light delay-75 duration-1000 whitespace-nowrap"
                 :class="{ 'bg-sub-color-light': val.post_category_id === selectCat }"></span>
@@ -29,32 +34,39 @@
       </ul>
     </div>
     <!-- 選單樣式 -->
-    <div class="dropdown-menu z-40 h-table:w-10/12 mb-8 relative laptop:hidden animate__animated animate__fadeIn"
-      :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]">
-      <button id="dropdownDefault"
+    <div
+      class="dropdown-menu z-40 h-table:w-10/12 mb-8 relative laptop:hidden animate__animated animate__fadeIn"
+      :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]"
+    >
+      <button
+        id="dropdownDefault"
         class="duration-1000 text-main-color-light border border-white border-opacity-60 hover:border-opacity-0 bg-opacity-0 bg-white hover:bg-opacity-18 hover:text-sub-color-light focus:bg-opacity-18 focus:outline-none focus:border-opacity-0 focus:text-sub-color-light font-medium text-xl pl-4 p-3 relative text-center inline-flex items-center tracking-wide-content w-200px"
         type="button" @click.prevent="toggleFilter()">
         {{ selectName }}
-        <svg class="ml-2 w-4 h-4 absolute right-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+        <svg
+          class="ml-2 w-4 h-4 absolute right-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"
+        />
         </svg>
       </button>
       <!-- Dropdown menu -->
-      <div id="dropdown" class="z-10 bg-main-color-light divide-y divide-gray-100 absolute w-200px"
-        v-show="toggleFilterVal">
+      <div
+        v-show="toggleFilterVal" id="dropdown"
+        class="z-10 bg-main-color-light divide-y divide-gray-100 absolute w-200px">
         <ul class="py-1 text-sm text-main-color-black cursor-pointer">
-          <li v-for="(val, key) in filterCategories" :key="key"
-            @click.stop="selectDropCat(String(val.post_category_id))"
-            class="tracking-wide-content block py-2 px-4 hover:text-sub-color-dark">{{ val.post_category_name }}</li>
+          <li
+            v-for="(val, key) in filterCategories" :key="key"
+            class="tracking-wide-content block py-2 px-4 hover:text-sub-color-dark"
+            @click.stop="selectDropCat(String(val.post_category_id))">{{ val.post_category_name }}</li>
         </ul>
       </div>
     </div>
     <!-- post grid -->
     <div
+      v-if="postList.length > 0 && postList"
       class="grid laptop:grid-cols-3 grid-cols-2 mobile:grid-cols-1 pro-pc:gap-24 h-table:gap-12 mobile:gap-5 h-table:w-10/12 overflow-hidden animate__animated animate__fadeInUp"
-      :class="{ 'animate__delay-4s': getFirstEnter === true }, { animate__fadeOut: changeGridState }"
-      v-if="postList.length > 0 && postList">
+      :class="[{ 'animate__delay-4s': getFirstEnter === true }, { animate__fadeOut: changeGridState }]">
       <div v-for="(val, key) in postList" :key="key">
         <!-- card -->
         <div
@@ -69,15 +81,18 @@
           <!-- date & cat -->
           <p class="text-tiny mt-1 text-main-color-light">
             {{ store.changeDate(Number(val.updatetime)) }},
-            <span v-if="!store.changeCatName(filterCategories, val.categoryid)"
+            <span
+              v-if="!store.changeCatName(filterCategories, val.categoryid)"
               class="text-lg grid-card-tag grid-card-tag-nothing">未分類</span>
-            <router-link v-else :to="'/archive/' + val.categoryid"
+            <router-link
+              v-else :to="'/archive/' + val.categoryid"
               class="text-sub-color-light hover:text-sp-color-light grid-card-tag">{{
                   store.changeCatName(filterCategories, val.categoryid)
               }}</router-link>
           </p>
           <!-- des -->
-          <v-md-preview class="text-main-color-light font-light mt-5 grid-des-box" :text="val.description"
+          <v-md-preview
+            class="text-main-color-light font-light mt-5 grid-des-box" :text="val.description"
             height="400px"></v-md-preview>
 
           <!-- link -->
@@ -87,8 +102,8 @@
         </div>
       </div>
     </div>
-    <div :class="['h-table:w-10/12', 'h-screen']" v-show="postList.length === 0"></div>
-    <div class="h-table:w-10/12 text-center" v-show="sciencePageInfo.hasNextPage && postList.length > 0">
+    <div v-show="postList.length === 0" :class="['h-table:w-10/12', 'h-screen']"></div>
+    <div v-show="sciencePageInfo.hasNextPage && postList.length > 0" class="h-table:w-10/12 text-center">
       <button class="h-table:mt-24 mt-6 mobile:mt-11 btn draw meet" @click.prevent="loadMoreData()">
         <span>加載更多</span>
       </button>

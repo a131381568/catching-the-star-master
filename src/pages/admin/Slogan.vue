@@ -11,102 +11,127 @@
       </div>
       <!-- 編輯區塊 -->
       <div class="editer-container h-table:w-9/12 w-full">
-        <Form ref="homeSloganForm" :validation-schema="homeSloganFormRules" v-slot="{ errors }"
+        <Form
+          ref="homeSloganForm" v-slot="{ errors }" :validation-schema="homeSloganFormRules"
           class="home-slogan w-full mb-14">
           <div class="flex justify-between mb-8 flex-wrap mobile:mb-4">
             <h2 class="text-main-color-light mobile:text-3xl mobile:w-full mobile:mb-4">首頁—主視覺文字</h2>
-            <button class="admin-sbtn" @click.prevent="setEditMode('homeSloganForm')"
-              v-if="!homeSloganEditMode">編輯標語</button>
-            <button class="admin-edit-sbtn" :class="{ 'pointer-events-none': Object.keys(errors).length > 0 }"
-              @click.prevent="setConfirmModal('homeSloganForm')" v-if="homeSloganEditMode">儲存標語</button>
+            <button
+              v-if="!homeSloganEditMode"
+              class="admin-sbtn"
+              @click.prevent="setEditMode('homeSloganForm')"
+            >編輯標語</button>
+            <button
+              v-if="homeSloganEditMode"
+              class="admin-edit-sbtn"
+              :class="{ 'pointer-events-none': Object.keys(errors).length > 0 }"
+              @click.prevent="setConfirmModal('homeSloganForm')">儲存標語</button>
           </div>
-          <div class="editer-inner view-mode" v-if="!homeSloganEditMode">
+          <div v-if="!homeSloganEditMode" class="editer-inner view-mode">
             <h4 class="home-title home-content-title"><i>{{ pageTitleFirst }}</i>{{ pageTitleLast }}</h4>
             <p>{{ pageSubTitle }}</p>
           </div>
-          <div class="editer-inner edit-mode mb-8" v-if="homeSloganEditMode">
-            <Field name="pageTitleRule" type="text" v-model="pageTitle"
+          <div v-if="homeSloganEditMode" class="editer-inner edit-mode mb-8">
+            <Field
+              v-model="pageTitle" name="pageTitleRule" type="text"
               class="home-title-input mb-4 bottom-line-input-gray" placeholder="主視覺標語"
               :class="{ '!border-sp-color-dark': errors.pageTitleRule }" />
-            <span v-show="errors.pageTitleRule"
+            <span
+              v-show="errors.pageTitleRule"
               class="home-title-errors-tip text-sp-color-dark text-xs w-full h-5 block mt-2">{{
                   errors.pageTitleRule
               }}</span>
-            <Field name="pageSubTitleRule" type="text" v-model="pageSubTitle"
+            <Field
+              v-model="pageSubTitle" name="pageSubTitleRule" type="text"
               class="home-slogan mb-2 bottom-line-input-gray" placeholder="主視覺引言"
               :class="{ '!border-sp-color-dark': errors.pageSubTitleRule }" />
-            <span v-show="errors.pageSubTitleRule"
+            <span
+              v-show="errors.pageSubTitleRule"
               class="home-slogan-errors-tip text-sp-color-dark text-xs w-full h-5 block mt-2">{{
                   errors.pageSubTitleRule
               }}</span>
           </div>
         </Form>
-        <Form ref="aboutSloganForm" :validation-schema="aboutSloganFormRules" v-slot="{ errors }"
+        <Form
+          ref="aboutSloganForm" v-slot="{ errors }" :validation-schema="aboutSloganFormRules"
           class="about-slogan w-full mb-14">
           <div ref="aboutSloganEditOuter" class="flex justify-between mb-8 flex-wrap mobile:mb-4">
             <h2 class="text-main-color-light mobile:text-3xl mobile:w-full mobile:mb-4">關於我們—理念</h2>
-            <button class="admin-sbtn" @click.prevent="setEditMode('aboutSloganForm')"
-              v-if="!aboutSloganEditMode">編輯標語</button>
-            <button class="admin-edit-sbtn" :class="{ 'pointer-events-none': Object.keys(errors).length > 0 }"
-              @click.prevent="setConfirmModal('aboutSloganForm')" v-if="aboutSloganEditMode">儲存標語</button>
+            <button
+              v-if="!aboutSloganEditMode" class="admin-sbtn"
+              @click.prevent="setEditMode('aboutSloganForm')">編輯標語</button>
+            <button
+              v-if="aboutSloganEditMode" class="admin-edit-sbtn"
+              :class="{ 'pointer-events-none': Object.keys(errors).length > 0 }" @click.prevent="setConfirmModal('aboutSloganForm')">儲存標語</button>
           </div>
-          <div class="editer-inner view-mode mb-14" v-if="!aboutSloganEditMode">
+          <div v-if="!aboutSloganEditMode" class="editer-inner view-mode mb-14">
             <h4 class="about-content-title text-xl">{{ sloganRef }}</h4>
             <hr class="border-main-color-middle my-8">
             <v-md-preview class="markdown-body" :text="philosophyRef" height="400px"></v-md-preview>
           </div>
-          <div class="editer-inner edit-mode md-container" v-if="aboutSloganEditMode">
-            <Field name="sloganRule" v-model="sloganRef" class="p-6"
+          <div v-if="aboutSloganEditMode" class="editer-inner edit-mode md-container">
+            <Field
+              v-model="sloganRef" name="sloganRule" class="p-6"
               :class="{ '!bg-sp-color-light': errors.sloganRule }" placeholder="關於我們標語" />
-            <span v-show="errors.sloganRule"
+            <span
+              v-show="errors.sloganRule"
               class="about-content-title-errors-tip text-sp-color-dark text-xs w-full h-5 block mt-2 mb-5">{{
                   errors.sloganRule
               }}</span>
-            <Field v-show="false" name="philosophyRule" v-model="philosophyRef" />
-            <v-md-editor class="markdown-body" v-model="philosophyRef" height="400px"></v-md-editor>
-            <span v-show="errors.philosophyRule"
+            <Field v-show="false" v-model="philosophyRef" name="philosophyRule" />
+            <v-md-editor v-model="philosophyRef" class="markdown-body" height="400px"></v-md-editor>
+            <span
+              v-show="errors.philosophyRule"
               class="about-content-philosophy-errors-tip text-sp-color-dark text-xs w-full h-5 block mt-2">{{
                   errors.philosophyRule
               }}</span>
           </div>
         </Form>
-        <Form ref="aboutQuoteForm" :validation-schema="aboutQuoteFormRules" v-slot="{ errors }"
+        <Form
+          ref="aboutQuoteForm" v-slot="{ errors }" :validation-schema="aboutQuoteFormRules"
           class="about-quote w-full mb-14">
           <div class="flex justify-between mb-8 flex-wrap mobile:mb-4">
             <h2 class="text-main-color-light mobile:text-3xl mobile:w-full mobile:mb-4">關於我們—引言</h2>
-            <button class="admin-sbtn" @click.prevent="setEditMode('aboutQuoteForm')"
-              v-if="!aboutQuoteEditMode">編輯標語</button>
-            <button class="admin-edit-sbtn" :class="{ 'pointer-events-none': Object.keys(errors).length > 0 }"
-              @click.prevent="setConfirmModal('aboutQuoteForm')" v-if="aboutQuoteEditMode">儲存標語</button>
+            <button
+              v-if="!aboutQuoteEditMode" class="admin-sbtn"
+              @click.prevent="setEditMode('aboutQuoteForm')">編輯標語</button>
+            <button
+              v-if="aboutQuoteEditMode" class="admin-edit-sbtn"
+              :class="{ 'pointer-events-none': Object.keys(errors).length > 0 }" @click.prevent="setConfirmModal('aboutQuoteForm')">儲存標語</button>
           </div>
-          <div class="editer-inner view-mode mb-14" v-if="!aboutQuoteEditMode">
+          <div v-if="!aboutQuoteEditMode" class="editer-inner view-mode mb-14">
             <v-md-preview class="markdown-body" :text="quoteRef" height="400px"></v-md-preview>
           </div>
-          <div class="editer-inner edit-mode md-container" v-if="aboutQuoteEditMode">
-            <Field v-show="false" name="quoteRule" v-model="quoteRef" />
-            <v-md-editor class="markdown-body" v-model="quoteRef" height="400px"></v-md-editor>
-            <span v-show="errors.quoteRule"
+          <div v-if="aboutQuoteEditMode" class="editer-inner edit-mode md-container">
+            <Field v-show="false" v-model="quoteRef" name="quoteRule" />
+            <v-md-editor v-model="quoteRef" class="markdown-body" height="400px"></v-md-editor>
+            <span
+              v-show="errors.quoteRule"
               class="about-content-quote-errors-tip text-sp-color-dark text-xs w-full h-5 block mt-2">{{
                   errors.quoteRule
               }}</span>
           </div>
         </Form>
-        <Form ref="aboutEpilogueForm" :validation-schema="aboutEpilogueFormRules" v-slot="{ errors }"
+        <Form
+          ref="aboutEpilogueForm" v-slot="{ errors }" :validation-schema="aboutEpilogueFormRules"
           class="about-epilogue w-full mb-14">
           <div class="flex justify-between mb-8 flex-wrap mobile:mb-4">
             <h2 class="text-main-color-light mobile:text-3xl mobile:w-full mobile:mb-4">關於我們—結語</h2>
-            <button class="admin-sbtn" @click.prevent="setEditMode('aboutEpilogueForm')"
-              v-if="!aboutEpilogueEditMode">編輯標語</button>
-            <button class="admin-edit-sbtn" :class="{ 'pointer-events-none': Object.keys(errors).length > 0 }"
-              @click.prevent="setConfirmModal('aboutEpilogueForm')" v-if="aboutEpilogueEditMode">儲存標語</button>
+            <button
+              v-if="!aboutEpilogueEditMode" class="admin-sbtn"
+              @click.prevent="setEditMode('aboutEpilogueForm')">編輯標語</button>
+            <button
+              v-if="aboutEpilogueEditMode" class="admin-edit-sbtn"
+              :class="{ 'pointer-events-none': Object.keys(errors).length > 0 }" @click.prevent="setConfirmModal('aboutEpilogueForm')">儲存標語</button>
           </div>
-          <div class="editer-inner view-mode mb-14" v-if="!aboutEpilogueEditMode">
+          <div v-if="!aboutEpilogueEditMode" class="editer-inner view-mode mb-14">
             <v-md-preview class="markdown-body" :text="epilogueRef" height="400px"></v-md-preview>
           </div>
-          <div class="editer-inner edit-mode md-container" v-if="aboutEpilogueEditMode">
-            <Field v-show="false" name="epilogueRule" v-model="epilogueRef" />
-            <v-md-editor class="markdown-body" v-model="epilogueRef" height="400px"></v-md-editor>
-            <span v-show="errors.epilogueRule"
+          <div v-if="aboutEpilogueEditMode" class="editer-inner edit-mode md-container">
+            <Field v-show="false" v-model="epilogueRef" name="epilogueRule" />
+            <v-md-editor v-model="epilogueRef" class="markdown-body" height="400px"></v-md-editor>
+            <span
+              v-show="errors.epilogueRule"
               class="about-content-epilogue-errors-tip text-sp-color-dark text-xs w-full h-5 block mt-2">{{
                   errors.epilogueRule
               }}</span>

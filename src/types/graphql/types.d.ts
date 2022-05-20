@@ -4,36 +4,36 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: 
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 
 export type File = {
-  filename: String
-  mimetype: String
-  encoding: String
-  s3Path: String
-  errorTitle: String
-}
+  filename: string
+  mimetype: string
+  encoding: string
+  s3Path: string
+  errorTitle: string
+};
 
 export type AboutInfo = {
-  visual: String
-  slogan: String
-  philosophy: String
-  quote: String
-  epilogue: String
-}
+  visual: string
+  slogan: string
+  philosophy: string
+  quote: string
+  epilogue: string
+};
 
 export type SinglePageInfo = {
-  page_title: String
-  sub_page_title: String
-  page_route: String
-}
+  page_title: string;
+  sub_page_title: string;
+  page_route: string;
+};
 
 export type ArtistsCategory = {
-  post_category_name: String
-  post_category_id: String
-}
+  post_category_name: string
+  post_category_id: string
+};
 
 export type ArtistsCategories = {
-  post_category_name: String
-  post_category_id: String
-}[]
+  post_category_name: string;
+  post_category_id: string;
+}[];
 
 export type Artists = {
   postid: number
@@ -73,8 +73,8 @@ export type PageInfo = {
 };
 
 export type PageInfoPush = {
-  hasNextPage: Boolean
-  hasPreviousPage: Boolean
+  hasNextPage: boolean
+  hasPreviousPage: boolean
   start: number
   end: number
   totalPagi: number
@@ -82,54 +82,54 @@ export type PageInfoPush = {
 
 export type FacilitiesArr = {
   facilities_orderid: number
-  facilities_title: String
-  facilities_description: String
-  facilities_image: String
-  facilities_link: String
+  facilities_title: string
+  facilities_description: string
+  facilities_image: string
+  facilities_link: string
 }[]
 
 export type Facility = {
   facilities_orderid: number
-  facilities_title: String
-  facilities_description: String
-  facilities_image: String
-  facilities_link: String
+  facilities_title: string
+  facilities_description: string
+  facilities_image: string
+  facilities_link: string
 }
 
 export type ObservatoriesArr = {
-  observatory_category_name: String
-  observatory_category_id: String
-  observatory_post_content: String
+  observatory_category_name: string
+  observatory_category_id: string
+  observatory_post_content: string
 }[]
 
 export type Observatory = {
-  observatory_category_name: String
-  observatory_category_id: String
-  observatory_post_content: String
+  observatory_category_name: string
+  observatory_category_id: string
+  observatory_post_content: string
 }
 
 export type Stargazing = {
-  stargazing_title: String
+  stargazing_title: string
   stargazing_latitude: number
   stargazing_longitude: number
-  stargazing_image: String
-  stargazing_description: String
-  stargazing_address: String
-  stargazing_link: String
-  stargazing_lid: String
-  published: Boolean
+  stargazing_image: string
+  stargazing_description: string
+  stargazing_address: string
+  stargazing_link: string
+  stargazing_lid: string
+  published: boolean
 }
 
 export type StargazingArr = {
-  stargazing_title: String
+  stargazing_title: string
   stargazing_latitude: number
   stargazing_longitude: number
-  stargazing_image: String
-  stargazing_description: String
-  stargazing_address: String
-  stargazing_link: String
-  stargazing_lid: String
-  published: Boolean
+  stargazing_image: string
+  stargazing_description: string
+  stargazing_address: string
+  stargazing_link: string
+  stargazing_lid: string
+  published: boolean
 }[];
 
 export type StargazingConnectionPush = {
