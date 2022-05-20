@@ -17,13 +17,11 @@
           }}</span>
           {{ pageTitle[1] }} {{ pageTitle[2] }}
         </h1>
-        <!-- eslint-disable vue/no-v-html -->
         <h4
           class="text-main-color-light animate__animated animate__fadeIn large-pc:mt-10 mt-6 large-pc:text-2xl h-table:text-lg mobile:text-lg middle-pc:w-auto h-table:w-380px"
           :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-2s': getFirstEnter === false }]"
           v-html="pageSubTitle">
         </h4>
-        <!--eslint-enable-->
         <router-link
           class="home-read-more btn draw meet inline-block animate__animated animate__flipInX large-pc:mt-12 mt-8"
           :class="[{ 'animate__delay-5s': getFirstEnter === true }, { 'animate__delay-3s': getFirstEnter === false }]"
@@ -39,7 +37,7 @@
 </template>
 <script setup lang="ts">
 const store = useStore();
-// const route = useRoute()
+const route = useRoute()
 const getFirstEnter = computed(() => store.get_firstEnter);
 let titleBak = [
   'Stars', 'are', 'blind'
@@ -54,9 +52,9 @@ const pageTitle = computed(() => {
 });
 const pageSubTitle = computed(() => store.pageSubTitle || subTitleBak);
 
-// const VERSION = import.meta.env.VITE_APP_VERSION;
-// const BUILD_DATE = import.meta.env.VITE_APP_BUILD_EPOCH
-//   ? new Date(Number(import.meta.env.VITE_APP_BUILD_EPOCH))
-//   : undefined;
-// const thisYear = new Date().getFullYear();
+const VERSION = import.meta.env.VITE_APP_VERSION;
+const BUILD_DATE = import.meta.env.VITE_APP_BUILD_EPOCH
+  ? new Date(Number(import.meta.env.VITE_APP_BUILD_EPOCH))
+  : undefined;
+const thisYear = new Date().getFullYear();
 </script>

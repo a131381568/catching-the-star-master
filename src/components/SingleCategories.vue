@@ -9,26 +9,22 @@
         <h1
           class="text-white relative -left-2 -top-2 mobile:text-5xl w-table:w-3/4 w-full mobile:w-full w-table:m-0 mb-5">
           {{ categoriesTitle }}</h1>
-        <button 
-          :class="{ 'pointer-events-none': !categoryName || !categoryId }" class="flex btn draw meet text-lg w-2/12 mobile:w-full mobile:mt-6 h-12 btn text-center items-center p-0 justify-center"
-          @click.prevent="setConfirmModal">
+        <button @click.prevent="setConfirmModal" :class="{ 'pointer-events-none': !categoryName || !categoryId }"
+          class="flex btn draw meet text-lg w-2/12 mobile:w-full mobile:mt-6 h-12 btn text-center items-center p-0 justify-center">
           {{ categoriesSaveBtn }}
         </button>
       </div>
       <!-- 表單區塊 -->
-      <Form
-        ref="addCategoriesForm" v-slot="{ errors }" :validation-schema="verifyRules"
+      <Form ref="addCategoriesForm" :validation-schema="verifyRules" v-slot="{ errors }"
         class="w-9/12 flex flex-wrap mobile:w-11/12 table-container mobile:m-auto justify-between">
         <div class="w-table:w-5/12 w-full">
           <!-- 地點名稱 -->
           <div class="input-group mb-14">
             <h4 class="text-main-color-light font-normal">分類名稱</h4>
-            <Field
-              v-model="categoryName" name="categoryNameRef"
-              type="text"
-              class="category-name-input h-16 block m-auto bottom-line-input text-lg" :class="{ 'border-sp-color-dark border-opacity-100': errors.categoryNameRef }" />
-            <span
-              v-show="errors.categoryNameRef"
+            <Field name="categoryNameRef" type="text"
+              class="category-name-input h-16 block m-auto bottom-line-input text-lg"
+              :class="{ 'border-sp-color-dark border-opacity-100': errors.categoryNameRef }" v-model="categoryName" />
+            <span v-show="errors.categoryNameRef"
               class="category-name-error-tip text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">{{
                   errors.categoryNameRef
               }}</span>
@@ -36,21 +32,19 @@
           <!-- 地址說明 -->
           <div class="input-group mb-14">
             <h4 class="text-main-color-light font-normal">分類 ID</h4>
-            <Field
-              v-model="categoryId" name="categoryIdRef"
-              type="text" class="category-id-input h-16 block m-auto bottom-line-input text-lg" :class="[
+            <Field name="categoryIdRef" type="text"
+              class="category-id-input h-16 block m-auto bottom-line-input text-lg" :class="[
                 { 'border-sp-color-dark border-opacity-100': errors.categoryIdRef },
                 { 'pointer-events-none border-0': routeName === 'EditSingleCategories' }
-              ]" />
-            <span
-              v-show="errors.categoryIdRef"
+              ]" v-model="categoryId" />
+            <span v-show="errors.categoryIdRef"
               class="category-id-error-tip text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">{{
                   errors.categoryIdRef
               }}</span>
           </div>
         </div>
       </Form>
-      <div v-if="routeName === 'EditSingleCategories'" class="w-table:w-9/12 w-full">
+      <div class="w-table:w-9/12 w-full" v-if="routeName === 'EditSingleCategories'">
         <button class="admin-delete-sbtn" @click.prevent="setDelConfirmModal()">
           刪除
         </button>

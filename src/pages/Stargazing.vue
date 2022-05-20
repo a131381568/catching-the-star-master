@@ -113,12 +113,10 @@ let map = ref({
   },
   remove(): void { },
   on(): void { },
-  setView: (x: Array<number>, y: number) => true,
+  setView: (x: Array<Number>, y: Number) => true,
   closePopup(): void { },
   removeLayer(layerObj: object): void { }
 })
-
-
 let actLayer = ref({
   setIcon: (n: object) => { }
 })
@@ -272,7 +270,7 @@ function mapInit() {
 }
 
 function setMark(markInfo: markType, layer: object) {
-  L.marker(
+  const marker = L.marker(
     [markInfo.stargazing_latitude, markInfo.stargazing_longitude], {
     icon: customIcon,
     title: markInfo.stargazing_title,
@@ -304,36 +302,36 @@ function destroyMap() {
 
 // 測試新增資料
 
-// let testLayer = ref({})
+let testLayer = ref({})
 
-// function setNewData() {
-//   let copyObj = {
-//     stargazing_title: 'xxxxx',
-//     stargazing_latitude: 25.033866188405085,
-//     stargazing_longitude: 121.5645582937896,
-//     stargazing_image: 'https://stage.taipei101mall.com.tw/uploads/content/3539a78f-df62-177c-f388-09243bc44ed2.png',
-//     stargazing_description: 'desssss',
-//     stargazing_address: '我是地址',
-//     stargazing_link: 'https://stage.taipei101mall.com.tw/article/390?article_type_id=0&article_tag_id=0&page=1'
-//   }
-//   let copyArr = JSON.parse(JSON.stringify(stargazingList.value))
-//   copyArr[0] = copyObj
-//   stargazingList.value = copyArr
-//   setActMarkData(copyObj)
+function setNewData() {
+  let copyObj = {
+    stargazing_title: 'xxxxx',
+    stargazing_latitude: 25.033866188405085,
+    stargazing_longitude: 121.5645582937896,
+    stargazing_image: 'https://stage.taipei101mall.com.tw/uploads/content/3539a78f-df62-177c-f388-09243bc44ed2.png',
+    stargazing_description: 'desssss',
+    stargazing_address: '我是地址',
+    stargazing_link: 'https://stage.taipei101mall.com.tw/article/390?article_type_id=0&article_tag_id=0&page=1'
+  }
+  let copyArr = JSON.parse(JSON.stringify(stargazingList.value))
+  copyArr[0] = copyObj
+  stargazingList.value = copyArr
+  setActMarkData(copyObj)
 
-//   // popup
-//   popupLayer.value.setLatLng([copyObj.stargazing_latitude, copyObj.stargazing_longitude])
-//   popupLayer.value.setContent(copyObj.stargazing_title)
-//   map.value.setView([copyObj.stargazing_latitude, copyObj.stargazing_longitude], 11)
+  // popup
+  popupLayer.value.setLatLng([copyObj.stargazing_latitude, copyObj.stargazing_longitude])
+  popupLayer.value.setContent(copyObj.stargazing_title)
+  map.value.setView([copyObj.stargazing_latitude, copyObj.stargazing_longitude], 11)
 
-//   // 建立座標圖層
-//   testLayer.value = L.featureGroup().addTo(map.value);
+  // 建立座標圖層
+  testLayer.value = L.featureGroup().addTo(map.value);
 
-//   // 地圖插點
-//   setMark(copyObj, testLayer.value)
-// }
+  // 地圖插點
+  setMark(copyObj, testLayer.value)
+}
 
-// function removeLayer() {
-//   map.value.removeLayer(testLayer.value)
-// }
+function removeLayer() {
+  map.value.removeLayer(testLayer.value)
+}
 </script>

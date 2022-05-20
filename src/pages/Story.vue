@@ -5,23 +5,18 @@
     <!-- 標題區塊 -->
     <TitleBox />
     <!-- 時間軸 -->
-    <div 
-      v-if="postList.length > 0 && postList"
-      ref="masonryRef"
+    <div ref="masonryRef"
       class="container mx-auto h-table:w-10/12 h-full grid grid-col-2 grid-flow-col justify-items-center relative animate__animated animate__fadeIn"
-      :class="[{ 'animate__delay-5s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]">
-      <masonry-wall
-        :items="postList" :ssr-columns="1" :column-width="gridWidth" :gap="0" class="py-56 timeline-grid"
+      :class="[{ 'animate__delay-5s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]"
+      v-if="postList.length > 0 && postList">
+      <masonry-wall :items="postList" :ssr-columns="1" :column-width="gridWidth" :gap="0" class="py-56 timeline-grid"
         :style="{ 'width': '100%' }">
         <template #default="{ item, index }">
-          <div
-            :class="[
-              { 'mt-20': index !== 0 },
-              { 'mt-0 ': index === 0 },
-              { 'animate__animated animate__fadeInUp': postList.length === 1 + index }
-            ]" 
-            class="flex group single-timeline-grid" :style="{ 'width': gridWidth + 'px' }"
-          >
+          <div :class="[
+            { 'mt-20': index !== 0 },
+            { 'mt-0 ': index === 0 },
+            { 'animate__animated animate__fadeInUp': postList.length === 1 + index }
+          ]" class="flex group single-timeline-grid" :style="{ 'width': gridWidth + 'px' }">
             <div
               class="left-line w-3/12 flex items-stretch justify-start border border-b border-t-0 border-l-0 border-r-0 h-0 border-main-color-middle mt-5 mr-2">
               <span class="self-center bg-sub-color-dark rounded-full h-9px w-9px block relative -left-4px"></span>
@@ -34,10 +29,8 @@
               </router-link>
               <div class="w-full">
                 <router-link :to="'/story/' + item.postid">
-                  <img
-                    class="w-auto mx-0 mt-6 mb-4 inline-block delay-75 duration-1000 group-hover:brightness-75"
-                    :src="item.image"
-                  />
+                  <img class="w-auto mx-0 mt-6 mb-4 inline-block delay-75 duration-1000 group-hover:brightness-75"
+                    :src="item.image" />
                 </router-link>
               </div>
               <span class="text-main-color-light grid-des-box">{{ item.description }}</span>
@@ -50,10 +43,8 @@
         </template>
       </masonry-wall>
     </div>
-    <div
-      v-show="storyPageInfo.hasNextPage && postList.length > 0"
-      class="h-table:w-10/12 w-table:text-center text-left"
-    >
+    <div class="h-table:w-10/12 w-table:text-center text-left"
+      v-show="storyPageInfo.hasNextPage && postList.length > 0">
       <button class="mt-20 btn draw meet timeline-loadmore" @click.prevent="loadMoreTimeLine()">
         <span>加載更多</span>
       </button>
@@ -63,8 +54,8 @@
 </template>
 <script setup lang="ts">
 import { getArtistsList } from '@/api/science'
-import { ArtistsArr, PageInfo } from '@/types/graphql/types'
-import { useWindowSize, useElementSize } from '@vueuse/core'
+import { ArtistsArr, PageInfo, ArtistsCategories } from '@/types/graphql/types'
+import { useWindowSize, useElementSize, useElementBounding } from '@vueuse/core'
 // 取得路由
 const route = useRoute()
 const routeName = String(route.name)

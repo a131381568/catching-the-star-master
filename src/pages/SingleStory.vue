@@ -5,12 +5,10 @@
     <!-- 標題區塊 -->
     <TitleBox />
     <!-- 主視覺 -->
-    <div
-      ref="imgSizeRef"
+    <div ref="imgSizeRef"
       class="laptop:w-4/12 h-table:w-5/12 mobile:6/12 flex-shrink mt-10 animate__animated animate__fadeInLeftBig"
       :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]">
-      <div 
-      :style="[
+      <div :style="[
         { 'width': imgSizeWidth + 'px' },
         { 'height': imgSizeWidth + 'px' },
         { 'background-image': 'url(' + circleBg + ')' }

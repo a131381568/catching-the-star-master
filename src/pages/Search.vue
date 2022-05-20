@@ -5,10 +5,8 @@
     <!-- 標題區塊 -->
     <TitleBox />
     <!-- 搜尋框 -->
-    <div 
-      class="h-table:w-10/12 w-full mt-1 mobile:-mt-8 animate__animated animate__fadeInUp"
-      :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]"
-    >
+    <div class="h-table:w-10/12 w-full mt-1 mobile:-mt-8 animate__animated animate__fadeInUp"
+      :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]">
       <div class="relative text-lg bg-transparent text-gray-800">
         <div
           class="flex items-center duration-500 border-b border-white border-opacity-25 py-2 focus-within:border-opacity-60 animate__animated animate__fadeIn"
@@ -18,40 +16,34 @@
             { 'border-sp-color-light': spaceAlert }
           ]">
           <input
-            v-model="searchWord"
-            class="w-full bg-transparent border-transparent focus:border-transparent border-none mr-3 px-2 h-table:text-3xl text-xl text-main-color-middle focus:outline-0 focus:ring-0 focus:text-main-color-light" type="text" placeholder="Search" @keyup.enter="searchData()" />
-          <button
-            type="submit"
-            class="search-btn absolute right-0 top-0 h-table:mt-3 h-table:mr-4 mt-5 mr-1"
+            class="w-full bg-transparent border-transparent focus:border-transparent border-none mr-3 px-2 h-table:text-3xl text-xl text-main-color-middle focus:outline-0 focus:ring-0 focus:text-main-color-light"
+            type="text" placeholder="Search" v-model="searchWord" @keyup.enter="searchData()" />
+          <button type="submit" class="search-btn absolute right-0 top-0 h-table:mt-3 h-table:mr-4 mt-5 mr-1"
             @click.prevent="searchData()">
-            <svg
-              id="Capa_1"
-              class="h-table:h-10 h-6 w-auto fill-white opacity-25 hover:opacity-60 duration-500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+            <svg class="h-table:h-10 h-6 w-auto fill-white opacity-25 hover:opacity-60 duration-500"
+              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1"
               x="0px" y="0px" viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;"
-              xml:space="preserve" width="512px" height="512px"
-            >
+              xml:space="preserve" width="512px" height="512px">
               <path
-                d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z"
-              />
+                d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
             </svg>
           </button>
         </div>
-        <p v-show="spaceAlert" class="errors-tip text-sp-color-light font-light h-table:mt-5 mt-1 text-lg truncate">
+        <p class="errors-tip text-sp-color-light font-light h-table:mt-5 mt-1 text-lg truncate" v-show="spaceAlert">
           請輸入關鍵字</p>
       </div>
     </div>
-    <div v-show="postList.length === 0" class="h-table:w-10/12 h-200px mt-16">
+    <div class="h-table:w-10/12 h-200px mt-16" v-show="postList.length === 0">
       <!-- 搜尋無結果 -->
-      <div v-show="searchIsNothing" class="search-nothing-tip animate__animated animate__fadeIn animate__delay-1s">
+      <div class="search-nothing-tip animate__animated animate__fadeIn animate__delay-1s" v-show="searchIsNothing">
         <p class="h-table:text-3xl text-xl font-normal text-white">查無結果</p>
         <p class="text-main-color-light font-light h-table:mt-5 mt-1 text-lg truncate">請使用其它關鍵字搜尋</p>
       </div>
     </div>
     <!-- 主視覺 -->
-    <div
-      v-show="postList.length > 0"
-      class="w-table:block hidden middle-pc:w-4/12 w-table:w-5/12 h-full mt-20 animate__animated animate__flipInY"
-      :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]">
+    <div class="w-table:block hidden middle-pc:w-4/12 w-table:w-5/12 h-full mt-20 animate__animated animate__flipInY"
+      :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]"
+      v-show="postList.length > 0">
       <img class="w-auto" src="/img/bg-search.png" />
     </div>
     <!-- post grid -->
@@ -71,9 +63,8 @@
           </div>
         </router-link>
       </div>
-      <div v-show="searchPageInfo.hasNextPage && postList.length > 0" class="w-full text-center">
-        <button
-          class="search-loadmore middle-pc:mt-16 h-table:mt-12 mobile:mt-10 btn draw meet"
+      <div class="w-full text-center" v-show="searchPageInfo.hasNextPage && postList.length > 0">
+        <button class="search-loadmore middle-pc:mt-16 h-table:mt-12 mobile:mt-10 btn draw meet"
           @click.prevent="loadMoreData()">
           <span>Load More</span>
         </button>

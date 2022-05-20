@@ -9,25 +9,21 @@
         <h1
           class="text-white relative -left-2 -top-2 mobile:text-5xl w-table:w-3/4 w-full mobile:w-full w-table:m-0 mb-5">
           {{ stargazerTitle }}</h1>
-        <button
-          class="flex btn draw meet text-lg w-2/12 mobile:w-full mobile:mt-6 h-12 text-center items-center p-0 justify-center"
-          @click.prevent="setConfirmModal">
+        <button @click.prevent="setConfirmModal"
+          class="flex btn draw meet text-lg w-2/12 mobile:w-full mobile:mt-6 h-12 text-center items-center p-0 justify-center">
           {{ stargazerSaveBtn }}
         </button>
       </div>
       <!-- 表單區塊 -->
-      <Form
-        ref="addPlaceForm" v-slot="{ errors }" :validation-schema="verifyRules"
+      <Form ref="addPlaceForm" :validation-schema="verifyRules" v-slot="{ errors }"
         class="w-9/12 flex flex-wrap mobile:w-11/12 table-container mobile:m-auto justify-between">
         <div class="w-table:w-5/12 w-full">
           <!-- 地點名稱 -->
           <div class="input-group mb-14">
             <h4 class="text-main-color-light font-normal">地點名稱</h4>
-            <Field
-              v-model="placeName" name="placeNameRef" type="text"
-              class="h-16 block m-auto bottom-line-input text-lg" :class="{ 'border-sp-color-dark border-opacity-100': errors.placeNameRef }" />
-            <span
-              v-show="errors.placeNameRef"
+            <Field name="placeNameRef" type="text" class="h-16 block m-auto bottom-line-input text-lg"
+              :class="{ 'border-sp-color-dark border-opacity-100': errors.placeNameRef }" v-model="placeName" />
+            <span v-show="errors.placeNameRef"
               class="stargazer-name-error-tip text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">{{
                   errors.placeNameRef
               }}</span>
@@ -35,12 +31,10 @@
           <!-- 地址說明 -->
           <div class="input-group mb-14">
             <h4 class="text-main-color-light font-normal">地址說明</h4>
-            <Field
-              v-model="placeDescription" name="placeDescriptionRef" type="text"
-              class="h-16 block m-auto bottom-line-input text-lg"
-              :class="{ 'border-sp-color-dark border-opacity-100': errors.placeDescriptionRef }" />
-            <span
-              v-show="errors.placeDescriptionRef"
+            <Field name="placeDescriptionRef" type="text" class="h-16 block m-auto bottom-line-input text-lg"
+              :class="{ 'border-sp-color-dark border-opacity-100': errors.placeDescriptionRef }"
+              v-model="placeDescription" />
+            <span v-show="errors.placeDescriptionRef"
               class="stargazer-des-error-tip text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">{{
                   errors.placeDescriptionRef
               }}</span>
@@ -48,13 +42,11 @@
           <!-- 地點介紹 -->
           <div class="input-group mb-14">
             <h4 class="text-main-color-light font-normal">地點介紹</h4>
-            <Field
-              v-model="placeIntroduction" name="placeIntroductionRef" type="text"
-              as="textarea"
+            <Field name="placeIntroductionRef" type="text" as="textarea"
               class="bottom-line-input h-200px resize-none block m-auto text-lg pt-4"
-              :class="{ 'border-sp-color-dark border-opacity-100': errors.placeIntroductionRef }" />
-            <span
-              v-show="errors.placeIntroductionRef"
+              :class="{ 'border-sp-color-dark border-opacity-100': errors.placeIntroductionRef }"
+              v-model="placeIntroduction" />
+            <span v-show="errors.placeIntroductionRef"
               class="stargazer-intro-error-tip text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">{{
                   errors.placeIntroductionRef
               }}</span>
@@ -67,22 +59,18 @@
             </div>
             <div
               class="relative place-lat-lon-container flex space-x-3 justify-between before:content-[','] before:block before:absolute before:-bottom-1 before:left-1/2-3px before:text-main-color-light before:opacity-70">
-              <Field
-                v-model="placeLat" name="placeLatRef" type="text" placeholder="Latitude"
-                class="bottom-line-input h-16" :class="{ 'border-sp-color-dark border-opacity-100': errors.placeLatRef }" />
-              <Field
-                v-model="placeLon" name="placeLonRef" type="text" placeholder="Longitude"
-                class="bottom-line-input h-16" :class="{ 'border-sp-color-dark border-opacity-100': errors.placeLonRef }" />
+              <Field name="placeLatRef" type="text" placeholder="Latitude" class="bottom-line-input h-16"
+                :class="{ 'border-sp-color-dark border-opacity-100': errors.placeLatRef }" v-model="placeLat" />
+              <Field name="placeLonRef" type="text" placeholder="Longitude" class="bottom-line-input h-16"
+                :class="{ 'border-sp-color-dark border-opacity-100': errors.placeLonRef }" v-model="placeLon" />
             </div>
             <div class="alert-message flex space-x-3 justify-between">
-              <div
-                :class="{ 'visible lat-is-error': errors.placeLatRef }"
+              <div :class="{ 'visible lat-is-error': errors.placeLatRef }"
                 class="lat-error-tip text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">
                 {{
                     errors.placeLatRef
                 }}</div>
-              <div
-                :class="{ 'visible lon-is-error': errors.placeLonRef }"
+              <div :class="{ 'visible lon-is-error': errors.placeLonRef }"
                 class="lon-error-tip text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">
                 {{
                     errors.placeLonRef
@@ -91,16 +79,14 @@
           </div>
         </div>
         <div class="w-table:w-5/12 w-full">
-          <div
-            class="animate__animated h-52 w-full bg-no-repeat bg-cover bg-center "
+          <div class="animate__animated h-52 w-full bg-no-repeat bg-cover bg-center "
             :style="{ 'background-image': 'url(' + uploadImgPath + ')' }"
             :class="[{ 'animate__fadeIn': localBgOpacity }, { 'animate__fadeOut': !localBgOpacity }]">
           </div>
           <div class="upload-bar flex justify-between mt-7 mb-1">
             <h4 class="text-main-color-light font-normal">地點圖片</h4>
             <label class="cursor-pointer admin-sbtn relative flex items-center justify-center">上傳圖片
-              <Field
-                v-model="placeImgPath" name="placeImgPathRef" class="update-btn hidden" type="file"
+              <Field name="placeImgPathRef" v-model="placeImgPath" class="update-btn hidden" type="file"
                 @change="updateFileAct($event)" />
             </label>
           </div>
@@ -110,7 +96,7 @@
               errors.placeImgPathRef
           }}</span>
         </div>
-        <div v-if="routeName === 'EditSingleStargazer'" class="w-table:w-10/12 w-full">
+        <div class="w-table:w-10/12 w-full" v-if="routeName === 'EditSingleStargazer'">
           <button class="admin-delete-sbtn" @click.prevent="setDelConfirmModal()">
             刪除
           </button>
@@ -122,16 +108,13 @@
     <div
       class="admin-stargazer-modal bg-black bg-opacity-50 w-full h-full fixed left-0 top-0 flex items-center justify-center animate__animated"
       :class="[{ animate__fadeOut: !modal }, { animate__fadeIn: modal }, { 'z-9999': modalInner }, { '-z-50': !modalInner }]">
-      <button
-        class="pointer-events-none absolute right-4 top-4 button small text-white cursor-pointer group"
+      <button class="pointer-events-none absolute right-4 top-4 button small text-white cursor-pointer group"
         title="close">
         <span class="w-12 h-16 inline-block">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" enable-background="new 0 0 40 40">
-            <line
-              class="group-hover:stroke-sp-color-light transition-all duration-700" x1="15" y1="15" x2="25" y2="25"
+            <line class="group-hover:stroke-sp-color-light transition-all duration-700" x1="15" y1="15" x2="25" y2="25"
               stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-miterlimit="10"></line>
-            <line
-              class="group-hover:stroke-sp-color-light transition-all duration-700" x1="25" y1="15" x2="15" y2="25"
+            <line class="group-hover:stroke-sp-color-light transition-all duration-700" x1="25" y1="15" x2="15" y2="25"
               stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-miterlimit="10"></line>
           </svg>
         </span>
@@ -144,9 +127,9 @@
 </template>
 
 <script setup lang="ts">
-// import { defineComponent, getCurrentInstance } from "vue";
+import { defineComponent, getCurrentInstance } from "vue";
 import L from "leaflet";
-import { markType, layerClickEvent } from '@/types/graphql/types' // , StargazingArr, PageInfoPush, CommonResponse
+import { markType, layerClickEvent, StargazingArr, PageInfoPush, CommonResponse } from '@/types/graphql/types'
 import schema from '@/utils/vee-validate-schema'
 import { Field, Form } from 'vee-validate';
 import { setNewStargazer, getSingleStargazer, editStargazer, deleteStargazer } from '@/api/stargazing'
@@ -259,7 +242,7 @@ let map = ref({
   },
   remove(): void { },
   on(n: string, event: any): void { },
-  setView: (x: Array<number>, y: number) => true,
+  setView: (x: Array<Number>, y: Number) => true,
   closePopup(): void { },
   removeLayer(layerObj: object): void { }
 })
@@ -347,7 +330,7 @@ function applyLatLon() {
 }
 
 function setMark(markInfo: markType, layer: object) {
-  L.marker(
+  const marker = L.marker(
     [markInfo.stargazing_latitude, markInfo.stargazing_longitude], {
     icon: customIcon,
     title: markInfo.stargazing_title,

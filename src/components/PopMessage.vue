@@ -8,11 +8,9 @@
         <button class="button small text-white cursor-pointer group" title="close" @click.prevent="popBtnCheck(false)">
           <span class="w-12 h-12 block">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" enable-background="new 0 0 40 40">
-              <line
-                class="group-hover:stroke-sp-color-light transition-all duration-700" x1="15" y1="15" x2="25"
+              <line class="group-hover:stroke-sp-color-light transition-all duration-700" x1="15" y1="15" x2="25"
                 y2="25" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-miterlimit="10"></line>
-              <line
-                class="group-hover:stroke-sp-color-light transition-all duration-700" x1="25" y1="15" x2="15"
+              <line class="group-hover:stroke-sp-color-light transition-all duration-700" x1="25" y1="15" x2="15"
                 y2="25" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-miterlimit="10"></line>
             </svg>
           </span>
@@ -21,21 +19,12 @@
       <div class="pop-msg-content w-full text-middle row-span-2 p-4 border-b border-main-color-light">{{ modalContent }}
       </div>
       <div class="pop-msg-footer w-full text-middle flex content-center">
-        <button
-          v-show="modalConfirmStyle"
-          class="confirm-true-btn w-1/2 border-r border-main-color-light hover:bg-sp-color-light transition-all duration-700"
-          @click.prevent="popBtnCheck(true)"
-        >確定</button>
-        <button
-          v-show="modalConfirmStyle"
-          class="confirm-false-btn w-1/2 hover:bg-main-color-dark hover:text-main-color-light transition-all duration-700"
-          @click.prevent="popBtnCheck(false)"
-        >取消</button>
-        <button
-          v-show="!modalConfirmStyle"
-          class="only-true-btn w-full hover:bg-main-color-dark hover:text-main-color-light transition-all duration-700"
-          @click.prevent="popBtnCheck(false)"
-        >確定</button>
+        <button @click.prevent="popBtnCheck(true)" v-show="modalConfirmStyle"
+          class="confirm-true-btn w-1/2 border-r border-main-color-light hover:bg-sp-color-light transition-all duration-700">確定</button>
+        <button @click.prevent="popBtnCheck(false)" v-show="modalConfirmStyle"
+          class="confirm-false-btn w-1/2 hover:bg-main-color-dark hover:text-main-color-light transition-all duration-700">取消</button>
+        <button @click.prevent="popBtnCheck(false)" v-show="!modalConfirmStyle"
+          class="only-true-btn w-full hover:bg-main-color-dark hover:text-main-color-light transition-all duration-700">確定</button>
       </div>
     </div>
   </div>

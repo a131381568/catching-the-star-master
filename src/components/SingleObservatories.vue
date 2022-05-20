@@ -9,27 +9,23 @@
         <h1
           class="text-white relative -left-2 -top-2 mobile:text-5xl w-table:w-3/4 w-full mobile:w-full w-table:m-0 mb-5">
           {{ observatoriesTitle }}</h1>
-        <button
+        <button @click.prevent="setConfirmModal"
           :class="{ 'pointer-events-none': !observatoryTitle || !observatoryCatId || !observatoryContnet }"
-          class="flex btn draw meet text-lg w-2/12 mobile:w-full mobile:mt-6 h-12 text-center items-center p-0 justify-center"
-          @click.prevent="setConfirmModal">
+          class="flex btn draw meet text-lg w-2/12 mobile:w-full mobile:mt-6 h-12 text-center items-center p-0 justify-center">
           {{ observatoriesSaveBtn }}
         </button>
       </div>
       <!-- 表單區塊 -->
-      <Form
-        ref="formRef" v-slot="{ errors }" :validation-schema="verifyRules"
+      <Form ref="formRef" :validation-schema="verifyRules" v-slot="{ errors }"
         class="w-9/12 flex flex-wrap mobile:w-11/12 table-container mobile:m-auto justify-between">
         <div class="w-table:w-5/12 w-full">
           <!-- 天文台分類 -->
           <div class="input-group mb-14">
             <h4 class="text-main-color-light font-normal">天文台分類</h4>
-            <Field
-              v-model="observatoryTitle" name="observatoriesTitleRef" type="text"
-              class="h-16 block m-auto bottom-line-input text-lg"
-              :class="{ 'border-sp-color-dark border-opacity-100': errors.observatoriesTitleRef }" />
-            <span
-              v-show="errors.observatoriesTitleRef"
+            <Field name="observatoriesTitleRef" type="text" class="h-16 block m-auto bottom-line-input text-lg"
+              :class="{ 'border-sp-color-dark border-opacity-100': errors.observatoriesTitleRef }"
+              v-model="observatoryTitle" />
+            <span v-show="errors.observatoriesTitleRef"
               class="obs-cat-name-error-tip text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">{{
                   errors.observatoriesTitleRef
               }}</span>
@@ -39,12 +35,10 @@
           <!-- 分類 ID -->
           <div class="input-group mb-14">
             <h4 class="text-main-color-light font-normal">分類 ID</h4>
-            <Field
-              v-model="observatoryCatId" name="observatoriesCatIdRef" type="text"
-              class="h-16 block m-auto bottom-line-input text-lg"
-              :class="[{ 'border-sp-color-dark border-opacity-100': errors.observatoriesCatIdRef }, { 'pointer-events-none border-0': routeName === 'EditSingleObservatories' }]" />
-            <span
-              v-show="errors.observatoriesCatIdRef"
+            <Field name="observatoriesCatIdRef" type="text" class="h-16 block m-auto bottom-line-input text-lg"
+              :class="[{ 'border-sp-color-dark border-opacity-100': errors.observatoriesCatIdRef }, { 'pointer-events-none border-0': routeName === 'EditSingleObservatories' }]"
+              v-model="observatoryCatId" />
+            <span v-show="errors.observatoriesCatIdRef"
               class="obs-cat-id-error-tip text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">{{
                   errors.observatoriesCatIdRef
               }}</span>
@@ -54,16 +48,15 @@
           <!-- MD 編輯器 -->
           <div class="w-full editer-inner edit-mode md-container">
             <h4 class="text-main-color-light font-normal">表格內容</h4>
-            <Field v-show="false" v-model="observatoryContnet" name="observatoriesContentRef" />
-            <v-md-editor v-model="observatoryContnet" class="markdown-body" height="550px"></v-md-editor>
-            <span
-              v-show="errors.observatoriesContentRef"
+            <Field v-show="false" name="observatoriesContentRef" v-model="observatoryContnet" />
+            <v-md-editor class="markdown-body" v-model="observatoryContnet" height="550px"></v-md-editor>
+            <span v-show="errors.observatoriesContentRef"
               class="obs-content-error-tip marker:text-sp-color-dark text-xs w-full h-5 block mt-2">{{
                   errors.observatoriesContentRef
               }}</span>
           </div>
         </div>
-        <div v-if="routeName === 'EditSingleObservatories'" class="w-table:w-10/12 w-full mt-16">
+        <div class="w-table:w-10/12 w-full mt-16" v-if="routeName === 'EditSingleObservatories'">
           <button class="admin-delete-sbtn" @click.prevent="setDelConfirmModal()">
             刪除
           </button>

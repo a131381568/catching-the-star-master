@@ -33,12 +33,10 @@
     "leaflet": "^1.7.1",
     "pinia": "~2.0",
     "vee-validate": "^4.5.11",
-    "vite-plugin-eslint": "^1.6.1",
     "vue": "~3.2",
     "vue-router": "~4.0"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.17.0",
     "@cypress/vite-dev-server": "~2.2",
     "@cypress/vue": "~3.1",
     "@pinia/testing": "^0.0.9",
@@ -51,10 +49,9 @@
     "@vitejs/plugin-vue": "~2",
     "@vue/eslint-config-typescript": "~10",
     "autoprefixer": "~10",
-    "babel-eslint": "^10.1.0",
     "cssnano": "~5.1",
     "cypress": "~9.5",
-    "eslint": "^8.11.0",
+    "eslint": "~8.11",
     "eslint-config-prettier": "~8.5",
     "eslint-plugin-import": "~2",
     "eslint-plugin-node": "~11.1",
@@ -71,7 +68,6 @@
     "vite": "~2.8",
     "vite-plugin-md": "^0.12.3",
     "vitest": "~0.6",
-    "vue-eslint-parser": "^8.3.0",
     "wait-on": "~6.0"
   }
 }
