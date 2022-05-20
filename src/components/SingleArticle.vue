@@ -1,22 +1,25 @@
 <template>
   <div class="flex items-stretch">
     <AdminSidebar />
-    <div @click.self="closeDefaultMenu()"
-      class="laptop:w-4/5 laptop:left-0 left-7 mobile:left-11 w-full mobile:w-admin-m-content h-table:flex flex-wrap items-start justify-center content-start middle-pc:pt-36 h-table:pt-32 pb-52 middle-pc:px-20 h-table:px-6 px-8 mobile:pt-32 relative">
+    <div
+      class="laptop:w-4/5 laptop:left-0 left-7 mobile:left-11 w-full mobile:w-admin-m-content h-table:flex flex-wrap items-start justify-center content-start middle-pc:pt-36 h-table:pt-32 pb-52 middle-pc:px-20 h-table:px-6 px-8 mobile:pt-32 relative"
+      @click.self="closeDefaultMenu()">
       <!-- 標題區塊 -->
       <div
         class="post-title-box w-9/12 mobile:w-11/12 flex justify-between mb-20 mobile:mb-9 mobile:block mobile:mx-auto flex-wrap">
         <h1
           class="text-white relative -left-2 -top-2 mobile:text-5xl w-table:w-3/4 w-full mobile:w-full w-table:m-0 mb-5">
           {{ articleTitle }}</h1>
-        <button @click.prevent="setConfirmModal"
+        <button
           :class="{ 'pointer-events-none': !postTitle || !postContent || !selectCat || !postImgPath }"
-          class="flex btn draw meet text-lg w-2/12 mobile:w-full mobile:mt-6 h-12 text-center items-center p-0 justify-center">
+          class="flex btn draw meet text-lg w-2/12 mobile:w-full mobile:mt-6 h-12 text-center items-center p-0 justify-center"
+          @click.prevent="setConfirmModal">
           {{ articleSaveBtn }}
         </button>
       </div>
       <!-- 表單區塊 -->
-      <Form ref="addArticleForm" :validation-schema="verifyRules" v-slot="{ errors }"
+      <Form
+        ref="addArticleForm" v-slot="{ errors }" :validation-schema="verifyRules"
         class="w-9/12 flex flex-wrap mobile:w-11/12 table-container mobile:m-auto justify-between editer-container">
         <div class="pro-pc:w-7/12 middle-pc:w-2/3 w-full flex content-center large-pc:mb-0 mb-14 mobile:flex-wrap">
           <!-- 上傳封面圖片 -->
@@ -29,7 +32,8 @@
             <h4 class="text-main-color-light font-normal w-full mb-4">封面圖片</h4>
             <h5 class="text-main-color-light mb-4 truncate w-10/12">{{ postImg }}</h5>
             <label class="cursor-pointer admin-sbtn relative w-24 flex justify-center pt-1">上傳圖片
-              <Field name="postImgPathRef" v-model="postImgPath" class="update-btn hidden" type="file"
+              <Field
+                v-model="postImgPath" name="postImgPathRef" class="update-btn hidden" type="file"
                 @change="updateFileAct($event)" />
             </label>
             <span v-show="errors.postImgPathRef" class="text-sp-color-dark text-xs w-full h-5 block m-auto mt-4">{{
@@ -41,9 +45,11 @@
           <!-- 文章標題 -->
           <div class="input-group mb-14">
             <h4 class="text-main-color-light font-normal">文章標題</h4>
-            <Field name="postTitleRef" type="text" class="post-title-input h-16 block m-auto bottom-line-input text-lg"
-              :class="{ 'border-sp-color-dark border-opacity-100': errors.postTitleRef }" v-model="postTitle" />
-            <span v-show="errors.postTitleRef"
+            <Field
+              v-model="postTitle" name="postTitleRef" type="text"
+              class="post-title-input h-16 block m-auto bottom-line-input text-lg" :class="{ 'border-sp-color-dark border-opacity-100': errors.postTitleRef }" />
+            <span
+              v-show="errors.postTitleRef"
               class="post-title-input-error-tip text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">{{
                   errors.postTitleRef
               }}</span>
@@ -51,45 +57,51 @@
           <!-- 文章分類 -->
           <div class="input-group mb-14">
             <h4 class="text-main-color-light font-normal mb-4">文章分類</h4>
-            <Field name="selectCatRule" type="text" class="post-cat-input" v-model="selectCat" v-show="false" />
+            <Field v-show="false" v-model="selectCat" name="selectCatRule" type="text" class="post-cat-input" />
             <!-- 選單樣式 -->
             <div class="post-cat-select dropdown-menu z-40 w-full mb-4 relative animate__animated animate__fadeIn">
-              <button id="dropdownDefault"
+              <button
+                id="dropdownDefault"
                 class="w-full duration-1000 text-main-color-light border border-white border-opacity-30 hover:border-opacity-0 bg-opacity-0 bg-white hover:bg-opacity-18 hover:text-sub-color-light focus:bg-opacity-18 focus:outline-none focus:border-opacity-0 focus:text-sub-color-light text-lg pl-4 p-3 relative text-center inline-flex items-center tracking-wide-content"
                 type="button" @click.prevent="toggleFilter()">
                 {{ selectName }}
-                <svg class="ml-2 w-4 h-4 absolute right-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                <svg
+                  class="ml-2 w-4 h-4 absolute right-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
               <!-- Dropdown menu -->
-              <div id="dropdown" class="z-10 bg-main-color-light divide-y divide-gray-100 absolute w-full"
-                v-show="toggleFilterVal">
+              <div
+                v-show="toggleFilterVal" id="dropdown"
+                class="z-10 bg-main-color-light divide-y divide-gray-100 absolute w-full">
                 <ul class="py-1 text-sm text-main-color-black cursor-pointer">
                   <!-- <li class="tracking-wide-content block py-2 px-4 hover:text-sub-color-dark">選擇分類</li> -->
-                  <li v-for="(val, key) in filterCategories" :key="key"
-                    @click.stop="selectDropCat(String(val.post_category_id))"
-                    class="tracking-wide-content block py-2 px-4 hover:text-sub-color-dark">{{ val.post_category_name }}
+                  <li
+                    v-for="(val, key) in filterCategories" :key="key"
+                    class="tracking-wide-content block py-2 px-4 hover:text-sub-color-dark"
+                    @click.stop="selectDropCat(String(val.post_category_id))">{{ val.post_category_name }}
                   </li>
                 </ul>
               </div>
             </div>
-            <span v-show="errors.selectCatRule"
+            <span
+              v-show="errors.selectCatRule"
               class="post-cat-select-error-tip text-sp-color-dark text-xs w-full h-5 block m-auto">{{
                   errors.selectCatRule
               }}</span>
           </div>
         </div>
         <div class="w-full editer-inner edit-mode md-container mt-16">
-          <Field v-show="false" name="postContentRef" v-model="postContent" />
-          <v-md-editor class="markdown-body" v-model="postContent" height="550px"></v-md-editor>
-          <span v-show="errors.postContentRef"
+          <Field v-show="false" v-model="postContent" name="postContentRef" />
+          <v-md-editor v-model="postContent" class="markdown-body" height="550px"></v-md-editor>
+          <span
+            v-show="errors.postContentRef"
             class="post-content-error-tip text-sp-color-dark text-xs w-full h-5 block mt-2">{{
                 errors.postContentRef
             }}</span>
         </div>
-        <div class="middle-pc:w-10/12 w-full mt-16" v-if="routeName === 'EditSingleArticle'">
+        <div v-if="routeName === 'EditSingleArticle'" class="middle-pc:w-10/12 w-full mt-16">
           <button class="admin-delete-sbtn" @click.prevent="setDelConfirmModal()">
             刪除
           </button>
@@ -107,7 +119,7 @@ import { Field, Form } from 'vee-validate';
 import { artistsCategories } from '@/api/science'
 import { setNewPost, deletePost, getSinglePostById, mutSinglePost } from '@/api/science'
 import { updateFile } from '@/api/utils'
-import { useDebounceFn, onClickOutside, useToggle } from '@vueuse/core'
+import { useDebounceFn, useToggle } from '@vueuse/core'
 // 取得路由
 const route = useRoute()
 const router = useRouter()

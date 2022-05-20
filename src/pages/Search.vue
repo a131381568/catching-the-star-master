@@ -5,7 +5,8 @@
     <!-- 標題區塊 -->
     <TitleBox />
     <!-- 搜尋框 -->
-    <div class="h-table:w-10/12 w-full mt-1 mobile:-mt-8 animate__animated animate__fadeInUp"
+    <div
+      class="h-table:w-10/12 w-full mt-1 mobile:-mt-8 animate__animated animate__fadeInUp"
       :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]">
       <div class="relative text-lg bg-transparent text-gray-800">
         <div
@@ -16,12 +17,14 @@
             { 'border-sp-color-light': spaceAlert }
           ]">
           <input
-            class="w-full bg-transparent border-transparent focus:border-transparent border-none mr-3 px-2 h-table:text-3xl text-xl text-main-color-middle focus:outline-0 focus:ring-0 focus:text-main-color-light"
-            type="text" placeholder="Search" v-model="searchWord" @keyup.enter="searchData()" />
-          <button type="submit" class="search-btn absolute right-0 top-0 h-table:mt-3 h-table:mr-4 mt-5 mr-1"
+            v-model="searchWord"
+            class="w-full bg-transparent border-transparent focus:border-transparent border-none mr-3 px-2 h-table:text-3xl text-xl text-main-color-middle focus:outline-0 focus:ring-0 focus:text-main-color-light" type="text" placeholder="Search" @keyup.enter="searchData()" />
+          <button
+            type="submit" class="search-btn absolute right-0 top-0 h-table:mt-3 h-table:mr-4 mt-5 mr-1"
             @click.prevent="searchData()">
-            <svg class="h-table:h-10 h-6 w-auto fill-white opacity-25 hover:opacity-60 duration-500"
-              xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1"
+            <svg
+              id="Capa_1"
+              class="h-table:h-10 h-6 w-auto fill-white opacity-25 hover:opacity-60 duration-500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
               x="0px" y="0px" viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;"
               xml:space="preserve" width="512px" height="512px">
               <path
@@ -29,21 +32,22 @@
             </svg>
           </button>
         </div>
-        <p class="errors-tip text-sp-color-light font-light h-table:mt-5 mt-1 text-lg truncate" v-show="spaceAlert">
+        <p v-show="spaceAlert" class="errors-tip text-sp-color-light font-light h-table:mt-5 mt-1 text-lg truncate">
           請輸入關鍵字</p>
       </div>
     </div>
-    <div class="h-table:w-10/12 h-200px mt-16" v-show="postList.length === 0">
+    <div v-show="postList.length === 0" class="h-table:w-10/12 h-200px mt-16">
       <!-- 搜尋無結果 -->
-      <div class="search-nothing-tip animate__animated animate__fadeIn animate__delay-1s" v-show="searchIsNothing">
+      <div v-show="searchIsNothing" class="search-nothing-tip animate__animated animate__fadeIn animate__delay-1s">
         <p class="h-table:text-3xl text-xl font-normal text-white">查無結果</p>
         <p class="text-main-color-light font-light h-table:mt-5 mt-1 text-lg truncate">請使用其它關鍵字搜尋</p>
       </div>
     </div>
     <!-- 主視覺 -->
-    <div class="w-table:block hidden middle-pc:w-4/12 w-table:w-5/12 h-full mt-20 animate__animated animate__flipInY"
-      :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]"
-      v-show="postList.length > 0">
+    <div
+      v-show="postList.length > 0"
+      class="w-table:block hidden middle-pc:w-4/12 w-table:w-5/12 h-full mt-20 animate__animated animate__flipInY"
+      :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]">
       <img class="w-auto" src="/img/bg-search.png" />
     </div>
     <!-- post grid -->
@@ -63,8 +67,9 @@
           </div>
         </router-link>
       </div>
-      <div class="w-full text-center" v-show="searchPageInfo.hasNextPage && postList.length > 0">
-        <button class="search-loadmore middle-pc:mt-16 h-table:mt-12 mobile:mt-10 btn draw meet"
+      <div v-show="searchPageInfo.hasNextPage && postList.length > 0" class="w-full text-center">
+        <button
+          class="search-loadmore middle-pc:mt-16 h-table:mt-12 mobile:mt-10 btn draw meet"
           @click.prevent="loadMoreData()">
           <span>Load More</span>
         </button>

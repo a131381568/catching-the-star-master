@@ -9,24 +9,29 @@
   </div>
   <!---------- 地點列表 ---------->
   <!-- 手機板選單樣式 -->
-  <div class="dropdown-menu z-401 absolute hidden mobile:block mt-2 ml-2 shadow-2xl animate__animated animate__flipInX"
+  <div
+    class="dropdown-menu z-401 absolute hidden mobile:block mt-2 ml-2 shadow-2xl animate__animated animate__flipInX"
     :class="[{ 'animate__delay-5s': getFirstEnter === true }, { 'animate__delay-2s': getFirstEnter === false }]">
-    <button id=" dropdownDefault"
+    <button
+      id=" dropdownDefault"
       class="duration-1000 text-main-color-black border border-white border-opacity-60 bg-opacity-100 bg-white font-medium text-lg pl-4 py-3 pr-12 relative text-center inline-flex items-center tracking-normal w-full"
       type="button" @click.prevent="togglePlace()">
       {{ actMarkName }}
-      <svg class="ml-2 w-4 h-4 absolute right-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+      <svg
+        class="ml-2 w-4 h-4 absolute right-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
       </svg>
     </button>
     <!-- Dropdown menu -->
-    <div id="dropdown" class="z-10 bg-main-color-light divide-y divide-gray-100 absolute w-full"
-      v-show="togglePlaceVal">
+    <div
+      v-show="togglePlaceVal" id="dropdown"
+      class="z-10 bg-main-color-light divide-y divide-gray-100 absolute w-full">
       <ul class="py-1 text-sm text-main-color-black cursor-pointer h-200px overflow-y-auto">
-        <li v-for="(val, key) in stargazingList" :key="key"
-          @click.stop="clickSingleInfo(val.stargazing_latitude, val.stargazing_longitude), hideInfoBox()"
-          class="tracking-normal block py-2 px-4 hover:text-sub-color-dark">{{ val.stargazing_title }}</li>
+        <li
+          v-for="(val, key) in stargazingList" :key="key"
+          class="tracking-normal block py-2 px-4 hover:text-sub-color-dark"
+          @click.stop="clickSingleInfo(val.stargazing_latitude, val.stargazing_longitude), hideInfoBox()">{{ val.stargazing_title }}</li>
       </ul>
     </div>
   </div>
@@ -36,7 +41,8 @@
     :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]">
     <h2 class="font-normal mb-9">地點列表</h2>
     <ul>
-      <li v-for="(val, key) in stargazingList" :key="key"
+      <li
+        v-for="(val, key) in stargazingList" :key="key"
         class="text-main-color-middle cursor-pointer mb-3 font-normal flex items-center tracking-wide group"
         @click.stop="clickSingleInfo(val.stargazing_latitude, val.stargazing_longitude)">
         <img class="w-15px mr-2" src="/svg/mark.svg" />
@@ -54,10 +60,12 @@
       <h2 class="tracking-normal font-normal truncate middle-pc:text-4xl h-table:text-xl mobile:text-xl">{{
           actMarkName
       }}</h2>
-      <button @click.stop="hideInfoBox"
-        class="close-stargazing-menu-btn p-6 -m-6 relative mobile:right-2 right-7 bottom-7px w-15px h-15px before:absolute before:left-15px before:h-15px before:w-2px before:bg-black before:rotate-45 after:absolute after:left-15px after:h-15px after:w-2px after:bg-black after:-rotate-45"></button>
+      <button
+        class="close-stargazing-menu-btn p-6 -m-6 relative mobile:right-2 right-7 bottom-7px w-15px h-15px before:absolute before:left-15px before:h-15px before:w-2px before:bg-black before:rotate-45 after:absolute after:left-15px after:h-15px after:w-2px after:bg-black after:-rotate-45"
+        @click.stop="hideInfoBox"></button>
     </div>
-    <div class="w-full min-h-100px bg-bottom bg-no-repeat bg-cover row-span-6 animate__animated animate__faster"
+    <div
+      class="w-full min-h-100px bg-bottom bg-no-repeat bg-cover row-span-6 animate__animated animate__faster"
       :style="'background-image: url(' + actMarkImg + ')'" :class="{ 'animate__flipOutX': !actMarkImg }"></div>
     <div class="p-4 text-main-color-middle row-span-4">
       <div class="stargazing-info-description">{{ actMarkDescription }}</div>
@@ -70,7 +78,9 @@
     </div>
   </div>
   <!-- 地圖容器 -->
-  <div id="map-container" class="w-full h-80vh middle-pc:mb-60 h-table:mb-24 z-0 animate__animated animate__fadeInRight"
+  <div
+    id="map-container"
+    class="w-full h-80vh middle-pc:mb-60 h-table:mb-24 z-0 animate__animated animate__fadeInRight"
     :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]"></div>
   <Footer />
 </template>
@@ -113,7 +123,7 @@ let map = ref({
   },
   remove(): void { },
   on(): void { },
-  setView: (x: Array<Number>, y: Number) => true,
+  setView: (x: Array<number>, y: number) => true,
   closePopup(): void { },
   removeLayer(layerObj: object): void { }
 })
@@ -270,7 +280,7 @@ function mapInit() {
 }
 
 function setMark(markInfo: markType, layer: object) {
-  const marker = L.marker(
+  L.marker(
     [markInfo.stargazing_latitude, markInfo.stargazing_longitude], {
     icon: customIcon,
     title: markInfo.stargazing_title,
@@ -302,36 +312,36 @@ function destroyMap() {
 
 // 測試新增資料
 
-let testLayer = ref({})
+// let testLayer = ref({})
 
-function setNewData() {
-  let copyObj = {
-    stargazing_title: 'xxxxx',
-    stargazing_latitude: 25.033866188405085,
-    stargazing_longitude: 121.5645582937896,
-    stargazing_image: 'https://stage.taipei101mall.com.tw/uploads/content/3539a78f-df62-177c-f388-09243bc44ed2.png',
-    stargazing_description: 'desssss',
-    stargazing_address: '我是地址',
-    stargazing_link: 'https://stage.taipei101mall.com.tw/article/390?article_type_id=0&article_tag_id=0&page=1'
-  }
-  let copyArr = JSON.parse(JSON.stringify(stargazingList.value))
-  copyArr[0] = copyObj
-  stargazingList.value = copyArr
-  setActMarkData(copyObj)
+// function setNewData() {
+//   let copyObj = {
+//     stargazing_title: 'xxxxx',
+//     stargazing_latitude: 25.033866188405085,
+//     stargazing_longitude: 121.5645582937896,
+//     stargazing_image: 'https://stage.taipei101mall.com.tw/uploads/content/3539a78f-df62-177c-f388-09243bc44ed2.png',
+//     stargazing_description: 'desssss',
+//     stargazing_address: '我是地址',
+//     stargazing_link: 'https://stage.taipei101mall.com.tw/article/390?article_type_id=0&article_tag_id=0&page=1'
+//   }
+//   let copyArr = JSON.parse(JSON.stringify(stargazingList.value))
+//   copyArr[0] = copyObj
+//   stargazingList.value = copyArr
+//   setActMarkData(copyObj)
 
-  // popup
-  popupLayer.value.setLatLng([copyObj.stargazing_latitude, copyObj.stargazing_longitude])
-  popupLayer.value.setContent(copyObj.stargazing_title)
-  map.value.setView([copyObj.stargazing_latitude, copyObj.stargazing_longitude], 11)
+//   // popup
+//   popupLayer.value.setLatLng([copyObj.stargazing_latitude, copyObj.stargazing_longitude])
+//   popupLayer.value.setContent(copyObj.stargazing_title)
+//   map.value.setView([copyObj.stargazing_latitude, copyObj.stargazing_longitude], 11)
 
-  // 建立座標圖層
-  testLayer.value = L.featureGroup().addTo(map.value);
+//   // 建立座標圖層
+//   testLayer.value = L.featureGroup().addTo(map.value);
 
-  // 地圖插點
-  setMark(copyObj, testLayer.value)
-}
+//   // 地圖插點
+//   setMark(copyObj, testLayer.value)
+// }
 
-function removeLayer() {
-  map.value.removeLayer(testLayer.value)
-}
+// function removeLayer() {
+//   map.value.removeLayer(testLayer.value)
+// }
 </script>

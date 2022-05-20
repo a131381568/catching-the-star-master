@@ -9,23 +9,27 @@
         <h1
           class="text-white relative -left-2 -top-2 mobile:text-5xl w-table:w-3/4 w-full mobile:w-full w-table:m-0 mb-5">
           {{ organizationTitle }}</h1>
-        <button @click.prevent="setConfirmModal"
+        <button
           :class="{ 'pointer-events-none': !facilitiesTitle || !facilitiesDescription || !facilitiesImagePath || !facilitiesLink }"
-          class="flex btn draw meet text-lg w-2/12 mobile:w-full mobile:mt-6 h-12 text-center items-center p-0 justify-center">
+          class="flex btn draw meet text-lg w-2/12 mobile:w-full mobile:mt-6 h-12 text-center items-center p-0 justify-center"
+          @click.prevent="setConfirmModal">
           {{ organizationSaveBtn }}
         </button>
       </div>
       <!-- 表單區塊 -->
-      <Form ref="addPlaceForm" :validation-schema="verifyRules" v-slot="{ errors }"
+      <Form
+        ref="addPlaceForm" v-slot="{ errors }" :validation-schema="verifyRules"
         class="w-9/12 flex flex-wrap mobile:w-11/12 table-container mobile:m-auto justify-between">
         <div class="w-table:w-5/12 w-full">
           <!-- 機構名稱 -->
           <div class="input-group mb-14">
             <h4 class="text-main-color-light font-normal">機構名稱</h4>
-            <Field name="facilitiesTitleRef" type="text" class="h-16 block m-auto bottom-line-input text-lg"
-              :class="{ 'border-sp-color-dark border-opacity-100': errors.facilitiesTitleRef }"
-              v-model="facilitiesTitle" />
-            <span v-show="errors.facilitiesTitleRef"
+            <Field
+              v-model="facilitiesTitle" name="facilitiesTitleRef" type="text"
+              class="h-16 block m-auto bottom-line-input text-lg"
+              :class="{ 'border-sp-color-dark border-opacity-100': errors.facilitiesTitleRef }" />
+            <span
+              v-show="errors.facilitiesTitleRef"
               class="organ-title-error-tip text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">{{
                   errors.facilitiesTitleRef
               }}</span>
@@ -33,10 +37,12 @@
           <!-- 外部連結 -->
           <div class="input-group mb-14">
             <h4 class="text-main-color-light font-normal">外部連結</h4>
-            <Field name="facilitiesLinkRef" type="text" class="h-16 block m-auto bottom-line-input text-lg"
-              :class="{ 'border-sp-color-dark border-opacity-100': errors.facilitiesLinkRef }"
-              v-model="facilitiesLink" />
-            <span v-show="errors.facilitiesLinkRef"
+            <Field
+              v-model="facilitiesLink" name="facilitiesLinkRef" type="text"
+              class="h-16 block m-auto bottom-line-input text-lg"
+              :class="{ 'border-sp-color-dark border-opacity-100': errors.facilitiesLinkRef }" />
+            <span
+              v-show="errors.facilitiesLinkRef"
               class="organ-link-error-tip text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">{{
                   errors.facilitiesLinkRef
               }}</span>
@@ -44,36 +50,41 @@
           <!-- 機構介紹 -->
           <div class="input-group mb-14">
             <h4 class="text-main-color-light font-normal">機構介紹</h4>
-            <Field name="facilitiesDescriptionRef" type="text" as="textarea"
+            <Field
+              v-model="facilitiesDescription" name="facilitiesDescriptionRef" type="text"
+              as="textarea"
               class="bottom-line-input h-130px resize-none block m-auto text-lg pt-4"
-              :class="{ 'border-sp-color-dark border-opacity-100': errors.facilitiesDescriptionRef }"
-              v-model="facilitiesDescription" />
-            <span v-show="errors.facilitiesDescriptionRef"
+              :class="{ 'border-sp-color-dark border-opacity-100': errors.facilitiesDescriptionRef }" />
+            <span
+              v-show="errors.facilitiesDescriptionRef"
               class="organ-des-error-tip text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">{{
                   errors.facilitiesDescriptionRef
               }}</span>
           </div>
         </div>
         <div class="w-table:w-5/12 w-full">
-          <div class="animate__animated h-52 w-full bg-no-repeat bg-cover bg-center "
+          <div
+            class="animate__animated h-52 w-full bg-no-repeat bg-cover bg-center "
             :style="{ 'background-image': 'url(' + uploadImgPath + ')' }"
             :class="[{ 'animate__fadeIn': localBgOpacity }, { 'animate__fadeOut': !localBgOpacity }]">
           </div>
           <div class="upload-bar flex justify-between mt-7 mb-1">
             <h4 class="text-main-color-light font-normal">機構圖片</h4>
             <label class="cursor-pointer admin-sbtn relative flex items-center justify-center">上傳圖片
-              <Field name="facilitiesImagePathRef" v-model="facilitiesImagePath" class="update-btn hidden" type="file"
+              <Field
+                v-model="facilitiesImagePath" name="facilitiesImagePathRef" class="update-btn hidden" type="file"
                 @change="updateFileAct($event)" />
             </label>
           </div>
           <h5 class="text-main-color-light mb-7">{{ facilitiesImage }}</h5>
 
-          <span v-show="errors.facilitiesImagePathRef"
+          <span
+            v-show="errors.facilitiesImagePathRef"
             class="text-sp-color-dark text-xs w-full h-5 block m-auto mt-2">{{
                 errors.facilitiesImagePathRef
             }}</span>
         </div>
-        <div class="w-table:w-10/12 w-full" v-if="routeName === 'EditSingleOrganization'">
+        <div v-if="routeName === 'EditSingleOrganization'" class="w-table:w-10/12 w-full">
           <button class="admin-delete-sbtn" @click.prevent="setDelConfirmModal()">
             刪除
           </button>
@@ -87,10 +98,10 @@
 <script setup lang="ts">
 import schema from '@/utils/vee-validate-schema'
 import { Field, Form } from 'vee-validate';
-import { editStargazer } from '@/api/stargazing'
+// import { editStargazer } from '@/api/stargazing'
 import { deleteOrganization, setNewOrganization, getSingleOrganization, mutOrganization } from '@/api/facilities'
 import { updateFile } from '@/api/utils'
-import { useDebounceFn, onClickOutside } from '@vueuse/core'
+import { useDebounceFn } from '@vueuse/core'
 // 取得路由
 const route = useRoute()
 const router = useRouter()

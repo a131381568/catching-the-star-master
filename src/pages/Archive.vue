@@ -5,7 +5,8 @@
     <!-- 標題區塊 -->
     <TitleBox />
     <!-- 主視覺 -->
-    <div class="w-table:block hidden middle-pc:w-4/12 w-table:w-5/12 h-full mt-20 animate__animated animate__flipInY"
+    <div
+      class="w-table:block hidden middle-pc:w-4/12 w-table:w-5/12 h-full mt-20 animate__animated animate__flipInY"
       :class="[{ 'animate__delay-4s': getFirstEnter === true }, { 'animate__delay-1s': getFirstEnter === false }]">
       <img class="laptop:w-auto h-table:w-4/5" src="/img/bg-achive.png" />
     </div>
@@ -25,7 +26,7 @@
           </div>
         </router-link>
       </div>
-      <div class="w-full text-center" v-show="archivePageInfo.hasNextPage && postList.length > 0">
+      <div v-show="archivePageInfo.hasNextPage && postList.length > 0" class="w-full text-center">
         <button class="middle-pc:mt-16 h-table:mt-12 mobile:mt-10 btn draw meet" @click.prevent="loadMoreData()">
           <span>加載更多</span>
         </button>
