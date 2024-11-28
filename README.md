@@ -1,5 +1,7 @@
 # Catch the stars
 
+> ## 2024-11-28 遷移至 [cts-front-end](https://github.com/a131381568/blair-nx/tree/development/apps/cts-front-end)
+
 ## 一、簡述（Description）
 
 **Catch the stars** 為基於 Vue3 製作而成的天文形象網站。
